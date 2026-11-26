@@ -1,0 +1,47 @@
+{
+  "math/bits": {"focus": "Bitwise arithmetic and overflow"},
+  "slices": {"focus": "Sorting, searching and boundary conditions"},
+  "sort": {"focus": "Ordering and permutation guarantees"},
+  "strconv": {
+    "focus": "Numeric parsing and round-trip correctness",
+    "packages": ["strconv", "internal/strconv"]
+  },
+  "encoding/json": {
+    "focus": "Parsing and serialization properties",
+    "packages": ["encoding/json", "encoding/json/v2", "encoding/json/jsontext", "encoding/json/internal", "encoding/json/internal/jsonflags", "encoding/json/internal/jsonopts", "encoding/json/internal/jsonwire"]
+  },
+  "net/netip": {"focus": "IP address representation and arithmetic"},
+  "sync": {
+    "focus": "Synchronization invariants",
+    "packages": ["sync", "internal/sync"]
+  },
+  "runtime": {
+    "focus": "Maps, channels and scheduler invariants",
+    "packages": ["runtime", "internal/runtime/maps"]
+  },
+  "go/types": {"focus": "Type checking and generic constraints"},
+  "math/big": {"focus": "Arbitrary-precision arithmetic"},
+  "time": {"focus": "Calendar and duration arithmetic"},
+  "math": {"focus": "Floating-point functions and special values"},
+  "regexp/syntax": {"focus": "Regular expression parsing and simplification"},
+  "net/url": {"focus": "URL parsing and escaping"},
+  "path/filepath": {"focus": "Path cleaning and matching"},
+  "encoding/binary": {"focus": "Byte order and variable-length integers"},
+  "unicode/utf8": {"focus": "UTF-8 encoding and decoding"},
+  "unicode/utf16": {"focus": "Surrogate pairs and decoding"},
+  "bytes": {"focus": "Byte-slice search and manipulation"},
+  "strings": {"focus": "String search and manipulation"},
+  "container/heap": {"focus": "Heap ordering invariants"},
+  "go/constant": {"focus": "Exact constant arithmetic"},
+  "image/color": {"focus": "Color model conversions"},
+  "math/rand/v2": {"focus": "Random number generation and range reduction"},
+  "compress/flate": {"focus": "DEFLATE compression and decompression"},
+  "archive/zip": {"focus": "ZIP archive reading and writing"},
+  "index/suffixarray": {"focus": "Suffix ordering and substring lookup"},
+  "internal/bytealg": {"focus": "Byte search and comparison"},
+  "internal/dag": {"focus": "Graph ordering and cycle detection"},
+  "cmd/compile": {
+    "focus": "Compiler optimization equivalence",
+    "packages": ["cmd/compile/..."]
+  }
+}

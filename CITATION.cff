@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using this metadata."
+title: "Formalizing Go: A Lean Model of Go 1.27.0"
+type: software
+repository-code: "https://github.com/guidoiaquinti/go-formalization"
+authors:
+  - family-names: Iaquinti
+    given-names: Guido
+license: Apache-2.0
+keywords:
+  - Go
+  - Lean
+  - formal verification
+  - differential testing
+preferred-citation:
+  type: generic
+  title: "Formalizing Go: A Lean Model of Go 1.27.0"
+  authors:
+    - family-names: Iaquinti
+      given-names: Guido
+  year: 2026
+  url: "https://github.com/guidoiaquinti/go-formalization"

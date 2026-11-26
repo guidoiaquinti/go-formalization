@@ -1,0 +1,422 @@
+{
+  "AddrPort.Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPortCompare.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortCompare",
+    "claim": "Orders address-port pairs by address and breaks ties by unsigned port, returning -1, 0 or 1.",
+    "limits": "The proof covers all modeled addresses and ports. Go comparisons use empty and decimal zones in 256 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling AddrPort.Compare on zero-address, IPv4, mapped IPv6, and scoped and unscoped IPv6 pairs.",
+    "theorems": ["GoLean.Net.Netip.addrPortCompare_spec"],
+    "check": "difftest/net/netip/addrport-compare/check.go"
+  },
+  "Addr.Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrCompare.lean",
+    "model_symbol": "GoLean.Net.Netip.addrCompare",
+    "claim": "Returns -1, 0 or 1 according to lexicographic order by bit length, unsigned address words, and zone for tied IPv6 addresses.",
+    "limits": "The proof covers modeled words and Lean strings. The Go check uses empty and decimal zones in 64 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537. Arbitrary Go zone byte sequences are outside the comparison.",
+    "configurations": "Native Go calling Addr.Compare on zero, IPv4, mapped IPv6 and scoped and unscoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrCompare_spec"],
+    "check": "difftest/net/netip/addr-compare/check.go"
+  },
+  "Addr.Less": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrLess.lean",
+    "model_symbol": "GoLean.Net.Netip.addrLess",
+    "claim": "Orders addresses lexicographically by bit length, unsigned address words and, for tied IPv6 addresses, zone.",
+    "limits": "The model uses Lean strings for zones. Go checks empty and decimal zones in 64 boundary cases and 60,000 samples using seeds 17, 2718 and 65537. Arbitrary Go string byte sequences are outside the comparison.",
+    "configurations": "Native Go invoking Addr.Less directly on zero, IPv4, mapped IPv6 and scoped and unscoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrLess_spec"],
+    "check": "difftest/net/netip/addr-less/check.go"
+  },
+  "Addr.Prev": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPrev.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPrev",
+    "claim": "Returns the zero Addr at the start of the address range. Otherwise subtracts one with borrow and preserves address detail.",
+    "limits": "The model covers all stored words and observable address details. Go checks 16 boundary cases and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.Prev and observing BitLen, As16 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPrev_spec"
+    ],
+    "check": "difftest/net/netip/addr-prev/check.go"
+  },
+  "Addr.Next": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrNext.lean",
+    "model_symbol": "GoLean.Net.Netip.addrNext",
+    "claim": "Increments the stored address with carry, returns the zero Addr on family-width overflow, and otherwise retains the original address detail.",
+    "limits": "The model covers all stored words and observable details. The zero receiver retains invalid detail with incremented bits in the pinned implementation. Go checks 16 boundary cases and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.Next and observing BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.addrNext_spec"],
+    "check": "difftest/net/netip/addr-next/check.go"
+  },
+  "Addr.IsGlobalUnicast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsGlobalUnicast.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsGlobalUnicast",
+    "claim": "After unmapping, excludes invalid and unspecified addresses, the IPv4 limited broadcast, loopback, multicast and link-local unicast. Scoped IPv6 zero and private unicast addresses can qualify.",
+    "limits": "The model compares canonical address details by contents. The check uses net.IP.IsGlobalUnicast as the value oracle with an explicit adjustment for scoped IPv6 zero. It exercises 31 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsGlobalUnicast on zero, IPv4 and IPv6 receivers, including scoped and mapped IPv6.",
+    "theorems": ["GoLean.Net.Netip.addrIsGlobalUnicast_spec"],
+    "check": "difftest/net/netip/addr-isglobalunicast/check.go"
+  },
+  "Addr.IsPrivate": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsPrivate.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsPrivate",
+    "claim": "Recognizes the three RFC 1918 IPv4 ranges, including mapped IPv6 payloads, and fc00::/7 for IPv6.",
+    "limits": "Proof covers all modeled words, families and zones. Go comparison uses unzoned receivers in 277 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsPrivate on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": [
+      "GoLean.Net.Netip.addrIsPrivate_spec"
+    ],
+    "check": "difftest/net/netip/addr-isprivate/check.go"
+  },
+  "Addr.IsInterfaceLocalMulticast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsInterfaceLocalMulticast.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsInterfaceLocalMulticast",
+    "claim": "Recognizes IPv6 multicast with scope 1 regardless of flags.",
+    "limits": "Proof covers all modeled words, families and zones. Go comparison uses unzoned receivers in 2,049 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsInterfaceLocalMulticast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": [
+      "GoLean.Net.Netip.addrIsInterfaceLocalMulticast_spec"
+    ],
+    "check": "difftest/net/netip/addr-isinterfacelocalmulticast/check.go"
+  },
+  "Addr.IsLinkLocalUnicast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsLinkLocalUnicast.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsLinkLocalUnicast",
+    "claim": "Recognizes 169.254.0.0/16 for IPv4 and mapped IPv6 payloads, and fe80::/10 for IPv6.",
+    "limits": "Proof covers all modeled words, families and zones. Go comparison uses unzoned receivers in 1,537 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsLinkLocalUnicast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": [
+      "GoLean.Net.Netip.addrIsLinkLocalUnicast_spec"
+    ],
+    "check": "difftest/net/netip/addr-islinklocalunicast/check.go"
+  },
+  "Addr.IsLinkLocalMulticast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsLinkLocalMulticast.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsLinkLocalMulticast",
+    "claim": "Recognizes 224.0.0.0/24 for IPv4 and mapped IPv6 payloads, and IPv6 multicast with scope 2 regardless of flags.",
+    "limits": "Proof covers all modeled words, families and zones. Go comparison uses unzoned receivers in 2,049 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsLinkLocalMulticast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIsLinkLocalMulticast_spec"],
+    "check": "difftest/net/netip/addr-islinklocalmulticast/check.go"
+  },
+  "Addr.IsMulticast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsMulticast.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsMulticast",
+    "claim": "Recognizes 224.0.0.0/4 for IPv4 and mapped IPv6 payloads, and ff00::/8 for IPv6.",
+    "limits": "The proof covers all modeled addresses and ignores zone contents. The Go check uses unzoned receivers and 769 boundary cases, including all first octets for each address form, plus 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsMulticast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIsMulticast_spec"],
+    "check": "difftest/net/netip/addr-ismulticast/check.go"
+  },
+  "Addr.IsLoopback": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsLoopback.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsLoopback",
+    "claim": "Returns true exactly for IPv4 and mapped IPv6 addresses with IPv4 payload in 127/8, and for IPv6 ::1.",
+    "limits": "The proof covers every modeled address and arbitrary zone contents. The Go check uses unzoned receivers in 233 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Addr.IsLoopback on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIsLoopback_spec"],
+    "check": "difftest/net/netip/addr-isloopback/check.go"
+  },
+  "Addr.IsUnspecified": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsUnspecified.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsUnspecified",
+    "claim": "Returns true exactly for 0.0.0.0 and unzoned ::.",
+    "limits": "Models Go address equality using words, the detail class and zone contents. The proof covers all modeled receivers. The Go comparison uses 133 boundary cases and 60,000 samples across seeds 17, 2718 and 65537, using empty and decimal zones.",
+    "configurations": "Native Go calling Addr.IsUnspecified on zero, IPv4, IPv6 and scoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIsUnspecified_spec"],
+    "check": "difftest/net/netip/addr-isunspecified/check.go"
+  },
+  "Prefix.IsSingleIP": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixIsSingleIP.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixIsSingleIP",
+    "claim": "For PrefixFrom results, returns true exactly for initialized IPv4 addresses at /32 and IPv6 addresses at /128.",
+    "limits": "Proof covers every modeled address and requested integer length. The comparison exhausts reachable length tags by family using five representative addresses at requested lengths -1 through 129 and both int extrema. A separate Go check covers the zero Prefix.",
+    "configurations": "Native Go invoking Prefix.IsSingleIP on the zero value and PrefixFrom results.",
+    "theorems": ["GoLean.Net.Netip.prefixIsSingleIP_spec"],
+    "check": "difftest/net/netip/prefix-issingleip/check.go"
+  },
+  "PrefixFrom": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixFrom.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixFrom",
+    "claim": "Preserves family and address bits including host bits, strips IPv6 zones, and reports the requested prefix length if valid or -1 otherwise.",
+    "limits": "The model represents observable address details and uses mathematical integers, covering every Go int input. Allocation is outside the claim. Go checks 11 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling PrefixFrom and observing Bits and the stored address through Addr, BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.prefixFrom_spec"],
+    "check": "difftest/net/netip/prefixfrom/check.go"
+  },
+  "Prefix.IsValid": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixIsValid.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixIsValid",
+    "claim": "Returns true exactly when the stored prefix length decodes to a nonnegative length, including /0.",
+    "limits": "The proof covers all byte tags. Go and Lean checks exercise all 130 reachable tags. Go uses five representative addresses at requested lengths -1 through 129 and both int extrema, plus a zero Prefix.",
+    "configurations": "Native Go calling Prefix.IsValid on the zero value and PrefixFrom results.",
+    "theorems": ["GoLean.Net.Netip.prefixIsValid_spec"],
+    "check": "difftest/net/netip/prefix-isvalid/check.go"
+  },
+  "Prefix.Bits": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixBits.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixBits",
+    "claim": "Decodes the stored prefix length tag by subtracting one after widening, yielding -1 for an invalid prefix.",
+    "limits": "The proof covers all byte tags. Go and Lean checks exhaust the 130 reachable tags, with Go checking five representative addresses at requested lengths -1 through 129 and both int extrema, plus a zero Prefix.",
+    "configurations": "Native Go calling Prefix.Bits on the zero value and PrefixFrom results.",
+    "theorems": ["GoLean.Net.Netip.prefixBits_spec"],
+    "check": "difftest/net/netip/prefix-bits/check.go"
+  },
+  "Prefix.Addr": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixAddr.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixAddr",
+    "claim": "Returns the stored address regardless of prefix length or validity, preserving stored host bits.",
+    "limits": "The proof covers all modeled stored addresses and length tags. Fixtures use PrefixFrom, which strips the input zone before Addr reads the stored address. The Go check uses six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling Prefix.Addr on valid and invalid PrefixFrom results and observing BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.prefixAddr_spec"],
+    "check": "difftest/net/netip/prefix-addr/check.go"
+  },
+  "AddrPort.Addr": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPortAddr.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortAddr",
+    "claim": "Returns the stored address, preserving bytes, family and zone for every port.",
+    "limits": "The proof covers all modeled addresses and ports. The Go comparison uses six boundary cases and 60,000 samples with seeds 17, 2718 and 65537, and empty or decimal zones.",
+    "configurations": "Native Go calling AddrPort.Addr and observing BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.addrPortAddr_spec"],
+    "check": "difftest/net/netip/addrport-addr/check.go"
+  },
+  "AddrPortFrom": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPortFrom.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortFrom",
+    "claim": "Preserves the supplied address bytes, family, zone and uint16 port.",
+    "limits": "The proof covers every modeled address and port. The Go check uses six boundary cases and 60,000 samples across seeds 17, 2718 and 65537, with empty and decimal zone strings. Allocation is outside the claim.",
+    "configurations": "Native Go calling AddrPortFrom and observing Addr and Port, with BitLen, As16 and Zone on the returned address.",
+    "theorems": ["GoLean.Net.Netip.addrPortFrom_spec"],
+    "check": "difftest/net/netip/addrportfrom/check.go"
+  },
+  "AddrPort.IsValid": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPortIsValid.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortIsValid",
+    "claim": "Returns true exactly when the stored address is initialized, for every port including zero.",
+    "limits": "The proof covers every modeled address and port. The comparison exhausts all 65,536 ports in each of the three modeled address classes and uses six representative Go addresses.",
+    "configurations": "Native Go calling netip.AddrPort.IsValid on receivers built with AddrPortFrom.",
+    "theorems": ["GoLean.Net.Netip.addrPortIsValid_spec"],
+    "check": "difftest/net/netip/addrport-isvalid/check.go"
+  },
+  "AddrPort.Port": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrPortPort.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortPort",
+    "claim": "Returns the stored uint16 port independently of the address, including zero for a zero AddrPort.",
+    "limits": "The proof quantifies over all modeled addresses and ports. The comparison exhausts all 65,536 port values for one Lean address and five Go addresses, with a separate Go zero-value check.",
+    "configurations": "Native Go invoking netip.AddrPort.Port on the zero value and values built with AddrPortFrom.",
+    "theorems": ["GoLean.Net.Netip.addrPortPort_spec"],
+    "check": "difftest/net/netip/addrport-port/check.go"
+  },
+  "Addr.AsSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrAsSlice.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAsSlice",
+    "claim": "Returns nil for the zero address, the four IPv4 bytes for IPv4, and all sixteen IPv6 bytes for IPv6, including mapped and scoped IPv6.",
+    "limits": "The proof covers nilness, length and contents for every address class and word pair. Slice capacity, allocation and storage identity are outside the claim. The Go comparison uses 133 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go comparing netip.Addr.AsSlice nilness and byte sequences.",
+    "theorems": ["GoLean.Net.Netip.addrAsSlice_spec"],
+    "check": "difftest/net/netip/addr-asslice/check.go"
+  },
+  "Addr.As4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrAs4.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAs4",
+    "claim": "Returns the four IPv4 bytes for IPv4 and IPv4-mapped IPv6 receivers. The zero receiver and other IPv6 receivers panic with distinct messages.",
+    "limits": "Models panic payloads and returned bytes. The four-byte truncated store is modeled by the last four bytes of the big-endian low word and proved against base-256 digits. The Go check uses 100 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.As4 and comparing its bytes or recovered string panic payload.",
+    "theorems": ["GoLean.Net.Netip.addrAs4_spec"],
+    "check": "difftest/net/netip/addr-as4/check.go"
+  },
+  "Addr.As16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrAs16.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAs16",
+    "claim": "Returns each stored address word as eight big-endian bytes, high word first. The zero receiver gives zero bytes and IPv4 uses its mapped representation.",
+    "limits": "The model takes the stored words directly because the source does not read address detail. The proof covers every pair of words and every output position. Go comparison uses 133 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.As16 on zero, IPv4, IPv6 and scoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrAs16_spec"],
+    "check": "difftest/net/netip/addr-as16/check.go"
+  },
+  "Addr.Zone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrZone.lean",
+    "model_symbol": "GoLean.Net.Netip.addrZone",
+    "claim": "Returns the stored zone for IPv6 and an empty string for IPv4 and zero receivers.",
+    "limits": "Models the observable contents of the detail handle. IPv4 uses z4, whose zone is empty. The proof covers arbitrary Lean strings. The Go check uses empty and decimal zones across five boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.Zone on zero, IPv4 and IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrZone_spec"],
+    "check": "difftest/net/netip/addr-zone/check.go"
+  },
+  "Addr.WithZone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrWithZone.lean",
+    "model_symbol": "GoLean.Net.Netip.addrWithZone",
+    "claim": "Preserves address bytes and family. Replaces the zone for IPv6, including removing it for an empty request, and leaves IPv4 and the zero address unchanged.",
+    "limits": "Models observable family and zone contents. Handle identity and interning costs are outside the claim. The proof covers arbitrary Lean strings. The Go check uses empty and decimal zone strings in six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.WithZone and observing BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.addrWithZone_spec"],
+    "check": "difftest/net/netip/addr-withzone/check.go"
+  },
+  "Addr.Unmap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrUnmap.lean",
+    "model_symbol": "GoLean.Net.Netip.addrUnmap",
+    "claim": "Converts mapped IPv6 receivers to IPv4 with an empty zone and identical As16 bytes. All other receivers retain their family, address bytes and zone.",
+    "limits": "Models the address-detail handle by family class and zone contents. Handle identity is abstracted. Go comparison uses 101 boundary cases and 60,000 samples across seeds 17, 2718 and 65537, with empty and decimal zone strings.",
+    "configurations": "Native Go calling netip.Addr.Unmap and observing BitLen, As16 and Zone.",
+    "theorems": ["GoLean.Net.Netip.addrUnmap_spec"],
+    "check": "difftest/net/netip/addr-unmap/check.go"
+  },
+  "Addr.Is4In6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIs4In6.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIs4In6",
+    "claim": "Returns true exactly for IPv6 receivers whose first 96 bits match ::ffff:0:0/96.",
+    "limits": "The model uses the address-detail class and both address words. Zone contents do not affect the predicate. The Go check uses 100 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.Is4In6 on zero, IPv4 and IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIs4In6_spec"],
+    "check": "difftest/net/netip/addr-is4in6/check.go"
+  },
+  "Addr.Is6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIs6.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIs6",
+    "claim": "Returns true exactly for IPv6 receivers, including scoped and IPv4-mapped IPv6 addresses.",
+    "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.Is6 on zero, IPv4, IPv6, and scoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIs6_spec"],
+    "check": "difftest/net/netip/addr-is6/check.go"
+  },
+  "Addr.Is4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIs4.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIs4",
+    "claim": "Returns true exactly for IPv4 receivers. IPv4-mapped IPv6 receivers return false.",
+    "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.Is4 on zero, IPv4, IPv6, and scoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIs4_spec"],
+    "check": "difftest/net/netip/addr-is4/check.go"
+  },
+  "Addr.IsValid": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrIsValid.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsValid",
+    "claim": "Returns true exactly when the receiver is initialized, including both unspecified addresses.",
+    "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling netip.Addr.IsValid on zero, IPv4, IPv6, and scoped IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrIsValid_spec"],
+    "check": "difftest/net/netip/addr-isvalid/check.go"
+  },
+  "Addr.BitLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrBitLen.lean",
+    "model_symbol": "GoLean.Net.Netip.addrBitLen",
+    "claim": "Returns 0 for the zero Addr, 32 for IPv4 and 128 for IPv6, including scoped and IPv4-mapped IPv6 addresses.",
+    "limits": "Models which address-detail handle class the source switch observes. The theorem exhausts those classes. Address bytes and zone contents are irrelevant to the switch. The Go check uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly invoking netip.Addr.BitLen on zero, IPv4 and IPv6 receivers.",
+    "theorems": ["GoLean.Net.Netip.addrBitLen_spec"],
+    "check": "difftest/net/netip/addr-bitlen/check.go"
+  },
+  "AddrFrom4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFrom4.lean",
+    "model_symbol": "GoLean.Net.Netip.addrFrom4",
+    "claim": "Returns an unzoned IPv4 address whose As16 bytes have the IPv4-mapped prefix followed by the four input bytes in order.",
+    "limits": "The proof covers all 32-bit inputs. The Go comparison samples 60,000 inputs with seeds 17, 2718 and 65537, plus 36 boundary cases. The model represents address detail by family and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.AddrFrom4 and observing As16, Is6 and Zone.",
+    "theorems": ["GoLean.Net.Netip.addrFrom4_spec"],
+    "check": "difftest/net/netip/addrfrom4/check.go"
+  },
+  "AddrFrom16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFrom16.lean",
+    "model_symbol": "GoLean.Net.Netip.addrFrom16",
+    "claim": "Returns an unzoned IPv6 address whose two words concatenate the sixteen input bytes in network order, including IPv4-mapped addresses.",
+    "limits": "The proof covers all 128-bit inputs. The Go comparison samples 60,000 inputs with seeds 17, 2718 and 65537, plus 132 boundary cases. The address detail is modeled by its family and zone contents; handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.AddrFrom16 and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.addrFrom16_spec"
+    ],
+    "check": "difftest/net/netip/addrfrom16/check.go"
+  },
+  "IPv6Loopback": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/IPv6Loopback.lean",
+    "model_symbol": "GoLean.Net.Netip.ipv6Loopback",
+    "claim": "Returns the unzoned IPv6 address ::1, with high word zero and low word one.",
+    "limits": "Exhaustive for this zero-argument function. The model represents the interned address detail by its IPv6 flag and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.IPv6Loopback and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.ipv6Loopback_spec"
+    ],
+    "check": "difftest/net/netip/ipv6loopback/check.go"
+  },
+  "IPv6LinkLocalAllRouters": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/IPv6LinkLocalAllRouters.lean",
+    "model_symbol": "GoLean.Net.Netip.ipv6LinkLocalAllRouters",
+    "claim": "Returns the unzoned IPv6 multicast address ff02::2.",
+    "limits": "Exhaustive for this zero-argument function. The model represents the interned address detail by its IPv6 flag and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.IPv6LinkLocalAllRouters and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.ipv6LinkLocalAllRouters_spec"
+    ],
+    "check": "difftest/net/netip/ipv6linklocalallrouters/check.go"
+  },
+  "IPv6Unspecified": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/IPv6Unspecified.lean",
+    "model_symbol": "GoLean.Net.Netip.ipv6Unspecified",
+    "claim": "Returns the unzoned IPv6 address ::, with both address words zero.",
+    "limits": "Exhaustive for this zero-argument function. The model represents the interned address detail by its IPv6 flag and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.IPv6Unspecified and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.ipv6Unspecified_spec"
+    ],
+    "check": "difftest/net/netip/ipv6unspecified/check.go"
+  },
+  "IPv6LinkLocalAllNodes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/IPv6LinkLocalAllNodes.lean",
+    "model_symbol": "GoLean.Net.Netip.ipv6LinkLocalAllNodes",
+    "claim": "Returns the unzoned IPv6 multicast address ff02::1.",
+    "limits": "Exhaustive for this zero-argument function. The model represents the interned address detail by its IPv6 flag and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.IPv6LinkLocalAllNodes and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.ipv6LinkLocalAllNodes_spec"
+    ],
+    "check": "difftest/net/netip/ipv6linklocalallnodes/check.go"
+  },
+  "IPv4Unspecified": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/IPv4Unspecified.lean",
+    "model_symbol": "GoLean.Net.Netip.ipv4Unspecified",
+    "claim": "Returns the unzoned IPv4 address 0.0.0.0 with IPv4-mapped bytes in As16.",
+    "limits": "Exhaustive for this zero-argument function. The model represents the interned address detail by its IPv6 flag and zone contents. Handle identity and allocation are outside the claim.",
+    "configurations": "Native Go calling netip.IPv4Unspecified and observing As16, Is6 and Zone.",
+    "theorems": [
+      "GoLean.Net.Netip.ipv4Unspecified_spec"
+    ],
+    "check": "difftest/net/netip/ipv4unspecified/check.go"
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "Find": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Find.lean",
+    "model_symbol": "GoLean.Sort.sortFind",
+    "claim": "Returns the first nonpositive comparison index or the search length, with found true exactly for an in-range zero comparison. Nonpositive lengths return zero and false.",
+    "limits": "The proof covers normally returning comparators with a partitioned sign predicate. Callback panics and state effects are outside the claim. Go checks callback bounds, ten boundary cases and 60,000 samples with seeds 17, 2718 and 65537, including native int extrema.",
+    "configurations": "Native Go calling sort.Find on comparator sign partitions.",
+    "theorems": ["GoLean.Sort.sortFind_spec"],
+    "check": "difftest/sort/find/check.go"
+  },
+  "Search": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Search.lean",
+    "model_symbol": "GoLean.Sort.search",
+    "claim": "Returns the first true index for a partitioned predicate or the search length if all indices are false. Nonpositive lengths return zero.",
+    "limits": "The theorem models the returned index for normally returning partitioned callbacks. Panic propagation and callback state effects are outside the claim. Go asserts callback indices are in bounds and checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537, including native int extremes.",
+    "configurations": "Native Go directly calling sort.Search with threshold predicates.",
+    "theorems": ["GoLean.Sort.search_spec"],
+    "check": "difftest/sort/search/check.go"
+  },
+  "Float64Slice.Search": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Float64SliceSearch.lean",
+    "model_symbol": "GoLean.Sort.float64SliceSearch",
+    "claim": "Returns the first index satisfying the binary64 >= predicate, or the slice length if none qualifies, when the predicate partitions the slice.",
+    "limits": "The proof assumes a partitioned predicate and uses Lean Float comparisons. The Go check uses ascending slices with NaNs first, includes NaN keys whose predicate is always false, and checks the cross-runtime comparison on ten boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.Float64Slice.Search on sorted binary64 slices and comparing against a linear scan.",
+    "theorems": [
+      "GoLean.Sort.float64SliceSearch_spec"
+    ],
+    "check": "difftest/sort/float64slice-search/check.go"
+  },
+  "StringSlice.Search": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/StringSliceSearch.lean",
+    "model_symbol": "GoLean.Sort.stringSliceSearch",
+    "claim": "On a bytewise ascending slice, returns the first index at or above the key, or the slice length if no element qualifies.",
+    "limits": "The proof assumes the search predicate partitions at the lower bound, as it does for ascending byte sequences. The unsigned midpoint is represented by exact natural arithmetic on valid nonnegative int indices. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.StringSlice.Search on sorted slices of arbitrary byte strings.",
+    "theorems": [
+      "GoLean.Sort.stringSliceSearch_spec"
+    ],
+    "check": "difftest/sort/stringslice-search/check.go"
+  },
+  "IntSlice.Search": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IntSliceSearch.lean",
+    "model_symbol": "GoLean.Sort.intSliceSearch",
+    "claim": "Returns the first index whose element is at least the key, or the slice length if there is none, for ascending sorted slices.",
+    "limits": "The proof assumes the Boolean search predicate partitions at the lower bound, as it does for an ascending slice. The unsigned midpoint is represented by exact natural arithmetic on valid nonnegative int indices. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.IntSlice.Search on ascending integer slices.",
+    "theorems": [
+      "GoLean.Sort.intSliceSearch_spec"
+    ],
+    "check": "difftest/sort/intslice-search/check.go"
+  },
+  "SearchFloat64s": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/SearchFloat64s.lean",
+    "model_symbol": "GoLean.Sort.searchFloat64s",
+    "claim": "Returns the first index satisfying the binary64 >= predicate, or the slice length if none qualifies, when the predicate partitions the slice.",
+    "limits": "The proof assumes a partitioned predicate and uses Lean Float comparisons. The Go check uses ascending slices with NaNs first, includes NaN keys whose predicate is always false, and checks the cross-runtime comparison on ten boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.SearchFloat64s on sorted binary64 slices and comparing against a linear scan.",
+    "theorems": ["GoLean.Sort.searchFloat64s_spec"],
+    "check": "difftest/sort/search-float64s/check.go"
+  },
+  "SearchStrings": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/SearchStrings.lean",
+    "model_symbol": "GoLean.Sort.searchStrings",
+    "claim": "On a bytewise ascending slice, returns the first index at or above the key, or the slice length if no element qualifies.",
+    "limits": "The proof assumes the search predicate partitions at the lower bound, as it does for ascending byte sequences. The unsigned midpoint is represented by exact natural arithmetic on valid nonnegative int indices. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.SearchStrings on sorted slices of arbitrary byte strings.",
+    "theorems": ["GoLean.Sort.searchStrings_spec"],
+    "check": "difftest/sort/search-strings/check.go"
+  },
+  "SearchInts": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/SearchInts.lean",
+    "model_symbol": "GoLean.Sort.searchInts",
+    "claim": "Returns the first index whose element is at least the key, or the slice length if there is none, for ascending sorted slices.",
+    "limits": "The proof assumes the Boolean search predicate partitions at the lower bound, as it does for an ascending slice. The unsigned midpoint is represented by exact natural arithmetic on valid nonnegative int indices. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling sort.SearchInts on ascending integer slices.",
+    "theorems": ["GoLean.Sort.searchInts_spec"],
+    "check": "difftest/sort/search-ints/check.go"
+  },
+  "Float64sAreSorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Float64sAreSorted.lean",
+    "model_symbol": "GoLean.Sort.float64sAreSorted",
+    "claim": "Returns true exactly when no adjacent pair is inverted in ascending binary64 order with NaNs first.",
+    "limits": "The proof uses Lean Float primitives. Their correspondence with Go is tested over binary64 bit patterns. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537, using an all-pairs order oracle.",
+    "configurations": "Native Go directly calling sort.Float64sAreSorted on nil, empty, sorted and unsorted slices.",
+    "theorems": ["GoLean.Sort.float64sAreSorted_spec"],
+    "check": "difftest/sort/float64s-are-sorted/check.go"
+  },
+  "StringsAreSorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/StringsAreSorted.lean",
+    "model_symbol": "GoLean.Sort.stringsAreSorted",
+    "claim": "Returns true exactly when no adjacent pair is inverted under unsigned bytewise lexicographic ordering.",
+    "limits": "Models strings as arbitrary byte sequences. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537, using an all-pairs byte order oracle.",
+    "configurations": "Native Go directly calling sort.StringsAreSorted on nil, empty, sorted and unsorted slices.",
+    "theorems": ["GoLean.Sort.stringsAreSorted_spec"],
+    "check": "difftest/sort/strings-are-sorted/check.go"
+  },
+  "IntsAreSorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IntsAreSorted.lean",
+    "model_symbol": "GoLean.Sort.intsAreSorted",
+    "claim": "Returns true exactly when every adjacent pair is in nondecreasing signed integer order.",
+    "limits": "The proof covers arbitrary integer lists. Nil and empty slices have the same visible elements. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537, using an all-pairs order oracle.",
+    "configurations": "Native Go directly calling sort.IntsAreSorted on nil, empty, sorted and unsorted slices.",
+    "theorems": ["GoLean.Sort.intsAreSorted_spec"],
+    "check": "difftest/sort/ints-are-sorted/check.go"
+  },
+  "IsSorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IsSorted.lean",
+    "model_symbol": "GoLean.Sort.isSorted",
+    "claim": "After Len returns a nonnegative length, checks adjacent pairs from right to left, stopping on an inversion or callback panic. Returns true exactly when every adjacent comparison returns false.",
+    "limits": "Models a completed nonnegative Len call and scripted Less outcomes including panic as a category. Go also checks Len call count and the Less panic marker. Negative lengths and Len panics are outside the claim. Comparison uses six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.IsSorted with a recording sort.Interface.",
+    "theorems": ["GoLean.Sort.isSorted_spec"],
+    "check": "difftest/sort/issorted/check.go"
+  },
+  "Reverse": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Reverse.lean",
+    "model_symbol": "GoLean.Sort.reverseInterface",
+    "claim": "Delegates Len and Swap unchanged and delegates Less with the two indices exchanged.",
+    "limits": "The model abstracts interface identity and allocation. Callback outcomes are parametric. The Go comparison uses a recorder on four boundary pairs and 60,000 samples with seeds 17, 2718 and 65537, plus a Go Less panic and side-effect check.",
+    "configurations": "Native Go calling sort.Reverse and then invoking all three methods on the returned interface.",
+    "theorems": ["GoLean.Sort.reverseInterface_spec"],
+    "check": "difftest/sort/reverse/check.go"
+  },
+  "Float64Slice.Swap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Float64SliceSwap.lean",
+    "model_symbol": "GoLean.Sort.float64SliceSwap",
+    "claim": "Exchanges the selected binary64 bit patterns and preserves slice length and all other elements. An invalid index panics before either write.",
+    "limits": "Models visible slice elements by their exact binary64 encodings. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.Float64Slice.Swap and comparing post-call bit patterns and recovered bounds panic text.",
+    "theorems": ["GoLean.Sort.float64SliceSwap_spec", "GoLean.Sort.float64SliceSwap_index_spec"],
+    "check": "difftest/sort/float64sliceswap/check.go"
+  },
+  "StringSlice.Swap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/StringSliceSwap.lean",
+    "model_symbol": "GoLean.Sort.stringSliceSwap",
+    "claim": "Exchanges the two indexed elements, preserving length and all other elements. An invalid index panics before any write.",
+    "limits": "Models Go strings as arbitrary byte sequences and compares visible slice contents, including on panic. Go checks 11 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.StringSlice.Swap and observing contents after success or a recovered runtime bounds panic.",
+    "theorems": [
+      "GoLean.Sort.stringSliceSwap_spec",
+      "GoLean.Sort.stringSliceSwap_index_spec"
+    ],
+    "check": "difftest/sort/stringsliceswap/check.go"
+  },
+  "IntSlice.Swap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IntSliceSwap.lean",
+    "model_symbol": "GoLean.Sort.intSliceSwap",
+    "claim": "Exchanges the two indexed elements, preserving length and all other elements. An invalid index panics before any write.",
+    "limits": "Models visible slice contents and the failed index. The driver observes the original list on panic. Go uses nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.IntSlice.Swap and observing contents after success or a recovered runtime bounds panic.",
+    "theorems": ["GoLean.Sort.intSliceSwap_spec", "GoLean.Sort.intSliceSwap_index_spec"],
+    "check": "difftest/sort/intsliceswap/check.go"
+  },
+  "Float64Slice.Less": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Float64SliceLess.lean",
+    "model_symbol": "GoLean.Sort.float64SliceLess",
+    "claim": "Compares using binary64 less-than with NaNs ordered before non-NaNs and panics at the first invalid index.",
+    "limits": "The proof covers bounds and the comparison formula using Lean Float primitives. Go and Lean floating-point behavior is compared over sampled bit patterns, not proved equivalent. Go checks 109 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.Float64Slice.Less and comparing Boolean results or recovered runtime bounds panic text.",
+    "theorems": ["GoLean.Sort.float64SliceLess_spec"],
+    "check": "difftest/sort/float64sliceless/check.go"
+  },
+  "StringSlice.Less": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/StringSliceLess.lean",
+    "model_symbol": "GoLean.Sort.stringSliceLess",
+    "claim": "Compares valid operands lexicographically by unsigned bytes and panics at the first invalid index.",
+    "limits": "Models Go strings as arbitrary byte sequences and nil and empty slices as empty lists. Go checks 11 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.StringSlice.Less and comparing its Boolean or recovered runtime bounds panic text.",
+    "theorems": [
+      "GoLean.Sort.stringSliceLess_spec"
+    ],
+    "check": "difftest/sort/stringsliceless/check.go"
+  },
+  "IntSlice.Less": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IntSliceLess.lean",
+    "model_symbol": "GoLean.Sort.intSliceLess",
+    "claim": "Compares signed elements at valid indices and panics at the first invalid index in evaluation order.",
+    "limits": "Lists model visible elements, with nil and empty slices represented by the empty list. Lean models the failed index and the driver formats its panic payload. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.IntSlice.Less and comparing its Boolean or recovered runtime bounds panic text.",
+    "theorems": ["GoLean.Sort.intSliceLess_spec"],
+    "check": "difftest/sort/intsliceless/check.go"
+  },
+  "Float64Slice.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/Float64SliceLen.lean",
+    "model_symbol": "GoLean.Sort.float64SliceLen",
+    "claim": "For a valid subslice x[lo:hi], Len returns hi - lo, including zero for empty and nil slices.",
+    "limits": "Models visible elements as a list of binary64 bit patterns and Go's builtin len as its length. Capacity, backing storage identity and nilness are abstracted. The proof covers arbitrary elements and valid bounds. Go comparisons use backing lengths 0 through 256, positive infinity and NaN payloads, seven boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.Float64Slice.Len on two-index subslices.",
+    "theorems": ["GoLean.Sort.float64SliceLen_subslice"],
+    "check": "difftest/sort/float64slicelen/check.go"
+  },
+  "IntSlice.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/IntSliceLen.lean",
+    "model_symbol": "GoLean.Sort.intSliceLen",
+    "claim": "For a valid subslice x[lo:hi], Len returns hi - lo, including zero for empty and nil slices.",
+    "limits": "Models visible elements as a list and Go's builtin len as its length. Capacity, backing storage identity and nilness are abstracted. The proof covers arbitrary elements and valid bounds. Go comparisons use backing lengths 0 through 256, seven boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.IntSlice.Len on two-index subslices.",
+    "theorems": ["GoLean.Sort.intSliceLen_subslice"],
+    "check": "difftest/sort/intslicelen/check.go"
+  },
+  "StringSlice.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sort/StringSliceLen.lean",
+    "model_symbol": "GoLean.Sort.stringSliceLen",
+    "claim": "For a valid subslice x[lo:hi], Len returns hi - lo, including zero for empty and nil slices.",
+    "limits": "Models visible elements as a list and Go's builtin len as its length. Capacity, backing storage identity and nilness are abstracted. The proof covers arbitrary elements and valid bounds. Go comparisons use backing lengths 0 through 256, seven boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling sort.StringSlice.Len on two-index subslices.",
+    "theorems": ["GoLean.Sort.stringSliceLen_subslice"],
+    "check": "difftest/sort/stringslicelen/check.go"
+  }
+}

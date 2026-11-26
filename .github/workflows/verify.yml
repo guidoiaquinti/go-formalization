@@ -1,0 +1,67 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+
+jobs:
+  verify-native:
+    name: Verify (${{ matrix.os }}/${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            os: linux
+            arch: amd64
+          - runner: ubuntu-24.04-arm
+            os: linux
+            arch: arm64
+          - runner: macos-15
+            os: darwin
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: .go-version
+          cache: false
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean
+          auto-config: false
+      - name: Verify the native toolchain and evidence
+        env:
+          EXPECTED_HOST: ${{ matrix.os }}/${{ matrix.arch }}
+        run: |
+          host="$(go env GOHOSTOS)/$(go env GOHOSTARCH)"
+          if [ "$host" != "$EXPECTED_HOST" ]; then
+            printf 'Expected %s toolchain, got %s\n' "$EXPECTED_HOST" "$host" >&2
+            exit 1
+          fi
+          make verify
+      - name: Exercise the 32-bit bits.Rem wrapper
+        if: matrix.os == 'linux' && matrix.arch == 'amd64'
+        env:
+          GOWORK: "off"
+          GOENV: "off"
+          GOOS: linux
+          GOARCH: "386"
+          GO386: sse2
+          GOFLAGS: ""
+          GOEXPERIMENT: ""
+          CGO_ENABLED: "0"
+        run: |
+          GOTOOLCHAIN="go$(cat .go-version)"
+          export GOTOOLCHAIN
+          go run ./difftest/math/bits/rem/check.go --native-width 32
+          go run -gcflags=command-line-arguments=-d=ssa/intrinsics/off -gcflags=math/bits=-d=ssa/intrinsics/off ./difftest/math/bits/rem/check.go --native-width 32
+
+  verify:
+    runs-on: ubuntu-24.04
+    needs: verify-native
+    if: ${{ always() }}
+    env:
+      MATRIX_RESULT: ${{ needs.verify-native.result }}
+    steps:
+      - run: test "$MATRIX_RESULT" = success

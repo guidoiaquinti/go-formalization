@@ -1,0 +1,52 @@
+{
+  "CanBackquote": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/CanBackquote.lean",
+    "model_symbol": "GoLean.Strconv.canBackquote",
+    "claim": "Accepts exactly valid UTF-8 without backquotes, DEL, BOM or ASCII control characters other than tab.",
+    "limits": "Lean validates the whole byte array before checking characters. Equivalence of the Go and Lean UTF-8 decoders is tested rather than proved. Go checks 272 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling strconv.CanBackquote on valid and malformed UTF-8 byte strings.",
+    "theorems": ["GoLean.Strconv.canBackquote_spec"],
+    "check": "difftest/strconv/canbackquote/check.go"
+  },
+  "NumError.Unwrap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/NumErrorUnwrap.lean",
+    "model_symbol": "GoLean.Strconv.numErrorUnwrap",
+    "claim": "Returns the stored error interface unchanged for non-nil receivers and panics on a nil receiver.",
+    "limits": "The proof treats error values as opaque and models nil dereference as a panic outcome. Go compares comparable error values including nil, typed nil and distinct equal-message errors, and checks the runtime panic. It uses 14 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling (*strconv.NumError).Unwrap directly.",
+    "theorems": ["GoLean.Strconv.numErrorUnwrap_spec"],
+    "check": "difftest/strconv/numerror-unwrap/check.go"
+  },
+  "ParseBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/ParseBool.lean",
+    "model_symbol": "GoLean.Strconv.parseBool",
+    "claim": "Accepts exactly the twelve documented spellings and returns the corresponding Boolean. Other inputs return false and NumError with Func ParseBool, the original input bytes and ErrSyntax.",
+    "limits": "Proof covers arbitrary byte strings. Error message rendering and allocation are outside the claim. Go checks 313 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling the public strconv.ParseBool wrapper and comparing returned values and error payloads.",
+    "theorems": ["GoLean.Strconv.parseBool_spec"],
+    "check": "difftest/strconv/parsebool/check.go"
+  },
+  "AppendBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/AppendBool.lean",
+    "model_symbol": "GoLean.Strconv.appendBool",
+    "claim": "Returns the original destination bytes followed by the lowercase Boolean spelling, extending the length by four or five bytes.",
+    "limits": "Proof covers arbitrary destination bytes and both Boolean values. The claim covers returned contents and length. Backing array identity, capacity and allocation are outside the model. Go uses 18 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling strconv.AppendBool on nil, empty and populated slices with varied spare capacity.",
+    "theorems": ["GoLean.Strconv.appendBool_spec"],
+    "check": "difftest/strconv/appendbool/check.go"
+  },
+  "FormatBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/FormatBool.lean",
+    "model_symbol": "GoLean.Strconv.formatBool",
+    "claim": "Returns exactly the lowercase string \"false\" for false and \"true\" for true.",
+    "limits": "Exhaustive over both boolean values. The claim covers returned string contents.",
+    "configurations": "Native Go calling the public strconv.FormatBool entry point.",
+    "theorems": ["GoLean.Strconv.formatBool_spec"],
+    "check": "difftest/strconv/formatbool/check.go"
+  }
+}

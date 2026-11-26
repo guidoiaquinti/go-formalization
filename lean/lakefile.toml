@@ -1,0 +1,572 @@
+name = "go-formalization"
+defaultTargets = ["GoLean", "godiff", "godiff-trailingzeros8", "godiff-onescount8", "godiff-rem", "godiff-mul64", "godiff-len8", "godiff-leadingzeros8", "godiff-len16", "godiff-leadingzeros16", "godiff-trailingzeros16", "godiff-onescount16", "godiff-reverse8", "godiff-reverse16", "godiff-len32", "godiff-len64", "godiff-len", "godiff-leadingzeros32", "godiff-leadingzeros64", "godiff-leadingzeros", "godiff-trailingzeros32", "godiff-trailingzeros64", "godiff-trailingzeros", "godiff-onescount32", "godiff-onescount64", "godiff-reverse32", "godiff-reverse64", "godiff-reverse", "godiff-reversebytes32", "godiff-reversebytes64", "godiff-reversebytes", "godiff-rotateleft8", "godiff-rotateleft16", "godiff-rotateleft32", "godiff-rotateleft64", "godiff-rotateleft", "godiff-add32", "godiff-add64", "godiff-add", "godiff-sub32", "godiff-sub64", "godiff-sub", "godiff-mul32", "godiff-mul", "godiff-div32", "godiff-div64", "godiff-div", "godiff-rem32", "godiff-rem64", "godiff-onescount", "godiff-formatbool", "godiff-intslicelen", "godiff-stringslicelen", "godiff-float64slicelen", "godiff-ipv6loopback", "godiff-addrfrom16", "godiff-ipv6linklocalallrouters", "godiff-ipv6unspecified", "godiff-ipv6linklocalallnodes", "godiff-ipv4unspecified", "godiff-addrfrom4", "godiff-addr-bitlen", "godiff-addr-isvalid", "godiff-addr-is4", "godiff-addr-is6", "godiff-addr-is4in6", "godiff-addr-unmap", "godiff-addr-withzone", "godiff-addr-zone", "godiff-addr-as16", "godiff-addr-as4", "godiff-addr-asslice", "godiff-addrport-port", "godiff-addrport-isvalid", "godiff-addrportfrom", "godiff-addrport-addr", "godiff-prefix-addr", "godiff-prefix-bits", "godiff-prefix-isvalid", "godiff-prefixfrom", "godiff-prefix-issingleip", "godiff-addr-isunspecified", "godiff-addr-isloopback", "godiff-addr-ismulticast", "godiff-addr-islinklocalmulticast", "godiff-addr-islinklocalunicast", "godiff-addr-isinterfacelocalmulticast", "godiff-addr-isprivate", "godiff-addr-isglobalunicast", "godiff-addr-next", "godiff-addr-prev", "godiff-addr-less", "godiff-addr-compare", "godiff-addrport-compare", "godiff-appendbool", "godiff-parsebool", "godiff-numerror-unwrap", "godiff-canbackquote", "godiff-intsliceless", "godiff-stringsliceless", "godiff-float64sliceless", "godiff-intsliceswap", "godiff-stringsliceswap", "godiff-float64sliceswap", "godiff-sort-reverse", "godiff-sort-issorted", "godiff-ints-are-sorted", "godiff-strings-are-sorted", "godiff-float64s-are-sorted", "godiff-search-ints", "godiff-search-strings", "godiff-search-float64s", "godiff-intslice-search", "godiff-stringslice-search", "godiff-float64slice-search", "godiff-sort-search", "godiff-sort-find", "godiff-slices-is-sorted", "godiff-slices-is-sorted-func", "godiff-slices-min", "godiff-slices-max", "godiff-slices-index", "godiff-slices-contains", "godiff-slices-index-func", "godiff-slices-contains-func", "godiff-slices-equal", "godiff-slices-equal-func", "godiff-slices-clip", "godiff-slices-clone", "godiff-slices-reverse", "godiff-slices-concat", "godiff-slices-repeat", "godiff-slices-compare", "godiff-slices-compare-func", "godiff-slices-binary-search", "godiff-slices-binary-search-func", "godiff-slices-min-func", "godiff-slices-max-func", "godiff-slices-compact", "godiff-slices-delete", "godiff-slices-delete-func"]
+
+[leanOptions]
+warningAsError = true
+
+[[lean_lib]]
+name = "GoLean"
+
+[[lean_lib]]
+name = "GoDiffSupport"
+roots = ["GoDiff.Math.Bits.Unary", "GoDiff.Math.Bits.Tuple"]
+
+[[lean_exe]]
+name = "godiff"
+root = "GoDiff.Math.Bits.ReverseBytes16"
+
+[[lean_exe]]
+name = "godiff-trailingzeros8"
+root = "GoDiff.Math.Bits.TrailingZeros8"
+
+[[lean_exe]]
+name = "godiff-onescount8"
+root = "GoDiff.Math.Bits.OnesCount8"
+
+[[lean_exe]]
+name = "godiff-rem"
+root = "GoDiff.Math.Bits.Rem"
+
+[[lean_exe]]
+name = "godiff-mul64"
+root = "GoDiff.Math.Bits.Mul64"
+
+[[lean_exe]]
+name = "godiff-len8"
+root = "GoDiff.Math.Bits.Len8"
+
+[[lean_exe]]
+name = "godiff-leadingzeros8"
+root = "GoDiff.Math.Bits.LeadingZeros8"
+
+[[lean_exe]]
+name = "godiff-len16"
+root = "GoDiff.Math.Bits.Len16"
+
+[[lean_exe]]
+name = "godiff-leadingzeros16"
+root = "GoDiff.Math.Bits.LeadingZeros16"
+
+[[lean_exe]]
+name = "godiff-trailingzeros16"
+root = "GoDiff.Math.Bits.TrailingZeros16"
+
+[[lean_exe]]
+name = "godiff-onescount16"
+root = "GoDiff.Math.Bits.OnesCount16"
+
+[[lean_exe]]
+name = "godiff-reverse8"
+root = "GoDiff.Math.Bits.Reverse8"
+
+[[lean_exe]]
+name = "godiff-reverse16"
+root = "GoDiff.Math.Bits.Reverse16"
+
+[[lean_exe]]
+name = "godiff-len32"
+root = "GoDiff.Math.Bits.Len32"
+
+[[lean_exe]]
+name = "godiff-len64"
+root = "GoDiff.Math.Bits.Len64"
+
+[[lean_exe]]
+name = "godiff-len"
+root = "GoDiff.Math.Bits.Len"
+
+[[lean_exe]]
+name = "godiff-leadingzeros32"
+root = "GoDiff.Math.Bits.LeadingZeros32"
+
+[[lean_exe]]
+name = "godiff-leadingzeros64"
+root = "GoDiff.Math.Bits.LeadingZeros64"
+
+[[lean_exe]]
+name = "godiff-leadingzeros"
+root = "GoDiff.Math.Bits.LeadingZeros"
+
+[[lean_exe]]
+name = "godiff-trailingzeros32"
+root = "GoDiff.Math.Bits.TrailingZeros32"
+
+[[lean_exe]]
+name = "godiff-trailingzeros64"
+root = "GoDiff.Math.Bits.TrailingZeros64"
+
+[[lean_exe]]
+name = "godiff-trailingzeros"
+root = "GoDiff.Math.Bits.TrailingZeros"
+
+[[lean_exe]]
+name = "godiff-onescount32"
+root = "GoDiff.Math.Bits.OnesCount32"
+
+[[lean_exe]]
+name = "godiff-onescount64"
+root = "GoDiff.Math.Bits.OnesCount64"
+
+[[lean_exe]]
+name = "godiff-reverse32"
+root = "GoDiff.Math.Bits.Reverse32"
+
+[[lean_exe]]
+name = "godiff-reverse64"
+root = "GoDiff.Math.Bits.Reverse64"
+
+[[lean_exe]]
+name = "godiff-reverse"
+root = "GoDiff.Math.Bits.Reverse"
+
+[[lean_exe]]
+name = "godiff-reversebytes32"
+root = "GoDiff.Math.Bits.ReverseBytes32"
+
+[[lean_exe]]
+name = "godiff-reversebytes64"
+root = "GoDiff.Math.Bits.ReverseBytes64"
+
+[[lean_exe]]
+name = "godiff-reversebytes"
+root = "GoDiff.Math.Bits.ReverseBytes"
+
+[[lean_exe]]
+name = "godiff-rotateleft8"
+root = "GoDiff.Math.Bits.RotateLeft8"
+
+[[lean_exe]]
+name = "godiff-rotateleft16"
+root = "GoDiff.Math.Bits.RotateLeft16"
+
+[[lean_exe]]
+name = "godiff-rotateleft32"
+root = "GoDiff.Math.Bits.RotateLeft32"
+
+[[lean_exe]]
+name = "godiff-rotateleft64"
+root = "GoDiff.Math.Bits.RotateLeft64"
+
+[[lean_exe]]
+name = "godiff-rotateleft"
+root = "GoDiff.Math.Bits.RotateLeft"
+
+[[lean_exe]]
+name = "godiff-add32"
+root = "GoDiff.Math.Bits.Add32"
+
+[[lean_exe]]
+name = "godiff-add64"
+root = "GoDiff.Math.Bits.Add64"
+
+[[lean_exe]]
+name = "godiff-add"
+root = "GoDiff.Math.Bits.Add"
+
+[[lean_exe]]
+name = "godiff-sub32"
+root = "GoDiff.Math.Bits.Sub32"
+
+[[lean_exe]]
+name = "godiff-sub64"
+root = "GoDiff.Math.Bits.Sub64"
+
+[[lean_exe]]
+name = "godiff-sub"
+root = "GoDiff.Math.Bits.Sub"
+
+[[lean_exe]]
+name = "godiff-mul32"
+root = "GoDiff.Math.Bits.Mul32"
+
+[[lean_exe]]
+name = "godiff-mul"
+root = "GoDiff.Math.Bits.Mul"
+
+[[lean_exe]]
+name = "godiff-div32"
+root = "GoDiff.Math.Bits.Div32"
+
+[[lean_exe]]
+name = "godiff-div64"
+root = "GoDiff.Math.Bits.Div64"
+
+[[lean_exe]]
+name = "godiff-div"
+root = "GoDiff.Math.Bits.Div"
+
+[[lean_exe]]
+name = "godiff-rem32"
+root = "GoDiff.Math.Bits.Rem32"
+
+[[lean_exe]]
+name = "godiff-rem64"
+root = "GoDiff.Math.Bits.Rem64"
+
+[[lean_exe]]
+name = "godiff-onescount"
+root = "GoDiff.Math.Bits.OnesCount"
+
+[[lean_exe]]
+name = "godiff-formatbool"
+root = "GoDiff.Strconv.FormatBool"
+
+[[lean_exe]]
+name = "godiff-intslicelen"
+root = "GoDiff.Sort.IntSliceLen"
+
+[[lean_exe]]
+name = "godiff-stringslicelen"
+root = "GoDiff.Sort.StringSliceLen"
+
+[[lean_exe]]
+name = "godiff-float64slicelen"
+root = "GoDiff.Sort.Float64SliceLen"
+
+[[lean_exe]]
+name = "godiff-ipv6loopback"
+root = "GoDiff.Net.Netip.IPv6Loopback"
+
+[[lean_exe]]
+name = "godiff-addrfrom16"
+root = "GoDiff.Net.Netip.AddrFrom16"
+
+[[lean_exe]]
+name = "godiff-ipv6linklocalallrouters"
+root = "GoDiff.Net.Netip.IPv6LinkLocalAllRouters"
+
+[[lean_exe]]
+name = "godiff-ipv6unspecified"
+root = "GoDiff.Net.Netip.IPv6Unspecified"
+
+[[lean_exe]]
+name = "godiff-ipv6linklocalallnodes"
+root = "GoDiff.Net.Netip.IPv6LinkLocalAllNodes"
+
+[[lean_exe]]
+name = "godiff-ipv4unspecified"
+root = "GoDiff.Net.Netip.IPv4Unspecified"
+
+[[lean_exe]]
+name = "godiff-addrfrom4"
+root = "GoDiff.Net.Netip.AddrFrom4"
+
+[[lean_exe]]
+name = "godiff-addr-bitlen"
+root = "GoDiff.Net.Netip.AddrBitLen"
+
+[[lean_exe]]
+name = "godiff-addr-isvalid"
+root = "GoDiff.Net.Netip.AddrIsValid"
+
+[[lean_exe]]
+name = "godiff-addr-is4"
+root = "GoDiff.Net.Netip.AddrIs4"
+
+[[lean_exe]]
+name = "godiff-addr-is6"
+root = "GoDiff.Net.Netip.AddrIs6"
+
+[[lean_exe]]
+name = "godiff-addr-is4in6"
+root = "GoDiff.Net.Netip.AddrIs4In6"
+
+[[lean_exe]]
+name = "godiff-addr-unmap"
+root = "GoDiff.Net.Netip.AddrUnmap"
+
+[[lean_exe]]
+name = "godiff-addr-withzone"
+root = "GoDiff.Net.Netip.AddrWithZone"
+
+[[lean_exe]]
+name = "godiff-addr-zone"
+root = "GoDiff.Net.Netip.AddrZone"
+
+[[lean_exe]]
+name = "godiff-addr-as16"
+root = "GoDiff.Net.Netip.AddrAs16"
+
+[[lean_exe]]
+name = "godiff-addr-as4"
+root = "GoDiff.Net.Netip.AddrAs4"
+
+[[lean_exe]]
+name = "godiff-addr-asslice"
+root = "GoDiff.Net.Netip.AddrAsSlice"
+
+[[lean_exe]]
+name = "godiff-addrport-port"
+root = "GoDiff.Net.Netip.AddrPortPort"
+
+[[lean_exe]]
+name = "godiff-addrport-isvalid"
+root = "GoDiff.Net.Netip.AddrPortIsValid"
+
+[[lean_exe]]
+name = "godiff-addrportfrom"
+root = "GoDiff.Net.Netip.AddrPortFrom"
+
+[[lean_exe]]
+name = "godiff-addrport-addr"
+root = "GoDiff.Net.Netip.AddrPortAddr"
+
+[[lean_exe]]
+name = "godiff-prefix-addr"
+root = "GoDiff.Net.Netip.PrefixAddr"
+
+[[lean_exe]]
+name = "godiff-prefix-bits"
+root = "GoDiff.Net.Netip.PrefixBits"
+
+[[lean_exe]]
+name = "godiff-prefix-isvalid"
+root = "GoDiff.Net.Netip.PrefixIsValid"
+
+[[lean_exe]]
+name = "godiff-prefixfrom"
+root = "GoDiff.Net.Netip.PrefixFrom"
+
+[[lean_exe]]
+name = "godiff-prefix-issingleip"
+root = "GoDiff.Net.Netip.PrefixIsSingleIP"
+
+[[lean_exe]]
+name = "godiff-addr-isunspecified"
+root = "GoDiff.Net.Netip.AddrIsUnspecified"
+
+[[lean_exe]]
+name = "godiff-addr-isloopback"
+root = "GoDiff.Net.Netip.AddrIsLoopback"
+
+[[lean_exe]]
+name = "godiff-addr-ismulticast"
+root = "GoDiff.Net.Netip.AddrIsMulticast"
+
+[[lean_exe]]
+name = "godiff-addr-islinklocalmulticast"
+root = "GoDiff.Net.Netip.AddrIsLinkLocalMulticast"
+
+[[lean_exe]]
+name = "godiff-addr-islinklocalunicast"
+root = "GoDiff.Net.Netip.AddrIsLinkLocalUnicast"
+
+[[lean_exe]]
+name = "godiff-addr-isinterfacelocalmulticast"
+root = "GoDiff.Net.Netip.AddrIsInterfaceLocalMulticast"
+
+[[lean_exe]]
+name = "godiff-addr-isprivate"
+root = "GoDiff.Net.Netip.AddrIsPrivate"
+
+[[lean_exe]]
+name = "godiff-addr-isglobalunicast"
+root = "GoDiff.Net.Netip.AddrIsGlobalUnicast"
+
+[[lean_exe]]
+name = "godiff-addr-next"
+root = "GoDiff.Net.Netip.AddrNext"
+
+[[lean_exe]]
+name = "godiff-addr-prev"
+root = "GoDiff.Net.Netip.AddrPrev"
+
+[[lean_exe]]
+name = "godiff-addr-less"
+root = "GoDiff.Net.Netip.AddrLess"
+
+[[lean_exe]]
+name = "godiff-addr-compare"
+root = "GoDiff.Net.Netip.AddrCompare"
+
+[[lean_exe]]
+name = "godiff-addrport-compare"
+root = "GoDiff.Net.Netip.AddrPortCompare"
+
+[[lean_exe]]
+name = "godiff-appendbool"
+root = "GoDiff.Strconv.AppendBool"
+
+[[lean_exe]]
+name = "godiff-parsebool"
+root = "GoDiff.Strconv.ParseBool"
+
+[[lean_exe]]
+name = "godiff-numerror-unwrap"
+root = "GoDiff.Strconv.NumErrorUnwrap"
+
+[[lean_exe]]
+name = "godiff-canbackquote"
+root = "GoDiff.Strconv.CanBackquote"
+
+[[lean_exe]]
+name = "godiff-intsliceless"
+root = "GoDiff.Sort.IntSliceLess"
+
+[[lean_exe]]
+name = "godiff-stringsliceless"
+root = "GoDiff.Sort.StringSliceLess"
+
+[[lean_exe]]
+name = "godiff-float64sliceless"
+root = "GoDiff.Sort.Float64SliceLess"
+
+[[lean_exe]]
+name = "godiff-intsliceswap"
+root = "GoDiff.Sort.IntSliceSwap"
+
+[[lean_exe]]
+name = "godiff-stringsliceswap"
+root = "GoDiff.Sort.StringSliceSwap"
+
+[[lean_exe]]
+name = "godiff-float64sliceswap"
+root = "GoDiff.Sort.Float64SliceSwap"
+
+[[lean_exe]]
+name = "godiff-sort-reverse"
+root = "GoDiff.Sort.Reverse"
+
+[[lean_exe]]
+name = "godiff-sort-issorted"
+root = "GoDiff.Sort.IsSorted"
+
+[[lean_exe]]
+name = "godiff-ints-are-sorted"
+root = "GoDiff.Sort.IntsAreSorted"
+
+[[lean_exe]]
+name = "godiff-strings-are-sorted"
+root = "GoDiff.Sort.StringsAreSorted"
+
+[[lean_exe]]
+name = "godiff-float64s-are-sorted"
+root = "GoDiff.Sort.Float64sAreSorted"
+
+[[lean_exe]]
+name = "godiff-search-ints"
+root = "GoDiff.Sort.SearchInts"
+
+[[lean_exe]]
+name = "godiff-search-strings"
+root = "GoDiff.Sort.SearchStrings"
+
+[[lean_exe]]
+name = "godiff-search-float64s"
+root = "GoDiff.Sort.SearchFloat64s"
+
+[[lean_exe]]
+name = "godiff-intslice-search"
+root = "GoDiff.Sort.IntSliceSearch"
+
+[[lean_exe]]
+name = "godiff-stringslice-search"
+root = "GoDiff.Sort.StringSliceSearch"
+
+[[lean_exe]]
+name = "godiff-float64slice-search"
+root = "GoDiff.Sort.Float64SliceSearch"
+
+[[lean_exe]]
+name = "godiff-sort-search"
+root = "GoDiff.Sort.Search"
+
+[[lean_exe]]
+name = "godiff-sort-find"
+root = "GoDiff.Sort.Find"
+
+[[lean_exe]]
+name = "godiff-slices-is-sorted"
+root = "GoDiff.Slices.IsSorted"
+
+[[lean_exe]]
+name = "godiff-slices-is-sorted-func"
+root = "GoDiff.Slices.IsSortedFunc"
+
+[[lean_exe]]
+name = "godiff-slices-min"
+root = "GoDiff.Slices.Min"
+
+[[lean_exe]]
+name = "godiff-slices-max"
+root = "GoDiff.Slices.Max"
+
+[[lean_exe]]
+name = "godiff-slices-index"
+root = "GoDiff.Slices.Index"
+
+[[lean_exe]]
+name = "godiff-slices-contains"
+root = "GoDiff.Slices.Contains"
+
+[[lean_exe]]
+name = "godiff-slices-index-func"
+root = "GoDiff.Slices.IndexFunc"
+
+[[lean_exe]]
+name = "godiff-slices-contains-func"
+root = "GoDiff.Slices.ContainsFunc"
+
+[[lean_exe]]
+name = "godiff-slices-equal"
+root = "GoDiff.Slices.Equal"
+
+[[lean_exe]]
+name = "godiff-slices-equal-func"
+root = "GoDiff.Slices.EqualFunc"
+
+[[lean_exe]]
+name = "godiff-slices-clip"
+root = "GoDiff.Slices.Clip"
+
+[[lean_exe]]
+name = "godiff-slices-clone"
+root = "GoDiff.Slices.Clone"
+
+[[lean_exe]]
+name = "godiff-slices-reverse"
+root = "GoDiff.Slices.Reverse"
+
+[[lean_exe]]
+name = "godiff-slices-concat"
+root = "GoDiff.Slices.Concat"
+
+[[lean_exe]]
+name = "godiff-slices-repeat"
+root = "GoDiff.Slices.Repeat"
+
+[[lean_exe]]
+name = "godiff-slices-compare"
+root = "GoDiff.Slices.Compare"
+
+[[lean_exe]]
+name = "godiff-slices-compare-func"
+root = "GoDiff.Slices.CompareFunc"
+
+[[lean_exe]]
+name = "godiff-slices-binary-search"
+root = "GoDiff.Slices.BinarySearch"
+
+[[lean_exe]]
+name = "godiff-slices-binary-search-func"
+root = "GoDiff.Slices.BinarySearchFunc"
+
+[[lean_exe]]
+name = "godiff-slices-min-func"
+root = "GoDiff.Slices.MinFunc"
+
+[[lean_exe]]
+name = "godiff-slices-max-func"
+root = "GoDiff.Slices.MaxFunc"
+
+[[lean_exe]]
+name = "godiff-slices-compact"
+root = "GoDiff.Slices.Compact"
+
+[[lean_exe]]
+name = "godiff-slices-delete"
+root = "GoDiff.Slices.Delete"
+
+[[lean_exe]]
+name = "godiff-slices-delete-func"
+root = "GoDiff.Slices.DeleteFunc"
