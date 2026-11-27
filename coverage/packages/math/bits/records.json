@@ -10,7 +10,9 @@
     "claim": "The sum word and carry reconstruct the unsigned sum including the input carry.",
     "limits": "64-bit uint only. Go requires the input flag to be zero or one. The model uses widened arithmetic. The source bitwise flag calculation is tested on Go. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Add.md"
   },
   "Add32": {
     "go_version": "1.27.0",
@@ -23,7 +25,9 @@
     "claim": "The sum word and carry reconstruct the unsigned sum including the input carry.",
     "limits": "Go requires the input flag to be zero or one. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Add32.md"
   },
   "Add64": {
     "go_version": "1.27.0",
@@ -36,7 +40,9 @@
     "claim": "The sum word and carry reconstruct the unsigned sum including the input carry.",
     "limits": "Go requires the input flag to be zero or one. The model uses widened arithmetic. The source bitwise flag calculation is tested on Go. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Add64.md"
   },
   "Div": {
     "go_version": "1.27.0",
@@ -49,7 +55,9 @@
     "claim": "Return the Euclidean quotient and remainder when the quotient fits. Panic for a zero divisor or quotient overflow, with zero divisor taking precedence.",
     "limits": "64-bit uint only. Observable outcomes only. The model abstracts the normalized long-division steps. The compiled Go paths are compared by sampling. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Div/main.go",
+    "review": "coverage/packages/math/bits/Div.md"
   },
   "Div32": {
     "go_version": "1.27.0",
@@ -62,7 +70,9 @@
     "claim": "Return the Euclidean quotient and remainder when the quotient fits. Panic for a zero divisor or quotient overflow, with zero divisor taking precedence.",
     "limits": "Observable outcomes only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Div/main.go",
+    "review": "coverage/packages/math/bits/Div32.md"
   },
   "Div64": {
     "go_version": "1.27.0",
@@ -75,7 +85,9 @@
     "claim": "Return the Euclidean quotient and remainder when the quotient fits. Panic for a zero divisor or quotient overflow, with zero divisor taking precedence.",
     "limits": "Observable outcomes only. The model abstracts the normalized long-division steps. The compiled Go paths are compared by sampling. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Div/main.go",
+    "review": "coverage/packages/math/bits/Div64.md"
   },
   "LeadingZeros": {
     "go_version": "1.27.0",
@@ -88,7 +100,9 @@
     "claim": "Count consecutive zero bits from the most significant end, including the word width at zero.",
     "limits": "Return value only. 64-bit uint only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/LeadingZeros/main.go",
+    "review": "coverage/packages/math/bits/LeadingZeros.md"
   },
   "LeadingZeros16": {
     "go_version": "1.27.0",
@@ -101,7 +115,9 @@
     "claim": "Count consecutive zero bits from the most significant end, including sixteen at zero.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/LeadingZeros/main.go",
+    "review": "coverage/packages/math/bits/LeadingZeros16.md"
   },
   "LeadingZeros32": {
     "go_version": "1.27.0",
@@ -114,7 +130,9 @@
     "claim": "Count consecutive zero bits from the most significant end, including the word width at zero.",
     "limits": "Return value only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/LeadingZeros/main.go",
+    "review": "coverage/packages/math/bits/LeadingZeros32.md"
   },
   "LeadingZeros64": {
     "go_version": "1.27.0",
@@ -127,7 +145,9 @@
     "claim": "Count consecutive zero bits from the most significant end, including the word width at zero.",
     "limits": "Return value only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/LeadingZeros/main.go",
+    "review": "coverage/packages/math/bits/LeadingZeros64.md"
   },
   "LeadingZeros8": {
     "go_version": "1.27.0",
@@ -140,7 +160,9 @@
     "claim": "Return the number of consecutive zero bits from the most significant end of every uint8 input, including eight at zero.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go, with default lowering and with intrinsics disabled in the driver and math/bits. CI matrix covers Linux/amd64, Linux/arm64 and macOS/arm64.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/LeadingZeros/main.go",
+    "review": "coverage/packages/math/bits/LeadingZeros8.md"
   },
   "Len": {
     "go_version": "1.27.0",
@@ -153,7 +175,9 @@
     "claim": "Return the minimum unsigned bit width, including zero bits at zero.",
     "limits": "Return value only. 64-bit uint only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/WideLength/main.go",
+    "review": "coverage/packages/math/bits/Len.md"
   },
   "Len16": {
     "go_version": "1.27.0",
@@ -166,7 +190,9 @@
     "claim": "Return the minimum unsigned bit width, including zero bits at zero.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Length/main.go",
+    "review": "coverage/packages/math/bits/Len16.md"
   },
   "Len32": {
     "go_version": "1.27.0",
@@ -179,7 +205,9 @@
     "claim": "Return the minimum unsigned bit width, including zero bits at zero.",
     "limits": "Return value only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/WideLength/main.go",
+    "review": "coverage/packages/math/bits/Len32.md"
   },
   "Len64": {
     "go_version": "1.27.0",
@@ -192,7 +220,9 @@
     "claim": "Return the minimum unsigned bit width, including zero bits at zero.",
     "limits": "Return value only. The length model factors the threshold and shift steps into recursive half-word selection. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/WideLength/main.go",
+    "review": "coverage/packages/math/bits/Len64.md"
   },
   "Len8": {
     "go_version": "1.27.0",
@@ -205,7 +235,9 @@
     "claim": "Return the smallest number of bits needed to represent every uint8 input, including zero bits at zero.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go, with default lowering and with intrinsics disabled in the driver and math/bits. CI matrix covers Linux/amd64, Linux/arm64 and macOS/arm64.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Length/main.go",
+    "review": "coverage/packages/math/bits/Len8.md"
   },
   "Mul": {
     "go_version": "1.27.0",
@@ -218,7 +250,9 @@
     "claim": "The high and low words reconstruct the full unsigned product.",
     "limits": "64-bit uint only. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Mul/main.go",
+    "review": "coverage/packages/math/bits/Mul.md"
   },
   "Mul32": {
     "go_version": "1.27.0",
@@ -231,7 +265,9 @@
     "claim": "The high and low words reconstruct the full unsigned product.",
     "limits": "Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Mul/main.go",
+    "review": "coverage/packages/math/bits/Mul32.md"
   },
   "Mul64": {
     "go_version": "1.27.0",
@@ -265,7 +301,9 @@
     "claim": "Return the number of set bits.",
     "limits": "64-bit uint only. The model sums disjoint halves, and the individual mask and shift intermediates in Go are outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Population/main.go",
+    "review": "coverage/packages/math/bits/OnesCount.md"
   },
   "OnesCount16": {
     "go_version": "1.27.0",
@@ -278,7 +316,9 @@
     "claim": "Return the number of set bits.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Population/main.go",
+    "review": "coverage/packages/math/bits/OnesCount16.md"
   },
   "OnesCount32": {
     "go_version": "1.27.0",
@@ -291,7 +331,9 @@
     "claim": "Return the number of set bits.",
     "limits": "Return value only. The model groups the four byte-table counts into two half-word sums. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Population/main.go",
+    "review": "coverage/packages/math/bits/OnesCount32.md"
   },
   "OnesCount64": {
     "go_version": "1.27.0",
@@ -304,7 +346,9 @@
     "claim": "Return the number of set bits.",
     "limits": "Return value only. The model sums disjoint halves. The individual mask and shift intermediates in Go are outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Population/main.go",
+    "review": "coverage/packages/math/bits/OnesCount64.md"
   },
   "OnesCount8": {
     "go_version": "1.27.0",
@@ -356,7 +400,9 @@
     "claim": "Return the Euclidean remainder even when the quotient overflows. Panic for a zero divisor.",
     "limits": "Observable outcomes only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RemFixedWidth/main.go",
+    "review": "coverage/packages/math/bits/Rem32.md"
   },
   "Rem64": {
     "go_version": "1.27.0",
@@ -369,7 +415,9 @@
     "claim": "Return the Euclidean remainder even when the quotient overflows. Panic for a zero divisor.",
     "limits": "Observable outcomes only. The model abstracts the normalized long-division steps. The compiled Go paths are compared by sampling. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RemFixedWidth/main.go",
+    "review": "coverage/packages/math/bits/Rem64.md"
   },
   "Reverse": {
     "go_version": "1.27.0",
@@ -382,7 +430,9 @@
     "claim": "Map every input bit to the opposite position in the word.",
     "limits": "Return value only. 64-bit uint only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/Reverse.md"
   },
   "Reverse16": {
     "go_version": "1.27.0",
@@ -395,7 +445,9 @@
     "claim": "Map every input bit to the opposite position in the word.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/Reverse16.md"
   },
   "Reverse32": {
     "go_version": "1.27.0",
@@ -408,7 +460,9 @@
     "claim": "Map every input bit to the opposite position in the word.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/Reverse32.md"
   },
   "Reverse64": {
     "go_version": "1.27.0",
@@ -421,7 +475,9 @@
     "claim": "Map every input bit to the opposite position in the word.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/Reverse64.md"
   },
   "Reverse8": {
     "go_version": "1.27.0",
@@ -434,7 +490,9 @@
     "claim": "Map every input bit to the opposite position in the word.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/Reverse8.md"
   },
   "ReverseBytes": {
     "go_version": "1.27.0",
@@ -447,7 +505,9 @@
     "claim": "Reverse the byte order while preserving each bit\u2019s position within its byte.",
     "limits": "Return value only. 64-bit uint only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/Reversal/main.go",
+    "review": "coverage/packages/math/bits/ReverseBytes.md"
   },
   "ReverseBytes16": {
     "go_version": "1.27.0",
@@ -480,7 +540,9 @@
     "claim": "Reverse the byte order while preserving each bit\u2019s position within its byte.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/ReverseByteWords/main.go",
+    "review": "coverage/packages/math/bits/ReverseBytes32.md"
   },
   "ReverseBytes64": {
     "go_version": "1.27.0",
@@ -493,7 +555,9 @@
     "claim": "Reverse the byte order while preserving each bit\u2019s position within its byte.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/ReverseByteWords/main.go",
+    "review": "coverage/packages/math/bits/ReverseBytes64.md"
   },
   "RotateLeft": {
     "go_version": "1.27.0",
@@ -506,7 +570,9 @@
     "claim": "Move each bit left by the signed count modulo the word width, wrapping at the word boundary.",
     "limits": "64-bit uint only. Return value only. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RotateLeft/main.go",
+    "review": "coverage/packages/math/bits/RotateLeft.md"
   },
   "RotateLeft16": {
     "go_version": "1.27.0",
@@ -519,7 +585,9 @@
     "claim": "Move each bit left by the signed count modulo the word width, wrapping at the word boundary.",
     "limits": "Return value only. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RotateLeft/main.go",
+    "review": "coverage/packages/math/bits/RotateLeft16.md"
   },
   "RotateLeft32": {
     "go_version": "1.27.0",
@@ -532,7 +600,9 @@
     "claim": "Move each bit left by the signed count modulo the word width, wrapping at the word boundary.",
     "limits": "Return value only. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RotateLeft/main.go",
+    "review": "coverage/packages/math/bits/RotateLeft32.md"
   },
   "RotateLeft64": {
     "go_version": "1.27.0",
@@ -545,7 +615,9 @@
     "claim": "Move each bit left by the signed count modulo the word width, wrapping at the word boundary.",
     "limits": "Return value only. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RotateLeft/main.go",
+    "review": "coverage/packages/math/bits/RotateLeft64.md"
   },
   "RotateLeft8": {
     "go_version": "1.27.0",
@@ -558,7 +630,9 @@
     "claim": "Move each bit left by the signed count modulo the word width, wrapping at the word boundary.",
     "limits": "Return value only. Timing is outside the claim. Exhausts all bytes and rotation residues. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/RotateLeft/main.go",
+    "review": "coverage/packages/math/bits/RotateLeft8.md"
   },
   "Sub": {
     "go_version": "1.27.0",
@@ -571,7 +645,9 @@
     "claim": "The difference word and borrow reconstruct the unsigned difference including the input borrow.",
     "limits": "64-bit uint only. Go requires the input flag to be zero or one. The model uses widened arithmetic. The source bitwise flag calculation is tested on Go. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Sub.md"
   },
   "Sub32": {
     "go_version": "1.27.0",
@@ -584,7 +660,9 @@
     "claim": "The difference word and borrow reconstruct the unsigned difference including the input borrow.",
     "limits": "Go requires the input flag to be zero or one. The model uses widened arithmetic. The source bitwise flag calculation is tested on Go. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Sub32.md"
   },
   "Sub64": {
     "go_version": "1.27.0",
@@ -597,7 +675,9 @@
     "claim": "The difference word and borrow reconstruct the unsigned difference including the input borrow.",
     "limits": "Go requires the input flag to be zero or one. The model uses widened arithmetic. The source bitwise flag calculation is tested on Go. Timing is outside the claim. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/AddSub/main.go",
+    "review": "coverage/packages/math/bits/Sub64.md"
   },
   "TrailingZeros": {
     "go_version": "1.27.0",
@@ -610,7 +690,9 @@
     "claim": "Count consecutive zero bits from the least significant end, including the word width at zero.",
     "limits": "Return value only. 64-bit uint only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/TrailingZeros/main.go",
+    "review": "coverage/packages/math/bits/TrailingZeros.md"
   },
   "TrailingZeros16": {
     "go_version": "1.27.0",
@@ -623,7 +705,9 @@
     "claim": "Count consecutive zero bits from the least significant end, including sixteen at zero.",
     "limits": "Return value only. Exhaustive comparison.",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/TrailingZeros/main.go",
+    "review": "coverage/packages/math/bits/TrailingZeros16.md"
   },
   "TrailingZeros32": {
     "go_version": "1.27.0",
@@ -636,7 +720,9 @@
     "claim": "Count consecutive zero bits from the least significant end, including the word width at zero.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/TrailingZeros/main.go",
+    "review": "coverage/packages/math/bits/TrailingZeros32.md"
   },
   "TrailingZeros64": {
     "go_version": "1.27.0",
@@ -649,7 +735,9 @@
     "claim": "Count consecutive zero bits from the least significant end, including the word width at zero.",
     "limits": "Return value only. Boundary cases and 60,000 seeded inputs (17, 2718, 65537).",
     "configurations": "Native Go with default lowering and with intrinsics disabled in the driver and math/bits.",
-    "source_fallback": true
+    "source_fallback": true,
+    "control": "coverage/packages/math/bits/controls/TrailingZeros/main.go",
+    "review": "coverage/packages/math/bits/TrailingZeros64.md"
   },
   "TrailingZeros8": {
     "go_version": "1.27.0",

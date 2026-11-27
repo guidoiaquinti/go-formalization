@@ -1,0 +1,1052 @@
+{
+  "Append": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/PublicBuffer.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binaryAppend",
+    "claim": "Appends the expected encoding and captures returned nilness, reuse, exact visible bytes, and the original backing for disjoint input and output.",
+    "limits": "8,644 fixed inputs and 60,000 samples (17, 2718, 65537) covering predeclared scalar, slice and nonnil pointer fast paths, empty slices, defined byte types on the reflective path, and rejected strings. General reflective encoding, callback ByteOrder, overlapping operands, typed nil pointers and allocation failures are outside scope.",
+    "configurations": "Direct Go public APIs with both built-in byte orders and independent bit-position and buffer-copy oracles.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binaryAppend_bad_type"
+    ],
+    "check": "difftest/encoding/binary/public-buffer/check.go",
+    "review": "coverage/packages/encoding/binary/append.md",
+    "control": "difftest/encoding/binary/public-buffer/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/fast-codec/testdata/bridge_test.go",
+      "difftest/encoding/binary/fast-codec/testdata/fast_codec_test.go"
+    ]
+  },
+  "AppendUvarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.appendUvarint",
+    "claim": "Appends the exact unsigned base-128 payload and models original backing writes, including a partial write before reallocation.",
+    "limits": "60,000 seeded rows (17, 2718, 65537) plus encoded width, sign, and capacity boundaries. Fresh allocation size and allocation failures are outside scope.",
+    "configurations": "Direct pinned native calls on nil and capacity-bounded offset slices. Independent bit-position and backing-prefix oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.appendUvarint_payload",
+      "GoLean.Encoding.Binary.appendUvarint_reused",
+      "GoLean.Encoding.Binary.appendUvarint_backing"
+    ],
+    "check": "difftest/encoding/binary/varint-append/check.go",
+    "control": "difftest/encoding/binary/varint-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/append-uvarint.md"
+  },
+  "AppendVarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.appendVarint",
+    "claim": "Appends the exact signed zigzag base-128 payload and models original backing writes, including a partial write before reallocation.",
+    "limits": "60,000 seeded rows (17, 2718, 65537) plus encoded width, sign, and capacity boundaries. Fresh allocation size and allocation failures are outside scope.",
+    "configurations": "Direct pinned native calls on nil and capacity-bounded offset slices. Independent bit-position and backing-prefix oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.appendVarint_payload",
+      "GoLean.Encoding.Binary.appendVarint_reused",
+      "GoLean.Encoding.Binary.appendVarint_backing"
+    ],
+    "check": "difftest/encoding/binary/varint-append/check.go",
+    "control": "difftest/encoding/binary/varint-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/append-varint.md"
+  },
+  "Decode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/PublicBuffer.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binaryDecode",
+    "claim": "Returns encoded width, short-buffer or type error and preserves destination on preflight failure. Captures the bounds panic and partial writes for oversized bool and int8 slice inputs.",
+    "limits": "8,644 fixed inputs and 60,000 samples (17, 2718, 65537) covering predeclared scalar, slice and nonnil pointer fast paths, empty slices, defined byte types on the reflective path, and rejected strings. General reflective encoding, callback ByteOrder, overlapping operands, typed nil pointers and allocation failures are outside scope.",
+    "configurations": "Direct Go public APIs with both built-in byte orders and independent bit-position and buffer-copy oracles.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binaryDecode_short"
+    ],
+    "check": "difftest/encoding/binary/public-buffer/check.go",
+    "review": "coverage/packages/encoding/binary/decode.md",
+    "control": "difftest/encoding/binary/public-buffer/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/fast-codec/testdata/bridge_test.go",
+      "difftest/encoding/binary/fast-codec/testdata/fast_codec_test.go"
+    ]
+  },
+  "Encode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/PublicBuffer.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binaryEncode",
+    "claim": "Returns the encoded width on success, preserves original storage on short buffer or unsupported type, and writes only the encoded prefix on success.",
+    "limits": "8,644 fixed inputs and 60,000 samples (17, 2718, 65537) covering predeclared scalar, slice and nonnil pointer fast paths, empty slices, defined byte types on the reflective path, and rejected strings. General reflective encoding, callback ByteOrder, overlapping operands, typed nil pointers and allocation failures are outside scope.",
+    "configurations": "Direct Go public APIs with both built-in byte orders and independent bit-position and buffer-copy oracles.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binaryEncode_short"
+    ],
+    "check": "difftest/encoding/binary/public-buffer/check.go",
+    "review": "coverage/packages/encoding/binary/encode.md",
+    "control": "difftest/encoding/binary/public-buffer/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/fast-codec/testdata/bridge_test.go",
+      "difftest/encoding/binary/fast-codec/testdata/fast_codec_test.go"
+    ]
+  },
+  "PutUvarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.putUvarint",
+    "claim": "Writes the unsigned base-128 encoding and returns its length on success. A short slice panics on the first missing index after completing all available prefix writes.",
+    "limits": "1,070 length, sign and capacity boundary rows and 60,000 seeded rows (17, 2718, 65537). Compares full backing and bounds-panic class.",
+    "configurations": "Direct pinned native Go with nil and offset destination views. Checks visible length separately from spare capacity using an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.putUvarint_result",
+      "GoLean.Encoding.Binary.putUvarint_backing"
+    ],
+    "check": "difftest/encoding/binary/varint-put/check.go",
+    "review": "coverage/packages/encoding/binary/put-uvarint.md",
+    "control": "difftest/encoding/binary/varint-put/review/main.go"
+  },
+  "PutVarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.putVarint",
+    "claim": "Writes the signed zigzag base-128 encoding and returns its length on success. A short slice panics on the first missing index after completing all available prefix writes.",
+    "limits": "1,070 length, sign and capacity boundary rows and 60,000 seeded rows (17, 2718, 65537). Compares full backing and bounds-panic class.",
+    "configurations": "Direct pinned native Go with nil and offset destination views. Checks visible length separately from spare capacity using an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.putVarint_result",
+      "GoLean.Encoding.Binary.putVarint_backing"
+    ],
+    "check": "difftest/encoding/binary/varint-put/check.go",
+    "review": "coverage/packages/encoding/binary/put-varint.md",
+    "control": "difftest/encoding/binary/varint-put/review/main.go"
+  },
+  "Read": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/PublicStream.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binaryRead",
+    "claim": "Reads a complete encoded prefix before updating the destination, preserving reader error identity except partial EOF becomes unexpected EOF. Captures request sizes, zero-width reads and scalar preflight ordering.",
+    "limits": "8,644 fixed cases and 60,000 sampled cases (17, 2718, 65537). Built-in byte orders, basic scalar/pointer/slice values and defined bytes, scripted reader and writer, nonnil pointers and disjoint storage.",
+    "configurations": "Direct pinned native public calls and independent buffer and request oracle. Reader chunking, EOF/partial EOF, wrapped and custom error identity, write alias, ignored short count and typed writer panic.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binaryRead_bad_form"
+    ],
+    "check": "difftest/encoding/binary/public-stream/check.go",
+    "review": "coverage/packages/encoding/binary/read.md",
+    "control": "difftest/encoding/binary/public-stream/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/fast-codec/testdata/bridge_test.go",
+      "difftest/encoding/binary/fast-codec/testdata/fast_codec_test.go"
+    ]
+  },
+  "ReadUvarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.readUvarint",
+    "claim": "Reads at most ten bytes and returns the complete or partial unsigned value, exact read count, and the terminating error classification.",
+    "limits": "5,124 fixed rows and 60,000 cases across seeds 17, 2718, and 65537. Callback count, partial value, wrapped EOF identity, and overflow are checked. Panicking or concurrent readers are outside scope.",
+    "configurations": "Go 1.27.0 direct native reader with a scripted byte stream and EOF, unexpected EOF, arbitrary sentinel error or wrapped EOF. Reference scans for the terminal byte and folds groups from highest to lowest.",
+    "theorems": [
+      "GoLean.Encoding.Binary.readUvarint_empty",
+      "GoLean.Encoding.Binary.readUvarint_eof_after_continuation",
+      "GoLean.Encoding.Binary.readUvarint_tenth_continuation"
+    ],
+    "check": "difftest/encoding/binary/varint-read/check.go",
+    "review": "coverage/packages/encoding/binary/read-uvarint.md",
+    "control": "difftest/encoding/binary/varint-read/review/main.go"
+  },
+  "ReadVarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.readVarint",
+    "claim": "Decodes the signed value even on partial reads, preserving the terminating error and callback count.",
+    "limits": "5,124 fixed rows and 60,000 cases across seeds 17, 2718, and 65537. Callback count, partial value, wrapped EOF identity, and overflow are checked. Panicking or concurrent readers are outside scope.",
+    "configurations": "Go 1.27.0 direct native reader with a scripted byte stream and EOF, unexpected EOF, arbitrary sentinel error or wrapped EOF. Reference scans for the terminal byte and folds groups from highest to lowest.",
+    "theorems": [
+      "GoLean.Encoding.Binary.readVarint_status",
+      "GoLean.Encoding.Binary.readVarint_partial"
+    ],
+    "check": "difftest/encoding/binary/varint-read/check.go",
+    "review": "coverage/packages/encoding/binary/read-varint.md",
+    "control": "difftest/encoding/binary/varint-read/review/main.go"
+  },
+  "Size": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/ReflectSize.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binarySize",
+    "claim": "Computes encoded value size with one level of top-level pointer indirection and a minus-one result for nil pointers or unsupported shapes.",
+    "limits": "1,814 fixed layouts and 60,000 seeded layouts (17, 2718, 65537). Covers nested arrays, structs, pointers and slices with size arithmetic fitting native int. Cache timing and concurrency are outside scope.",
+    "configurations": "Pinned private same-package input and public binary.Size, with cold and warm struct cache results and an independent reflect layout oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binarySize_nil",
+      "GoLean.Encoding.Binary.binarySize_indirect"
+    ],
+    "check": "difftest/encoding/binary/reflect-size/check.go",
+    "review": "coverage/packages/encoding/binary/size.md",
+    "control": "difftest/encoding/binary/reflect-size/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/reflect-size/review/testdata/review_test.go"
+    ]
+  },
+  "Uvarint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintDecode.lean",
+    "model_symbol": "GoLean.Encoding.Binary.uvarint",
+    "claim": "Decodes the unsigned 64-bit value and reports exact bytes consumed, zero on incomplete input or the negative count on overflow.",
+    "limits": "3,330 boundary cases and 60,000 seeded cases (17, 2718, 65537), including every byte at length and overflow boundaries.",
+    "configurations": "Direct pinned native Go on nil, empty, truncated, noncanonical, overflow and trailing byte cases with a separate terminal-scan and reverse-fold oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.uvarint_empty",
+      "GoLean.Encoding.Binary.uvarint_one",
+      "GoLean.Encoding.Binary.uvarint_ten_continued"
+    ],
+    "check": "difftest/encoding/binary/varint-decode/check.go",
+    "review": "coverage/packages/encoding/binary/uvarint.md",
+    "control": "difftest/encoding/binary/varint-decode/review/main.go"
+  },
+  "Varint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/VarintDecode.lean",
+    "model_symbol": "GoLean.Encoding.Binary.varint",
+    "claim": "Unfolds the unsigned payload into a signed 64-bit value and preserves the unsigned decoder\u2019s exact byte count or error count.",
+    "limits": "3,330 boundary cases and 60,000 seeded cases (17, 2718, 65537), including every byte at length and overflow boundaries.",
+    "configurations": "Direct pinned native Go on nil, empty, truncated, noncanonical, overflow and trailing byte cases with a separate terminal-scan and reverse-fold oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.varint_report",
+      "GoLean.Encoding.Binary.varint_value"
+    ],
+    "check": "difftest/encoding/binary/varint-decode/check.go",
+    "review": "coverage/packages/encoding/binary/varint.md",
+    "control": "difftest/encoding/binary/varint-decode/review/main.go"
+  },
+  "Write": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/PublicStream.lean",
+    "model_symbol": "GoLean.Encoding.Binary.binaryWrite",
+    "claim": "Writes the encoded payload once for supported values, passes an existing nonempty byte slice by alias, and propagates writer errors independently of returned count.",
+    "limits": "8,644 fixed cases and 60,000 sampled cases (17, 2718, 65537). Built-in byte orders, basic scalar/pointer/slice values and defined bytes, scripted reader and writer, nonnil pointers and disjoint storage.",
+    "configurations": "Direct pinned native public calls and independent buffer and request oracle. Reader chunking, EOF/partial EOF, wrapped and custom error identity, write alias, ignored short count and typed writer panic.",
+    "theorems": [
+      "GoLean.Encoding.Binary.binaryWrite_bad_form"
+    ],
+    "check": "difftest/encoding/binary/public-stream/check.go",
+    "review": "coverage/packages/encoding/binary/write.md",
+    "control": "difftest/encoding/binary/public-stream/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/fast-codec/testdata/bridge_test.go",
+      "difftest/encoding/binary/fast-codec/testdata/fast_codec_test.go"
+    ]
+  },
+  "bigEndian.AppendUint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigAppendUint16",
+    "claim": "Appends 2 bytes in big-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native BigEndian.AppendUint16 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigAppendUint16_reused",
+      "GoLean.Encoding.Binary.bigAppendUint16_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/bigEndian.AppendUint16.md"
+  },
+  "bigEndian.AppendUint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigAppendUint32",
+    "claim": "Appends 4 bytes in big-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native BigEndian.AppendUint32 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigAppendUint32_reused",
+      "GoLean.Encoding.Binary.bigAppendUint32_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/bigEndian.AppendUint32.md"
+  },
+  "bigEndian.AppendUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigAppendUint64",
+    "claim": "Appends 8 bytes in big-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native BigEndian.AppendUint64 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigAppendUint64_reused",
+      "GoLean.Encoding.Binary.bigAppendUint64_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/bigEndian.AppendUint64.md"
+  },
+  "bigEndian.GoString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigEndianGoString",
+    "claim": "The singleton receiver returns the exact string binary.BigEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.BigEndian.GoString and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigEndianGoString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/big-endian-go-string.md"
+  },
+  "bigEndian.PutUint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigPutUint16",
+    "claim": "Writes the first 2 bytes of the destination view in big-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native BigEndian.PutUint16 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigPutUint16_short",
+      "GoLean.Encoding.Binary.bigPutUint16_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-put-uint16.md"
+  },
+  "bigEndian.PutUint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigPutUint32",
+    "claim": "Writes the first 4 bytes of the destination view in big-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native BigEndian.PutUint32 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigPutUint32_short",
+      "GoLean.Encoding.Binary.bigPutUint32_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-put-uint32.md"
+  },
+  "bigEndian.PutUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigPutUint64",
+    "claim": "Writes the first 8 bytes of the destination view in big-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native BigEndian.PutUint64 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigPutUint64_short",
+      "GoLean.Encoding.Binary.bigPutUint64_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-put-uint64.md"
+  },
+  "bigEndian.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigEndianString",
+    "claim": "The singleton receiver returns the exact string BigEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.BigEndian.String and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigEndianString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/big-endian-string.md"
+  },
+  "bigEndian.Uint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigUint16",
+    "claim": "Reads the first 2 raw bytes as an unsigned big-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.BigEndian.Uint16 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigUint16_short",
+      "GoLean.Encoding.Binary.bigUint16_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-uint16.md"
+  },
+  "bigEndian.Uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigUint32",
+    "claim": "Reads the first 4 raw bytes as an unsigned big-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.BigEndian.Uint32 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigUint32_short",
+      "GoLean.Encoding.Binary.bigUint32_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-uint32.md"
+  },
+  "bigEndian.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.bigUint64",
+    "claim": "Reads the first 8 raw bytes as an unsigned big-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.BigEndian.Uint64 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.bigUint64_short",
+      "GoLean.Encoding.Binary.bigUint64_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/big-uint64.md"
+  },
+  "dataSize": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/ReflectSize.lean",
+    "model_symbol": "GoLean.Encoding.Binary.dataSize",
+    "claim": "Computes fixed encoded size for a reflected value; slices multiply the element width by the dynamic length and invalid shapes return minus one.",
+    "limits": "1,814 fixed layouts and 60,000 seeded layouts (17, 2718, 65537). Covers nested arrays, structs, pointers and slices with size arithmetic fitting native int. Cache timing and concurrency are outside scope.",
+    "configurations": "Pinned private same-package input and public binary.Size, with cold and warm struct cache results and an independent reflect layout oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.dataSize_slice"
+    ],
+    "check": "difftest/encoding/binary/reflect-size/check.go",
+    "review": "coverage/packages/encoding/binary/data-size.md",
+    "control": "difftest/encoding/binary/reflect-size/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/reflect-size/review/testdata/review_test.go"
+    ]
+  },
+  "decodeFast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/FastCodec.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decodeFast",
+    "claim": "Matches recognized pointer and slice types, decodes words in the specified byte order, and preserves the untouched destination suffix on early failure.",
+    "limits": "8,640 fixed combinations and 60,000 reproducible cases (17, 2718, 65537). Built-in endian orders, disjoint buffers, nonnil scalar pointers and normally allocated inputs; typed nil pointers and arbitrary ByteOrder callbacks are outside scope.",
+    "configurations": "Pinned exact private Go with bool, integer and floating scalars, pointers, slices and rejected dynamic types; compares raw words, partial writes, untouched spare and bounds class.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decodeFast_value_is_unsupported"
+    ],
+    "check": "difftest/encoding/binary/fast-codec/check.go",
+    "review": "coverage/packages/encoding/binary/decode-fast.md",
+    "control": "difftest/encoding/binary/fast-codec/review/main.go"
+  },
+  "decoder.bool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderBool",
+    "claim": "Tests any nonzero byte as true. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderBool_nonzero"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-bool.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "decoder.int16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderInt16",
+    "claim": "Delegates on a 2-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the signed interpretation of the delegated word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderInt16_signed"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-int16.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.int32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderInt32",
+    "claim": "Delegates on a 4-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the signed interpretation of the delegated word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderInt32_signed"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-int32.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.int64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderInt64",
+    "claim": "Delegates on a 8-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the signed interpretation of the delegated word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderInt64_signed"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-int64.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.int8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderInt8",
+    "claim": "Returns the signed interpretation of the byte. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderInt8_signed"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-int8.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "decoder.skip": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderSkip.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderSkip",
+    "claim": "Adds the reflected value size to the current native signed offset, including minus one for unsupported values; does not access the backing.",
+    "limits": "3,840 fixed and 60,000 seeded cases (17, 2718, 65537). Includes long offset extremes and wrap, unsupported layouts, spare capacity and empty clear.",
+    "configurations": "Direct private Go calls with nonnil receivers and indexed reflected values. Compares native signed offset, full backing and panic class against an independent interval oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderSkip_unsupported"
+    ],
+    "check": "difftest/encoding/binary/coder-skip/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-skip.md",
+    "control": "difftest/encoding/binary/coder-skip/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/ReflectSize.lean"
+    ]
+  },
+  "decoder.uint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderUint16",
+    "claim": "Delegates on a 2-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the delegated unsigned word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderUint16_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-uint16.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderUint32",
+    "claim": "Delegates on a 4-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the delegated unsigned word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderUint32_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-uint32.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderUint64",
+    "claim": "Delegates on a 8-byte two-index subslice of the original backing and advances the offset only after a successful call. Returns the delegated unsigned word.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderUint64_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-uint64.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "decoder.uint8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderUint8",
+    "claim": "Returns the byte unchanged. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderUint8_in_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-uint8.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "decoder.value": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderValue.lean",
+    "model_symbol": "GoLean.Encoding.Binary.decoderValue",
+    "claim": "Traverses reflected fields, collects complete scalar and complex values, skips blank fields without reading backing, and retains earlier field updates and advances on a later bounds panic.",
+    "limits": "3,136 boundary rows and 60,000 samples (17, 2718, 65537). Settable scalar, array, slice and struct-with-array values, finite floating components, nonnegative offsets and built-in byte orders. Non-settable nonblank values, arbitrary callbacks and concurrency are outside scope.",
+    "configurations": "Direct pinned same-package calls on reflected values, with visible-length versus capacity bounds, exact offset and full retained state checked against an independent field oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.decoderValue_blank"
+    ],
+    "check": "difftest/encoding/binary/coder-value/check.go",
+    "review": "coverage/packages/encoding/binary/decoder-value.md",
+    "control": "difftest/encoding/binary/coder-value/review/main.go"
+  },
+  "encodeFast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/FastCodec.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encodeFast",
+    "claim": "Encodes predeclared scalars, pointers and slices in the specified byte order, preserving the untouched suffix and any completed writes before failure.",
+    "limits": "8,640 fixed combinations and 60,000 reproducible cases (17, 2718, 65537). Built-in endian orders, disjoint buffers, nonnil scalar pointers and normally allocated inputs; typed nil pointers and arbitrary ByteOrder callbacks are outside scope.",
+    "configurations": "Pinned exact private Go with bool, integer and floating scalars, pointers, slices and rejected dynamic types; compares raw words, partial writes, untouched spare and bounds class.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encodeFast_unsupported"
+    ],
+    "check": "difftest/encoding/binary/fast-codec/check.go",
+    "review": "coverage/packages/encoding/binary/encode-fast.md",
+    "control": "difftest/encoding/binary/fast-codec/review/main.go"
+  },
+  "encoder.bool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderBool",
+    "claim": "Writes canonical zero or one. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderBool_canonical"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-bool.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "encoder.int16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderInt16",
+    "claim": "Delegates on a 2-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the signed argument\u2019s fixed-width bit pattern to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderInt16_bits"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-int16.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.int32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderInt32",
+    "claim": "Delegates on a 4-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the signed argument\u2019s fixed-width bit pattern to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderInt32_bits"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-int32.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.int64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderInt64",
+    "claim": "Delegates on a 8-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the signed argument\u2019s fixed-width bit pattern to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderInt64_bits"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-int64.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.int8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderInt8",
+    "claim": "Writes the bit pattern of the signed byte. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderInt8_bits"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-int8.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "encoder.skip": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderSkip.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderSkip",
+    "claim": "Clears the exact reflected-width slice using capacity and then advances the signed offset; slice bounds panics preserve offset and storage.",
+    "limits": "3,840 fixed and 60,000 seeded cases (17, 2718, 65537). Includes long offset extremes and wrap, unsupported layouts, spare capacity and empty clear.",
+    "configurations": "Direct private Go calls with nonnil receivers and indexed reflected values. Compares native signed offset, full backing and panic class against an independent interval oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderSkip_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-skip/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-skip.md",
+    "control": "difftest/encoding/binary/coder-skip/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/ReflectSize.lean"
+    ]
+  },
+  "encoder.uint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderUint16",
+    "claim": "Delegates on a 2-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the supplied unsigned word to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderUint16_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-uint16.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderUint32",
+    "claim": "Delegates on a 4-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the supplied unsigned word to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderUint32_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-uint32.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderWord.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderUint64",
+    "claim": "Delegates on a 8-byte two-index subslice of the original backing and advances the offset only after a successful call. Passes the supplied unsigned word to the delegate.",
+    "limits": "1,995 geometry and extreme-offset rows and 60,000 sampled rows per declaration at seeds 17, 2718 and 65537. Sequential calls with constructed nonnil receivers.",
+    "configurations": "Pinned native private Go with built-in little/big endian, nil ByteOrder, or a scripted delegate that traces alias, length and capacity, writes two bytes, and may panic. Independent bit-position and trace oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderUint64_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-word/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-uint64.md",
+    "control": "difftest/encoding/binary/coder-word/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/coder-word/testdata/bridge_test.go",
+      "difftest/encoding/binary/coder-word/testdata/coder_word_test.go"
+    ]
+  },
+  "encoder.uint8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderByte.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderUint8",
+    "claim": "Writes the byte unchanged. Successful calls advance the offset by one. Invalid offsets panic before changing the offset or backing storage.",
+    "limits": "7,171 cases exhausting all byte values across fixed slice geometries, plus 60,000 cases at seeds 17, 2718, and 65537. Includes nil receivers and buffers, spare capacity, and native signed offset extrema.",
+    "configurations": "Pinned private same-package Go call with nil ByteOrder (unused). Models sequential access and compares exact result, visible transformation, and retained backing.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderUint8_in_bounds"
+    ],
+    "check": "difftest/encoding/binary/coder-byte/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-uint8.md",
+    "control": "difftest/encoding/binary/coder-byte/review/main.go"
+  },
+  "encoder.value": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/CoderValue.lean",
+    "model_symbol": "GoLean.Encoding.Binary.encoderValue",
+    "claim": "Traverses reflected fields, writes scalar and complex components in order, zeroes blank fields, and preserves writes completed before a bounds panic.",
+    "limits": "3,136 boundary rows and 60,000 samples (17, 2718, 65537). Settable scalar, array, slice and struct-with-array values, finite floating components, nonnegative offsets and built-in byte orders. Non-settable nonblank values, arbitrary callbacks and concurrency are outside scope.",
+    "configurations": "Direct pinned same-package calls on reflected values, with visible-length versus capacity bounds, exact offset and full retained state checked against an independent field oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.encoderValue_blank"
+    ],
+    "check": "difftest/encoding/binary/coder-value/check.go",
+    "review": "coverage/packages/encoding/binary/encoder-value.md",
+    "control": "difftest/encoding/binary/coder-value/review/main.go"
+  },
+  "ensure": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/Ensure.lean",
+    "model_symbol": "GoLean.Encoding.Binary.ensure",
+    "claim": "Returns the extended buffer and its appended subslice, preserving old spare bytes as well as the visible prefix. Negative counts panic before changing storage.",
+    "limits": "Capacity geometry through 23 with negative, exact fit, and overflow of available spare, plus 60,000 rows at seeds 17, 2718, and 65537. Allocator rounding or failure and lengths near MaxInt are outside scope.",
+    "configurations": "Pinned private same-package call and independent copy oracle. Compares both returned views, nilness, storage reuse and mutation, including aliasing of the returned position.",
+    "theorems": [
+      "GoLean.Encoding.Binary.ensure_negative",
+      "GoLean.Encoding.Binary.ensure_reuse",
+      "GoLean.Encoding.Binary.ensure_allocate"
+    ],
+    "check": "difftest/encoding/binary/ensure/check.go",
+    "review": "coverage/packages/encoding/binary/ensure.md",
+    "control": "difftest/encoding/binary/ensure/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/ensure/review/testdata/ensure_review_test.go"
+    ]
+  },
+  "intDataSize": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/IntDataSize.lean",
+    "model_symbol": "GoLean.Encoding.Binary.intDataSize",
+    "claim": "Returns exact fast-path sizes for supported scalars, their pointers, and slices, and passes through an unchanged alias only for the predeclared byte slice type.",
+    "limits": "1,440 fixed cases and 60,000 seeded cases (17, 2718, 65537), including typed nils, defined types, unsupported type forms, and byte slices with spare capacity. Sizes must fit the native int.",
+    "configurations": "Pinned native private Go, generated typed values and a reflection-based type classifier. Checks byte-slice length, nilness, full capacity contents and backing identity.",
+    "theorems": [
+      "GoLean.Encoding.Binary.intDataSize_byte_alias",
+      "GoLean.Encoding.Binary.intDataSize_pointer",
+      "GoLean.Encoding.Binary.intDataSize_unsupported"
+    ],
+    "check": "difftest/encoding/binary/int-data-size/check.go",
+    "review": "coverage/packages/encoding/binary/int-data-size.md",
+    "control": "difftest/encoding/binary/int-data-size/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/int-data-size/review/testdata/review_test.go"
+    ]
+  },
+  "littleEndian.AppendUint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleAppendUint16",
+    "claim": "Appends 2 bytes in little-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native LittleEndian.AppendUint16 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleAppendUint16_reused",
+      "GoLean.Encoding.Binary.littleAppendUint16_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/littleEndian.AppendUint16.md"
+  },
+  "littleEndian.AppendUint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleAppendUint32",
+    "claim": "Appends 4 bytes in little-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native LittleEndian.AppendUint32 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleAppendUint32_reused",
+      "GoLean.Encoding.Binary.littleAppendUint32_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/littleEndian.AppendUint32.md"
+  },
+  "littleEndian.AppendUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianAppend.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleAppendUint64",
+    "claim": "Appends 8 bytes in little-endian order, reuses backing exactly when spare capacity suffices, and preserves the original backing on reallocation.",
+    "limits": "65,649 boundaries including all 16-bit values and 60,000 seeded rows (17, 2718 and 65537). Checks exact returned bytes, reuse and original backing. Newly allocated capacities and allocator failures are outside scope.",
+    "configurations": "Pinned native LittleEndian.AppendUint64 on nil, empty, unaligned and capacity-bounded slices. Separate bit-position and copying oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleAppendUint64_reused",
+      "GoLean.Encoding.Binary.littleAppendUint64_detached"
+    ],
+    "check": "difftest/encoding/binary/endian-append/check.go",
+    "control": "difftest/encoding/binary/endian-append/review/main.go",
+    "review": "coverage/packages/encoding/binary/littleEndian.AppendUint64.md"
+  },
+  "littleEndian.GoString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleEndianGoString",
+    "claim": "The singleton receiver returns the exact string binary.LittleEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.LittleEndian.GoString and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleEndianGoString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/little-endian-go-string.md"
+  },
+  "littleEndian.PutUint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littlePutUint16",
+    "claim": "Writes the first 2 bytes of the destination view in little-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native LittleEndian.PutUint16 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littlePutUint16_short",
+      "GoLean.Encoding.Binary.littlePutUint16_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-put-uint16.md"
+  },
+  "littleEndian.PutUint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littlePutUint32",
+    "claim": "Writes the first 4 bytes of the destination view in little-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native LittleEndian.PutUint32 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littlePutUint32_short",
+      "GoLean.Encoding.Binary.littlePutUint32_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-put-uint32.md"
+  },
+  "littleEndian.PutUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianPut.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littlePutUint64",
+    "claim": "Writes the first 8 bytes of the destination view in little-endian order. A short view panics before mutating any storage. A successful write preserves the destination suffix and backing outside the view.",
+    "limits": "65,715 boundaries including every 16-bit value and 60,000 seeded rows (17, 2718, 65537). Compares all backing bytes and observes the bounds panic class, excluding compiler-specific panic wording.",
+    "configurations": "Pinned native LittleEndian.PutUint64 on unaligned and short destination views, with separate bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littlePutUint64_short",
+      "GoLean.Encoding.Binary.littlePutUint64_suffix"
+    ],
+    "check": "difftest/encoding/binary/endian-put/check.go",
+    "control": "difftest/encoding/binary/endian-put/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-put-uint64.md"
+  },
+  "littleEndian.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleEndianString",
+    "claim": "The singleton receiver returns the exact string LittleEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.LittleEndian.String and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleEndianString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/little-endian-string.md"
+  },
+  "littleEndian.Uint16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleUint16",
+    "claim": "Reads the first 2 raw bytes as an unsigned little-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.LittleEndian.Uint16 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleUint16_short",
+      "GoLean.Encoding.Binary.littleUint16_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-uint16.md"
+  },
+  "littleEndian.Uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleUint32",
+    "claim": "Reads the first 4 raw bytes as an unsigned little-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.LittleEndian.Uint32 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleUint32_short",
+      "GoLean.Encoding.Binary.littleUint32_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-uint32.md"
+  },
+  "littleEndian.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianRead.lean",
+    "model_symbol": "GoLean.Encoding.Binary.littleUint64",
+    "claim": "Reads the first 8 raw bytes as an unsigned little-endian word, ignoring later bytes, and panics with a bounds-class error on short input.",
+    "limits": "68,100 boundary cases, including every 16-bit prefix, and 60,000 seeded observations using 17, 2718 and 65537. Observes the panic class without depending on compiler-specific text.",
+    "configurations": "Pinned native encoding/binary.LittleEndian.Uint64 compared to model and an independent bit-position oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.littleUint64_short",
+      "GoLean.Encoding.Binary.littleUint64_prefix"
+    ],
+    "check": "difftest/encoding/binary/endian-read/check.go",
+    "control": "difftest/encoding/binary/endian-read/review/main.go",
+    "review": "coverage/packages/encoding/binary/little-uint64.md"
+  },
+  "nativeEndian.GoString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.nativeEndianGoString",
+    "claim": "The singleton receiver returns the exact string binary.NativeEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.NativeEndian.GoString and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.nativeEndianGoString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/native-endian-go-string.md"
+  },
+  "nativeEndian.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/EndianNames.lean",
+    "model_symbol": "GoLean.Encoding.Binary.nativeEndianString",
+    "claim": "The singleton receiver returns the exact string NativeEndian.",
+    "limits": "Exhausts the singleton receiver domain. No random seeds apply. Native byte-order formatting is tested on the host architecture.",
+    "configurations": "Pinned native encoding/binary.NativeEndian.String and corresponding fmt entry point; compares exact literal bytes with Lean.",
+    "theorems": [
+      "GoLean.Encoding.Binary.nativeEndianString_value"
+    ],
+    "check": "difftest/encoding/binary/endian-names/check.go",
+    "control": "coverage/review/encoding/binary/endian-names/main.go",
+    "review": "coverage/packages/encoding/binary/native-endian-string.md"
+  },
+  "sizeof": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Binary/ReflectSize.lean",
+    "model_symbol": "GoLean.Encoding.Binary.sizeof",
+    "claim": "Computes the encoded fixed size of supported Go types and sums structure field widths without native padding. Illegal types return minus one and a nil reflect.Type panics.",
+    "limits": "1,814 fixed layouts and 60,000 seeded layouts (17, 2718, 65537). Covers nested arrays, structs, pointers and slices with size arithmetic fitting native int. Cache timing and concurrency are outside scope.",
+    "configurations": "Pinned private same-package input and public binary.Size, with cold and warm struct cache results and an independent reflect layout oracle.",
+    "theorems": [
+      "GoLean.Encoding.Binary.sizeof_unpadded",
+      "GoLean.Encoding.Binary.sizeof_unsupported_element",
+      "GoLean.Encoding.Binary.sizeof_nil"
+    ],
+    "check": "difftest/encoding/binary/reflect-size/check.go",
+    "review": "coverage/packages/encoding/binary/sizeof.md",
+    "control": "difftest/encoding/binary/reflect-size/review/main.go",
+    "review_sources": [
+      "difftest/encoding/binary/reflect-size/review/testdata/review_test.go"
+    ]
+  }
+}

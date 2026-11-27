@@ -1,0 +1,2079 @@
+{
+  "Buffer.ReadFrom": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadFrom.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadFrom",
+    "claim": "Clears the read flag, reserves at least MinRead and offers all remaining capacity to each Read callback. Commits reported bytes before suppressing io.EOF or returning the reader's other error. Reader panics and malformed negative or oversized counts preserve prior commits and scratch writes without committing the failing call.",
+    "limits": "Legal nonnegative buffer geometry and finite, non-reentrant callback scripts that write within the offered slice. Exact allocator classes through 32 KiB and feasible allocations. The guard is modeled, but resource-dependent allocation failures, arbitrary callback side effects and unbounded zero-progress readers are outside the native comparison. Checks 5,242 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Buffer.ReadFrom through a same-package overlay. A separate mutable byte-array and allocation-class oracle checks complete backing and offered scratch bytes, offset, read flag, counts, EOF/error identity, panic payload or class, and direct offered-slice alias identity. Includes exhausted reset, reslice, compaction, reallocation, nil reader/receiver, and finite zero-progress reads.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadFrom_nil",
+      "GoLean.Bytes.bufferReadFrom_eof",
+      "GoLean.Bytes.bufferReadFrom_negative_keepsScratch"
+    ],
+    "check": "difftest/bytes/buffer-read-from/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/BufferReset.lean",
+      "difftest/bytes/buffer-read-from/testdata/bridge_test.go",
+      "difftest/bytes/buffer-read-from/testdata/buffer_read_from_test.go"
+    ],
+    "review": "coverage/packages/bytes/buffer-read-from.md",
+    "control": "difftest/bytes/buffer-read-from/review/main.go"
+  },
+  "Repeat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/RepeatTitle.lean",
+    "model_symbol": "GoLean.Bytes.repeatBytes",
+    "claim": "Returns a nonnil exact-capacity repetition with independently writable backing. Zero count or empty source yields an empty result after the applicable count guards. Panics on negative count and native signed output-length overflow.",
+    "limits": "Feasible allocations after the product check. The full mathematical product models the unsigned multiply-high and signed-low guard. The model includes aligned chunk copying around the 8 KiB limit. Representable allocations too large for the runtime are outside scope. Checks 638 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Repeat with arbitrary-precision overflow and independent sequential copy oracle. Checks exact panic strings, empty backing nilness, clipped capacity, source isolation, native extrema, and chunk boundaries with aligned and oversized inputs.",
+    "theorems": [
+      "GoLean.Bytes.repeatBytes_zero",
+      "GoLean.Bytes.repeatBytes_negative",
+      "GoLean.Bytes.repeatBytes_overflow",
+      "GoLean.Bytes.repeatBytes_chunkExample"
+    ],
+    "check": "difftest/bytes/repeat-title/check.go",
+    "review": "coverage/packages/bytes/repeat.md",
+    "control": "difftest/bytes/repeat-title/review/main.go"
+  },
+  "Title": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/RepeatTitle.lean",
+    "model_symbol": "GoLean.Bytes.titleBytes",
+    "claim": "Applies pinned Unicode simple titlecase only after an original separator rune, starting after a space. Re-encodes malformed input as one RuneError per invalid byte and returns a nonnil copy.",
+    "limits": "Raw byte slices and feasible allocations. Exact capacity is modeled while the initial allocation suffices. Allocation failures and exact growth capacity are outside scope. Checks 638 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Title, with a string-range and independent separator and titlecase oracle. Includes ASCII punctuation, digits, underscores, Unicode spaces and punctuation, malformed input, nil and nonnil empty, and writable result isolation.",
+    "theorems": [
+      "GoLean.Bytes.titleBytes_empty",
+      "GoLean.Bytes.titleBytes_boundary"
+    ],
+    "check": "difftest/bytes/repeat-title/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/SimpleCase.lean",
+      "lean/GoLean/Strings/IsSeparator.lean",
+      "lean/GoLean/Strings/ToTitle.lean",
+      "lean/GoLean/Strings/SimpleTitleData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/title.md",
+    "control": "difftest/bytes/repeat-title/review/main.go"
+  },
+  "ToUpperSpecial": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SpecialCase.lean",
+    "model_symbol": "GoLean.Bytes.toUpperSpecialBytes",
+    "claim": "Applies the upper special-case delta or the pinned Unicode fallback on a range miss. The result is nonnil, drops negative mapped runes, and retains exact input-sized capacity when the encoded output fits.",
+    "limits": "Sequential calls, fixed caller-supplied case table and feasible allocation. The model tracks raw output and capacity when the starting allocation suffices. Exact growth capacity and allocation failures are outside scope. Checks 1,276 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.ToUpperSpecial with an independent signed midpoint table oracle and Go string-range decoder. Includes Turkish and Azeri cases, unsorted or overlapping ranges, zero-delta hits, signed extrema, malformed input, empty result, and copy isolation.",
+    "theorems": [
+      "GoLean.Bytes.toUpperSpecialBytes_fallback",
+      "GoLean.Bytes.toUpperSpecialBytes_drop"
+    ],
+    "check": "difftest/bytes/special-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Bytes/SimpleCase.lean",
+      "lean/GoLean/Strings/SpecialCase.lean",
+      "lean/GoLean/Strings/ToUpper.lean",
+      "lean/GoLean/Strings/SimpleUpperData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/toupperspecial.md",
+    "control": "difftest/bytes/special-case/review/main.go"
+  },
+  "ToLowerSpecial": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SpecialCase.lean",
+    "model_symbol": "GoLean.Bytes.toLowerSpecialBytes",
+    "claim": "Applies the lower special-case delta or the pinned Unicode fallback on a range miss. The result is nonnil, drops negative mapped runes, and retains exact input-sized capacity when the encoded output fits.",
+    "limits": "Sequential calls, fixed caller-supplied case table and feasible allocation. The model tracks raw output and capacity when the starting allocation suffices. Exact growth capacity and allocation failures are outside scope. Checks 1,276 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.ToLowerSpecial with an independent signed midpoint table oracle and Go string-range decoder. Includes Turkish and Azeri cases, unsorted or overlapping ranges, zero-delta hits, signed extrema, malformed input, empty result, and copy isolation.",
+    "theorems": [
+      "GoLean.Bytes.toLowerSpecialBytes_fallback",
+      "GoLean.Bytes.toLowerSpecialBytes_identity"
+    ],
+    "check": "difftest/bytes/special-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Bytes/SimpleCase.lean",
+      "lean/GoLean/Strings/SpecialCase.lean",
+      "lean/GoLean/Strings/ToLower.lean",
+      "lean/GoLean/Strings/SimpleLowerData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/tolowerspecial.md",
+    "control": "difftest/bytes/special-case/review/main.go"
+  },
+  "ToTitleSpecial": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SpecialCase.lean",
+    "model_symbol": "GoLean.Bytes.toTitleSpecialBytes",
+    "claim": "Applies the title special-case delta or the pinned Unicode fallback on a range miss. The result is nonnil, drops negative mapped runes, and retains exact input-sized capacity when the encoded output fits.",
+    "limits": "Sequential calls, fixed caller-supplied case table and feasible allocation. The model tracks raw output and capacity when the starting allocation suffices. Exact growth capacity and allocation failures are outside scope. Checks 1,276 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.ToTitleSpecial with an independent signed midpoint table oracle and Go string-range decoder. Includes Turkish and Azeri cases, unsorted or overlapping ranges, zero-delta hits, signed extrema, malformed input, empty result, and copy isolation.",
+    "theorems": [
+      "GoLean.Bytes.toTitleSpecialBytes_fallback",
+      "GoLean.Bytes.toTitleSpecialBytes_delta"
+    ],
+    "check": "difftest/bytes/special-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Bytes/SimpleCase.lean",
+      "lean/GoLean/Strings/SpecialCase.lean",
+      "lean/GoLean/Strings/ToTitle.lean",
+      "lean/GoLean/Strings/SimpleTitleData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/totitlespecial.md",
+    "control": "difftest/bytes/special-case/review/main.go"
+  },
+  "ToUpper": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SimpleCase.lean",
+    "model_symbol": "GoLean.Bytes.toUpperBytes",
+    "claim": "Copies ASCII bytes with lowercase letters mapped to uppercase and applies pinned Unicode simple uppercase mapping on decoded non-ASCII input. The result is nonnil, and a changed ASCII result has capacity exactly equal to length.",
+    "limits": "Feasible allocations. Exact capacity is modeled on the clipped ASCII path, for empty output, and when Unicode mapping fits within the input-sized allocation. Allocator growth capacity and allocation failures are outside scope. Checks 6,506 boundaries and 60,000 samples using seeds 17, 2718 and 65537, plus all Unicode code point mapping lookups.",
+    "configurations": "Pinned native bytes.ToUpper plus an independent Go string-range and Unicode mapping oracle. Checks malformed input, nil and nonnil empty, copy isolation and exact capacity where modeled.",
+    "theorems": [
+      "GoLean.Bytes.toUpperBytes_ascii",
+      "GoLean.Bytes.toUpperBytes_empty"
+    ],
+    "check": "difftest/bytes/simple-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Strings/ToUpper.lean",
+      "lean/GoLean/Strings/SimpleUpperData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/toupper.md",
+    "control": "difftest/bytes/simple-case/review/main.go"
+  },
+  "ToLower": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SimpleCase.lean",
+    "model_symbol": "GoLean.Bytes.toLowerBytes",
+    "claim": "Copies ASCII bytes with uppercase letters mapped to lowercase and applies pinned Unicode simple lowercase mapping on decoded non-ASCII input. The result is nonnil, and a changed ASCII result has capacity exactly equal to length.",
+    "limits": "Feasible allocations. Exact capacity is modeled on the clipped ASCII path, for empty output, and when Unicode mapping fits within the input-sized allocation. Allocator growth capacity and allocation failures are outside scope. Checks 6,506 boundaries and 60,000 samples using seeds 17, 2718 and 65537, plus all Unicode code point mapping lookups.",
+    "configurations": "Pinned native bytes.ToLower plus an independent Go string-range and Unicode mapping oracle. Checks malformed input, nil and nonnil empty, copy isolation and exact capacity where modeled.",
+    "theorems": [
+      "GoLean.Bytes.toLowerBytes_ascii",
+      "GoLean.Bytes.toLowerBytes_empty"
+    ],
+    "check": "difftest/bytes/simple-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Strings/ToLower.lean",
+      "lean/GoLean/Strings/SimpleLowerData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/tolower.md",
+    "control": "difftest/bytes/simple-case/review/main.go"
+  },
+  "ToTitle": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SimpleCase.lean",
+    "model_symbol": "GoLean.Bytes.toTitleBytes",
+    "claim": "Decodes each rune, applies pinned Unicode simple titlecase, and returns a nonnil byte slice. When encoded output fits, capacity equals the input byte length.",
+    "limits": "Feasible allocations. The model tracks raw output bytes and capacity when the initial allocation suffices. Allocator growth capacity and allocation failures are outside scope. Checks 6,506 boundaries and 60,000 samples using seeds 17, 2718 and 65537, plus all Unicode code point mapping lookups.",
+    "configurations": "Pinned native bytes.ToTitle plus an independent Go string-range and Unicode mapping oracle. Checks malformed input, nil and nonnil empty, copy isolation and exact capacity where modeled.",
+    "theorems": [
+      "GoLean.Bytes.toTitleBytes_empty",
+      "GoLean.Bytes.toTitleBytes_map"
+    ],
+    "check": "difftest/bytes/simple-case/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Map.lean",
+      "lean/GoLean/Strings/ToTitle.lean",
+      "lean/GoLean/Strings/SimpleTitleData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/AppendRune.lean"
+    ],
+    "review": "coverage/packages/bytes/totitle.md",
+    "control": "difftest/bytes/simple-case/review/main.go"
+  },
+  "EqualFold": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/FoldRunes.lean",
+    "model_symbol": "GoLean.Bytes.equalFoldBytes",
+    "claim": "Compares raw byte slices using the ASCII fast path and Unicode simple fold, consuming one byte for each malformed sequence decoded as RuneError.",
+    "limits": "Raw byte slices, including nil and nonnil empty. Reuses the source-shaped string fold loop since the slice and string decoders agree on rune and width. The check audits all 1,114,112 SimpleFold successors and the four-member orbit bound. The shared driver compares 72,644 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.EqualFold, with independently canonicalized rune orbits, all single-byte pairs and distinct members of every nontrivial fold orbit. Includes raw malformed sequences, literal RuneError, ASCII prefixes, and differing lengths.",
+    "theorems": [
+      "GoLean.Bytes.equalFoldBytes_ascii",
+      "GoLean.Bytes.equalFoldBytes_replacement",
+      "GoLean.Bytes.equalFoldBytes_byteCount"
+    ],
+    "check": "difftest/bytes/fold-runes/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/EqualFold.lean",
+      "lean/GoLean/Strings/SimpleFoldData.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean"
+    ],
+    "review": "coverage/packages/bytes/equalfold.md",
+    "control": "difftest/bytes/fold-runes/review/main.go"
+  },
+  "Runes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/FoldRunes.lean",
+    "model_symbol": "GoLean.Bytes.runesBytes",
+    "claim": "Returns a nonnil rune slice with exact capacity equal to its rune count. Each input rune is decoded in order, consuming one byte per malformed encoding.",
+    "limits": "Raw byte slices and feasible allocations. Models the decoded values and exact allocation capacity. Nil and nonnil empty input give the same nonnil empty result. The shared driver compares both slices of 72,644 boundary pairs and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Runes on each input in the pair. The Go built-in string-to-rune conversion supplies the independent values and length. Direct probes check result nilness, exact capacity, and source bytes after modifying the result.",
+    "theorems": [
+      "GoLean.Bytes.runesBytes_empty",
+      "GoLean.Bytes.runesBytes_asciiHead",
+      "GoLean.Bytes.runesBytes_malformed_and_literal"
+    ],
+    "check": "difftest/bytes/fold-runes/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Count.lean",
+      "lean/GoLean/Unicode/Utf8/RuneCount.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean"
+    ],
+    "review": "coverage/packages/bytes/runes.md",
+    "control": "difftest/bytes/fold-runes/review/main.go"
+  },
+  "Clone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/CopyReplace.lean",
+    "model_symbol": "GoLean.Bytes.cloneBytes",
+    "claim": "Copies the visible bytes and preserves nilness. Nonnil empty input produces a nonnil zero-capacity result. Native mutations of a populated result confirm isolation from the source.",
+    "limits": "The model records result bytes and nilness. Nonzero append growth capacity and allocation failure are outside scope. Shared comparison checks 25,653 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Clone, exercised directly with nil and nonnil empty input, populated source, spare backing, and result writes.",
+    "theorems": [
+      "GoLean.Bytes.cloneBytes_contents",
+      "GoLean.Bytes.cloneBytes_empty"
+    ],
+    "check": "difftest/bytes/copy-replace/check.go",
+    "review": "coverage/packages/bytes/clone.md",
+    "control": "difftest/bytes/copy-replace/review/main.go"
+  },
+  "Replace": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/CopyReplace.lean",
+    "model_symbol": "GoLean.Bytes.replaceBytes",
+    "claim": "Copies the raw input with the first requested nonoverlapping replacements. Empty patterns match at UTF-8 boundaries. An empty no-work copy is nil, but an allocated empty result is nonnil. The replacement allocation has exact capacity.",
+    "limits": "Signed native limits, representable result sizes and feasible allocations. The output transformation uses the existing raw string replacement model. Nonzero append growth capacity and allocation failure are outside scope. Shared comparison checks 25,653 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Replace with independent match-offset enumeration. Checks nilness, exact capacity on replacement, result mutation isolation including source-aliasing arguments, overlapping matches, signed limits, literal RuneError and malformed UTF-8.",
+    "theorems": [
+      "GoLean.Bytes.replaceBytes_zero",
+      "GoLean.Bytes.replaceBytes_removed_all",
+      "GoLean.Bytes.replaceBytes_emptyPattern"
+    ],
+    "check": "difftest/bytes/copy-replace/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Count.lean",
+      "lean/GoLean/Strings/Count.lean",
+      "lean/GoLean/Strings/Replace.lean"
+    ],
+    "review": "coverage/packages/bytes/replace.md",
+    "control": "difftest/bytes/copy-replace/review/main.go"
+  },
+  "ReplaceAll": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/CopyReplace.lean",
+    "model_symbol": "GoLean.Bytes.replaceAllBytes",
+    "claim": "Returns the unlimited replacement copy with raw-byte, nilness and exact replacement-allocation capacity behavior of Replace with limit minus one.",
+    "limits": "Representable result sizes and feasible allocations. Nonzero append growth capacity and allocation failure are outside scope. Shared comparison checks 25,653 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.ReplaceAll invoked directly, with an independent match-offset oracle plus capacity and mutation probes. Empty patterns include malformed single-byte boundaries and complete encoded RuneError.",
+    "theorems": [
+      "GoLean.Bytes.replaceAllBytes_unlimited",
+      "GoLean.Bytes.replaceAllBytes_malformed"
+    ],
+    "check": "difftest/bytes/copy-replace/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/Count.lean",
+      "lean/GoLean/Strings/Count.lean",
+      "lean/GoLean/Strings/Replace.lean"
+    ],
+    "review": "coverage/packages/bytes/replaceall.md",
+    "control": "difftest/bytes/copy-replace/review/main.go"
+  },
+  "Lines": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ConfiguredIter.lean",
+    "model_symbol": "GoLean.Bytes.lines",
+    "claim": "Yields raw lines with any terminating newline included, clips each yielded capacity to length, and consumes each line before its callback can stop. Empty input yields nothing.",
+    "limits": "Sequential invocations with fixed source bytes and deterministic callback budgets. Models fragment bytes, capacity and captured suffix. Direct probes check append isolation. Arbitrary callback mutation, callback panics and reentrant use are outside scope. Checks 1,952 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native bytes.Lines with bounded callbacks, two subsequent drain attempts and an independent raw string-cut oracle. Includes nil, empty, consecutive LF, CRLF, malformed UTF-8, and unterminated final lines.",
+    "theorems": [
+      "GoLean.Bytes.lines_stop_after_newline",
+      "GoLean.Bytes.lines_no_phantom_final",
+      "GoLean.Bytes.lines_empty"
+    ],
+    "check": "difftest/bytes/configured-iter/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Substring.lean",
+      "difftest/bytes/configured-iter/testdata/bridge_test.go",
+      "difftest/bytes/configured-iter/testdata/configured_iter_test.go"
+    ],
+    "review": "coverage/packages/bytes/lines.md",
+    "control": "difftest/bytes/configured-iter/review/main.go"
+  },
+  "splitSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ConfiguredIter.lean",
+    "model_symbol": "GoLean.Bytes.splitSeqConfigured",
+    "claim": "Yields clipped fragments with signed separator retention, allowing the fragment to extend into spare backing through capacity. A false callback leaves the current suffix unconsumed. Invalid endpoints produce a bounds panic while preserving completed yields and the current suffix.",
+    "limits": "Sequential invocations with fixed backing bytes, native signed retention and deterministic callback budgets. Models bounds panic class, fragment bytes and nilness, clipped capacity and captured suffix. Arbitrary callback mutation, callback panics and reentrant use are outside scope. Checks 1,952 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes the private declaration through a same-package overlay. The independent string-cut and string-range oracle checks raw matching, malformed UTF-8 with empty separator, native signed extrema and capacity bounds, nil and empty final yields, stops, resumption and append isolation.",
+    "theorems": [
+      "GoLean.Bytes.splitSeqConfigured_stopped",
+      "GoLean.Bytes.splitSeqConfigured_spare",
+      "GoLean.Bytes.splitSeqConfigured_partialPanic"
+    ],
+    "check": "difftest/bytes/configured-iter/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Count.lean",
+      "lean/GoLean/Strings/Substring.lean",
+      "difftest/bytes/configured-iter/testdata/bridge_test.go",
+      "difftest/bytes/configured-iter/testdata/configured_iter_test.go"
+    ],
+    "review": "coverage/packages/bytes/split-seq-private.md",
+    "control": "difftest/bytes/configured-iter/review/main.go"
+  },
+  "Reader.Seek": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderPosition.lean",
+    "model_symbol": "GoLean.Bytes.readerSeek",
+    "claim": "Clears the previous-rune marker, computes a signed 64-bit absolute position for the requested origin, rejects invalid origins or negative results, and changes the cursor only on success. A nil receiver panics.",
+    "limits": "Nonnegative initial int64 cursor, signed int64 offset, native int origin and sequential access. Negative initial cursors caused by a malformed writer are outside scope. Checks 8,403 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes bytes.Reader.Seek in a same-package overlay. An arbitrary-precision sum oracle checks invalid origins, negative positions, signed overflow, exact returned positions, cursor and marker, and source preservation.",
+    "theorems": [
+      "GoLean.Bytes.readerSeek_live",
+      "GoLean.Bytes.readerSeek_nil"
+    ],
+    "check": "difftest/bytes/reader-position/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-position/testdata/bridge_test.go",
+      "difftest/bytes/reader-position/testdata/reader_position_test.go"
+    ],
+    "review": "coverage/packages/bytes/Reader.Seek.md",
+    "control": "difftest/bytes/reader-position/review/main.go"
+  },
+  "Reader.WriteTo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderPosition.lean",
+    "model_symbol": "GoLean.Bytes.readerWriteTo",
+    "claim": "Clears the rune marker, then calls Write once with the unread slice unless exhausted. Applies a returned count, preserves an explicit writer error, synthesizes io.ErrShortWrite for a nonfull nil-error count, and panics on an excessive count before advancing.",
+    "limits": "Nonnegative initial int64 cursor, valid slice geometry and non-mutating non-reentrant scripted writers. Includes malformed negative native counts and signed result cursors. Arbitrary writer mutation and follow-up calls from a corrupted cursor are outside scope. Checks 8,403 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes bytes.Reader.WriteTo in a same-package overlay. Checks original slice identity and capacity, exact unread bytes, Write versus WriteString routing, marker before dispatch, writer error and panic identity, io.ErrShortWrite, excessive-count panic text, nil writer and nil receiver, and final state.",
+    "theorems": [
+      "GoLean.Bytes.readerWriteTo_eof",
+      "GoLean.Bytes.readerWriteTo_count",
+      "GoLean.Bytes.readerWriteTo_panic",
+      "GoLean.Bytes.readerWriteTo_nil"
+    ],
+    "check": "difftest/bytes/reader-position/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-position/testdata/bridge_test.go",
+      "difftest/bytes/reader-position/testdata/reader_position_test.go"
+    ],
+    "review": "coverage/packages/bytes/Reader.WriteTo.md",
+    "control": "difftest/bytes/reader-position/review/main.go"
+  },
+  "Reader.Read": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderRead.lean",
+    "model_symbol": "GoLean.Bytes.readerRead",
+    "claim": "Copies up to the remaining bytes, clears the rune marker, and advances by the copy count. At or beyond end it returns zero and io.EOF with reader and destination intact. A live short read returns nil error. A nil receiver panics.",
+    "limits": "Sequential calls and nonnegative int64 cursors. Destinations may be disjoint or contained in the reader's source backing through its capacity. Overlapping subslices extending outside the tracked backing and concurrent access are outside scope. Checks 7,605 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.Reader.Read through a same-package overlay. An independent original-byte indexing oracle checks destination bytes, source and spare bytes, cursor, rune marker, io.EOF identity and nil dereference. Destination aliases include both copy directions and reader spare storage.",
+    "theorems": [
+      "GoLean.Bytes.readerRead_at_end",
+      "GoLean.Bytes.readerRead_shared",
+      "GoLean.Bytes.readerRead_nil"
+    ],
+    "check": "difftest/bytes/reader-read/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-read/testdata/bridge_test.go",
+      "difftest/bytes/reader-read/testdata/reader_read_test.go"
+    ],
+    "review": "coverage/packages/bytes/reader-read.md",
+    "control": "difftest/bytes/reader-read/review/main.go"
+  },
+  "Reader.ReadAt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderRead.lean",
+    "model_symbol": "GoLean.Bytes.readerReadAt",
+    "claim": "Rejects a negative offset before accessing the receiver. At or beyond end it returns zero and io.EOF. An in-bounds copy returns io.EOF only when the destination is longer than the remaining input. Cursor and rune marker stay fixed, while a shared destination can change backing bytes.",
+    "limits": "Sequential calls and signed int64 offsets. Destinations may be disjoint or contained in the reader's source backing through its capacity. Offsets, source bounds, and exact error text are modeled, with error freshness checked on native Go. Overlapping subslices extending outside tracked backing and concurrent access are outside scope. Checks 7,605 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.Reader.ReadAt through a same-package overlay. The independent original-byte indexing oracle checks destination, shared storage and reader fields, exact io.EOF, negative-offset error and nil dereference. Includes empty destinations, signed extrema, partial overlap and nil receiver.",
+    "theorems": [
+      "GoLean.Bytes.readerReadAt_negative",
+      "GoLean.Bytes.readerReadAt_nil",
+      "GoLean.Bytes.readerReadAt_fields",
+      "GoLean.Bytes.readerReadAt_partial"
+    ],
+    "check": "difftest/bytes/reader-read/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-read/testdata/bridge_test.go",
+      "difftest/bytes/reader-read/testdata/reader_read_test.go"
+    ],
+    "review": "coverage/packages/bytes/reader-read-at.md",
+    "control": "difftest/bytes/reader-read/review/main.go"
+  },
+  "Reader.ReadRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderRune.lean",
+    "model_symbol": "GoLean.Bytes.readerReadRune",
+    "claim": "Decodes one rune from the current byte offset, saves that offset as the previous-rune marker, and advances by its decoded width. The exhausted path returns zero rune and width with io.EOF and clears the marker. A nil receiver panics.",
+    "limits": "Legal slice geometry, nonnegative int64 cursors, native int markers and sequential access. Checks 4,099 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.Reader.ReadRune in a same-package overlay. A native string range supplies the independent UTF-8 value and width oracle. Covers ASCII, every possible leading byte, all valid widths, malformed and truncated encodings, literal RuneError, nil/empty backing and receiver, unchanged source storage and exact io.EOF identity.",
+    "theorems": [
+      "GoLean.Bytes.readerReadRune_eof",
+      "GoLean.Bytes.readerReadRune_live",
+      "GoLean.Bytes.readerReadRune_nil"
+    ],
+    "check": "difftest/bytes/reader-rune/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean",
+      "difftest/bytes/reader-rune/testdata/bridge_test.go",
+      "difftest/bytes/reader-rune/testdata/reader_rune_test.go"
+    ],
+    "review": "coverage/packages/bytes/Reader.ReadRune.md",
+    "control": "difftest/bytes/reader-rune/review/main.go"
+  },
+  "Reader.UnreadRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderRune.lean",
+    "model_symbol": "GoLean.Bytes.readerUnreadRune",
+    "claim": "At a positive cursor with a saved rune marker, rewinds the cursor to that marker and clears it. At cursor zero returns the beginning-of-slice error before checking the marker. At a positive cursor with a negative marker returns the previous-operation error. Both errors preserve the reader state, and a nil receiver panics.",
+    "limits": "Legal slice geometry, nonnegative int64 cursors, native int markers and sequential access. Lean records error text, with freshness checked on the native errors. Checks 4,099 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.Reader.UnreadRune in a same-package overlay. Checks cursor-zero priority with a saved marker, negative markers, rewind including synthetic native marker extrema, nil dereference, and unchanged source storage.",
+    "theorems": [
+      "GoLean.Bytes.readerUnreadRune_at_start",
+      "GoLean.Bytes.readerUnreadRune_missing_rune",
+      "GoLean.Bytes.readerUnreadRune_rewind",
+      "GoLean.Bytes.readerUnreadRune_nil"
+    ],
+    "check": "difftest/bytes/reader-rune/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-rune/testdata/bridge_test.go",
+      "difftest/bytes/reader-rune/testdata/reader_rune_test.go"
+    ],
+    "review": "coverage/packages/bytes/Reader.UnreadRune.md",
+    "control": "difftest/bytes/reader-rune/review/main.go"
+  },
+  "Reader.ReadByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderByte.lean",
+    "model_symbol": "GoLean.Bytes.readerReadByte",
+    "claim": "Returns the next byte and advances the cursor, or returns zero and io.EOF without advancing at or past end. Every live call clears the previous-rune marker and preserves the source slice. A nil receiver panics.",
+    "limits": "Valid slice geometry and nonnegative int64 cursors. Sequential state and backing observations. Checks 3,859 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go through a same-package overlay and an independent indexed-byte and state oracle. Includes all byte values, nil and nonnil empty backing, populated spare storage, cursors beyond end and MaxInt64, exact io.EOF identity and nil dereference.",
+    "theorems": [
+      "GoLean.Bytes.readerReadByte_live",
+      "GoLean.Bytes.readerReadByte_nil"
+    ],
+    "check": "difftest/bytes/reader-byte/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-byte/testdata/bridge_test.go",
+      "difftest/bytes/reader-byte/testdata/reader_byte_test.go"
+    ],
+    "control": "difftest/bytes/reader-byte/review/main.go",
+    "review": "coverage/packages/bytes/Reader.ReadByte.md"
+  },
+  "Reader.UnreadByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderByte.lean",
+    "model_symbol": "GoLean.Bytes.readerUnreadByte",
+    "claim": "A positive cursor decrements and clears the previous-rune marker. At cursor zero the reader state is unchanged and the method returns the beginning-of-slice error. A nil receiver panics.",
+    "limits": "Valid slice geometry and nonnegative int64 cursors. The model records error text. Native evidence additionally checks a fresh error on each start-of-slice call. Checks 3,859 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go through a same-package overlay and independent state oracle. Includes nil and nonnil empty backing, populated spare storage, positive cursors beyond end and MaxInt64, preservation of a prior marker on failure, and nil dereference.",
+    "theorems": [
+      "GoLean.Bytes.readerUnreadByte_start",
+      "GoLean.Bytes.readerUnreadByte_positive",
+      "GoLean.Bytes.readerUnreadByte_nil"
+    ],
+    "check": "difftest/bytes/reader-byte/check.go",
+    "review_sources": [
+      "lean/GoLean/Bytes/ReaderSetup.lean",
+      "difftest/bytes/reader-byte/testdata/bridge_test.go",
+      "difftest/bytes/reader-byte/testdata/reader_byte_test.go"
+    ],
+    "control": "difftest/bytes/reader-byte/review/main.go",
+    "review": "coverage/packages/bytes/Reader.UnreadByte.md"
+  },
+  "NewReader": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderSetup.lean",
+    "model_symbol": "GoLean.Bytes.newReader",
+    "claim": "Adopts the input byte slice with exact geometry and initializes cursor zero and previous-rune marker -1.",
+    "limits": "Covers valid slice geometry and nonnegative int64 cursors, including past end and the maximum. Checks 3,170 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes each public declaration through a same-package observation overlay. An independent snapshot oracle checks nilness, raw bytes, spare backing, adoption, cursor, previous rune and panic identity class.",
+    "theorems": [
+      "GoLean.Bytes.newReader_snapshot"
+    ],
+    "check": "difftest/bytes/reader-setup/check.go",
+    "review_sources": [
+      "difftest/bytes/reader-setup/testdata/bridge_test.go",
+      "difftest/bytes/reader-setup/testdata/reader_setup_test.go"
+    ],
+    "control": "difftest/bytes/reader-state/review/main.go",
+    "review": "coverage/packages/bytes/new-reader.md"
+  },
+  "Reader.Reset": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderSetup.lean",
+    "model_symbol": "GoLean.Bytes.readerReset",
+    "claim": "Replaces the receiver state with the supplied slice, cursor zero and previous-rune marker -1. A nil receiver panics.",
+    "limits": "Covers valid slice geometry and nonnegative int64 cursors, including past end and the maximum. Checks 3,170 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes each public declaration through a same-package observation overlay. An independent snapshot oracle checks nilness, raw bytes, spare backing, adoption, cursor, previous rune and panic identity class.",
+    "theorems": [
+      "GoLean.Bytes.readerReset_snapshot",
+      "GoLean.Bytes.readerReset_nil"
+    ],
+    "check": "difftest/bytes/reader-setup/check.go",
+    "review_sources": [
+      "difftest/bytes/reader-setup/testdata/bridge_test.go",
+      "difftest/bytes/reader-setup/testdata/reader_setup_test.go"
+    ],
+    "control": "difftest/bytes/reader-state/review/main.go",
+    "review": "coverage/packages/bytes/reader-reset.md"
+  },
+  "Reader.Size": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderSetup.lean",
+    "model_symbol": "GoLean.Bytes.readerSize",
+    "claim": "Returns the original slice length regardless of cursor and previous-rune state. A nil receiver panics.",
+    "limits": "Covers valid slice geometry and nonnegative int64 cursors, including past end and the maximum. Checks 3,170 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes each public declaration through a same-package observation overlay. An independent snapshot oracle checks nilness, raw bytes, spare backing, adoption, cursor, previous rune and panic identity class.",
+    "theorems": [
+      "GoLean.Bytes.readerSize_unreadIndependent",
+      "GoLean.Bytes.readerSize_nil"
+    ],
+    "check": "difftest/bytes/reader-setup/check.go",
+    "review_sources": [
+      "difftest/bytes/reader-setup/testdata/bridge_test.go",
+      "difftest/bytes/reader-setup/testdata/reader_setup_test.go"
+    ],
+    "control": "difftest/bytes/reader-state/review/main.go",
+    "review": "coverage/packages/bytes/reader-size.md"
+  },
+  "Reader.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ReaderLen.lean",
+    "model_symbol": "GoLean.Bytes.readerLen",
+    "claim": "Returns the unread byte count, clamping to zero at or beyond end, and leaves the cursor unchanged. A nil receiver panics.",
+    "limits": "Covers public nonnegative reader positions, including the signed int64 maximum. Tests 2,278 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned public Reader.Len and Seek on zero and constructor-created readers and a nil pointer. A signed arithmetic oracle compares the exact result and a follow-up Seek reads the cursor.",
+    "theorems": [
+      "GoLean.Bytes.readerLen_unread",
+      "GoLean.Bytes.readerLen_pastEnd",
+      "GoLean.Bytes.readerLen_nil"
+    ],
+    "check": "difftest/bytes/reader-len/check.go",
+    "control": "difftest/bytes/reader-len/review/main.go",
+    "review": "coverage/packages/bytes/Reader.Len.md"
+  },
+  "Buffer.WriteTo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferWriteTo.lean",
+    "model_symbol": "GoLean.Bytes.bufferWriteTo",
+    "claim": "Clears the read flag and offers the unread bytes in one write. Preserves writer error identity, reports io.ErrShortWrite on a short nil-error reply, panics on an oversized count, and resets after success.",
+    "limits": "Covers legal receiver geometry, nil receiver panic, and nonpanicking writers with nonnegative scripted counts that do not mutate the offered backing. Negative writer counts and writer panics are outside scope. Checks 28,053 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned public Buffer.WriteTo through a same-package observation overlay. Go checks exact count/error or panic class, single write bytes and capacity, and receiver cursor, read flag and full backing. An independent scripted oracle predicts each outcome.",
+    "theorems": [
+      "GoLean.Bytes.bufferWriteTo_nil",
+      "GoLean.Bytes.bufferWriteTo_invalid",
+      "GoLean.Bytes.bufferWriteTo_error",
+      "GoLean.Bytes.bufferWriteTo_reset"
+    ],
+    "check": "difftest/bytes/buffer-write-to/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-write-to/testdata/bridge_test.go",
+      "difftest/bytes/buffer-write-to/testdata/write_to_test.go"
+    ],
+    "control": "difftest/bytes/buffer-write-to/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.WriteTo.md"
+  },
+  "NewBufferString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/NewBufferString.lean",
+    "model_symbol": "GoLean.Bytes.newBufferString",
+    "claim": "Copies exact raw string bytes into a nonnil Buffer slice and starts with zero cursor and read flag. Empty input uses a nonnil empty slice.",
+    "limits": "Models successful allocation and checks exact small-object rounding and zero-filled spare storage for escaping buffers through length 512. Checks 1,028 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native public constructor via a non-inlined escaping call. Go checks observable len, cap, nilness, backing contents, unread rejection and input isolation under a destination mutation. An independent Go pinned size-class table provides expected rows.",
+    "theorems": [
+      "GoLean.Bytes.newBufferString_empty",
+      "GoLean.Bytes.newBufferString_bytes",
+      "GoLean.Bytes.newBufferString_small"
+    ],
+    "check": "difftest/bytes/new-buffer-string/check.go",
+    "control": "difftest/bytes/new-buffer-string/review/main.go",
+    "review": "coverage/packages/bytes/NewBufferString.md"
+  },
+  "NewBuffer": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/NewBuffer.lean",
+    "model_symbol": "GoLean.Bytes.newBuffer",
+    "claim": "Adopts the exact source slice and backing capacity, preserves nilness and accessible spare bytes, and initializes the cursor and read flag to zero.",
+    "limits": "Covers legal slice geometry and successful allocation of the Buffer object. Native checks observe backing address when capacity is nonzero, without using the original slice after ownership transfers. Checks 4,489 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned public NewBuffer, Len, Cap, Bytes, UnreadByte and UnreadRune. An independent view oracle predicts initial bytes and capacity, including subviews with excluded prefix and suffix backing.",
+    "theorems": [
+      "GoLean.Bytes.newBuffer_nil",
+      "GoLean.Bytes.newBuffer_adopts"
+    ],
+    "check": "difftest/bytes/new-buffer/check.go",
+    "control": "difftest/bytes/new-buffer/review/main.go",
+    "review": "coverage/packages/bytes/NewBuffer.md"
+  },
+  "Buffer.ReadString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadString.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadString",
+    "claim": "Returns a string snapshot of raw bytes through the first delimiter, or all unread bytes with io.EOF. Preserves the helper's offset and ordinary read flag. A nil receiver panics.",
+    "limits": "Covers legal buffer geometry and all byte delimiters, including malformed UTF-8 and delimiter positions inside valid encodings. Native checks verify output bytes remain stable after writing the original buffer storage. Checks 11,525 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes Buffer.ReadString through a same-package overlay and compares exact EOF identity, string bytes and receiver state. An independent Go raw byte scan predicts each outcome.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadString_nil",
+      "GoLean.Bytes.bufferReadString_empty",
+      "GoLean.Bytes.bufferReadString_first",
+      "GoLean.Bytes.bufferReadString_missing"
+    ],
+    "check": "difftest/bytes/buffer-read-string/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-read-string/testdata/bridge_test.go",
+      "difftest/bytes/buffer-read-string/testdata/read_string_test.go"
+    ],
+    "control": "difftest/bytes/buffer-read-string/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.ReadString.md"
+  },
+  "Buffer.ReadBytes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadBytes.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadBytes",
+    "claim": "Returns a detached copy of the bytes through the first delimiter or the remaining bytes with io.EOF, preserving the delimiter helper's cursor and ordinary read flag. Empty results are nil. A nil receiver panics.",
+    "limits": "Covers legal buffer geometry, all byte delimiters, and successful result allocation requests through 512 bytes. Exact capacity and zero-filled spare are checked in that domain. Native checks mutate the result and verify backing isolation. Checks 12,034 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes Buffer.ReadBytes through a same-package overlay. An independent raw scan and pinned small-size capacity classes predict exact output, EOF identity, cursor, flag and receiver backing.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadBytes_nil",
+      "GoLean.Bytes.bufferReadBytes_empty",
+      "GoLean.Bytes.bufferReadBytes_detached"
+    ],
+    "check": "difftest/bytes/buffer-read-bytes/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-read-bytes/testdata/bridge_test.go",
+      "difftest/bytes/buffer-read-bytes/testdata/read_bytes_test.go"
+    ],
+    "control": "difftest/bytes/buffer-read-bytes/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.ReadBytes.md"
+  },
+  "Buffer.readSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadSlice.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadSlice",
+    "claim": "Returns an aliased prefix ending in the first raw delimiter with nil error, or the entire unread suffix with io.EOF. Advances the cursor without resetting and always sets the ordinary read flag. A nil receiver panics.",
+    "limits": "Covers legal initial buffer state, all byte delimiters and exact view capacity and nilness. Native fixtures mutate the view immediately and verify backing aliasing. Checks 11,522 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes the private helper in a same-package overlay. An independent raw scan calculates the first delimiter and predicts the resulting view, exact error identity, cursor, flag and spare bytes.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadSlice_nil",
+      "GoLean.Bytes.bufferReadSlice_empty",
+      "GoLean.Bytes.bufferReadSlice_first",
+      "GoLean.Bytes.bufferReadSlice_missing"
+    ],
+    "check": "difftest/bytes/buffer-read-slice/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-read-slice/testdata/bridge_test.go",
+      "difftest/bytes/buffer-read-slice/testdata/read_slice_test.go"
+    ],
+    "control": "difftest/bytes/buffer-read-slice/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.readSlice.md"
+  },
+  "Buffer.Read": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferRead.lean",
+    "model_symbol": "GoLean.Bytes.bufferRead",
+    "claim": "Copies the unread prefix into an independent destination and preserves its unused suffix. Advances by the copied count, setting the ordinary read flag only for a nonzero copy. A drained buffer resets and returns io.EOF only for a nonempty destination. A nil receiver panics.",
+    "limits": "Covers legal buffer geometry and disjoint destination slices, including length zero. Destination aliases into receiver storage are outside scope. Checks 16,834 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes Buffer.Read through a same-package overlay and compares exact error identity, count, destination bytes, offset, flag, buffer nilness and complete stored/spare bytes. A Go prefix-copy oracle supplies expected results.",
+    "theorems": [
+      "GoLean.Bytes.bufferRead_nil",
+      "GoLean.Bytes.bufferRead_emptyReset",
+      "GoLean.Bytes.bufferRead_zeroClears",
+      "GoLean.Bytes.bufferRead_partialDestination"
+    ],
+    "check": "difftest/bytes/buffer-read/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-read/testdata/bridge_test.go",
+      "difftest/bytes/buffer-read/testdata/read_test.go"
+    ],
+    "control": "difftest/bytes/buffer-read/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Read.md"
+  },
+  "Buffer.Peek": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferPeek.lean",
+    "model_symbol": "GoLean.Bytes.bufferPeek",
+    "claim": "Returns the requested unread prefix or the remaining unread bytes with io.EOF. Preserves receiver state and returns a view of original backing with exact capacity and nilness. A negative count or nil receiver panics.",
+    "limits": "Covers legal buffer geometry, signed counts and exact view including spare bytes. The native comparison verifies aliasing with an immediate mutation before modifying the receiver. Checks 19,643 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes Buffer.Peek through a same-package overlay and compares exact error identity, panic class, raw view, nilness, spare bytes, cursor and read flag. An independent slicing oracle supplies expected results.",
+    "theorems": [
+      "GoLean.Bytes.bufferPeek_nil",
+      "GoLean.Bytes.bufferPeek_negative",
+      "GoLean.Bytes.bufferPeek_zeroNil",
+      "GoLean.Bytes.bufferPeek_retainsCapacity",
+      "GoLean.Bytes.bufferPeek_eof"
+    ],
+    "check": "difftest/bytes/buffer-peek/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-peek/testdata/bridge_test.go",
+      "difftest/bytes/buffer-peek/testdata/peek_test.go"
+    ],
+    "control": "difftest/bytes/buffer-peek/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Peek.md"
+  },
+  "Buffer.empty": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferEmpty.lean",
+    "model_symbol": "GoLean.Bytes.bufferEmpty",
+    "claim": "Returns true exactly when the stored slice length is at or below the signed read offset. Does not use spare capacity. A nil receiver panics.",
+    "limits": "Covers reachable and synthetic offsets, including offsets past length and native signed extrema. Tests 4,101 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go invokes the private method in a same-package overlay. An arithmetic comparison oracle checks exact booleans and nil panic.",
+    "theorems": [
+      "GoLean.Bytes.bufferEmpty_nil",
+      "GoLean.Bytes.bufferEmpty_end",
+      "GoLean.Bytes.bufferEmpty_hasUnread"
+    ],
+    "check": "difftest/bytes/buffer-empty/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-empty/testdata/bridge_test.go",
+      "difftest/bytes/buffer-empty/testdata/buffer_empty_test.go"
+    ],
+    "control": "difftest/bytes/buffer-empty/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.empty.md"
+  },
+  "growSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/GrowSlice.lean",
+    "model_symbol": "GoLean.Bytes.growSlice",
+    "claim": "Produces the original payload in fresh storage with rounded capacity and zero-filled spare bytes. The capacity request is the greater of the signed length-plus-count sum and twice the original capacity. A zero request returns a nil slice.",
+    "limits": "Covers legal original capacity through 256 bytes, signed native counts and successful raw allocation requests through 512 bytes, including signed length overflow that falls back to twice capacity. Excludes allocator panics and larger requests.",
+    "configurations": "Pinned Go directly calls growSlice through a same-package overlay and checks exact result bytes, capacity, nilness, original backing isolation, and zero spare bytes. An arithmetic and explicit size-class oracle supplies expected outcomes. Checks 24,906 boundaries and 60,000 seeded cases (17, 2718 and 65537).",
+    "theorems": [
+      "GoLean.Bytes.growSlice_empty",
+      "GoLean.Bytes.growSlice_doubles",
+      "GoLean.Bytes.growSlice_preserves"
+    ],
+    "check": "difftest/bytes/grow-slice/check.go",
+    "review_sources": [
+      "difftest/bytes/grow-slice/testdata/bridge_test.go",
+      "difftest/bytes/grow-slice/testdata/grow_slice_test.go"
+    ],
+    "control": "difftest/bytes/grow-slice/review/main.go",
+    "review": "coverage/packages/bytes/growSlice.md"
+  },
+  "Buffer.grow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferGrowPrivate.lean",
+    "model_symbol": "GoLean.Bytes.bufferGrowPrivate",
+    "claim": "Exposes reserved storage and returns the insertion index, preserving the read flag unless an exhausted buffer resets. Models fast reslice, in-place compaction and allocation, preserving exact backing bytes and cursor. Distinguishes nil, bounds and explicit ErrTooLarge panics.",
+    "limits": "Models legal initial slice geometry, signed counts including direct negative shrink, successful raw growth requests through 512 bytes and the explicit overflow guard. Allocator failure is excluded. Checks 43,165 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls the private helper in a same-package overlay, comparing exact insertion index, panic identity or class, flag, offset, nilness, capacity, alias and backing bytes. An arithmetic and byte-array oracle simulates reservation independently.",
+    "theorems": [
+      "GoLean.Bytes.bufferGrowPrivate_nil",
+      "GoLean.Bytes.bufferGrowPrivate_reslice",
+      "GoLean.Bytes.bufferGrowPrivate_compact",
+      "GoLean.Bytes.bufferGrowPrivate_resetThenBounds"
+    ],
+    "check": "difftest/bytes/buffer-grow-private/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-grow-private/testdata/bridge_test.go",
+      "difftest/bytes/buffer-grow-private/testdata/grow_test.go"
+    ],
+    "control": "difftest/bytes/buffer-grow-private/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.grow-private.md"
+  },
+  "Buffer.tryGrowByReslice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferTryGrowByReslice.lean",
+    "model_symbol": "GoLean.Bytes.bufferTryGrowByReslice",
+    "claim": "Reslices retained storage when the signed count fits spare capacity and returns the previous stored length and true. Insufficient capacity returns zero and false. A negative resulting length panics, and a nil receiver panics independently of count.",
+    "limits": "Models legal initial slice geometry and signed machine counts, including synthetic negative calls. The cursor and read flag remain unchanged, so a successful private shrink can leave the cursor beyond the new end. Checks 40,400 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls the private method through a same-package overlay. An independent branch oracle compares the exact tuple, panic class, cursor, flag, capacity, nilness, retained alias and complete original backing bytes.",
+    "theorems": [
+      "GoLean.Bytes.bufferTryGrowByReslice_nil",
+      "GoLean.Bytes.bufferTryGrowByReslice_reject",
+      "GoLean.Bytes.bufferTryGrowByReslice_fit",
+      "GoLean.Bytes.bufferTryGrowByReslice_shrink",
+      "GoLean.Bytes.bufferTryGrowByReslice_bounds"
+    ],
+    "check": "difftest/bytes/buffer-try-grow-by-reslice/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-try-grow-by-reslice/testdata/bridge_test.go",
+      "difftest/bytes/buffer-try-grow-by-reslice/testdata/grow_test.go"
+    ],
+    "control": "difftest/bytes/buffer-try-grow-by-reslice/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.tryGrowByReslice.md"
+  },
+  "Buffer.Grow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferGrow.lean",
+    "model_symbol": "GoLean.Bytes.bufferGrow",
+    "claim": "Reserves space without appending bytes, modeling the initial exhausted-buffer reset, fit, compaction and allocation. Preserves the read flag except when resetting. Distinguishes negative count, nil receiver panic and the explicit ErrTooLarge overflow guard.",
+    "limits": "Models legal buffer geometry, signed machine-sized requests and successful small allocations with raw requests through 512 bytes, plus the explicit overflow guard. Excludes resource-dependent allocation failures. Checks 21,715 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls Buffer.Grow directly through a same-package overlay. The comparison asserts panic text or exact ErrTooLarge identity, offset, read flag, nilness, every backing byte and storage reuse. A byte-array simulation supplies independent expected results.",
+    "theorems": [
+      "GoLean.Bytes.bufferGrow_negative",
+      "GoLean.Bytes.bufferGrow_nil",
+      "GoLean.Bytes.bufferGrow_exhaustedZero",
+      "GoLean.Bytes.bufferGrow_preservesRead",
+      "GoLean.Bytes.bufferGrow_tooLarge"
+    ],
+    "check": "difftest/bytes/buffer-grow/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-grow/testdata/bridge_test.go",
+      "difftest/bytes/buffer-grow/testdata/grow_test.go"
+    ],
+    "control": "difftest/bytes/buffer-grow/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Grow.md"
+  },
+  "Buffer.WriteString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferWriteString.lean",
+    "model_symbol": "GoLean.Bytes.bufferWriteString",
+    "claim": "Appends raw string bytes, returns the original byte count and nil error, clears the read flag, and preserves the exact buffer state for fitting, compacting and growing writes. A nil receiver panics.",
+    "limits": "Models stable string bytes, legal buffer geometry and successful small-object allocations through a raw request of 512 bytes. Excludes unsafe mutation of string backing, allocator failure and ErrTooLarge. Checks 21,714 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.WriteString in a same-package overlay and checks byte count, nil error or nil receiver panic, raw backing, capacity and reuse, read flag and offset. An explicit byte-array growth oracle supplies the expected results.",
+    "theorems": [
+      "GoLean.Bytes.bufferWriteString_detached",
+      "GoLean.Bytes.bufferWriteString_nil",
+      "GoLean.Bytes.bufferWriteString_emptyNil",
+      "GoLean.Bytes.bufferWriteString_appendRaw",
+      "GoLean.Bytes.bufferWriteString_compact"
+    ],
+    "check": "difftest/bytes/buffer-write-string/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-write-string/testdata/bridge_test.go",
+      "difftest/bytes/buffer-write-string/testdata/write_string_test.go"
+    ],
+    "control": "difftest/bytes/buffer-write-string/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.WriteString.md"
+  },
+  "Buffer.Write": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferWrite.lean",
+    "model_symbol": "GoLean.Bytes.bufferWrite",
+    "claim": "Returns the copied byte count and a nil error, clears the read flag and preserves exact buffer geometry. The input can be disjoint or a valid subslice of original backing. An alias reflects any in-place compaction before the final overlapping copy.",
+    "limits": "Models legal buffer states and successful small-object allocations through a raw request of 512 bytes. Excludes ErrTooLarge and allocator failure. Aliased slices are modeled as pinned implementation behavior. Checks 21,714 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls Write directly through a same-package test overlay, comparing copied count, nil error or nil receiver panic, full stored and spare bytes, cursor, read flag, capacity and backing reuse. An independent slice simulation checks both detached and aliased inputs.",
+    "theorems": [
+      "GoLean.Bytes.bufferWrite_nil",
+      "GoLean.Bytes.bufferWrite_empty",
+      "GoLean.Bytes.bufferWrite_compactAlias",
+      "GoLean.Bytes.bufferWrite_allocateAlias"
+    ],
+    "check": "difftest/bytes/buffer-write/check.go",
+    "review_sources": [
+      "difftest/bytes/buffer-write/testdata/bridge_test.go",
+      "difftest/bytes/buffer-write/testdata/write_test.go"
+    ],
+    "control": "difftest/bytes/buffer-write/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Write.md"
+  },
+  "Buffer.WriteRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferWriteRune.lean",
+    "model_symbol": "GoLean.Bytes.bufferWriteRune",
+    "claim": "Returns the actual UTF-8 width and nil error, substitutes RuneError for invalid scalars, clears the read flag, and preserves exact successful buffer state. ASCII uses one-byte growth; other runes reserve four bytes before appending.",
+    "limits": "Models signed int32 runes, legal buffer states and successful small-object allocation for raw requests through 512 bytes. Excludes allocation failure and ErrTooLarge. Checks 17,179 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls WriteRune directly under a same-package overlay and checks width, nil error or nil receiver panic, raw backing, spare capacity, offset, flag and reuse. The independent Go oracle encodes through the rune-to-string conversion and uses pinned small-object size classes.",
+    "theorems": [
+      "GoLean.Bytes.bufferWriteRune_nil",
+      "GoLean.Bytes.bufferWriteRune_ascii",
+      "GoLean.Bytes.bufferWriteRune_replacement",
+      "GoLean.Bytes.bufferWriteRune_reserveFour",
+      "GoLean.Bytes.bufferWriteRune_reslice"
+    ],
+    "check": "difftest/bytes/buffer-write-rune/check.go",
+    "control": "difftest/bytes/buffer-write-rune/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.WriteRune.md"
+  },
+  "Buffer.WriteByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferWriteByte.lean",
+    "model_symbol": "GoLean.Bytes.bufferWriteByte",
+    "claim": "Writes the byte and returns nil, clearing the read flag. Models the fast reslice, exhausted-buffer reuse, compaction, nil-storage allocation and small size-class growth, with exact bytes, offset, capacity and storage reuse. A nil receiver panics.",
+    "limits": "Covers legal state geometry, allocation success and raw growth requests up to 512 bytes. Excludes larger size classes and ErrTooLarge/allocator failure. Checks 17,417 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes WriteByte through a same-package overlay and checks error identity, all backing bytes, storage aliasing, observable unread geometry, and the read flag. The independent byte-array oracle implements the pinned small-object size classes.",
+    "theorems": [
+      "GoLean.Bytes.bufferWriteByte_nil",
+      "GoLean.Bytes.bufferWriteByte_reslice",
+      "GoLean.Bytes.bufferWriteByte_nilStorage",
+      "GoLean.Bytes.bufferWriteByte_compactExample",
+      "GoLean.Bytes.bufferWriteByte_allocateExample"
+    ],
+    "check": "difftest/bytes/buffer-write-byte/check.go",
+    "control": "difftest/bytes/buffer-write-byte/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.WriteByte.md"
+  },
+  "Buffer.UnreadByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferUnreadByte.lean",
+    "model_symbol": "GoLean.Bytes.bufferUnreadByte",
+    "claim": "Returns the exact errUnreadByte sentinel and preserves state when the prior read flag is zero. A nonzero flag is cleared, one byte is rewound if the offset is positive, and nil is returned. Nil receivers panic.",
+    "limits": "Models legal offsets, all signed int8 read flags, exact raw backing bytes, capacity and nilness. Includes synthetically prepared states for rarely or never publicly reachable flag values. Checks 33,281 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes Buffer.UnreadByte via a same-package overlay to compare the returned error by identity and inspect cursor, flag and storage. An explicit arithmetic and slicing oracle gives expected rows for Go and Lean.",
+    "theorems": [
+      "GoLean.Bytes.bufferUnreadByte_nil",
+      "GoLean.Bytes.bufferUnreadByte_invalid",
+      "GoLean.Bytes.bufferUnreadByte_rewind",
+      "GoLean.Bytes.bufferUnreadByte_zeroOffset"
+    ],
+    "check": "difftest/bytes/buffer-unread-byte/check.go",
+    "control": "difftest/bytes/buffer-unread-byte/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.UnreadByte.md"
+  },
+  "Buffer.UnreadRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferUnreadRune.lean",
+    "model_symbol": "GoLean.Bytes.bufferUnreadRune",
+    "claim": "Returns a fresh error and preserves state for nonpositive read flags. A positive flag rewinds by that width if the offset permits it, clears the flag and returns nil. Nil receivers panic.",
+    "limits": "Models nilness, exact raw stored and spare bytes, legal slice offsets and every signed int8 read flag, including flags only reachable through same-package setup. Checks 33,281 boundaries and 60,000 samples from seeds 17, 2718 and 65537. Error identity is modeled by the fresh-error outcome and observed through separately allocated live errors in the native comparison.",
+    "configurations": "Pinned Go calls the method directly from a same-package test overlay, checking exact error text and distinct error identity, offset, signed flag, capacity, raw bytes and nilness. A separate arithmetic and slicing oracle supplies shared expectations.",
+    "theorems": [
+      "GoLean.Bytes.bufferUnreadRune_nil",
+      "GoLean.Bytes.bufferUnreadRune_reject",
+      "GoLean.Bytes.bufferUnreadRune_rewind",
+      "GoLean.Bytes.bufferUnreadRune_shortOffset"
+    ],
+    "check": "difftest/bytes/buffer-unread-rune/check.go",
+    "control": "difftest/bytes/buffer-unread-rune/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.UnreadRune.md"
+  },
+  "Buffer.ReadRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadRune.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadRune",
+    "claim": "Reads the first unread UTF-8 rune, reports its original byte width, and records that width for UnreadRune. Malformed UTF-8 consumes one byte and returns RuneError. An exhausted buffer resets and returns zero rune and width with io.EOF. A nil receiver pointer panics.",
+    "limits": "Models reachable state with exact raw bytes, capacity, nilness, cursor and read flag. Native checks both UnreadByte and UnreadRune retries. Checks 68,668 boundaries including all two-byte inputs, and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.ReadRune. An independent Go range oracle extracts the first rune and width and predicts EOF reset, subsequent raw byte retry and the exact rune retry after rewinding.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadRune_nil",
+      "GoLean.Bytes.bufferReadRune_eof",
+      "GoLean.Bytes.bufferReadRune_live"
+    ],
+    "check": "difftest/bytes/buffer-read-rune/check.go",
+    "control": "difftest/bytes/buffer-read-rune/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.ReadRune.md"
+  },
+  "Buffer.ReadByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReadByte.lean",
+    "model_symbol": "GoLean.Bytes.bufferReadByte",
+    "claim": "Returns the next raw byte with a nil error and marks an ordinary read. An exhausted buffer resets and returns byte zero with io.EOF. A nil receiver pointer panics.",
+    "limits": "Models reachable buffer geometry, exact raw state and the read flag. Checks the unread retry behavior after success and EOF, and covers prior Next and ReadRune flags. Checks 3,121 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.ReadByte. The independent oracle indexes the original stored bytes, prepares the expected state and observes exact EOF identity, spare bytes, nilness and subsequent UnreadByte and UnreadRune behavior.",
+    "theorems": [
+      "GoLean.Bytes.bufferReadByte_nil",
+      "GoLean.Bytes.bufferReadByte_live",
+      "GoLean.Bytes.bufferReadByte_eof"
+    ],
+    "check": "difftest/bytes/buffer-read-byte/check.go",
+    "control": "difftest/bytes/buffer-read-byte/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.ReadByte.md"
+  },
+  "Buffer.Next": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferNext.lean",
+    "model_symbol": "GoLean.Bytes.bufferNext",
+    "claim": "Returns the next bytes from the current offset, clamping oversized nonnegative requests, and advances by the returned length. The returned view aliases the original storage. Negative counts panic after invalidating the read flag, and a nil receiver pointer panics.",
+    "limits": "Models reachable buffer geometry, exact view bytes, capacity, nilness and post-call read flag. Native checks mutate the view before invalidation, verify original backing and remaining unread bytes, and observe the flag through UnreadByte and UnreadRune. Checks 11,056 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Next after Next or ReadRune setup. The oracle computes the clamped interval, predicts the backing mutation and offset, and distinguishes the bounds and nil-pointer panics.",
+    "theorems": [
+      "GoLean.Bytes.bufferNext_nil",
+      "GoLean.Bytes.bufferNext_negative",
+      "GoLean.Bytes.bufferNext_advance",
+      "GoLean.Bytes.bufferNext_readFlag"
+    ],
+    "check": "difftest/bytes/buffer-next/check.go",
+    "control": "difftest/bytes/buffer-next/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Next.md"
+  },
+  "Buffer.Truncate": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferTruncate.lean",
+    "model_symbol": "GoLean.Bytes.bufferTruncate",
+    "claim": "Zero truncation resets the buffer. Positive in-range counts retain exactly that many unread bytes with the original offset and backing storage. Negative and oversized requests panic after invalidating the read flag. A nil receiver pointer panics.",
+    "limits": "Models reachable buffer state and the truncation outcome. Checks retained raw bytes, spare bytes, nilness, offset, capacity and UnreadByte and UnreadRune rejection on success and bounds panic. Checks 11,056 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Truncate after Next or ReadRune setup, classifies nil and bounds panics, and observes fresh views and unread outcomes. An independent oracle computes the expected stored endpoint, offset and spare bytes.",
+    "theorems": [
+      "GoLean.Bytes.bufferTruncate_zero",
+      "GoLean.Bytes.bufferTruncate_nil",
+      "GoLean.Bytes.bufferTruncate_bounds",
+      "GoLean.Bytes.bufferTruncate_positive"
+    ],
+    "check": "difftest/bytes/buffer-truncate/check.go",
+    "control": "difftest/bytes/buffer-truncate/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Truncate.md"
+  },
+  "Buffer.Reset": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferReset.lean",
+    "model_symbol": "GoLean.Bytes.bufferReset",
+    "claim": "Empties the stored slice, moves the read offset to zero, invalidates unread operations and retains the original storage and nilness. A nil pointer receiver panics.",
+    "limits": "Models reachable buffer geometry, raw retained storage and the last-read tag. The comparison observes capacity, retained spare bytes, reuse through a subsequent fitting WriteByte, and rejected UnreadByte and UnreadRune calls. It uses newly obtained views after Reset. Checks 2,609 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Reset after public Next or ReadRune setup. The independent oracle checks the emptied view, unchanged original capacity and backing bytes, invalidated unread operations and backing reuse.",
+    "theorems": [
+      "GoLean.Bytes.bufferReset_state",
+      "GoLean.Bytes.bufferReset_nilStorage",
+      "GoLean.Bytes.bufferReset_nil"
+    ],
+    "check": "difftest/bytes/buffer-reset/check.go",
+    "control": "difftest/bytes/buffer-reset/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Reset.md"
+  },
+  "Buffer.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferString.lean",
+    "model_symbol": "GoLean.Bytes.bufferString",
+    "claim": "Returns the exact unread raw bytes as an immutable string snapshot. A nil receiver returns the literal string <nil>.",
+    "limits": "Models reachable buffer geometry and returned bytes. The comparison checks previously returned snapshots after writes through Buffer.Bytes and after emptying and overwriting the buffer through Reset and Write. Allocation details and string backing addresses are outside scope. Checks 2,604 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.String. The independent oracle constructs expected byte intervals and overwrites explicitly, then observes original and subsequent strings after all mutations.",
+    "theorems": [
+      "GoLean.Bytes.bufferString_nil",
+      "GoLean.Bytes.bufferString_unread",
+      "GoLean.Bytes.bufferString_overwrite"
+    ],
+    "check": "difftest/bytes/buffer-string/check.go",
+    "control": "difftest/bytes/buffer-string/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.String.md"
+  },
+  "Buffer.Bytes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferBytes.lean",
+    "model_symbol": "GoLean.Bytes.bufferBytes",
+    "claim": "Returns the exact unread slice, preserving nilness and capacity relative to the read cursor. Immediate writes through the returned view affect subsequent reads. A nil receiver pointer panics.",
+    "limits": "Models reachable buffer geometry and the unread and spare backing bytes. The comparison checks original visible bytes and capacity, mutation through the view before invalidating it, subsequent reads, and preservation of consumed and spare backing bytes. Lifetime after buffer modification is outside scope. Checks 2,604 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Bytes. The oracle constructs explicit stored and spare byte regions, predicts the cursor-relative view, and compares immediate XOR writes, the next read, and final backing bytes.",
+    "theorems": [
+      "GoLean.Bytes.bufferBytes_view",
+      "GoLean.Bytes.bufferBytes_consumed",
+      "GoLean.Bytes.bufferBytes_nilStorage",
+      "GoLean.Bytes.bufferBytes_nil"
+    ],
+    "check": "difftest/bytes/buffer-bytes/check.go",
+    "control": "difftest/bytes/buffer-bytes/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Bytes.md"
+  },
+  "Buffer.AvailableBuffer": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferAvailableBuffer.lean",
+    "model_symbol": "GoLean.Bytes.bufferAvailableBuffer",
+    "claim": "Returns a nil or zero-length view beginning at the end of the stored bytes with the remaining spare capacity. Its backing tail aliases the buffer. A nil receiver pointer panics.",
+    "limits": "Models reachable buffer geometry and visible spare bytes. The comparison checks the documented append-then-Write use, including append growth, raw spare-byte alias effects before the write and exact resulting unread bytes. Post-write capacity, allocator policy and behavior after invalidating the view are outside scope. Checks 10,408 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.AvailableBuffer. The oracle constructs explicit stored and spare byte regions, predicts alias updates visible before Buffer.Write, and predicts concatenated unread bytes after it.",
+    "theorems": [
+      "GoLean.Bytes.bufferAvailableBuffer_view",
+      "GoLean.Bytes.bufferAvailableBuffer_nilStorage",
+      "GoLean.Bytes.bufferAvailableBuffer_nil"
+    ],
+    "check": "difftest/bytes/buffer-available-buffer/check.go",
+    "control": "difftest/bytes/buffer-available-buffer/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.AvailableBuffer.md"
+  },
+  "Buffer.Cap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferCap.lean",
+    "model_symbol": "GoLean.Bytes.bufferCap",
+    "claim": "Returns total backing slice capacity without subtracting a consumed prefix. A nil receiver pointer panics.",
+    "limits": "Models capacity observation, with allocated growth capacity inferred from a zero-offset Bytes view. The allocator policy is outside scope. Checks 12,290 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go directly calls Buffer.Cap after reads, reslicing, in-place compaction, forced allocation and reset. The oracle adds the modeled consumed offset to cap(Buffer.Bytes()).",
+    "theorems": [
+      "GoLean.Bytes.bufferCap_backing",
+      "GoLean.Bytes.bufferCap_unreadGeometry",
+      "GoLean.Bytes.bufferCap_nil"
+    ],
+    "check": "difftest/bytes/buffer-cap/check.go",
+    "control": "difftest/bytes/buffer-cap/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Cap.md"
+  },
+  "Buffer.Available": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferAvailable.lean",
+    "model_symbol": "GoLean.Bytes.bufferAvailable",
+    "claim": "Reports space after the stored slice length, excluding the consumed prefix, and panics on a nil receiver pointer.",
+    "limits": "Models reachable buffer geometry. Exact runtime allocator growth is outside scope, with the post-growth capacity independently read from Buffer.Cap. Checks 12,290 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Available on zero and nil receivers and after controlled reslice, same-array compaction, forced allocation and reset histories. The oracle checks spare capacity of the unread view.",
+    "theorems": [
+      "GoLean.Bytes.bufferAvailable_unreadGeometry",
+      "GoLean.Bytes.bufferAvailable_full",
+      "GoLean.Bytes.bufferAvailable_nil"
+    ],
+    "check": "difftest/bytes/buffer-available/check.go",
+    "control": "difftest/bytes/buffer-available/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Available.md"
+  },
+  "Buffer.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/BufferLen.lean",
+    "model_symbol": "GoLean.Bytes.bufferLen",
+    "claim": "Returns the length of the unread suffix, including zero when fully consumed. A nil receiver pointer panics.",
+    "limits": "Models reachable buffer geometry with a read offset from zero through the slice length. Checks 17,161 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls Buffer.Len after public operations that prepare zero, partially read, fully read, written and reset buffers, and compares it with len(Buffer.Bytes()) for nonnil receivers.",
+    "theorems": [
+      "GoLean.Bytes.bufferLen_unread",
+      "GoLean.Bytes.bufferLen_consumed",
+      "GoLean.Bytes.bufferLen_nil"
+    ],
+    "check": "difftest/bytes/buffer-len/check.go",
+    "control": "difftest/bytes/buffer-len/review/main.go",
+    "review": "coverage/packages/bytes/Buffer.Len.md"
+  },
+  "Count": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Count.lean",
+    "model_symbol": "GoLean.Bytes.count",
+    "claim": "Counts left-to-right nonoverlapping raw-byte matches for a nonempty separator. An empty separator yields one plus the number of UTF-8 decoding steps, counting malformed bytes separately.",
+    "limits": "Models counts that fit in Go int. Index probe details and architecture-specific byte-count acceleration are outside scope. Checks 66,457 boundaries, including every two-byte input with empty separator, and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go directly calls bytes.Count. The independent oracle advances by raw separator length after a match and uses explicit UTF-8 decode steps for empty separators.",
+    "theorems": [
+      "GoLean.Bytes.count_empty",
+      "GoLean.Bytes.count_byte",
+      "GoLean.Bytes.count_nonoverlap"
+    ],
+    "check": "difftest/bytes/count/check.go",
+    "control": "difftest/bytes/count/review/main.go",
+    "review": "coverage/packages/bytes/Count.md"
+  },
+  "ContainsAny": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ContainsAny.lean",
+    "model_symbol": "GoLean.Bytes.containsAny",
+    "claim": "Reports whether the input and cutset share a decoded rune. Malformed bytes and literal RuneError both contribute RuneError, and either empty operand yields false.",
+    "limits": "The boolean result is the existence of an IndexAny byte match. Architecture-specific Unicode search probes are outside scope. Checks 69,856 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go directly calls bytes.ContainsAny. An independent forward range oracle checks rune-map membership, including every singleton byte pair and longer ASCII and Unicode paths.",
+    "theorems": [
+      "GoLean.Bytes.containsAny_spec",
+      "GoLean.Bytes.containsAny_emptyInput",
+      "GoLean.Bytes.containsAny_emptyChars"
+    ],
+    "check": "difftest/bytes/contains-any/check.go",
+    "control": "difftest/bytes/contains-any/review/main.go",
+    "review": "coverage/packages/bytes/ContainsAny.md"
+  },
+  "LastIndexAny": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/LastIndexAny.lean",
+    "model_symbol": "GoLean.Bytes.lastIndexAny",
+    "claim": "Returns the original byte offset of the last decoded rune in the cutset, or -1 when no rune matches. Literal RuneError and malformed bytes can both match RuneError.",
+    "limits": "Models the empty paths, ASCII table gate, singleton input and cutset, and backward decoding. Architecture-specific Unicode membership probes are abstracted. Checks 71,836 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.LastIndexAny. An independent forward Go range oracle records the last matching original byte offset.",
+    "theorems": [
+      "GoLean.Bytes.lastIndexAny_emptyChars",
+      "GoLean.Bytes.lastIndexAny_emptyInput",
+      "GoLean.Bytes.lastIndexAny_singleHigh"
+    ],
+    "check": "difftest/bytes/last-index-any/check.go",
+    "control": "difftest/bytes/last-index-any/review/main.go",
+    "review": "coverage/packages/bytes/LastIndexAny.md"
+  },
+  "IndexAny": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/IndexAny.lean",
+    "model_symbol": "GoLean.Bytes.indexAny",
+    "claim": "Returns the original byte offset of the first decoded rune present in the cutset, or -1 when absent. Malformed bytes and literal RuneError participate as decoded RuneError.",
+    "limits": "Models empty paths, singleton input and cutset, the ASCII table threshold and decoded membership. Architecture-specific substring probes are abstracted. Checks 69,856 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go directly calls bytes.IndexAny. An independent forward range oracle compares rune-map membership at each original byte offset.",
+    "theorems": [
+      "GoLean.Bytes.indexAny_emptyChars",
+      "GoLean.Bytes.indexAny_emptyInput",
+      "GoLean.Bytes.indexAny_singleHigh"
+    ],
+    "check": "difftest/bytes/index-any/check.go",
+    "control": "difftest/bytes/index-any/review/main.go",
+    "review": "coverage/packages/bytes/IndexAny.md"
+  },
+  "containsRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ContainsRunePrivate.lean",
+    "model_symbol": "GoLean.Bytes.containsRunePrivate",
+    "claim": "Reports whether Go string-range decoding of a raw cutset emits the requested rune, including literal and malformed RuneError. Signed invalid rune values never match.",
+    "limits": "Models the short-circuit decoded membership result on arbitrary raw cutsets and signed rune queries. Checks 11,302 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A single pinned same-package overlay calls private bytes.containsRune directly. The independent oracle traverses a byte slice using utf8.DecodeRune and explicit byte-width advances.",
+    "theorems": [
+      "GoLean.Bytes.containsRunePrivate_empty",
+      "GoLean.Bytes.containsRunePrivate_cons",
+      "GoLean.Bytes.containsRunePrivate_negative"
+    ],
+    "check": "difftest/bytes/contains-rune-private/check.go",
+    "control": "difftest/bytes/contains-rune-private/review/main.go",
+    "review": "coverage/packages/bytes/containsRune-generic.md"
+  },
+  "IndexRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/IndexRune.lean",
+    "model_symbol": "GoLean.Bytes.indexRune",
+    "claim": "Returns the first matching UTF-8 byte offset, or -1 on a miss or invalid signed rune. RuneError matches the first malformed byte or literal encoded RuneError in decoding order.",
+    "limits": "Lean proves first encoded-byte match for valid non-RuneError values, rejection for invalid values, and recursive byte offset handling for RuneError. Probe ordering and architecture-specific search cutovers are outside scope. Checks 11,365 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.IndexRune. An independent Go range oracle checks first byte offsets, including both orders of malformed and literal RuneError and repeated false encoding candidates.",
+    "theorems": [
+      "GoLean.Bytes.indexRune_valid",
+      "GoLean.Bytes.indexRune_invalid",
+      "GoLean.Bytes.indexRune_error_cons"
+    ],
+    "check": "difftest/bytes/index-rune/check.go",
+    "control": "difftest/bytes/index-rune/review/main.go",
+    "review": "coverage/packages/bytes/IndexRune.md"
+  },
+  "ContainsRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ContainsRune.lean",
+    "model_symbol": "GoLean.Bytes.containsRune",
+    "claim": "Reports whether the slice's UTF-8 decoding emits the requested rune. Malformed input and a literal encoded RuneError both match RuneError. Invalid signed rune values never match.",
+    "limits": "Models the boolean result. Architecture-specific IndexRune search probes and cutover decisions are outside scope. Checks 11,302 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls bytes.ContainsRune. A Go string-range oracle independently checks decoded membership, including invalid encodings, signed invalid seek values, and repeated false byte candidates.",
+    "theorems": [
+      "GoLean.Bytes.containsRune_spec",
+      "GoLean.Bytes.containsRune_invalid",
+      "GoLean.Bytes.containsRune_error"
+    ],
+    "check": "difftest/bytes/contains-rune/check.go",
+    "control": "difftest/bytes/contains-rune/review/main.go",
+    "review": "coverage/packages/bytes/ContainsRune.md"
+  },
+  "isSeparator": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/IsSeparator.lean",
+    "model_symbol": "GoLean.Bytes.isSeparator",
+    "claim": "Classifies signed runes at or below ASCII 127 as separators except for ASCII letters, digits and underscore. Above 127, Unicode 17.0.0 White_Space members are the separators.",
+    "limits": "Checks all 1,114,112 code points from zero through U+10FFFF including surrogates, 12 signed out-of-range boundaries and 60,000 sampled signed runes using seeds 17, 2718 and 65537.",
+    "configurations": "One pinned Go overlay calls private bytes.isSeparator directly. The category oracle also checks White_Space disjointness from letters and digits across all Unicode code points.",
+    "theorems": [
+      "GoLean.Bytes.isSeparator_ascii",
+      "GoLean.Bytes.isSeparator_negative",
+      "GoLean.Bytes.isSeparator_aboveSpace"
+    ],
+    "check": "difftest/bytes/is-separator/check.go",
+    "control": "difftest/bytes/is-separator/review/main.go",
+    "review": "coverage/packages/bytes/isSeparator.md"
+  },
+  "shouldUseASCIISet": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ShouldUseASCIISet.lean",
+    "model_symbol": "GoLean.Bytes.shouldUseASCIISet",
+    "claim": "Returns true exactly when the signed buffer length is at least nine.",
+    "limits": "The theorem covers all mathematical integers, including every value of either native Go int width. Differential evidence checks 545 boundary rows and 60,000 native signed int samples using seeds 17, 2718 and 65537. Performance is outside scope.",
+    "configurations": "A pinned native same-package overlay calls private bytes.shouldUseASCIISet directly. Boundary rows include -256 through 256, signed 32-bit extremes and native int extremes.",
+    "theorems": [
+      "GoLean.Bytes.shouldUseASCIISet_iff"
+    ],
+    "check": "difftest/bytes/should-use-ascii-set/check.go",
+    "control": "difftest/bytes/should-use-ascii-set/review/main.go",
+    "review": "coverage/packages/bytes/shouldUseASCIISet.md"
+  },
+  "asciiSet.contains": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ASCIISetContains.lean",
+    "model_symbol": "GoLean.Bytes.asciiSetContains",
+    "claim": "Returns the indexed boolean for every byte in an arbitrary 256-entry table. A nil receiver panics for every byte.",
+    "limits": "Covers lookup and nil-pointer panic classification. Compares all 256 keys on 514 boundary tables, one nil receiver, and 240 arbitrary sampled tables using seeds 17, 2718 and 65537, totaling 193,280 lookups.",
+    "configurations": "Pinned Go calls bytes.asciiSet.contains through a same-package bridge. The check independently compares each lookup with the fixture's indexed boolean or expected panic.",
+    "theorems": [
+      "GoLean.Bytes.asciiSetContains_entry",
+      "GoLean.Bytes.asciiSetContains_nil"
+    ],
+    "check": "difftest/bytes/ascii-set-contains/check.go",
+    "control": "difftest/bytes/ascii-set-contains/review/main.go",
+    "review": "coverage/packages/bytes/asciiSet.contains.md"
+  },
+  "makeASCIISet": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/MakeASCIISet.lean",
+    "model_symbol": "GoLean.Bytes.makeASCIISet",
+    "claim": "Builds a 256-entry value table from the ASCII prefix, returning false at the first high byte and preserving entries inserted before rejection. Empty input returns the all-false table and true.",
+    "limits": "Covers all return slots and flags for arbitrary raw strings, including repeated ASCII, embedded NUL, malformed UTF-8, and rejected high bytes. Checks 65,798 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls private bytes.makeASCIISet through a same-package overlay. An independent oracle finds the first high raw byte and checks each table entry against the retained prefix.",
+    "theorems": [
+      "GoLean.Bytes.makeASCIISet_empty",
+      "GoLean.Bytes.makeASCIISet_stop",
+      "GoLean.Bytes.makeASCIISet_high"
+    ],
+    "check": "difftest/bytes/make-ascii-set/check.go",
+    "control": "difftest/bytes/make-ascii-set/review/main.go",
+    "review": "coverage/packages/bytes/makeASCIISet.md"
+  },
+  "ToValidUTF8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ToValidUTF8.lean",
+    "model_symbol": "GoLean.Bytes.toValidUTF8",
+    "claim": "Replaces each contiguous malformed UTF-8 run with the replacement's exact raw bytes, preserves the other input bytes, and returns a nonnil slice. Capacity is len(input) + len(replacement) when no append growth is needed, and is at least the output length otherwise.",
+    "limits": "Covers inputs that fit in memory with a representable initial capacity. Exact runtime allocator growth, backing addresses, and allocation failure are outside scope. Checks 4,216 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls bytes.ToValidUTF8. A Go range oracle independently groups malformed input, distinguishes a literal replacement rune, and predicts exact initial capacity or required growth.",
+    "theorems": [
+      "GoLean.Bytes.toValidUTF8_empty",
+      "GoLean.Bytes.toValidUTF8_ascii",
+      "GoLean.Bytes.toValidUTF8_capacity"
+    ],
+    "check": "difftest/bytes/to-valid-utf8/check.go",
+    "control": "difftest/bytes/to-valid-utf8/review/main.go",
+    "review": "coverage/packages/bytes/ToValidUTF8.md"
+  },
+  "trimRightUnicode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimRightUnicode.lean",
+    "model_symbol": "GoLean.Bytes.trimRightUnicode",
+    "claim": "Removes trailing runes found in the cutset, preserving exact raw prefix bytes, original capacity, and nilness even after full removal. Malformed bytes decode as RuneError for membership.",
+    "limits": "Models original retained bytes, capacity and nilness, including nil, nonnil empty slices and malformed UTF-8 in either operand. Backing-array identity and mutation through aliases are outside scope. Checks 5,319 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A native pinned same-package overlay calls the private helper. An independent forward rune-set oracle records original byte endpoints and checks prefix bytes, nilness, and capacity.",
+    "theorems": [
+      "GoLean.Bytes.trimRightUnicode_empty",
+      "GoLean.Bytes.trimRightUnicode_capacity",
+      "GoLean.Bytes.trimRightUnicode_length"
+    ],
+    "check": "difftest/bytes/trim-right-unicode/check.go",
+    "control": "difftest/bytes/trim-right-unicode/review/main.go",
+    "review": "coverage/packages/bytes/trimRightUnicode.md"
+  },
+  "trimLeftUnicode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimLeftUnicode.lean",
+    "model_symbol": "GoLean.Bytes.trimLeftUnicode",
+    "claim": "Removes leading runes contained in the cutset, preserving exact retained raw bytes. Malformed bytes decode as RuneError for membership. Capacity decreases by the dropped byte count for nonempty results. Empty and fully trimmed slices yield nil.",
+    "limits": "Models retained bytes, capacity and nilness, including nil and nonnil empty slices and malformed UTF-8 in either operand. Backing-array identity and mutation through aliases are outside scope. Checks 5,319 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A pinned native same-package overlay calls the private helper. The independent rune-set oracle uses original offsets from Go range and checks exact suffix bytes, capacity and nilness.",
+    "theorems": [
+      "GoLean.Bytes.trimLeftUnicode_empty",
+      "GoLean.Bytes.trimLeftUnicode_stop",
+      "GoLean.Bytes.trimLeftUnicode_capacity"
+    ],
+    "check": "difftest/bytes/trim-left-unicode/check.go",
+    "control": "difftest/bytes/trim-left-unicode/review/main.go",
+    "review": "coverage/packages/bytes/trimLeftUnicode.md"
+  },
+  "trimRightASCII": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimRightASCII.lean",
+    "model_symbol": "GoLean.Bytes.trimRightASCII",
+    "claim": "Removes trailing raw bytes selected by any 256-entry table, including high bytes. Preserves exact prefix bytes, original capacity and nilness even after full removal. Nonempty input with a nil table panics.",
+    "limits": "Models exact bytes, capacity, nil results and nil-table panic classification. Backing-array identity and mutation through aliases are outside scope. Checks 65,545 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A pinned same-package bridge constructs arbitrary asciiSet tables or passes nil directly. The independent oracle finds the last excluded byte via forward list membership.",
+    "theorems": [
+      "GoLean.Bytes.trimRightASCII_empty",
+      "GoLean.Bytes.trimRightASCII_nil",
+      "GoLean.Bytes.trimRightASCII_skip",
+      "GoLean.Bytes.trimRightASCII_retain"
+    ],
+    "check": "difftest/bytes/trim-right-ascii/check.go",
+    "control": "difftest/bytes/trim-right-ascii/review/main.go",
+    "review": "coverage/packages/bytes/trimRightASCII.md"
+  },
+  "trimLeftASCII": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimLeftASCII.lean",
+    "model_symbol": "GoLean.Bytes.trimLeftASCII",
+    "claim": "Removes leading raw bytes selected by any 256-entry table, including high bytes. Preserves the exact suffix and reduces capacity by the discarded byte count. Empty and fully trimmed input yield nil. Nonempty input with a nil table panics.",
+    "limits": "Models exact bytes, capacity, nil results and nil-table panic classification. Backing-array identity and mutation through aliases are outside scope. Checks 65,545 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A pinned same-package bridge constructs arbitrary asciiSet tables or passes nil directly. The independent oracle finds the first excluded byte with slices.IndexFunc and list membership.",
+    "theorems": [
+      "GoLean.Bytes.trimLeftASCII_empty",
+      "GoLean.Bytes.trimLeftASCII_nil",
+      "GoLean.Bytes.trimLeftASCII_skip",
+      "GoLean.Bytes.trimLeftASCII_retain"
+    ],
+    "check": "difftest/bytes/trim-left-ascii/check.go",
+    "control": "difftest/bytes/trim-left-ascii/review/main.go",
+    "review": "coverage/packages/bytes/trimLeftASCII.md"
+  },
+  "trimLeftByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimLeftByte.lean",
+    "model_symbol": "GoLean.Bytes.trimLeftByte",
+    "claim": "Removes leading matches for any raw cut byte and preserves exact original suffix bytes. Capacity decreases by the consumed prefix length if bytes remain. Empty and fully trimmed inputs yield nil.",
+    "limits": "Covers all 256 cut bytes, malformed UTF-8, nil, and empty nonnil slices of zero and positive capacity. Backing-array identity and mutation through aliases are outside scope. Checks 66,304 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "A Go package overlay calls the private helper directly. An independent prefix search checks exact raw bytes, nilness, and capacity.",
+    "theorems": [
+      "GoLean.Bytes.trimLeftByte_empty",
+      "GoLean.Bytes.trimLeftByte_prefix",
+      "GoLean.Bytes.trimLeftByte_nonmatching"
+    ],
+    "check": "difftest/bytes/trim-left-byte/check.go",
+    "control": "difftest/bytes/trim-left-byte/review/main.go",
+    "review": "coverage/packages/bytes/trimLeftByte.md"
+  },
+  "trimRightByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimRightByte.lean",
+    "model_symbol": "GoLean.Bytes.trimRightByte",
+    "claim": "Returns the original prefix after removing trailing matches for any cut byte. The original slice capacity and nilness are preserved, even after full removal.",
+    "limits": "All 256 cut bytes, raw byte semantics and malformed UTF-8. Covers nil, nonnil empty slices, and growing spare capacity. Backing-array identity and mutation through aliases are outside scope. Checks 66,304 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "A Go package overlay exercises the private helper directly. An independent suffix search checks result bytes, nilness and capacity.",
+    "theorems": [
+      "GoLean.Bytes.trimRightByte_capacity",
+      "GoLean.Bytes.trimRightByte_empty",
+      "GoLean.Bytes.trimRightByte_skipLast",
+      "GoLean.Bytes.trimRightByte_keepLast"
+    ],
+    "check": "difftest/bytes/trim-right-byte/check.go",
+    "control": "difftest/bytes/trim-right-byte/review/main.go",
+    "review": "coverage/packages/bytes/trimRightByte.md"
+  },
+  "TrimSpace": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimSpace.lean",
+    "model_symbol": "GoLean.Bytes.trimSpace",
+    "claim": "Removes leading and trailing Unicode White_Space and preserves exact retained original bytes. Empty and all-whitespace input yield nil. Only the consumed leading bytes reduce capacity.",
+    "limits": "Pinned Unicode 17.0.0 whitespace, both ASCII scans, and both Unicode fallback paths. Covers nil, nonnil empty slices, and malformed UTF-8. Backing-array identity and mutation through aliases are outside scope. Checks 2,002 boundaries and 60,000 samples using seeds 17, 2718, and 65537.",
+    "configurations": "Native Go directly calls bytes.TrimSpace. A forward rune-set oracle checks raw bytes, capacity and nilness. The oracle table is compared with unicode.IsSpace for every rune value from zero through U+10FFFF.",
+    "theorems": [
+      "GoLean.Bytes.trimSpace_empty",
+      "GoLean.Bytes.trimSpace_skipLeft",
+      "GoLean.Bytes.trimSpace_keepASCIIEnds"
+    ],
+    "check": "difftest/bytes/trim-space/check.go",
+    "control": "difftest/bytes/trim-space/review/main.go",
+    "review": "coverage/packages/bytes/TrimSpace.md"
+  },
+  "TrimRight": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimRight.lean",
+    "model_symbol": "GoLean.Bytes.trimRight",
+    "claim": "Removes trailing cutset members and returns exact original prefix bytes, with capacity and nilness unchanged even when no bytes remain.",
+    "limits": "Checks single ASCII, ASCII membership table, and Unicode cutsets, including malformed input and cutsets, nil and both zero-capacity and spare-capacity empty slices. Backing-array identity and mutation through aliases are outside scope. Checks 5,361 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.TrimRight. A forward rune-set oracle checks raw prefix bytes, capacity and nilness.",
+    "theorems": [
+      "GoLean.Bytes.trimRight_nil",
+      "GoLean.Bytes.trimRight_emptyCutset",
+      "GoLean.Bytes.trimRight_capacity",
+      "GoLean.Bytes.trimRight_singleASCII"
+    ],
+    "check": "difftest/bytes/trim-right/check.go",
+    "control": "difftest/bytes/trim-right/review/main.go",
+    "review": "coverage/packages/bytes/TrimRight.md"
+  },
+  "TrimLeft": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimLeft.lean",
+    "model_symbol": "GoLean.Bytes.trimLeft",
+    "claim": "Removes only leading cutset members and retains exact original suffix bytes and capacity. Empty or fully trimmed input yields nil.",
+    "limits": "Covers single ASCII, ASCII membership table and Unicode cutsets, including malformed input and cutsets. Checks 5,359 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Backing-array identity and mutation through aliases are outside scope.",
+    "configurations": "Native Go calls bytes.TrimLeft directly. A forward rune-set oracle checks raw suffix bytes, nilness and capacity.",
+    "theorems": [
+      "GoLean.Bytes.trimLeft_empty",
+      "GoLean.Bytes.trimLeft_emptyCutset",
+      "GoLean.Bytes.trimLeft_singleASCII"
+    ],
+    "check": "difftest/bytes/trim-left/check.go",
+    "control": "difftest/bytes/trim-left/review/main.go",
+    "review": "coverage/packages/bytes/TrimLeft.md"
+  },
+  "Trim": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Trim.lean",
+    "model_symbol": "GoLean.Bytes.trim",
+    "claim": "Trims both edges by cutset membership and preserves exact original bytes. Empty or fully trimmed input yields nil. A retained suffix starts at the first retained byte and reduces capacity by that offset.",
+    "limits": "Reuses the source-shaped single-ASCII, ASCII membership table and Unicode scanners for retained bytes, and computes the left offset with an equivalent forward membership scan. Backing identity and alias mutation are outside scope. Checks 5,317 boundaries and 60,000 samples with seeds 17, 2718 and 65537, including malformed retained bytes, nil, and nonnil empty input.",
+    "configurations": "Native Go directly calls bytes.Trim. A forward rune-membership and byte-position oracle checks retained bytes, nilness and capacity.",
+    "theorems": [
+      "GoLean.Bytes.trim_empty",
+      "GoLean.Bytes.trim_emptyCutset",
+      "GoLean.Bytes.trim_retained"
+    ],
+    "check": "difftest/bytes/trim/check.go",
+    "control": "difftest/bytes/trim/review/main.go",
+    "review": "coverage/packages/bytes/Trim.md"
+  },
+  "TrimRightFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimRightFunc.lean",
+    "model_symbol": "GoLean.Bytes.trimRightFunc",
+    "claim": "Returns the original byte prefix through the last decoded rune whose predicate is false. Preserves input capacity and nilness even when every byte is trimmed. Calls the predicate in reverse order through the first false result. A nil callback panics on nonempty input.",
+    "limits": "Models fixed raw bytes, deterministic predicate traces and exact result capacity and nilness. Callback mutation, callback-thrown panics and backing identity are outside scope. Covers 3,144 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.TrimRightFunc with five predicates and nil. The oracle reverses Go string-range offsets and checks raw bytes, capacity, nilness, and callback trace.",
+    "theorems": [
+      "GoLean.Bytes.trimRightFunc_empty",
+      "GoLean.Bytes.trimRightFunc_nil",
+      "GoLean.Bytes.trimRightFunc_all",
+      "GoLean.Bytes.trimRightFunc_at"
+    ],
+    "check": "difftest/bytes/trim-right-func/check.go",
+    "control": "difftest/bytes/trim-right-func/review/main.go",
+    "review": "coverage/packages/bytes/TrimRightFunc.md"
+  },
+  "TrimLeftFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimLeftFunc.lean",
+    "model_symbol": "GoLean.Bytes.trimLeftFunc",
+    "claim": "Returns the original suffix beginning at the first decoded rune whose predicate is false, with capacity reduced by the byte offset. Returns nil when no rune is retained and preserves the forward callback trace through the first false result. A nil predicate panics on nonempty input.",
+    "limits": "Models a deterministic predicate over fixed raw bytes, result nilness and capacity, and callback argument order. Input mutation, alias identity and callback-thrown panics are outside scope. Covers 3,132 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.TrimLeftFunc with five deterministic predicates and nil. A forward string-range oracle checks exact bytes, capacity, nilness and callback order.",
+    "theorems": [
+      "GoLean.Bytes.trimLeftFunc_empty",
+      "GoLean.Bytes.trimLeftFunc_nil",
+      "GoLean.Bytes.trimLeftFunc_at",
+      "GoLean.Bytes.trimLeftFunc_all"
+    ],
+    "check": "difftest/bytes/trim-left-func/check.go",
+    "control": "difftest/bytes/trim-left-func/review/main.go",
+    "review": "coverage/packages/bytes/TrimLeftFunc.md"
+  },
+  "TrimFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/TrimFunc.lean",
+    "model_symbol": "GoLean.Bytes.trimFunc",
+    "claim": "Trims the left side before the right scan of the surviving suffix. Returns exact original bytes, nilness and remaining capacity, along with the observed callback trace. A nil callback panics on nonempty input.",
+    "limits": "Models a deterministic predicate over fixed raw bytes. Fully trimmed and empty inputs return nil. Right trimming preserves the post-left capacity. Input mutation, alias identity and callback-thrown panics are outside scope. Covers 3,132 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.TrimFunc with a nil callback and five deterministic predicates. The oracle uses original byte offsets from string range and compares callback order, result bytes, capacity and nilness.",
+    "theorems": [
+      "GoLean.Bytes.trimFunc_empty",
+      "GoLean.Bytes.trimFunc_nil",
+      "GoLean.Bytes.trimFunc_fullLeft"
+    ],
+    "check": "difftest/bytes/trim-func/check.go",
+    "control": "coverage/packages/bytes/controls/TrimFunc/main.go",
+    "review": "coverage/packages/bytes/TrimFunc.md"
+  },
+  "lastIndexFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/LastIndexFuncPrivate.lean",
+    "model_symbol": "GoLean.Bytes.lastIndexFuncPrivate",
+    "claim": "Returns the last decoded rune's byte offset whose predicate equals the truth flag, or -1. The predicate runs in reverse decode order through the match. A nil predicate panics for nonempty input and is skipped for empty input.",
+    "limits": "Reuses the reverse scan on fixed raw bytes and represents the direct ASCII tail check by the matching decoder result. Callback mutation and callback-thrown panics are outside scope. Covers both truth modes on 6,252 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls private bytes.lastIndexFunc directly through a test-only same-package overlay. The oracle reverses forward range offsets and the test separately calls public LastIndexFunc when truth is true.",
+    "theorems": [
+      "GoLean.Bytes.lastIndexFuncPrivate_empty",
+      "GoLean.Bytes.lastIndexFuncPrivate_nil",
+      "GoLean.Bytes.lastIndexFuncPrivate_true"
+    ],
+    "check": "difftest/bytes/last-index-func-private/check.go",
+    "review_sources": [
+      "difftest/bytes/last-index-func-private/testdata/bridge_test.go",
+      "difftest/bytes/last-index-func-private/testdata/last_index_func_test.go"
+    ],
+    "control": "difftest/bytes/last-index-func-private/review/main.go",
+    "review": "coverage/packages/bytes/lastIndexFunc-private.md"
+  },
+  "LastIndexFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/LastIndexFunc.lean",
+    "model_symbol": "GoLean.Bytes.lastIndexFunc",
+    "claim": "Returns the last matching decoded rune's byte offset or -1. The predicate is called in reverse decode order through that match. A nil predicate panics only for nonempty slices.",
+    "limits": "Uses the shared reverse decoder on fixed raw bytes. The pinned direct ASCII tail check is represented by the decoder's identical ASCII result. Callback mutation and callback-thrown panics are outside scope. Checks 3,126 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.LastIndexFunc directly with five deterministic predicates and a nil predicate. The oracle reverses forward string-range rune offsets and compares results and callback traces.",
+    "theorems": [
+      "GoLean.Bytes.lastIndexFunc_empty",
+      "GoLean.Bytes.lastIndexFunc_nil",
+      "GoLean.Bytes.lastIndexFunc_firstCall"
+    ],
+    "check": "difftest/bytes/last-index-func/check.go",
+    "control": "coverage/packages/bytes/controls/LastIndexFunc/main.go",
+    "review": "coverage/packages/bytes/LastIndexFunc.md"
+  },
+  "ContainsFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ContainsFunc.lean",
+    "model_symbol": "GoLean.Bytes.containsFunc",
+    "claim": "Reports whether a decoded rune satisfies the predicate and calls it only through the first true result. Empty input returns false with no calls. A nil predicate panics for nonempty input.",
+    "limits": "Reuses the IndexFunc scan on fixed raw bytes with a deterministic predicate. Malformed bytes decode as RuneError with width one. Callback state changes, input mutation, and callback-thrown panics are outside scope. Checks 3,126 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.ContainsFunc directly with five predicates and a nil predicate. A string-range oracle compares exact callback traces, boolean results and nil-panic classification.",
+    "theorems": [
+      "GoLean.Bytes.containsFunc_empty",
+      "GoLean.Bytes.containsFunc_nil",
+      "GoLean.Bytes.containsFunc_first"
+    ],
+    "check": "difftest/bytes/contains-func/check.go",
+    "control": "coverage/packages/bytes/controls/ContainsFunc/main.go",
+    "review": "coverage/packages/bytes/ContainsFunc.md"
+  },
+  "indexFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/IndexFuncPrivate.lean",
+    "model_symbol": "GoLean.Bytes.indexFuncPrivate",
+    "claim": "Returns the first decoded rune's byte index where the predicate equals truth, or -1 if absent. The callback stops at that match. Nil callbacks panic only for nonempty slices.",
+    "limits": "Uses the existing truth-parametric scan on fixed raw bytes with a deterministic predicate. Mutating callbacks and callback-thrown panics are outside scope. Checks both truth values on 6,252 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls private bytes.indexFunc directly through a same-package overlay and compares byte offsets and callback traces against a forward range oracle, with a separate public IndexFunc call for true.",
+    "theorems": [
+      "GoLean.Bytes.indexFuncPrivate_empty",
+      "GoLean.Bytes.indexFuncPrivate_nil",
+      "GoLean.Bytes.indexFuncPrivate_true"
+    ],
+    "check": "difftest/bytes/index-func-private/check.go",
+    "review_sources": [
+      "difftest/bytes/index-func-private/testdata/bridge_test.go",
+      "difftest/bytes/index-func-private/testdata/index_func_test.go"
+    ],
+    "control": "difftest/bytes/index-func-private/review/main.go",
+    "review": "coverage/packages/bytes/indexFunc-private.md"
+  },
+  "IndexFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/IndexFunc.lean",
+    "model_symbol": "GoLean.Bytes.indexFunc",
+    "claim": "Returns the byte index of the first matching decoded rune or -1 if absent, and calls the predicate only through that match. A nil predicate panics for nonempty input and is skipped for an empty slice.",
+    "limits": "Models fixed raw bytes and the argument trace for deterministic predicates. Malformed UTF-8 decodes as RuneError with width one. Input mutation, callback state changes, and callback-thrown panics are outside scope. Checks 3,126 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.IndexFunc directly with five predicates and a nil predicate. The oracle uses a string range over the original bytes to check the offset, callback sequence and nil-panic classification.",
+    "theorems": [
+      "GoLean.Bytes.indexFunc_empty",
+      "GoLean.Bytes.indexFunc_nil",
+      "GoLean.Bytes.indexFunc_first",
+      "GoLean.Bytes.indexFunc_noMatch"
+    ],
+    "check": "difftest/bytes/index-func/check.go",
+    "control": "coverage/packages/bytes/controls/IndexFunc/main.go",
+    "review": "coverage/packages/bytes/IndexFunc.md"
+  },
+  "Map": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Map.lean",
+    "model_symbol": "GoLean.Bytes.mapRunes",
+    "claim": "Invokes the mapping once per decoded rune in forward order, drops negative results, and replaces nonnegative invalid results with U+FFFD. The returned slice is nonnil even on empty input or if all results are dropped.",
+    "limits": "Models raw input bytes, deterministic callback arguments, and returned bytes and nilness. Malformed input decodes as RuneError with width one. Allocation capacity, aliasing, nil callbacks, callback panics and callback state mutation are outside scope. Checks 3,144 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.Map directly with six deterministic rune mappings and compares exact callback arguments and output to a string-range and rune-slice conversion oracle.",
+    "theorems": [
+      "GoLean.Bytes.mapRunes_drop",
+      "GoLean.Bytes.mapRunes_trace",
+      "GoLean.Bytes.mapRunes_empty"
+    ],
+    "check": "difftest/bytes/map/check.go",
+    "control": "coverage/packages/bytes/controls/Map/main.go",
+    "review": "coverage/packages/bytes/Map.md"
+  },
+  "Join": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Join.lean",
+    "model_symbol": "GoLean.Bytes.join",
+    "claim": "For feasible output lengths, joins exact byte contents with separators between elements. Zero elements return nonnil empty, an empty singleton returns nil, and nonempty results have independent storage.",
+    "limits": "Models bytes and nilness, with copy independence and exact multi-element capacity checked by comparison. The shared planner models overflow but the registered claim covers safely allocatable lengths only. Allocator behavior and singleton capacity are outside scope. The comparison uses 2,088 boundaries and 60,000 samples with seeds 17, 2718 and 65537, plus a nil singleton check.",
+    "configurations": "Native Go invokes bytes.Join directly and compares against a byte-append oracle. Direct mutations of returned bytes and then of each input and separator check copy behavior.",
+    "theorems": [
+      "GoLean.Bytes.join_empty",
+      "GoLean.Bytes.join_single",
+      "GoLean.Bytes.join_two"
+    ],
+    "check": "difftest/bytes/join/check.go",
+    "control": "coverage/packages/bytes/controls/Join/main.go",
+    "review": "coverage/packages/bytes/Join.md"
+  },
+  "FieldsFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/FieldsFunc.lean",
+    "model_symbol": "GoLean.Bytes.fieldsFunc",
+    "claim": "Returns the exact nonempty byte ranges separated by a deterministic rune predicate. Every fragment has capacity equal to length. The pinned implementation calls the predicate once for each decoded rune, in forward order.",
+    "limits": "Reuses the span collection model with fixed backing bytes. Predicate ordering is observed for this implementation and is outside the documented contract. Nil callbacks, callback mutation and panics, outer capacity, and alias identity are outside scope. Checks 1,325 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.FieldsFunc on raw bytes, logging the arguments for five deterministic predicates and comparing the exact bytes and capacities. The oracle uses forward string range offsets.",
+    "theorems": [
+      "GoLean.Bytes.fieldsFunc_allSeparators",
+      "GoLean.Bytes.fieldsFunc_noSeparators",
+      "GoLean.Bytes.fieldsFunc_caps"
+    ],
+    "check": "difftest/bytes/fields-func/check.go",
+    "control": "coverage/packages/bytes/controls/FieldsFunc/main.go",
+    "review": "coverage/packages/bytes/FieldsFunc.md"
+  },
+  "FieldsFuncSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/FieldsFuncSeq.lean",
+    "model_symbol": "GoLean.Bytes.fieldsFuncSeq",
+    "claim": "A stopped run yields the predicate and fragment trace through its final yield. Every yielded fragment has capacity equal to length, and a fresh invocation starts again at byte zero.",
+    "limits": "Models fixed backing bytes and total deterministic rune predicates. Tests append isolation for every yield, including source spare backing bytes. Aliased writes, other callback mutation, nil callbacks, panics and reentrancy are outside scope. Covers 5,300 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.FieldsFuncSeq for five prescribed predicates, observing stopped and unrestricted traces on the same iterator. The oracle uses string range with original byte offsets.",
+    "theorems": [
+      "GoLean.Bytes.fieldsFuncSeq_stop",
+      "GoLean.Bytes.fieldsFuncSeq_caps"
+    ],
+    "check": "difftest/bytes/fields-func-seq/check.go",
+    "control": "coverage/packages/bytes/controls/FieldsFuncSeq/main.go",
+    "review": "coverage/packages/bytes/FieldsFuncSeq.md"
+  },
+  "Fields": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Fields.lean",
+    "model_symbol": "GoLean.Bytes.fields",
+    "claim": "Returns a nonnil outer slice of nonempty byte fields separated by whitespace, with each fragment capped at its length. Nil and nonnil empty inputs produce a nonnil empty result.",
+    "limits": "Reuses the ASCII transition prescan and Unicode whitespace model. Checks exact fragment bytes and inner capacities, including malformed input and all pinned whitespace characters. Allocation, outer capacity, backing identity and later alias mutation are outside scope. Covers 413 boundaries and 60,000 samples with seeds 17, 2718 and 65537, plus a nonnil empty-slice check.",
+    "configurations": "Native Go calls bytes.Fields directly on arbitrary raw slices. An independent range-based oracle checks ASCII and Unicode field boundaries and the resulting fragment capacities.",
+    "theorems": [
+      "GoLean.Bytes.fields_empty",
+      "GoLean.Bytes.fields_nonnil",
+      "GoLean.Bytes.fields_caps"
+    ],
+    "check": "difftest/bytes/fields/check.go",
+    "control": "coverage/packages/bytes/controls/Fields/main.go",
+    "review": "coverage/packages/bytes/Fields.md"
+  },
+  "FieldsSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/FieldsSeq.lean",
+    "model_symbol": "GoLean.Bytes.fieldsSeq",
+    "claim": "Yields nonempty byte fields between whitespace runs with capacity equal to length. A stopped traversal yields the corresponding prefix, and each new invocation starts at the beginning.",
+    "limits": "Uses fixed backing bytes and the shared Unicode whitespace scanner. The check verifies append isolation for yielded fields, including the source spare capacity. Direct writes through existing aliases, concurrent mutation, callback panics and backing identity are outside scope. Covers 2,065 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go invokes bytes.FieldsSeq directly on arbitrary byte slices, observing a bounded callback traversal followed by a full traversal against strings.Fields.",
+    "theorems": [
+      "GoLean.Bytes.fieldsSeq_take",
+      "GoLean.Bytes.fieldsSeq_caps"
+    ],
+    "check": "difftest/bytes/fields-seq/check.go",
+    "control": "coverage/packages/bytes/controls/FieldsSeq/main.go",
+    "review": "coverage/packages/bytes/FieldsSeq.md"
+  },
+  "explode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Explode.lean",
+    "model_symbol": "GoLean.Bytes.explode",
+    "claim": "Splits at decoded UTF-8 widths up to the signed bound and preserves the original bytes. Nonpositive bounds are unbounded. Decoded fragments are capped at length, while a final unsplit suffix keeps spare capacity.",
+    "limits": "Models outer nilness, exact fragment bytes and inner capacities. Backing identity, inner nilness, outer capacity and later mutation are outside scope. Checks 8,547 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls private bytes.explode through a test-only overlay. A string-range oracle derives rune boundaries and expected capacities, including malformed bytes, native signed limit extrema and varied spare capacity.",
+    "theorems": [
+      "GoLean.Bytes.explode_nonpositive",
+      "GoLean.Bytes.explode_one",
+      "GoLean.Bytes.explode_empty"
+    ],
+    "check": "difftest/bytes/explode/check.go",
+    "review_sources": [
+      "difftest/bytes/explode/testdata/bridge_test.go",
+      "difftest/bytes/explode/testdata/explode_test.go"
+    ],
+    "control": "difftest/bytes/explode/review/main.go",
+    "review": "coverage/packages/bytes/explode.md"
+  },
+  "genSplit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/GenSplit.lean",
+    "model_symbol": "GoLean.Bytes.genSplit",
+    "claim": "Splits with signed retained width and signed limit. A matched fragment can include bytes beyond the slice length up to its capacity. A processed endpoint outside capacity bounds panics. Zero limit returns nil, and an empty separator ignores retention.",
+    "limits": "Models initialized spare backing bytes, exact fragment contents and capacities, outer nilness, and bounds panic classification. Positive native endpoint overflow is represented by the out-of-bounds case. Excludes backing identity, later alias mutation, inner nilness, outer result capacity and exact panic text. Checks 3,969 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls private bytes.genSplit through a same-package test overlay. An independent strings-based oracle checks signed bounds, fragment bytes and capacities.",
+    "theorems": [
+      "GoLean.Bytes.genSplit_zero",
+      "GoLean.Bytes.genSplit_emptySeparator",
+      "GoLean.Bytes.genSplit_one"
+    ],
+    "check": "difftest/bytes/gen-split/check.go",
+    "review_sources": [
+      "difftest/bytes/gen-split/testdata/bridge_test.go",
+      "difftest/bytes/gen-split/testdata/gen_split_test.go"
+    ],
+    "control": "difftest/bytes/gen-split/review/main.go",
+    "review": "coverage/packages/bytes/genSplit.md"
+  },
+  "SplitAfter": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SplitAfter.lean",
+    "model_symbol": "GoLean.Bytes.splitAfter",
+    "claim": "Returns a nonnil outer result retaining every matched separator in unbounded nonoverlapping splitting. An empty separator agrees with Split. Processed fragments are capped and a raw final suffix retains its spare capacity.",
+    "limits": "Reuses the SplitAfterN capacity and raw byte model. Inner nilness, outer capacity, backing identity and later mutation are outside scope. The comparison checks 1,150 boundaries and 60,000 samples with seeds 17, 2718 and 65537, including nil input and varied spare capacity.",
+    "configurations": "Native Go directly calls bytes.SplitAfter. The oracle uses strings.SplitAfter for fragments and computes capacities independently.",
+    "theorems": [
+      "GoLean.Bytes.splitAfter_eq_splitAfterN",
+      "GoLean.Bytes.splitAfter_noSeparator",
+      "GoLean.Bytes.splitAfter_nonnil"
+    ],
+    "check": "difftest/bytes/split-after/check.go",
+    "control": "coverage/packages/bytes/controls/SplitAfter/main.go",
+    "review": "coverage/packages/bytes/SplitAfter.md"
+  },
+  "SplitAfterN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SplitAfterN.lean",
+    "model_symbol": "GoLean.Bytes.splitAfterN",
+    "claim": "Retains complete separators and the final unsplit suffix within the signed limit. At zero the result is nil. Processed fragments are capped at their lengths and the raw final suffix retains its spare capacity.",
+    "limits": "Models outer nilness and exact byte fragments and capacities, including malformed input with an empty separator. Inner nilness, outer capacity, backing identity, and later mutation are outside scope. The Lean theorems cover the zero limit and equality with SplitN for an empty separator. The comparison covers 5,750 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls bytes.SplitAfterN. The oracle groups fragments from strings.SplitAfter according to the signed bound and computes slice capacities.",
+    "theorems": [
+      "GoLean.Bytes.splitAfterN_zero",
+      "GoLean.Bytes.splitAfterN_noSeparator"
+    ],
+    "check": "difftest/bytes/split-after-n/check.go",
+    "control": "coverage/packages/bytes/controls/SplitAfterN/main.go",
+    "review": "coverage/packages/bytes/SplitAfterN.md"
+  },
+  "Split": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Split.lean",
+    "model_symbol": "GoLean.Bytes.split",
+    "claim": "Returns a nonnil outer slice of exact raw byte fragments, using the unbounded SplitN path. It preserves malformed bytes and gives each fragment the same capacity as the unbounded model.",
+    "limits": "Reuses the split scanner and fragment capacity model. Inner nilness, outer capacity, backing identity and later mutation are outside scope. The comparison uses 1,150 boundaries and 60,000 samples with seeds 17, 2718 and 65537, including nil input and varied spare capacity.",
+    "configurations": "Native Go directly calls bytes.Split. The differential oracle uses strings.Split for fragment contents with an independent capacity calculation.",
+    "theorems": [
+      "GoLean.Bytes.split_eq_splitN",
+      "GoLean.Bytes.split_nonnil"
+    ],
+    "check": "difftest/bytes/split/check.go",
+    "control": "coverage/packages/bytes/controls/Split/main.go",
+    "review": "coverage/packages/bytes/Split.md"
+  },
+  "SplitN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SplitN.lean",
+    "model_symbol": "GoLean.Bytes.splitN",
+    "claim": "Splits at nonoverlapping matches or decoded UTF-8 widths, retaining the unsplit suffix when the limit is reached. Zero returns nil, and processed fragments are capped at length while a raw final suffix retains remaining capacity.",
+    "limits": "Models raw byte contents, outer result nilness, and inner fragment capacities. Inner nilness, output slice capacity, backing identity and later alias mutation are outside scope. The oracle checks 5,750 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.SplitN directly on byte slices with varied spare capacity and signed limits. The oracle groups independent strings.Split fragments, then tracks the raw suffix capacity.",
+    "theorems": [
+      "GoLean.Bytes.splitN_zero",
+      "GoLean.Bytes.splitN_one"
+    ],
+    "check": "difftest/bytes/split-n/check.go",
+    "control": "coverage/packages/bytes/controls/SplitN/main.go",
+    "review": "coverage/packages/bytes/SplitN.md"
+  },
+  "SplitAfterSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SplitAfterSeq.lean",
+    "model_symbol": "GoLean.Bytes.splitAfterSeq",
+    "claim": "Yields exact fragments retaining each matched separator and caps every fragment at its length. An immediate stop at a match preserves the captured suffix. An empty separator splits at decoded rune widths, preserving malformed bytes.",
+    "limits": "Models the fixed backing bytes, captured suffix, and fragment capacity. Checks that appending to a fragment leaves source and spare backing bytes unchanged. Nilness, mutation through existing aliases, and callback panic or reentrancy are outside scope. Reinvocation checks behavior of the pinned single-use iterator. Covers 4,088 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.SplitAfterSeq directly, comparing fragment contents and capacity over two bounded invocations, a complete invocation and a subsequent call with a strings.SplitAfter-based oracle.",
+    "theorems": [
+      "GoLean.Bytes.splitAfterSeq_caps",
+      "GoLean.Bytes.splitAfterSeq_first"
+    ],
+    "check": "difftest/bytes/split-after-seq/check.go",
+    "control": "coverage/packages/bytes/controls/SplitAfterSeq/main.go",
+    "review": "coverage/packages/bytes/SplitAfterSeq.md"
+  },
+  "SplitSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/SplitSeq.lean",
+    "model_symbol": "GoLean.Bytes.splitSeq",
+    "claim": "Yields exact split fragments with capacity equal to length and preserves the captured suffix when the first callback stops. Empty separators split at decoded rune widths, including malformed byte fragments.",
+    "limits": "Models byte contents, fragment capacity, and the captured suffix with fixed backing bytes. Checks that appending to any yielded fragment leaves the source and its spare backing bytes unchanged. Nilness, direct writes through yielded slices, mutation of the input or separator, and callback panic or reentrancy are outside scope. Reinvocation checks the pinned behavior beyond the documented single-use contract. Covers 4,088 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls bytes.SplitSeq directly, compares raw fragments and capacities over two bounded invocations, a complete invocation and a subsequent call, using an independent strings.Split-based oracle.",
+    "theorems": [
+      "GoLean.Bytes.splitSeq_caps",
+      "GoLean.Bytes.splitSeq_stop_first"
+    ],
+    "check": "difftest/bytes/split-seq/check.go",
+    "control": "coverage/packages/bytes/controls/SplitSeq/main.go",
+    "review": "coverage/packages/bytes/SplitSeq.md"
+  },
+  "Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Compare.lean",
+    "model_symbol": "GoLean.Bytes.compare",
+    "claim": "Returns -1, 0 or 1 according to the lexicographic order of the unsigned byte sequences. A shorter strict prefix sorts first.",
+    "limits": "Models visible bytes and ignores backing-array identity and capacity. The lexicographic model follows the generic Go scan. The comparison exhausts all 65,536 single-byte pairs, checks 100 other boundary pairs and samples 60,000 pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.Compare and comparing with an independent reverse-scan oracle, with native package implementation and a run with compiler intrinsics disabled.",
+    "theorems": [
+      "GoLean.Bytes.compare_spec"
+    ],
+    "check": "difftest/bytes/compare/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/OrderAndSearch/main.go",
+    "review": "coverage/packages/bytes/Compare.md"
+  },
+  "Contains": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Substring.lean",
+    "model_symbol": "GoLean.Bytes.contains",
+    "claim": "Returns true exactly when a matching byte window exists.",
+    "limits": "Models byte contents, offsets, slice nilness and capacity. Backing identity and algorithm-specific performance are outside the model. The comparison checks 1,916 boundaries and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.Contains directly. The shared comparison checks both offsets and the exact returned slices, including nilness and capacity, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.contains_spec"
+    ],
+    "check": "difftest/bytes/substring/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/Substring/main.go",
+    "review": "coverage/packages/bytes/Contains.md"
+  },
+  "Cut": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Substring.lean",
+    "model_symbol": "GoLean.Bytes.cut",
+    "claim": "Returns slices before and after the first match and true. On failure returns the original slice and nil with false.",
+    "limits": "Models byte contents, offsets, slice nilness and capacity. Backing identity and algorithm-specific performance are outside the model. The comparison checks 1,916 boundaries and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.Cut directly. The shared comparison checks both offsets and the exact returned slices, including nilness and capacity, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.cut_spec"
+    ],
+    "check": "difftest/bytes/substring/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/Substring/main.go",
+    "review": "coverage/packages/bytes/Cut.md"
+  },
+  "CutLast": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Substring.lean",
+    "model_symbol": "GoLean.Bytes.cutLast",
+    "claim": "Returns slices before and after the last match and true. On failure returns the original slice and nil with false.",
+    "limits": "Models byte contents, offsets, slice nilness and capacity. Backing identity and algorithm-specific performance are outside the model. The comparison checks 1,916 boundaries and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.CutLast directly. The shared comparison checks both offsets and the exact returned slices, including nilness and capacity, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.cutLast_spec"
+    ],
+    "check": "difftest/bytes/substring/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/CutLast/main.go",
+    "review": "coverage/packages/bytes/CutLast.md"
+  },
+  "CutPrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.cutPrefix",
+    "claim": "Removes a matching prefix, preserving nilness and subtracting the prefix length from capacity. On a mismatch, returns the original slice. Reports whether it matched.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.CutPrefix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.cutPrefix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/CutPrefix.md"
+  },
+  "CutSuffix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.cutSuffix",
+    "claim": "Removes a matching suffix, preserving nilness and preserving capacity. On a mismatch, returns the original slice. Reports whether it matched.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.CutSuffix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.cutSuffix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/CutSuffix.md"
+  },
+  "Equal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Compare.lean",
+    "model_symbol": "GoLean.Bytes.equal",
+    "claim": "Returns true exactly when both slices have the same bytes in the same order. Nil is equivalent to an empty slice.",
+    "limits": "Models visible bytes and ignores backing-array identity and capacity. The lexicographic model follows the generic Go scan. The comparison exhausts all 65,536 single-byte pairs, checks 100 other boundary pairs and samples 60,000 pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.Equal and comparing with an independent reverse-scan oracle, with native package implementation and a run with compiler intrinsics disabled.",
+    "theorems": [
+      "GoLean.Bytes.equal_spec"
+    ],
+    "check": "difftest/bytes/compare/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/OrderAndSearch/main.go",
+    "review": "coverage/packages/bytes/Equal.md"
+  },
+  "HasPrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.hasPrefix",
+    "claim": "Returns true exactly when the input equals the prefix followed by some byte sequence.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.HasPrefix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.hasPrefix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/HasPrefix.md"
+  },
+  "HasSuffix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.hasSuffix",
+    "claim": "Returns true exactly when the input equals some byte sequence followed by the suffix.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.HasSuffix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.hasSuffix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/HasSuffix.md"
+  },
+  "Index": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Substring.lean",
+    "model_symbol": "GoLean.Bytes.index",
+    "claim": "Returns the first matching byte offset or -1 when missing. An empty separator matches at offset zero.",
+    "limits": "Models byte contents, offsets, slice nilness and capacity. Backing identity and algorithm-specific performance are outside the model. The comparison checks 1,916 boundaries and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.Index directly. The shared comparison checks both offsets and the exact returned slices, including nilness and capacity, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.index_spec"
+    ],
+    "check": "difftest/bytes/substring/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/Substring/main.go",
+    "review": "coverage/packages/bytes/Index.md"
+  },
+  "IndexByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ByteSearch.lean",
+    "model_symbol": "GoLean.Bytes.indexByte",
+    "claim": "Returns the byte index of the first occurrence of the requested byte, or -1 when it is absent.",
+    "limits": "Models byte content and indices. The executable scan follows the generic search. Machine-specific optimizations are tested. The comparison checks 65,889 boundaries, including every singleton pair, and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.IndexByte directly in the shared forward/backward comparison, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.indexByte_found",
+      "GoLean.Bytes.indexByte_missing"
+    ],
+    "check": "difftest/bytes/byte-search/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/OrderAndSearch/main.go",
+    "review": "coverage/packages/bytes/IndexByte.md"
+  },
+  "LastIndex": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Substring.lean",
+    "model_symbol": "GoLean.Bytes.lastIndex",
+    "claim": "Returns the last matching byte offset or -1 when missing. An empty separator matches at the input length.",
+    "limits": "Models byte contents, offsets, slice nilness and capacity. Backing identity and algorithm-specific performance are outside the model. The comparison checks 1,916 boundaries and 60,000 sampled pairs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.LastIndex directly. The shared comparison checks both offsets and the exact returned slices, including nilness and capacity, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.lastIndex_spec"
+    ],
+    "check": "difftest/bytes/substring/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/Substring/main.go",
+    "review": "coverage/packages/bytes/LastIndex.md"
+  },
+  "LastIndexByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/ByteSearch.lean",
+    "model_symbol": "GoLean.Bytes.lastIndexByte",
+    "claim": "Returns the byte index of the last occurrence of the requested byte, or -1 when it is absent.",
+    "limits": "Models byte content and indices. The executable scan follows the generic search. Machine-specific optimizations are tested. The comparison checks 65,889 boundaries, including every singleton pair, and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling bytes.LastIndexByte directly in the shared forward/backward comparison, with normal and intrinsics-disabled compilation.",
+    "theorems": [
+      "GoLean.Bytes.lastIndexByte_found",
+      "GoLean.Bytes.lastIndexByte_missing"
+    ],
+    "check": "difftest/bytes/byte-search/check.go",
+    "source_fallback": true,
+    "control": "coverage/packages/bytes/controls/OrderAndSearch/main.go",
+    "review": "coverage/packages/bytes/LastIndexByte.md"
+  },
+  "TrimPrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.trimPrefix",
+    "claim": "Removes a matching prefix, preserving nilness and subtracting the prefix length from capacity. On a mismatch, returns the original slice.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.TrimPrefix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.trimPrefix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/TrimPrefix.md"
+  },
+  "TrimSuffix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Bytes/Affix.lean",
+    "model_symbol": "GoLean.Bytes.trimSuffix",
+    "claim": "Removes a matching suffix, preserving nilness and preserving capacity. On a mismatch, returns the original slice.",
+    "limits": "The model records visible bytes, capacity and nilness. Backing-array identity and aliasing are outside the claim. The shared comparison checks 418 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling bytes.TrimSuffix on nil, empty and populated slices. The shared comparison checks each of the six byte affix operations.",
+    "theorems": [
+      "GoLean.Bytes.trimSuffix_spec"
+    ],
+    "check": "difftest/bytes/affix/check.go",
+    "control": "coverage/packages/bytes/controls/Affix/main.go",
+    "review": "coverage/packages/bytes/TrimSuffix.md"
+  }
+}

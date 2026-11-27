@@ -1,0 +1,190 @@
+{
+  "lower": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerBits.lean",
+    "model_symbol": "GoLean.Strconv.lower",
+    "claim": "Sets bit five in every byte and preserves all other bits.",
+    "limits": "Models the fixed-width word operations directly. For the word predicate, zero and both signed minimum values are proved and the full bit-count characterization is tested.",
+    "configurations": "Exhaustive 256 byte inputs against the pinned same-package Go helper and independent arithmetic specification.",
+    "theorems": [
+      "GoLean.Strconv.lower_fixedBits"
+    ],
+    "check": "difftest/internal/strconv/integer-bits/check.go",
+    "control": "difftest/internal/strconv/integer-bits/review/main.go",
+    "review": "coverage/packages/internal/strconv/lower.md"
+  },
+  "isPowerOfTwo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerBits.lean",
+    "model_symbol": "GoLean.Strconv.isPowerOfTwo",
+    "claim": "Accepts words containing at most one set bit, including zero and signed minimum, at native int width.",
+    "limits": "Models the fixed-width word operations directly. For the word predicate, zero and both signed minimum values are proved and the full bit-count characterization is tested.",
+    "configurations": "130 32-bit and 258 64-bit boundary rows and 60,000 samples per width at seeds 17, 2718 and 65537. Pinned same-package Go overlay runs native-width rows. Lean is exercised at both widths.",
+    "theorems": [
+      "GoLean.Strconv.powerOfTwo_zero",
+      "GoLean.Strconv.powerOfTwo_min32",
+      "GoLean.Strconv.powerOfTwo_min64"
+    ],
+    "check": "difftest/internal/strconv/integer-bits/check.go",
+    "control": "difftest/internal/strconv/integer-bits/review/main.go",
+    "review": "coverage/packages/internal/strconv/isPowerOfTwo.md"
+  },
+  "FormatUint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerFormat.lean",
+    "model_symbol": "GoLean.Strconv.integerFormatUint",
+    "claim": "Returns the lowercase unsigned digits for bases 2 through 36 and panics with the pinned diagnostic for other bases.",
+    "limits": "The digit loop models the optimized native decimal and power-of-two paths through their returned bytes. 4,382 boundary rows and 60,000 seeded samples per declaration with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native internal/strconv calls compared with the Lean executable and an independent math/big radix and staged append oracle.",
+    "theorems": [
+      "GoLean.Strconv.integerFormatUint_zero"
+    ],
+    "check": "difftest/strconv/integer-format/check.go",
+    "review_sources": [
+      "difftest/strconv/integer-format/testdata/format_test.go"
+    ],
+    "review": "coverage/packages/internal/strconv/FormatUint.md",
+    "control": "difftest/strconv/integer-format/review/main.go"
+  },
+  "FormatInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerFormat.lean",
+    "model_symbol": "GoLean.Strconv.integerFormatInt",
+    "claim": "Returns the lowercase signed digits for bases 2 through 36, including the minimum signed word, and panics with the pinned diagnostic for other bases.",
+    "limits": "The digit loop models the optimized native decimal and power-of-two paths through their returned bytes. 4,382 boundary rows and 60,000 seeded samples per declaration with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native internal/strconv calls compared with the Lean executable and an independent math/big radix and staged append oracle.",
+    "theorems": [
+      "GoLean.Strconv.integerFormatInt_minimum"
+    ],
+    "check": "difftest/strconv/integer-format/check.go",
+    "review_sources": [
+      "difftest/strconv/integer-format/testdata/format_test.go"
+    ],
+    "review": "coverage/packages/internal/strconv/FormatInt.md",
+    "control": "difftest/strconv/integer-format/review/main.go"
+  },
+  "Itoa": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerFormat.lean",
+    "model_symbol": "GoLean.Strconv.integerItoa",
+    "claim": "Returns the signed native-width decimal rendering.",
+    "limits": "The model interprets 32-bit and 64-bit native integers. Direct comparison covers the host native width and omits allocation identity. 4,382 boundary rows and 60,000 seeded samples per declaration with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native internal/strconv calls compared with the Lean executable and an independent math/big radix and staged append oracle.",
+    "theorems": [
+      "GoLean.Strconv.integerItoa_negative"
+    ],
+    "check": "difftest/strconv/integer-format/check.go",
+    "review_sources": [
+      "difftest/strconv/integer-format/testdata/format_test.go"
+    ],
+    "review": "coverage/packages/internal/strconv/Itoa.md",
+    "control": "difftest/strconv/integer-format/review/main.go"
+  },
+  "AppendUint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerFormat.lean",
+    "model_symbol": "GoLean.Strconv.integerAppendUint",
+    "claim": "Appends unsigned lowercase digits to the original destination. Invalid bases panic before destination mutation.",
+    "limits": "Valid destination geometry is modeled with all bytes through capacity. Return nilness, backing reuse and writes visible through the original backing are compared. Allocator-selected growth capacity is outside the claim. 4,382 boundary rows and 60,000 seeded samples per declaration with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native internal/strconv calls compared with the Lean executable and an independent math/big radix and staged append oracle.",
+    "theorems": [
+      "GoLean.Strconv.integerAppendUint_badBase"
+    ],
+    "check": "difftest/strconv/integer-format/check.go",
+    "review_sources": [
+      "difftest/strconv/integer-format/testdata/format_test.go"
+    ],
+    "review": "coverage/packages/internal/strconv/AppendUint.md",
+    "control": "difftest/strconv/integer-format/review/main.go"
+  },
+  "AppendInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Strconv/IntegerFormat.lean",
+    "model_symbol": "GoLean.Strconv.integerAppendInt",
+    "claim": "Appends signed lowercase digits to the original destination. A negative value appends the sign before radix validation, including the visible spare backing write on an invalid radix when capacity permits.",
+    "limits": "Valid destination geometry is modeled with all bytes through capacity. Return nilness, backing reuse and writes visible through the original backing are compared. Allocator-selected growth capacity is outside the claim. 4,382 boundary rows and 60,000 seeded samples per declaration with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native internal/strconv calls compared with the Lean executable and an independent math/big radix and staged append oracle.",
+    "theorems": [
+      "GoLean.Strconv.integerAppendInt_badBase"
+    ],
+    "check": "difftest/strconv/integer-format/check.go",
+    "review_sources": [
+      "difftest/strconv/integer-format/testdata/format_test.go"
+    ],
+    "review": "coverage/packages/internal/strconv/AppendInt.md",
+    "control": "difftest/strconv/integer-format/review/main.go"
+  },
+  "ParseBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Strconv/Bool.lean",
+    "model_symbol": "GoLean.Internal.Strconv.parseBool",
+    "claim": "Returns the matching truth value for the twelve permitted raw spellings or false with the bare ErrSyntax for every other byte string.",
+    "limits": "Arbitrary raw byte strings. Native verifies exact ErrSyntax interface identity, with error presence represented by a Boolean in Lean.",
+    "configurations": "Pinned direct internal/strconv calls via external test overlay, compiled Lean and independent literal-table and byte-slice oracle. 4,416 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Internal.Strconv.parseBool_false",
+      "GoLean.Internal.Strconv.parseBool_invalid"
+    ],
+    "check": "difftest/internal/strconv/bool/check.go",
+    "review_sources": [
+      "lean/GoLean/Strconv/ParseBool.lean",
+      "lean/GoLean/Strconv/FormatBool.lean",
+      "lean/GoLean/Strconv/AppendBool.lean"
+    ],
+    "control": "difftest/internal/strconv/bool/review/main.go",
+    "review": "coverage/packages/internal/strconv/ParseBool.md"
+  },
+  "FormatBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Strconv/Bool.lean",
+    "model_symbol": "GoLean.Internal.Strconv.formatBool",
+    "claim": "Returns the lowercase ASCII spelling of its Boolean argument.",
+    "limits": "Both possible Boolean inputs.",
+    "configurations": "Pinned direct internal/strconv calls via external test overlay, compiled Lean and independent literal-table and byte-slice oracle. 4,416 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Internal.Strconv.formatBool_spellings"
+    ],
+    "check": "difftest/internal/strconv/bool/check.go",
+    "review_sources": [
+      "lean/GoLean/Strconv/ParseBool.lean",
+      "lean/GoLean/Strconv/FormatBool.lean",
+      "lean/GoLean/Strconv/AppendBool.lean"
+    ],
+    "control": "difftest/internal/strconv/bool/review/main.go",
+    "review": "coverage/packages/internal/strconv/FormatBool.md"
+  },
+  "AppendBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Strconv/Bool.lean",
+    "model_symbol": "GoLean.Internal.Strconv.appendBool",
+    "claim": "Appends the lowercase ASCII spelling to the caller prefix. Reuses sufficient backing and preserves untouched spare cells, or allocates without changing old backing.",
+    "limits": "Valid destination slice geometry, including nil/empty inputs and arbitrary byte prefix and spare backing. Returned allocation size after growth is outside scope; exit bytes, original backing and reuse identity are observed.",
+    "configurations": "Pinned direct internal/strconv calls via external test overlay, compiled Lean and independent literal-table and byte-slice oracle. 4,416 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Internal.Strconv.appendBool_short",
+      "GoLean.Internal.Strconv.appendBool_exact"
+    ],
+    "check": "difftest/internal/strconv/bool/check.go",
+    "review_sources": [
+      "lean/GoLean/Strconv/ParseBool.lean",
+      "lean/GoLean/Strconv/FormatBool.lean",
+      "lean/GoLean/Strconv/AppendBool.lean"
+    ],
+    "control": "difftest/internal/strconv/bool/review/main.go",
+    "review": "coverage/packages/internal/strconv/AppendBool.md"
+  },
+  "Error.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Strconv/Bool.lean",
+    "model_symbol": "GoLean.Internal.Strconv.errorText",
+    "claim": "Returns the fixed diagnostic for each of the four known internal error tags and unknown error for any other signed tag.",
+    "limits": "All signed native int tags. Tests include native endpoints and seeded values.",
+    "configurations": "Pinned direct internal/strconv calls via external test overlay, compiled Lean and independent literal-table and byte-slice oracle. 4,416 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Internal.Strconv.errorText_syntax"
+    ],
+    "check": "difftest/internal/strconv/bool/check.go",
+    "control": "difftest/internal/strconv/bool/review/main.go",
+    "review": "coverage/packages/internal/strconv/Error.Error.md"
+  }
+}

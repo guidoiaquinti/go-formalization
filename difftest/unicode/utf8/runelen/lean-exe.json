@@ -1,0 +1,4 @@
+{
+  "name": "godiff-utf8-runelen",
+  "root": "GoDiff.Unicode.Utf8.RuneLen"
+}

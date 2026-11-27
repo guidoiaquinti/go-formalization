@@ -1,0 +1,188 @@
+{
+  "Graph.AddEdge": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/AddEdge.lean",
+    "model_symbol": "GoLean.Internal.Dag.addEdge",
+    "claim": "Panics on a nil receiver or an unavailable source row. Otherwise writes true to the selected destination and preserves the presence and values of every other modeled entry.",
+    "limits": "The model uses unique-key association lists and distinct inner maps, as created by newGraph and addNode. It treats panic as an outcome. Aliased inner maps, panic diagnostics and unrelated graph fields are outside the model. The comparison exhausts 492 representative states over the empty and NUL keys, including nil maps and absent or false entries, and checks the preservation of two unrelated sentinel fields.",
+    "configurations": "Native pinned Go tests package internal/dag through a temporary overlay. The fixture calls Graph.AddEdge directly, distinguishes panics from successful calls, and serializes the successful edge state.",
+    "theorems": ["GoLean.Internal.Dag.addEdge_spec"],
+    "check": "difftest/internal/dag/graph-addedge/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.AddEdge.md"
+  },
+  "Graph.DelEdge": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/DelEdge.lean",
+    "model_symbol": "GoLean.Internal.Dag.delEdge",
+    "claim": "A nil graph receiver panics. Otherwise deletion removes only the specified destination entry at the specified source, preserving other entries and the nilness and presence of all maps.",
+    "limits": "The model represents edge maps using unique-key association lists and distinct inner maps, as created by newGraph and addNode. Shared inner map aliases, other graph fields and the panic diagnostic are outside the model. The comparison exhausts 492 representative states over the empty string and the NUL key, including absent and nil maps, and absent, false and true entries. It also checks that two sentinel fields survive each non-nil call.",
+    "configurations": "Native pinned Go tests package internal/dag through a temporary overlay. The fixture calls Graph.DelEdge directly, distinguishes nil receiver panics from successful calls and serializes the resulting edge state.",
+    "theorems": ["GoLean.Internal.Dag.delEdge_spec"],
+    "check": "difftest/internal/dag/graph-deledge/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.DelEdge.md"
+  },
+  "Graph.Edges": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/Edges.lean",
+    "model_symbol": "GoLean.Internal.Dag.edges",
+    "claim": "A nil receiver panics. Otherwise returns a non-nil slice containing exactly the destination keys, even for false values, sorted by rank when the destination ranks are distinct.",
+    "limits": "Models unique map keys as association lists and byLabel lookup as a rank function with the Go zero default. Distinct destination ranks hold when byLabel assigns each node its insertion position through addNode. Merge sort abstracts the source sort algorithm. Tied ranks, result capacity and allocation are outside the claim. The check includes 171 boundary cases and 60,000 samples over seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls internal/dag.Graph.Edges through a temporary in-package test overlay. The fixture checks for nil results and panics, and the driver compares ordered keys to an independent rank-indexed oracle.",
+    "theorems": ["GoLean.Internal.Dag.edges_panics_iff", "GoLean.Internal.Dag.edges_spec"],
+    "check": "difftest/internal/dag/graph-edges/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.Edges.md"
+  },
+  "Graph.HasEdge": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/HasEdge.lean",
+    "model_symbol": "GoLean.Internal.Dag.hasEdge",
+    "claim": "A nil graph receiver panics. Otherwise returns true exactly when the source has a non-nil edge map with the destination explicitly mapped to true.",
+    "limits": "The model uses association lists with unique keys to represent Go maps and treats labels as opaque strings. It represents nil receiver panic as a missing result and does not track the panic diagnostic, map storage, or unrelated graph fields. The comparison exhausts 492 lookup states with two distinct keys, the empty string and the NUL byte, including nil maps, absent entries, and explicit false and true values.",
+    "configurations": "Native pinned Go tests package internal/dag with a temporary overlay. The fixture calls Graph.HasEdge directly, recovers runtime panics, and sends results to the driver for comparison with the compiled Lean model and the lookup specification.",
+    "theorems": ["GoLean.Internal.Dag.hasEdge_spec"],
+    "check": "difftest/internal/dag/graph-hasedge/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.HasEdge.md"
+  },
+  "Graph.Topo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/Topo.lean",
+    "model_symbol": "GoLean.Internal.Dag.topo",
+    "claim": "Returns a duplicate-free order from depth-first search, in reverse finishing order, visiting roots in node order and all edge keys in ascending destination rank.",
+    "limits": "The model tracks completion marks by membership in the accumulated order. The proof establishes uniqueness under strictly increasing edge heights. Exact deterministic output and all nodes preceding their edge destinations are tested. The comparison covers non-nil graphs, distinct insertion ranks and acyclic edges between listed nodes. The node count bounds recursive descent on that domain. Cycles, malformed graphs, rank ties and allocation details are outside the claim. It exhausts all 116 ordered graphs through three nodes allowing absent, false and true entries, and samples 60,000 larger-domain graphs with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go runs a temporary overlay test inside internal/dag and calls Graph.Topo directly. The driver compares Go and compiled Lean to the exact order from an iterative enter/exit stack oracle that also checks node uniqueness and edge order.",
+    "theorems": ["GoLean.Internal.Dag.topo_nodup"],
+    "check": "difftest/internal/dag/graph-topo/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.Topo.md"
+  },
+  "Graph.TransitiveReduction": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/TransitiveReduction.lean",
+    "model_symbol": "GoLean.Internal.Dag.transitiveReduction",
+    "claim": "In the modeled edge relation, the scan only deletes edges and preserves every original edge without an original two-hop witness. The comparison checks the exact output of the sequential deletion scan.",
+    "limits": "Go comparisons use non-nil graphs with distinct nodes, allocated independent rows, and a strict transitively closed relation of true edges. The proof covers every modeled edge relation. The comparison crosses all topological permutations and initial DAG matrices through four nodes (1,590 cases before deduplication), plus 60,000 sampled closed DAGs up to nine nodes with seeds 17, 2718 and 65537. Exact cover equality is tested on 23,402 cases where insertion order is topological. The failing unrestricted exact-cover claim is preserved in FINDINGS.md. Nil receivers, false-valued explicit keys, map identity and aliased rows are outside the model.",
+    "configurations": "Native pinned Go calls internal/dag.Graph.TransitiveReduction through a temporary in-package overlay. A mutable adjacency matrix checks the exact sequential output, original covers and edge containment. The fixture also checks node order, ranks, and allocated row shape.",
+    "theorems": ["GoLean.Internal.Dag.transitiveReduction_spec"],
+    "check": "difftest/internal/dag/graph-transitive-reduction/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.TransitiveReduction.md"
+  },
+  "Graph.Transpose": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/Transpose.lean",
+    "model_symbol": "GoLean.Internal.Dag.transpose",
+    "claim": "Rebuilds one edge row per node and writes true for exactly the reversed old keys, including keys formerly mapped to false.",
+    "limits": "Successful mutation of a non-nil graph with distinct nodes and old edges between those nodes. The model groups writes by destination and omits map iteration order, identity, panic cases and non-edge fields. The check exhausts the ternary edge matrices on zero, one and two nodes and samples 60,000 matrices on up to eight nodes using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls internal/dag.Graph.Transpose through a temporary in-package test overlay and checks the new map shape and its complete edge contents.",
+    "theorems": [
+      "GoLean.Internal.Dag.transpose_rows",
+      "GoLean.Internal.Dag.transpose_spec"
+    ],
+    "check": "difftest/internal/dag/graph-transpose/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.Transpose.md"
+  },
+  "Graph.addNode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/AddNode.lean",
+    "model_symbol": "GoLean.Internal.Dag.addNode",
+    "claim": "An already ranked label leaves the graph unchanged and returns false. A fresh label gets the former node count as its rank, is appended to Nodes, and is assigned an empty edge row. A nil receiver or nil map on the insertion path panics, preserving any writes already performed.",
+    "limits": "Models node contents and nilness, distinct map keys, and allocated inner edge rows. Panic diagnostics, backing storage, and map identity or aliases are outside the claim. The comparison uses numeric string labels and map states with or without a prior edge row at the new key. It crosses all 100 boundary combinations and samples 60,000 larger combinations with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go runs an in-package overlay test that calls the private addNode method, recovers runtime panics, and compares the complete modeled state on both success and panic.",
+    "theorems": ["GoLean.Internal.Dag.addNode_spec", "GoLean.Internal.Dag.addNode_nil"],
+    "check": "difftest/internal/dag/graph-addnode/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Graph.addNode.md"
+  },
+  "Parse": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/Parse.lean",
+    "model_symbol": "GoLean.Internal.Dag.parse",
+    "claim": "Builds a graph with nodes in definition order and the transitive closure of positive edges, or returns ordered syntax or semantic diagnostics. The kernel proves propagation of syntax errors and exact results for an empty rule list or a single ordinary node defined after NONE.",
+    "limits": "Models raw label bytes, insertion order, edge presence and diagnostics. Maps are represented by node and edge relations. All inserted destinations already have rows, so the missing-row branch is represented by that invariant. The comparison checks 12 boundaries and 60,000 generated graphs of up to eight named nodes using seeds 17, 2718 and 65537. Generated cases include negative assertions, with syntax, cycle and other semantic errors exercised in the boundary corpus.",
+    "configurations": "Native Go directly calling internal/dag.Parse through an in-package overlay. The independent oracle computes reachability by searching the original edges.",
+    "theorems": ["GoLean.Internal.Dag.parse_syntax", "GoLean.Internal.Dag.parse_empty", "GoLean.Internal.Dag.parse_single_definition"],
+    "check": "difftest/internal/dag/parse/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/Parse.md"
+  },
+  "newGraph": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/NewGraph.lean",
+    "model_symbol": "GoLean.Internal.Dag.newGraph",
+    "claim": "The returned graph has a nil Nodes slice and non-nil, empty byLabel and edges maps.",
+    "limits": "Exhausts the constructor's sole input. The model represents the graph by its fields and does not track pointer identity, allocation size, or later mutation.",
+    "configurations": "Native pinned Go testing package internal/dag in place through a temporary overlay that adds one test file. The fixture calls newGraph directly and checks nilness and field lengths; the driver checks the same fields in the compiled Lean model.",
+    "theorems": ["GoLean.Internal.Dag.newGraph_spec"],
+    "check": "difftest/internal/dag/newgraph/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/newGraph.md"
+  },
+  "rulesParser.nextList": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/NextList.lean",
+    "model_symbol": "GoLean.Internal.Dag.nextList",
+    "claim": "Returns names in input order and the consumed terminating token, or propagates the typed lexer panic or raises the typed bad-list diagnostic. Initial EOF returns a nil list and empty token. The receiver retains every write made before return or panic.",
+    "limits": "Models native-width signed line numbers and arbitrary input bytes. Kernel results characterize the listed transitions relative to the lexer, including nil receiver, first token failure, a single name, misplaced leading delimiters and EOF after a comma. Full loop, lexer equivalence and sufficiency of the byte-count fuel are checked on inputs. Allocation identity is abstracted, with the nil list observed explicitly. Go compares 1,133 boundary states and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls the private parser method in a temporary in-package overlay. An anchored regular-expression lexer and alternating-token grammar form the independent oracle for names, token, panic and the full parser state.",
+    "theorems": ["GoLean.Internal.Dag.nextList_nil", "GoLean.Internal.Dag.nextList_eof", "GoLean.Internal.Dag.nextList_first_error", "GoLean.Internal.Dag.nextList_single", "GoLean.Internal.Dag.nextList_badDelimiter", "GoLean.Internal.Dag.nextList_trailingComma"],
+    "check": "difftest/internal/dag/rulesparser-nextlist/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/rulesParser.nextList.md"
+  },
+  "rulesParser.nextToken": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/NextToken.lean",
+    "model_symbol": "GoLean.Internal.Dag.nextToken",
+    "claim": "Skips trivia and counts LF with native-width signed wraparound. Returns the next punctuation token, maximal name or EOF with the exact remaining bytes and last-word field. A malformed bang raises the exact typed diagnostic and preserves prior trivia writes. A nil receiver raises a nil-pointer panic.",
+    "limits": "Models byte strings, including malformed UTF-8, and native-width line numbers. The theorems characterize nil and the terminal branches relative to the modeled trivia scan. Equivalence of trivia skipping and diagnostic decimal formatting is tested. Go compares 1,089 boundary cases, including every possible leading byte at four initial line numbers, and 60,000 samples using seeds 17, 2718 and 65537. Allocation and stack traces are outside the claim.",
+    "configurations": "Native pinned Go invokes the private method in a temporary in-package overlay. The test compares the token or panic and all three parser fields after the call.",
+    "theorems": ["GoLean.Internal.Dag.nextToken_word", "GoLean.Internal.Dag.nextToken_bang_error", "GoLean.Internal.Dag.nextToken_eof", "GoLean.Internal.Dag.nextToken_punctuation", "GoLean.Internal.Dag.nextToken_bang", "GoLean.Internal.Dag.nextToken_nil"],
+    "check": "difftest/internal/dag/rulesparser-nexttoken/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/rulesParser.nextToken.md"
+  },
+  "rulesParser.syntaxError": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/SyntaxError.lean",
+    "model_symbol": "GoLean.Internal.Dag.rulesSyntaxError",
+    "claim": "Raises a typed syntaxError panic with the exact formatted line, message bytes and last-word bytes, or a nil pointer panic on a nil receiver.",
+    "limits": "The model represents the Go line number as a mathematical integer and uses Lean decimal printing. Correspondence to Go decimal formatting is tested, including signed native int extrema. Models the panic kind and diagnostic bytes. Stack traces and allocator behavior are outside the claim. The comparison checks 366 boundaries and 60,000 samples with seeds 17, 2718 and 65537, including malformed UTF-8.",
+    "configurations": "Native pinned Go runs a temporary overlay test inside internal/dag. The fixture directly calls the private method and recovers its panic.",
+    "theorems": ["GoLean.Internal.Dag.rulesSyntaxError_spec", "GoLean.Internal.Dag.rulesSyntaxError_nil"],
+    "check": "difftest/internal/dag/rulesparser-syntaxerror/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/rulesParser.syntaxError.md"
+  },
+  "syntaxError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/SyntaxErrorMethod.lean",
+    "model_symbol": "GoLean.Internal.Dag.syntaxErrorError",
+    "claim": "Returns the exact receiver bytes in order, including empty strings, embedded NULs and malformed UTF-8.",
+    "limits": "Models byte contents for every defined-string receiver. String storage and allocation are outside the claim. The comparison covers 262 boundaries including every single byte, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go runs a temporary overlay test inside internal/dag and calls the value receiver's Error method directly.",
+    "theorems": ["GoLean.Internal.Dag.syntaxErrorError_spec"],
+    "check": "difftest/internal/dag/syntaxerror-error/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/syntaxError.Error.md"
+  },
+  "parseRules": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Dag/ParseRules.lean",
+    "model_symbol": "GoLean.Internal.Dag.parseRules",
+    "claim": "Parses ordered rule triples and returns the already emitted prefix together with the typed syntax diagnostic on failure. The kernel proves the single-rule success case and that a missing operator after a second list retains the emitted rule.",
+    "limits": "Models original byte strings and native integer line width. The parser composes the modeled lexer, list reader and syntax diagnostic. Allocation and unexpected internal panics are outside the model. The comparison checks the full observable result on 538 boundary inputs and 60,000 samples with seeds 17, 2718 and 65537, including rule chains, malformed input and partial output.",
+    "configurations": "Native pinned Go directly calling internal/dag.parseRules in an in-package overlay. The independent oracle scans anchored byte lexemes and checks ordered rules, error payloads and partial results.",
+    "theorems": [
+      "GoLean.Internal.Dag.parseRules_single",
+      "GoLean.Internal.Dag.parseRules_missingOperator"
+    ],
+    "check": "difftest/internal/dag/parse-rules/check.go",
+    "control": "difftest/internal/dag/review/main.go",
+    "review": "coverage/packages/internal/dag/parseRules.md"
+  }
+}

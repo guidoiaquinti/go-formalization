@@ -1,0 +1,119 @@
+{
+  "Remove": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Remove.lean",
+    "model_symbol": "GoLean.Container.Heap.remove",
+    "claim": "For an in-range index, calls Len before any swap. Removing the last item skips swaps and sifts. Otherwise swaps with the former last index, sifts down below the reduced length, and sifts up only if no downward swap occurred. Returns the value from Interface.Pop unchanged.",
+    "limits": "Models scripted normal callbacks and represents the returned value by an opaque tag. Callback panics, invalid indices, and storage effects beyond the trace are outside scope. Compares 8,984 boundary cases and 60,000 seeded scenarios (17, 2718 and 65537).",
+    "configurations": "Pinned Go calls public heap.Remove with a callback probe. The independent oracle uses one-based traversal, excludes the removed slot, and tracks ordered callback results and the returned value.",
+    "theorems": [
+      "GoLean.Container.Heap.remove_return",
+      "GoLean.Container.Heap.remove_last",
+      "GoLean.Container.Heap.remove_repair"
+    ],
+    "check": "difftest/container/heap/remove/check.go",
+    "control": "difftest/container/heap/remove/review/main.go",
+    "review": "coverage/packages/container/heap/Remove.md"
+  },
+  "Pop": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Pop.lean",
+    "model_symbol": "GoLean.Container.Heap.pop",
+    "claim": "Calls Len, swaps the root with the former last index, sifts down excluding that index, and calls Interface.Pop last, returning its value unchanged.",
+    "limits": "Length is nonnegative. Models callback order and returned payload as a tag; scripted callbacks return normally. An empty callback probe observes Swap(0,-1), while panic behavior and storage effects are outside scope. Tests 2,072 boundary cases and 60,000 seeded scenarios (17, 2718 and 65537).",
+    "configurations": "Pinned Go calls heap.Pop with a callback probe. A one-based sift oracle independently checks its callback trace and the opaque injected return value.",
+    "theorems": [
+      "GoLean.Container.Heap.pop_return",
+      "GoLean.Container.Heap.pop_dispatch",
+      "GoLean.Container.Heap.pop_sift",
+      "GoLean.Container.Heap.pop_empty_callbacks"
+    ],
+    "check": "difftest/container/heap/pop/check.go",
+    "review_sources": ["difftest/container/heap/pop/review/testdata/review_test.go"],
+    "control": "difftest/container/heap/pop/review/main.go",
+    "review": "coverage/packages/container/heap/Pop.md"
+  },
+  "Fix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Fix.lean",
+    "model_symbol": "GoLean.Container.Heap.fix",
+    "claim": "Calls Len and sifts down from the chosen index, then sifts up only when the down-sift made no swap. The model emits the ordered Less and Swap callbacks and continues the scripted Less outcomes across both phases.",
+    "limits": "Models in-range indices and normal callback returns. Storage side effects and panic behavior are outside scope. Tests 8,992 boundaries and 60,000 seeded scenarios (17, 2718 and 65537), including length equal to the largest signed Go int.",
+    "configurations": "Pinned Go directly calls heap.Fix. The oracle uses one-based nodes, prechecks parent eligibility, and switches direction only when the node never moved downward.",
+    "theorems": [
+      "GoLean.Container.Heap.fix_moved",
+      "GoLean.Container.Heap.fix_still",
+      "GoLean.Container.Heap.fix_singleton"
+    ],
+    "check": "difftest/container/heap/fix/check.go",
+    "review_sources": ["difftest/container/heap/fix/review/testdata/review_test.go"],
+    "control": "difftest/container/heap/fix/review/main.go",
+    "review": "coverage/packages/container/heap/Fix.md"
+  },
+  "Init": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Init.lean",
+    "model_symbol": "GoLean.Container.Heap.init",
+    "claim": "Calls Len once, then emits the exact ordered Less and Swap callbacks for down-sifts starting at the last parent and continuing back to the root. The original order of scripted Less returns is preserved across sifts.",
+    "limits": "The model assumes a nonnegative length and normal callback returns; it abstracts side effects beyond the trace and does not independently prove the heap property for a particular comparator and storage. Tests 1,032 boundary cases and 60,000 seeded scenarios (17, 2718 and 65537).",
+    "configurations": "Pinned Go directly calls public Init. The independent oracle enumerates parents and children in one-based numbering and consumes the same scripted comparisons.",
+    "theorems": [
+      "GoLean.Container.Heap.init_len_first",
+      "GoLean.Container.Heap.init_sifts",
+      "GoLean.Container.Heap.init_leaves"
+    ],
+    "check": "difftest/container/heap/init/check.go",
+    "review_sources": ["difftest/container/heap/init/review/testdata/review_test.go"],
+    "control": "difftest/container/heap/init/review/main.go",
+    "review": "coverage/packages/container/heap/Init.md"
+  },
+  "down": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Down.lean",
+    "model_symbol": "GoLean.Container.Heap.down",
+    "claim": "For nonnegative Go indices and lengths, returns whether any descent occurred and emits the exact normal-return Less and Swap callback trace. It checks the right child against the left when present, checks the selected child against the parent, and descends only if that comparison succeeds.",
+    "limits": "Consumes scripted comparison decisions in callback order. It abstracts the effects of callbacks and excludes callback panics and negative indices or lengths. Natural child indices beyond signed int range fall beyond the heap length, matching the negative-overflow exit. Checks 17,442 boundaries and 60,000 seeded scenarios (17, 2718 and 65537).",
+    "configurations": "Pinned Go directly invokes private container/heap.down using a same-package overlay. The independent oracle compares the current index with the number of parents before calculating child indices, avoiding signed overflow.",
+    "theorems": [
+      "GoLean.Container.Heap.down_leaf",
+      "GoLean.Container.Heap.down_left_stop",
+      "GoLean.Container.Heap.down_right_swap"
+    ],
+    "check": "difftest/container/heap/down/check.go",
+    "review_sources": [
+      "difftest/container/heap/down/testdata/down_test.go", "difftest/container/heap/down/review/testdata/review_test.go"
+    ],
+    "control": "difftest/container/heap/down/review/main.go",
+    "review": "coverage/packages/container/heap/down.md"
+  },
+  "Push": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Push.lean",
+    "model_symbol": "GoLean.Container.Heap.push",
+    "claim": "Passes the input to Interface.Push, calls Len afterward, then invokes the ordered Less and Swap callbacks for the path from the last index to its ancestors until a false Less or the root.",
+    "limits": "The positive post-push length must fit a Go int. Models normal callbacks with scripted Less decisions, an opaque input represented by a tag, and the observed callback trace. Heap element storage, callback side effects outside the trace, and panics are outside scope. Checks 2,056 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls public container/heap.Push with a probe that grows its length on Push. The independent oracle enumerates the new node's ancestors by shifting its one-based index.",
+    "theorems": [
+      "GoLean.Container.Heap.push_dispatch",
+      "GoLean.Container.Heap.push_sift",
+      "GoLean.Container.Heap.push_first"
+    ],
+    "check": "difftest/container/heap/push/check.go",
+    "review_sources": ["difftest/container/heap/push/review/testdata/review_test.go"],
+    "control": "difftest/container/heap/push/review/main.go",
+    "review": "coverage/packages/container/heap/Push.md"
+  },
+  "up": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Container/Heap/Up.lean",
+    "model_symbol": "GoLean.Container.Heap.up",
+    "claim": "From a nonnegative signed Go index, emits the exact ordered Less(child,parent) and Swap(parent,child) callbacks given scripted Less returns. It stops without another callback at the root, or after the first false comparison.",
+    "limits": "Models traces for callbacks that return normally, with Less decisions supplied least-significant bit first. Callback side effects beyond the trace and decisions, invalid negative indices, and panic behavior are outside scope. Tests 2,056 boundaries and 60,000 seeded scenarios (17, 2718 and 65537), including the largest native signed index.",
+    "configurations": "Pinned native Go calls private container/heap.up through a same-package test overlay. The independent oracle enumerates ancestors by shifting the one-based index and derives the trace from the decision mask.",
+    "theorems": ["GoLean.Container.Heap.up_root", "GoLean.Container.Heap.up_stop", "GoLean.Container.Heap.up_swap"],
+    "check": "difftest/container/heap/up/check.go",
+    "review_sources": ["difftest/container/heap/up/testdata/up_test.go", "difftest/container/heap/up/review/testdata/review_test.go"],
+    "control": "difftest/container/heap/up/review/main.go",
+    "review": "coverage/packages/container/heap/up.md"
+  }
+}

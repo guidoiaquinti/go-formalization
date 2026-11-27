@@ -1,0 +1,167 @@
+{
+  "HTMLEscape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/HtmlEscape.lean",
+    "model_symbol": "GoLean.Encoding.Json.htmlEscape",
+    "claim": "Appends the visible HTML-escaped bytes to the existing buffer, preserves its visible prefix, and faults on a nil buffer.",
+    "limits": "Finite disjoint source and destination buffers with valid geometry and feasible allocations. Public buffer internal capacity, unread offset behavior, concurrency and allocation failure are outside scope. The alternate legacy build was not replayed.",
+    "configurations": "Pinned Go 1.27.0 default JSON v2 source selection and direct same-package overlay on darwin/arm64. Byte-span oracle checks untouched bytes, lowercase sequences and the staged append state on capacity transitions. 7,056 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.htmlEscape_separator",
+      "GoLean.Encoding.Json.htmlEscape_nil"
+    ],
+    "check": "difftest/encoding/json/html-escape/check.go",
+    "control": "difftest/encoding/json/html-escape/review/main.go",
+    "review": "coverage/packages/encoding/json/HTMLEscape.md"
+  },
+  "appendHTMLEscape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/HtmlEscape.lean",
+    "model_symbol": "GoLean.Encoding.Json.appendHTMLEscape",
+    "claim": "Preserves the prefix and escapes five target encodings by byte scan. Observes output nilness, reuse, and exact writes to the original backing before growth.",
+    "limits": "Finite disjoint source and destination buffers with valid geometry and feasible allocations. Public buffer internal capacity, unread offset behavior, concurrency and allocation failure are outside scope. The alternate legacy build was not replayed.",
+    "configurations": "Pinned Go 1.27.0 default JSON v2 source selection and direct same-package overlay on darwin/arm64. Byte-span oracle checks untouched bytes, lowercase sequences and the staged append state on capacity transitions. 7,056 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.appendHTMLEscape_partial"
+    ],
+    "check": "difftest/encoding/json/html-escape/check.go",
+    "control": "difftest/encoding/json/html-escape/review/main.go",
+    "review": "coverage/packages/encoding/json/appendHTMLEscape.md"
+  },
+  "SyntaxError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.syntaxError",
+    "claim": "Returns the raw stored message for a live receiver, independent of Offset. A nil receiver panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.syntaxError_value"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/SyntaxError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "UnsupportedValueError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.unsupportedValueError",
+    "claim": "Prefixes the stored raw diagnostic without consulting reflect.Value. A nil receiver panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.unsupportedValueError_raw"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/UnsupportedValueError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "UnsupportedTypeError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.unsupportedTypeError",
+    "claim": "Prefixes the rendered reflected type. Nil receiver or nil reflected type panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.unsupportedTypeError_missing"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/UnsupportedTypeError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "InvalidUnmarshalError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.invalidUnmarshalError",
+    "claim": "Returns distinct messages for a nil reflected type, a pointer type and a non-pointer type. A nil receiver panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.invalidUnmarshalError_missing"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/InvalidUnmarshalError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "MarshalerError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.marshalerError",
+    "claim": "Formats the callback name, reflected type and returned nested message. An empty callback name defaults to MarshalJSON. Nil receiver, nil type or missing error panics. A nested Error panic propagates after the type is rendered.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.marshalerError_default"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/MarshalerError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "MarshalerError.Unwrap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.marshalerErrorUnwrap",
+    "claim": "Returns the stored nested error interface unchanged. A nil receiver panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.marshalerErrorUnwrap_identity"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/MarshalerError.Unwrap.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "UnmarshalTypeError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.unmarshalTypeError",
+    "claim": "Renders the raw JSON value description and reflected type, with Go-value, struct-field or numeric-final-component context. Appends the nested message only if present. Nil type or nil receiver panics and nested Error panics propagate after type rendering.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.unmarshalTypeError_missingType"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/UnmarshalTypeError.Error.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  },
+  "UnmarshalTypeError.Unwrap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Encoding/Json/CompatErrors.lean",
+    "model_symbol": "GoLean.Encoding.Json.unmarshalTypeErrorUnwrap",
+    "claim": "Returns the stored nested error interface unchanged. A nil receiver panics.",
+    "limits": "Go 1.27.0 default compatibility implementation. Raw strings, nil or live receiver, and abstract reflected kind/name and nested identity/outcome where applicable. Reflect display and nested callback implementations are inputs to the model.",
+    "configurations": "Pinned Go same-package overlay with concrete field values and direct method calls, compiled Lean and an independent explicit-message and numeric-suffix regexp oracle. 1,009 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Encoding.Json.unmarshalTypeErrorUnwrap_identity"
+    ],
+    "check": "difftest/encoding/json/compat-errors/check.go",
+    "review_sources": [
+      "difftest/encoding/json/compat-errors/testdata/errors_test.go"
+    ],
+    "review": "coverage/packages/encoding/json/UnmarshalTypeError.Unwrap.md",
+    "control": "difftest/encoding/json/compat-errors/review/main.go"
+  }
+}

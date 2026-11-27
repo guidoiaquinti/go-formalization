@@ -1,0 +1,4 @@
+{
+  "name": "godiff-utf8-rune-count",
+  "root": "GoDiff.Unicode.Utf8.RuneCount"
+}

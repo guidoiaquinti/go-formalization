@@ -1,0 +1,4 @@
+{
+  "name": "godiff-parsebool",
+  "root": "GoDiff.Strconv.ParseBool"
+}

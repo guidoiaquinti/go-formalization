@@ -1,0 +1,271 @@
+{
+  "decodeRuneSlow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeRuneSlow.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeRuneSlow",
+    "claim": "Decodes the first scalar and width from a byte slice. Direct ASCII calls return the ASCII scalar and width one. Nil and empty slices return RuneError with width zero. Malformed or truncated bytes return RuneError with width one.",
+    "limits": "Represents the ASCII and illegal-lead mask by the corresponding observable classification. Lean proves equality with the slow string model on identical bytes and the ASCII result. The differential check covers 65,802 boundaries, including nil, nonnil empty and every one- and two-byte slice, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private unicode/utf8.decodeRuneSlow function directly on slices through a test-only overlay and compares both result fields with an independent scalar-accumulation and validity oracle.",
+    "theorems": ["GoLean.Unicode.Utf8.decodeRuneSlow_spec", "GoLean.Unicode.Utf8.decodeRuneSlow_ascii"],
+    "check": "difftest/unicode/utf8/decode-rune-slow/check.go",
+    "review_sources": ["difftest/unicode/utf8/decode-rune-slow/testdata/bridge_test.go", "difftest/unicode/utf8/decode-rune-slow/testdata/decode_test.go"],
+    "control": "difftest/unicode/utf8/decode-rune-slow/review/main.go",
+    "review": "coverage/packages/unicode/utf8/decodeRuneSlow.md"
+  },
+  "decodeRuneInStringSlow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeRuneInStringSlow.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeRuneInStringSlow",
+    "claim": "Decodes the first scalar and byte width. Direct ASCII calls return that byte and width one. Empty input returns RuneError with width zero and malformed or truncated input returns RuneError with width one.",
+    "limits": "The table's mask selection for ASCII and illegal lead bytes is modeled by its observable classification. Lean proves equivalence with the public string model and the direct ASCII result. The comparison checks 65,801 boundaries, including every one- and two-byte string, and 60,000 sampled inputs using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls private unicode/utf8.decodeRuneInStringSlow directly on raw byte strings through a test-only overlay and compares both returned fields with an independent scalar accumulation and legality oracle.",
+    "theorems": ["GoLean.Unicode.Utf8.decodeRuneInStringSlow_spec", "GoLean.Unicode.Utf8.decodeRuneInStringSlow_ascii"],
+    "check": "difftest/unicode/utf8/decode-rune-in-string-slow/check.go",
+    "review_sources": ["difftest/unicode/utf8/decode-rune-in-string-slow/testdata/bridge_test.go", "difftest/unicode/utf8/decode-rune-in-string-slow/testdata/decode_test.go"],
+    "control": "difftest/unicode/utf8/decode-rune-in-string-slow/review/main.go",
+    "review": "coverage/packages/unicode/utf8/decodeRuneInStringSlow.md"
+  },
+  "encodeRuneNonASCII": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/EncodeRuneNonASCII.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.encodeRuneNonASCII",
+    "claim": "Writes encoded bytes and returns their width, preserving the destination suffix. Direct ASCII inputs use the two-byte overlong form. Invalid runes use the replacement encoding. A short destination panics before any write.",
+    "limits": "Reuses the private append helper's payload and models all bytes within the destination slice. Exact panic text and backing bytes outside the slice are excluded. Checks 1,001 boundaries including every ASCII value at lengths zero through six, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls private unicode/utf8.encodeRuneNonASCII directly through a test-only overlay. The oracle uses rune-to-string conversion and explicit two-byte construction for ASCII, then checks the return value or bounds panic and complete destination bytes.",
+    "theorems": ["GoLean.Unicode.Utf8.encodeRuneNonASCII_short", "GoLean.Unicode.Utf8.encodeRuneNonASCII_written"],
+    "check": "difftest/unicode/utf8/encode-rune-non-ascii/check.go",
+    "review_sources": ["difftest/unicode/utf8/encode-rune-non-ascii/testdata/bridge_test.go", "difftest/unicode/utf8/encode-rune-non-ascii/testdata/encode_test.go"],
+    "control": "difftest/unicode/utf8/encode-rune-non-ascii/review/main.go",
+    "review": "coverage/packages/unicode/utf8/encodeRuneNonASCII.md"
+  },
+  "appendRuneNonASCII": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/AppendRuneNonASCII.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.appendRuneNonASCII",
+    "claim": "Preserves the byte prefix and appends the encoded scalar or the replacement bytes for an invalid rune. Direct calls with ASCII append the helper's two-byte overlong form.",
+    "limits": "Models returned bytes for the full signed int32 rune domain. Allocation and aliasing are outside scope. The comparison exhausts ASCII at two destination prefixes, includes width and validity boundaries for 286 total boundary cases, and uses 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private encoding helper through a test-only overlay. The oracle uses rune-to-string conversion for non-ASCII and explicit two-byte construction for ASCII.",
+    "theorems": ["GoLean.Unicode.Utf8.appendRuneNonASCII_ascii", "GoLean.Unicode.Utf8.appendRuneNonASCII_non_ascii"],
+    "check": "difftest/unicode/utf8/append-rune-non-ascii/check.go",
+    "review_sources": ["difftest/unicode/utf8/append-rune-non-ascii/testdata/bridge_test.go", "difftest/unicode/utf8/append-rune-non-ascii/testdata/append_test.go"],
+    "control": "difftest/unicode/utf8/append-rune-non-ascii/review/main.go",
+    "review": "coverage/packages/unicode/utf8/appendRuneNonASCII.md"
+  },
+  "word": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/Word.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.word",
+    "claim": "Packs the first four or eight bytes into native-width little-endian lanes, ignores later bytes, and panics on input shorter than the native width.",
+    "limits": "Models the source bitwise OR of disjoint byte lanes as arithmetic accumulation. Lean proves rejection of short input, suffix independence and the low-byte lane result. The comparison checks every lane with every byte, length boundaries and sampled inputs against encoding/binary. Panic text beyond identifying an index-bounds runtime error is outside scope.",
+    "configurations": "A test-only overlay directly calls the native unicode/utf8.word helper on both string and byte slices. Lean is compared at both four- and eight-byte widths, with 2,113 boundaries and 60,000 samples from seeds 17, 2718 and 65537 for each profile.",
+    "theorems": ["GoLean.Unicode.Utf8.word_short", "GoLean.Unicode.Utf8.word_suffix_ignored", "GoLean.Unicode.Utf8.word_first_lane"],
+    "check": "difftest/unicode/utf8/word/check.go",
+    "review_sources": ["difftest/unicode/utf8/word/testdata/bridge_test.go", "difftest/unicode/utf8/word/testdata/word_test.go"],
+    "control": "difftest/unicode/utf8/word/review/main.go",
+    "review": "coverage/packages/unicode/utf8/word.md"
+  },
+  "ValidString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/ValidString.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.validString",
+    "claim": "Reports whether all of the raw string bytes form valid UTF-8. It accepts ASCII and rejects malformed or truncated non-ASCII encodings.",
+    "limits": "Reuses the source-shaped Valid model of the common native-word ASCII block steps and multibyte acceptance paths. The packed high-bit test is represented by bytewise ASCII checks. Lean proves ASCII-only acceptance and malformed non-ASCII lead rejection conditional on the width classifier. Complete validation is compared on 66,603 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls unicode/utf8.ValidString directly on raw strings. The model receives the native word width and the forward scalar-accumulation oracle checks accepted encodings independently.",
+    "theorems": ["GoLean.Unicode.Utf8.validString_ascii_only", "GoLean.Unicode.Utf8.validString_rejects_malformed_lead"],
+    "check": "difftest/unicode/utf8/valid-string/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/ValidString/main.go",
+    "review": "coverage/packages/unicode/utf8/ValidString.md"
+  },
+  "Valid": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/Valid.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.valid",
+    "claim": "Reports whether the entire slice is valid UTF-8, accepting ASCII blocks and rejecting malformed or truncated non-ASCII encodings.",
+    "limits": "The model preserves the strict native-width ASCII block checks and repeated large-block scan. It represents the packed high-bit test as bytewise ASCII checks and abstracts the capacity restriction and generated code. Lean proves ASCII-only acceptance, rejection of a malformed leading non-ASCII byte, and the accepted multibyte step conditional on the width classifier. The complete behavior is compared on 66,604 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls unicode/utf8.Valid directly on raw byte slices. The driver selects the native word width and compares acceptance with forward scalar accumulation and legality checks.",
+    "theorems": ["GoLean.Unicode.Utf8.valid_empty", "GoLean.Unicode.Utf8.valid_ascii_only", "GoLean.Unicode.Utf8.valid_rejects_malformed_lead", "GoLean.Unicode.Utf8.valid_multibyte_step"],
+    "check": "difftest/unicode/utf8/valid/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/Valid/main.go",
+    "review": "coverage/packages/unicode/utf8/Valid.md"
+  },
+  "EncodeRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/EncodeRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.encodeRune",
+    "claim": "Writes the UTF-8 encoding or the replacement character to the destination prefix, preserves the remaining bytes, and returns the width. A short destination triggers an index bounds panic before any write.",
+    "limits": "The pinned implementation checks the last required byte before writing a multibyte result. The model observes the bounds panic and destination bytes within the slice length. The exact panic text and reslicing beyond that length are outside scope. The comparison covers 170 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls unicode/utf8.EncodeRune directly and checks the returned width or recovered panic class and all destination bytes, against Go rune-to-string conversion and an independent length check.",
+    "theorems": ["GoLean.Unicode.Utf8.encodeRune_short", "GoLean.Unicode.Utf8.encodeRune_written"],
+    "check": "difftest/unicode/utf8/encode-rune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/EncodeRune/main.go",
+    "review": "coverage/packages/unicode/utf8/EncodeRune.md"
+  },
+  "AppendRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/AppendRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.appendRune",
+    "claim": "Preserves the exact destination prefix and appends the UTF-8 encoding of the input rune, replacing invalid runes with U+FFFD.",
+    "limits": "Models returned byte contents and uses the existing scalar encoder and validity model. Capacity, allocation, and aliasing are outside the claim. The comparison checks 340 boundaries and 60,000 samples with seeds 17, 2718 and 65537, including nil and non-nil destinations with varied spare capacity and invalid signed int32 rune inputs.",
+    "configurations": "Native Go calls unicode/utf8.AppendRune directly. The independent oracle concatenates the destination bytes with the Go language rune-to-string conversion.",
+    "theorems": ["GoLean.Unicode.Utf8.appendRune_spec"],
+    "check": "difftest/unicode/utf8/append-rune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/AppendRune/main.go",
+    "review": "coverage/packages/unicode/utf8/AppendRune.md"
+  },
+  "DecodeLastRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeLastRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeLastRune",
+    "claim": "Returns the last scalar and its width, returning RuneError with width zero on an empty slice and width one on a malformed tail.",
+    "limits": "Models the slice-specific call to DecodeRune, the bounded reverse scan, and rejection when the decoded width leaves trailing bytes. The kernel theorem equates the slice and string models on the same bytes. The direct comparison with a forward scalar oracle checks 65,807 boundaries, including nil and non-nil empty slices and every one- and two-byte slice, and 60,000 sampled inputs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls unicode/utf8.DecodeLastRune on raw byte slices and compares the returned scalar and width.",
+    "theorems": ["GoLean.Unicode.Utf8.decodeLastRune_spec"],
+    "check": "difftest/unicode/utf8/decode-last-rune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/DecodeLastRune/main.go",
+    "review": "coverage/packages/unicode/utf8/DecodeLastRune.md"
+  },
+  "DecodeLastRuneInString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeLastRuneInString.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeLastRuneInString",
+    "claim": "Returns the last decoded scalar and its byte width, returning RuneError with width zero on empty input and width one on a malformed tail. The backward start scan examines at most three earlier positions and the decoded candidate must consume its entire suffix.",
+    "limits": "Models raw string bytes and reuses the established first-rune model. The kernel proves the empty result and the bounded scan budget and exact suffix-width check. The comparison checks the complete backward result against a forward scalar-accumulation oracle on 65,806 boundaries, including every one- and two-byte string, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls unicode/utf8.DecodeLastRuneInString on raw byte strings and checks both returned fields.",
+    "theorems": ["GoLean.Unicode.Utf8.decodeLastRuneInString_empty", "GoLean.Unicode.Utf8.decodeLastRuneInString_spec"],
+    "check": "difftest/unicode/utf8/decode-last-rune-in-string/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/DecodeLastRuneInString/main.go",
+    "review": "coverage/packages/unicode/utf8/DecodeLastRuneInString.md"
+  },
+  "DecodeRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeRune",
+    "claim": "Decodes the first scalar and its byte width from a byte slice. Empty slices return RuneError with width zero, and malformed or truncated input returns RuneError with width one.",
+    "limits": "Models the first-byte ASCII path and the shared acceptance classifier and payload reconstruction. The kernel theorem proves equality of the slice and string models on the same bytes. The comparison independently tests classifier and payload agreement on 65,809 boundary cases including nil and non-nil empty slices and every one- and two-byte slice, plus 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls unicode/utf8.DecodeRune directly on raw byte slices and compares both returned fields to an independent scalar-accumulation and legality oracle.",
+    "theorems": ["GoLean.Unicode.Utf8.decodeRune_spec"],
+    "check": "difftest/unicode/utf8/decode-rune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/DecodeRune/main.go",
+    "review": "coverage/packages/unicode/utf8/DecodeRune.md"
+  },
+  "DecodeRuneInString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.decodeRuneInString",
+    "claim": "Decodes the first scalar and its byte width. Empty input returns RuneError with width zero, and malformed or truncated sequences return RuneError with width one.",
+    "limits": "Models raw bytes and reuses the existing width classifier based on Go's acceptance table. The theorems cover empty, ASCII, rejected and accepted payload paths conditional on that classifier. Differential verification checks the classifier against scalar validity, with 65,809 boundaries including every singleton and two-byte string, plus 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls unicode/utf8.DecodeRuneInString on raw byte strings and compares both returned fields to an independent scalar-accumulation and legality oracle.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.decodeRuneInString_empty",
+      "GoLean.Unicode.Utf8.decodeRuneInString_ascii",
+      "GoLean.Unicode.Utf8.decodeRuneInString_error",
+      "GoLean.Unicode.Utf8.decodeRuneInString_two",
+      "GoLean.Unicode.Utf8.decodeRuneInString_three",
+      "GoLean.Unicode.Utf8.decodeRuneInString_four"
+    ],
+    "check": "difftest/unicode/utf8/decode-rune-in-string/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/DecodeRuneInString/main.go",
+    "review": "coverage/packages/unicode/utf8/DecodeRuneInString.md"
+  },
+  "FullRuneInString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/FullRuneInString.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.fullRuneInString",
+    "claim": "Returns whether the first rune can be decoded from the string bytes, including a one-byte error when the known prefix is malformed.",
+    "limits": "Models raw Go string bytes without requiring valid UTF-8. The proof characterizes the empty string and incomplete but potentially valid leading prefixes using the same lead table as FullRune. The comparison has 66,296 boundaries, including every one-byte and two-byte string, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls unicode/utf8.FullRuneInString on exact byte strings, comparing against an independent Unicode scalar prefix-completion oracle.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.fullRuneInString_empty",
+      "GoLean.Unicode.Utf8.fullRuneInString_short"
+    ],
+    "check": "difftest/unicode/utf8/full-rune-in-string/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/FullRuneInString/main.go",
+    "review": "coverage/packages/unicode/utf8/FullRuneInString.md"
+  },
+  "FullRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/FullRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.fullRune",
+    "claim": "Returns false for empty input and for a short prefix whose supplied continuation bytes are in the lead byte’s permitted ranges. A malformed sequence already identifiable as a one-byte error counts as full.",
+    "limits": "Byte slices are modeled by their contents. The comparison exhausts all one- and two-byte words, checks nil and non-nil empty slices and 502 selected longer inputs, and samples 60,000 raw or truncated inputs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls unicode/utf8.FullRune directly. The independent oracle tests whether the known payload bits can be completed to a legal scalar of the candidate width.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.fullRune_empty",
+      "GoLean.Unicode.Utf8.fullRune_short"
+    ],
+    "check": "difftest/unicode/utf8/full-rune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/FullRune/main.go",
+    "review": "coverage/packages/unicode/utf8/FullRune.md"
+  },
+  "RuneCount": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/RuneCount.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.runeCount",
+    "claim": "Counts leading ASCII bytes and then counts the remaining suffix by decoded UTF-8 width. The result equals the string rune count for the same bytes.",
+    "limits": "All one- and two-byte words, nil and empty input, and 28 additional cases at UTF-8 boundaries or with ASCII prefixes. Another 60,000 cases use seeds 17, 2718 and 65537 across raw bytes, encoded runes and mixed payloads with ASCII prefixes.",
+    "configurations": "Native Go calls both unicode/utf8 functions. A scalar-decoding oracle validates candidate widths arithmetically.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.runeCount_spec"
+    ],
+    "check": "difftest/unicode/utf8/rune-count/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/RuneCount/main.go",
+    "review": "coverage/packages/unicode/utf8/RuneCount.md"
+  },
+  "RuneCountInString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/RuneCount.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.runeCountInString",
+    "claim": "Counts one rune for each decoded UTF-8 width, advancing one byte for malformed encodings. The count is bounded by the byte length.",
+    "limits": "All one- and two-byte words, nil and empty input, and 28 additional cases at UTF-8 boundaries or with ASCII prefixes. Another 60,000 cases use seeds 17, 2718 and 65537 across raw bytes, encoded runes and mixed payloads with ASCII prefixes.",
+    "configurations": "Native Go calls both unicode/utf8 functions. A scalar-decoding oracle validates candidate widths arithmetically.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.runeCountInString_step",
+      "GoLean.Unicode.Utf8.runeCountInString_bound"
+    ],
+    "check": "difftest/unicode/utf8/rune-count/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/RuneCount/main.go",
+    "review": "coverage/packages/unicode/utf8/RuneCountInString.md"
+  },
+  "RuneLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/RuneLen.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.runeLen",
+    "claim": "Returns -1 for runes outside Unicode planes 0 through 16 and for surrogate blocks 54 and 55. For valid runes, returns the first encoding length that fits the value, with seven payload bits for one byte, eleven for two, sixteen for three and twenty-one for four.",
+    "limits": "The proof treats the signed rune as a mathematical integer. Go checks all 65,536 BMP values, seven additional signed or boundary values, and 60,000 samples divided equally between supplementary values and signed 32-bit words, with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling unicode/utf8.RuneLen. The oracle uses signed right shifts for the power-of-two quotients in the theorem.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.runeLen_spec"
+    ],
+    "check": "difftest/unicode/utf8/runelen/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/RuneProperties/main.go",
+    "review": "coverage/packages/unicode/utf8/RuneLen.md"
+  },
+  "RuneStart": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/RuneStart.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.runeStart",
+    "claim": "RuneStart returns false exactly for bytes in the inclusive range 0x80 through 0xBF.",
+    "limits": "Exhaustive across all 256 byte values. The predicate classifies a single byte and the claim makes no assertion about validity of an encoded rune.",
+    "configurations": "Native Go unicode/utf8.RuneStart and the compiled Lean model.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.runeStart_spec"
+    ],
+    "check": "difftest/unicode/utf8/runestart/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/RuneProperties/main.go",
+    "review": "coverage/packages/unicode/utf8/RuneStart.md"
+  },
+  "ValidRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf8/ValidRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf8.validRune",
+    "claim": "ValidRune accepts exactly the runes on Unicode planes 0 through 16 whose signed high-bit prefix after dropping ten bits is neither 54 nor 55.",
+    "limits": "The model interprets runes as signed mathematical integers and proves the claim for every such integer. Go checks every BMP value, seven additional signed or boundary values, and 60,000 samples divided between signed 32-bit words and the Unicode code-point range, with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling unicode/utf8.ValidRune. The Go oracle uses signed right shifts of a 32-bit rune and the Lean theorem uses floor division.",
+    "theorems": [
+      "GoLean.Unicode.Utf8.validRune_spec"
+    ],
+    "check": "difftest/unicode/utf8/validrune/check.go",
+    "control": "coverage/packages/unicode/utf8/controls/RuneProperties/main.go",
+    "review": "coverage/packages/unicode/utf8/ValidRune.md"
+  }
+}

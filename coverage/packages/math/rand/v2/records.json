@@ -1,0 +1,790 @@
+{
+  "Float32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalFloat32",
+    "claim": "Delegates to the global Rand Float32 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalFloat32_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Float32.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Float64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalFloat64",
+    "claim": "Delegates to the global Rand Float64 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalFloat64_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Float64.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Int": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalInt",
+    "claim": "Delegates to the global Rand Int method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalInt_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Int.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Int32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalInt32",
+    "claim": "Delegates to the global Rand Int32 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalInt32_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Int32.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Int32N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalInt32N",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalInt32N_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/Int32N.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "Int64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalInt64",
+    "claim": "Delegates to the global Rand Int64 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalInt64_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Int64.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Int64N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalInt64N",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalInt64N_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/Int64N.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "IntN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalIntN",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalIntN_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/IntN.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalN",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalN_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/N.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "New": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.newRand",
+    "claim": "Initializes a fresh Rand retaining the exact supplied Source, including nil, without drawing a word.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.newRand_source"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/New.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "NewPCG": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.newPCG",
+    "claim": "Initializes high and low state words from the two seed arguments.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.newPCG_seed"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/NewPCG.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgAppendBinary",
+    "claim": "Appends the 20-byte payload, preserving the visible prefix and modeling original backing writes and reuse through the three appends.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgAppendBinary_output"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.AppendBinary.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgMarshalBinary",
+    "claim": "Produces the exact 20-byte payload with a pcg: prefix and two big-endian words.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgMarshalBinary_magic"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.MarshalBinary.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.Seed": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgSeed",
+    "claim": "Replaces both current state words with the supplied seeds.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgSeed_reset"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.Seed.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgUint64",
+    "claim": "Advances the state once per call and reports the exact output from the pinned DXSM transform.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgUint64_updates"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.Uint64.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.UnmarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgUnmarshalBinary",
+    "claim": "Accepts only canonical length and prefix, decodes both state words, and preserves the current state on error.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgUnmarshalBinary_bad_length"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.UnmarshalBinary.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "PCG.next": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/PCG.lean",
+    "model_symbol": "GoLean.Math.RandV2.pcgNext",
+    "claim": "Advances the 128-bit state by the pinned affine recurrence modulo 2^128 and returns the two updated words.",
+    "limits": "8,450 boundaries and 60,000 samples (17, 2718, 65537). Sequential access, nonnil receiver and feasible buffers. Allocation capacity after growth and probabilistic distribution claims are outside scope.",
+    "configurations": "Pinned Go public methods and private same-package next, compared with 128-bit big integer and independent byte/buffer oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.pcgNext_zero"
+    ],
+    "check": "difftest/math/rand/v2/pcg/check.go",
+    "review": "coverage/packages/math/rand/v2/PCG.next.md",
+    "control": "difftest/math/rand/v2/pcg/review/main.go"
+  },
+  "Perm": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalShuffle.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalPerm",
+    "claim": "Delegates to the default Rand, preserving the exact source draws, visible swap trace or permutation, and panic behavior.",
+    "limits": "540 boundaries and 60,000 samples (17, 2718, 65537). Native host width, serial finite scripted sources and ordinarily allocatable lengths. Runtime entropy and concurrency outside scope.",
+    "configurations": "Direct pinned package-level calls with a temporarily installed global source, matched to compiled Lean and the separately constructed Go Rand method.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalPerm_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-shuffle/check.go",
+    "review": "coverage/packages/math/rand/v2/Perm.md",
+    "control": "difftest/math/rand/v2/global-shuffle/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go"
+    ]
+  },
+  "Rand.Float32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randFloat32",
+    "claim": "Returns the low 24 bits of the high 32-bit word scaled by 2^-24 with exact binary32 representation.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randFloat32_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Float32.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Float64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randFloat64",
+    "claim": "Returns the low 53 bits of one source word scaled by 2^-53 with exact binary64 representation.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randFloat64_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Float64.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Int": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randInt",
+    "claim": "Consumes one source word and returns its low native int width minus one bits.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randInt_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Int.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Int32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randInt32",
+    "claim": "Consumes one source word and returns its high 31 bits.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randInt32_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Int32.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Int32N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randInt32N",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randInt32N_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-int32n.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.Int64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randInt64",
+    "claim": "Consumes one source word and returns its low 63 bits.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randInt64_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Int64.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Int64N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randInt64N",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randInt64N_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-int64n.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.IntN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randIntN",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randIntN_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-intn.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randN",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randN_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-n-generic.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.Perm": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Shuffle.lean",
+    "model_symbol": "GoLean.Math.RandV2.randPerm",
+    "claim": "Returns an allocated slice of shuffled indices with exact order and source draws, including nonnil empty and singleton results.",
+    "limits": "5,760 fixed cases and 60,000 sampled cases (17, 2718, 65537). Feasible lengths, finite scripted source, typed source and callback panics, or nil callback.",
+    "configurations": "Pinned direct Go methods, exact swap trace and draw count, arbitrary-precision draw oracle and inverse permutation reconstruction.",
+    "theorems": [
+      "GoLean.Math.RandV2.randPerm_singleton"
+    ],
+    "check": "difftest/math/rand/v2/shuffle/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Perm.md",
+    "control": "difftest/math/rand/v2/shuffle/review/main.go"
+  },
+  "Rand.Shuffle": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Shuffle.lean",
+    "model_symbol": "GoLean.Math.RandV2.randShuffle",
+    "claim": "Requests bounded draws in descending index order and invokes each swap exactly once with the selected indices. Preserves exact draw and callback prefix on a panic.",
+    "limits": "5,760 fixed cases and 60,000 sampled cases (17, 2718, 65537). Feasible lengths, finite scripted source, typed source and callback panics, or nil callback.",
+    "configurations": "Pinned direct Go methods, exact swap trace and draw count, arbitrary-precision draw oracle and inverse permutation reconstruction.",
+    "theorems": [
+      "GoLean.Math.RandV2.randShuffle_empty"
+    ],
+    "check": "difftest/math/rand/v2/shuffle/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Shuffle.md",
+    "control": "difftest/math/rand/v2/shuffle/review/main.go"
+  },
+  "Rand.Uint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint",
+    "claim": "Consumes one source word and reduces it to the native unsigned word width.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Uint.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint32",
+    "claim": "Consumes one source word and returns its high 32 bits.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint32_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Uint32.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Uint32N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint32N",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint32N_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-uint32n-public.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Word.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint64",
+    "claim": "Consumes one source word and returns it unchanged.",
+    "limits": "1,536 boundaries and 60,000 cases (17, 2718, 65537). Sequential scripted sources, nil receiver or source, and callback panic identity. Native int width of the running platform.",
+    "configurations": "Pinned native Go exact methods, source-identity overlay for New, independent bit interval and floating-bit oracles.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint64_word"
+    ],
+    "check": "difftest/math/rand/v2/word/check.go",
+    "review": "coverage/packages/math/rand/v2/Rand.Uint64.md",
+    "control": "difftest/math/rand/v2/word/review/main.go"
+  },
+  "Rand.Uint64N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint64N",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint64N_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-uint64n-public.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.UintN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUintN",
+    "claim": "Rejects zero and applicable negative bounds without drawing. With a valid bound uses the exact multiply-high rejection or mask path and preserves draw count and callback panic.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUintN_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-uintn.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.uint32n": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint32n",
+    "claim": "Reduces scripted source words using a power-of-two mask or exact multiply-high rejection, with exact output and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint32n_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-uint32n-private.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Rand.uint64n": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/Bounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.randUint64n",
+    "claim": "Reduces scripted source words using a power-of-two mask or exact multiply-high rejection, with exact output and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled cases (17, 2718, 65537). Native host int width and a finite scripted source whose exhaustion panics. The generic method is replayed with defined signed int8 and uint16.",
+    "configurations": "Pinned exact Go public wrappers and private same-package helpers, compared with the compiled Lean model and arbitrary-precision product oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.randUint64n_zero"
+    ],
+    "check": "difftest/math/rand/v2/bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/rand-uint64n-private.md",
+    "control": "difftest/math/rand/v2/bounded/review/main.go"
+  },
+  "Shuffle": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalShuffle.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalShuffle",
+    "claim": "Delegates to the default Rand, preserving the exact source draws, visible swap trace or permutation, and panic behavior.",
+    "limits": "540 boundaries and 60,000 samples (17, 2718, 65537). Native host width, serial finite scripted sources and ordinarily allocatable lengths. Runtime entropy and concurrency outside scope.",
+    "configurations": "Direct pinned package-level calls with a temporarily installed global source, matched to compiled Lean and the separately constructed Go Rand method.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalShuffle_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-shuffle/check.go",
+    "review": "coverage/packages/math/rand/v2/Shuffle.md",
+    "control": "difftest/math/rand/v2/global-shuffle/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go"
+    ]
+  },
+  "Uint": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUint",
+    "claim": "Delegates to the global Rand Uint method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUint_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Uint.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Uint32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUint32",
+    "claim": "Delegates to the global Rand Uint32 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUint32_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Uint32.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Uint32N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUint32N",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUint32N_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/Uint32N.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalWord.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUint64",
+    "claim": "Delegates to the global Rand Uint64 method, preserving its exact result, source draw count and callback panic.",
+    "limits": "1,152 boundaries and 60,000 sampled states (17, 2718, 65537). Serial injected sources and native host width. Runtime entropy generation and concurrency are outside scope.",
+    "configurations": "Pinned native exported calls with a temporarily injected global source from an in-package test overlay and independent bit interval oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUint64_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-word/check.go",
+    "review": "coverage/packages/math/rand/v2/Uint64.md",
+    "control": "difftest/math/rand/v2/global-word/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/word/testdata/word_test.go"
+    ]
+  },
+  "Uint64N": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUint64N",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUint64N_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/Uint64N.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "UintN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/GlobalBounded.lean",
+    "model_symbol": "GoLean.Math.RandV2.globalUintN",
+    "claim": "Delegates to the bounded Rand method, retaining exact result, invalid-bound panic, retries and draw count.",
+    "limits": "1,536 boundaries and 60,000 sampled states (17, 2718, 65537). Native word width and serial injected finite source. The generic wrapper is replayed with a defined int8 and uint16.",
+    "configurations": "Pinned package-level Go calls with a serial temporarily installed global source, compiled Lean and arbitrary-precision threshold oracle.",
+    "theorems": [
+      "GoLean.Math.RandV2.globalUintN_delegates"
+    ],
+    "check": "difftest/math/rand/v2/global-bounded/check.go",
+    "review": "coverage/packages/math/rand/v2/UintN.md",
+    "control": "difftest/math/rand/v2/global-bounded/review/main.go",
+    "review_sources": [
+      "difftest/math/rand/v2/global-word/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bridge_test.go",
+      "difftest/math/rand/v2/bounded/testdata/bounded_test.go"
+    ]
+  },
+  "ChaCha8.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.chaCha8MarshalBinary",
+    "claim": "Serializes the seed, draw position and any pending Read bytes in the pinned format.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). Nonnil receivers initialized by NewChaCha8 or Seed and reached by sequential Read and Uint64 calls. A zero-value receiver before explicit initialization, states restored by UnmarshalBinary, allocation capacities after growth, and concurrency are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.chaCha8MarshalBinary_unbuffered"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/chacha8-marshal-binary.md"
+  },
+  "ChaCha8.Read": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.chaCha8Read",
+    "claim": "Returns the exact requested bytes by consuming pending bytes first, then little-endian generated words. Preserves an incomplete word for the next Read.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). Nonnil receivers initialized by NewChaCha8 or Seed and reached by sequential Read and Uint64 calls. A zero-value receiver before explicit initialization, states restored by UnmarshalBinary, allocation capacities after growth, and concurrency are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.chaCha8Read_zero"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/chacha8-read.md"
+  },
+  "NewChaCha8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.newChaCha8",
+    "claim": "Initializes the pinned stream from the four little-endian seed words with empty buffered bytes.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). All 32-byte seeds. Generated state and bytes are checked through initialized streams. Concurrency and resource allocation failure are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.newChaCha8_pending"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/new-chacha8.md"
+  },
+  "ChaCha8.Seed": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.chaCha8Seed",
+    "claim": "Resets all stream position and buffered bytes and starts identically to NewChaCha8 with the replacement seed.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). Nonnil receivers, with differential replay on seeded reachable states and a native zero-value reset probe. Concurrency and resource allocation failure are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.chaCha8Seed_reset"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/chacha8-seed.md"
+  },
+  "ChaCha8.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.chaCha8AppendBinary",
+    "claim": "Appends the exact serialized payload and preserves the staged writes to the original backing allocation before growth.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). Nonnil receivers initialized by NewChaCha8 or Seed and reached by sequential Read and Uint64 calls. A zero-value receiver before explicit initialization, states restored by UnmarshalBinary, allocation capacities after growth, and concurrency are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.chaCha8AppendBinary_output"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/chacha8-append-binary.md"
+  },
+  "ChaCha8.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/ChaChaStream.lean",
+    "model_symbol": "GoLean.Math.RandV2.chaCha8Uint64",
+    "claim": "Emits the exact interleaved ChaCha8Rand word, with four-block refills and reseeding, while preserving pending Read bytes.",
+    "limits": "1,800 refill, reseeding, buffer and capacity boundaries and 60,000 sampled cases (17, 2718, 65537). Nonnil receivers initialized by NewChaCha8 or Seed and reached by sequential Read and Uint64 calls. A zero-value receiver before explicit initialization, states restored by UnmarshalBinary, allocation capacities after growth, and concurrency are outside scope.",
+    "configurations": "Direct pinned Go APIs checked against a source-shaped scalar ChaCha8 block model and an independent read assembly, serialization buffer and alias comparison.",
+    "theorems": [
+      "GoLean.Math.RandV2.chaCha8Uint64_pending"
+    ],
+    "check": "difftest/math/rand/v2/chacha-stream/check.go",
+    "control": "difftest/math/rand/v2/chacha-stream/review/main.go",
+    "review": "coverage/packages/math/rand/v2/chacha8-uint64.md"
+  },
+  "absInt32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/RandV2/AbsInt32.lean",
+    "model_symbol": "GoLean.Math.RandV2.absInt32",
+    "claim": "Returns the unsigned magnitude of any signed 32-bit input, including 2147483648 at the minimum signed input. Reapplying the original sign recovers the input bits.",
+    "limits": "All int32 inputs are modeled. Bit recovery and the minimum input are proved. Exact magnitude is tested.",
+    "configurations": "Pinned private Go entry point via a same-package test overlay and independent widened signed magnitude. 9 boundaries and 60,000 random words across seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Math.RandV2.absInt32_sign",
+      "GoLean.Math.RandV2.absInt32_min"
+    ],
+    "check": "difftest/math/rand/v2/abs-int32/check.go",
+    "review": "coverage/packages/math/rand/v2/absInt32.md",
+    "control": "difftest/math/rand/v2/abs-int32/review/main.go"
+  }
+}

@@ -1,16 +1,28 @@
 # Go formalisation in Lean
 
-Lean 4 models and proofs for selected Go standard-library and compiler functions, checked against compiled Go.
+Research artifact. Not maintained and not accepting contributions.
+
+Lean 4 models and proofs for selected Go standard-library functions, with differential checks against compiled Go.
+
+In this snapshot, 1,375 of 6,423 selected standard-library declarations have a recorded model. Zero declarations have a current independent `FAITHFUL` verdict. The inventory also tracks 10,458 compiler-toolchain declarations, all `UNSTARTED`. [Coverage dashboard](coverage/README.md)
 
 ## Run the checks
 
 Install Make, Go 1.21+ and Elan with `lake` on your path. The first run may download Go 1.27.0 and Lean 4.35.0. Run from the repository root. [Go version](.go-version) · [Lean toolchain](lean/lean-toolchain) · [Elan setup](https://github.com/leanprover/elan#installation)
 
+Start with the registered Go and Lean comparisons for `math/bits`. This command builds the Lean drivers for that target and runs its differential checks, source fallbacks and reviewer controls.
+
+```sh
+make diff TARGET=math/bits
+```
+
+Run the full verification suite with the native toolchains.
+
 ```sh
 make verify
 ```
 
-Run this command on your development machine with native Go and Lean toolchains. CI runs the same command on Linux/amd64, Linux/arm64 and macOS/arm64 on pushes and pull requests. It checks the generated files, builds the models and executables, audits the proofs, and runs every registered differential check and mutation control, regardless of `TARGET`. The Linux/amd64 job also runs the 32-bit Linux/386 `bits.Rem` wrapper. [Makefile](Makefile) · [CI workflow](.github/workflows/verify.yml)
+Plain `make verify` checks the generated files, builds the models and executables, audits the proofs, runs the tooling tests and contract replays, and exercises all registered differential checks, source fallbacks and reviewer controls. With `make verify TARGET=math/bits`, the shared checks still run and the differential checks, source fallbacks and reviewer controls are scoped to `math/bits`. The contract replays run with plain `make verify` or `make verify TARGET=math`. CI runs the full suite on Linux/amd64, Linux/arm64 and macOS/arm64 on pushes and pull requests. The Linux/amd64 job also exercises the 32-bit Linux/386 `bits.Rem` wrapper. [Makefile](Makefile) · [CI workflow](.github/workflows/verify.yml)
 
 ## Explore coverage
 
@@ -19,10 +31,11 @@ The inventory uses Linux/amd64 v1 with cgo disabled as a reference profile for t
 ```sh
 make coverage                     # print the dashboard
 make inventory TARGET=math/bits   # list symbols, review states and pinned source lines
-make diff TARGET=math/bits        # run this target's registered Go/Lean comparisons
 ```
 
 ## Formalisation workflow
+
+For bug discovery, start with an independent contract check against Go. `make contracts` replays the floating-point witnesses using Go alone. [Contract-first workflow](CONTRIBUTING.md#check-an-independent-contract-first)
 
 For each declaration, translate the pinned implementation into Lean, compare the executable model with Go, prove a property that can distinguish plausible wrong implementations, and run that property against Go. An independent reviewer checks the source correspondence and tests the property against a deliberately broken implementation. Only a current `FAITHFUL` verdict contributes to reviewed progress. [Contributor guide](CONTRIBUTING.md) · [Formalizing CPython](https://broyojo.com/python-formalization/)
 
@@ -40,13 +53,13 @@ Use the coverage dashboard to check whether a historical verdict still matches t
 
 The `Mul64` worked example connects a guarded transcription of the pinned Go source to a Lean proof for every input pair. Separate differential runs exercise the source fallback and the compiler intrinsic on each execution host. [Mul64 source correspondence](coverage/packages/math/bits/Mul64-source.md)
 
-## Contributing
+## Modelling and review references
 
 The coverage prompt accepts a target and an optional function name. [Contributor guide](CONTRIBUTING.md) · [Agent instructions](AGENTS.md) · [Coverage prompt](prompts/extend-coverage.md)
 
 ## Credits
 
-Maintained by [Guido Iaquinti](https://guido.iaquinti.com/).
+The author is [Guido Iaquinti](https://guido.iaquinti.com/).
 
 The modelling and review workflow follows the CPython formalisation project, whose write-up shows how passing tests and proofs can miss a plausible implementation error. [Formalizing CPython](https://broyojo.com/python-formalization/) · [Code and review process](https://github.com/Broyojo/python-formalization)
 

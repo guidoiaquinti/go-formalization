@@ -1,0 +1,768 @@
+{
+  "newhcode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HCode.lean",
+    "model_symbol": "GoLean.Compress.Flate.newHCode",
+    "claim": "Packs the 16-bit code above the eight-bit length with the high byte zero, and the accessors recover both supplied values.",
+    "limits": "All typed bit patterns are accepted. The setter models a writable nonnil receiver as its before and after words. Huffman construction and nil receiver panics are outside scope.",
+    "configurations": "Pinned private declarations via same-package Go overlay, compiled Lean, and an independent quotient/remainder oracle. 384 boundaries and 60,000 sampled inputs at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.newHCode_parts"
+    ],
+    "check": "difftest/compress/flate/hcode/check.go",
+    "review": "coverage/packages/compress/flate/newhcode.md",
+    "control": "difftest/compress/flate/hcode/review/main.go"
+  },
+  "hcode.len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HCode.lean",
+    "model_symbol": "GoLean.Compress.Flate.hCodeLen",
+    "claim": "Returns all eight low bits of any packed word.",
+    "limits": "All typed bit patterns are accepted. The setter models a writable nonnil receiver as its before and after words. Huffman construction and nil receiver panics are outside scope.",
+    "configurations": "Pinned private declarations via same-package Go overlay, compiled Lean, and an independent quotient/remainder oracle. 384 boundaries and 60,000 sampled inputs at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hCodeLen_bits"
+    ],
+    "check": "difftest/compress/flate/hcode/check.go",
+    "review": "coverage/packages/compress/flate/hcode.len.md",
+    "control": "difftest/compress/flate/hcode/review/main.go"
+  },
+  "hcode.code64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HCode.lean",
+    "model_symbol": "GoLean.Compress.Flate.hCodeCode64",
+    "claim": "Returns the entire upper 24-bit field as an unsigned uint64, including manually constructed high bytes.",
+    "limits": "All typed bit patterns are accepted. The setter models a writable nonnil receiver as its before and after words. Huffman construction and nil receiver panics are outside scope.",
+    "configurations": "Pinned private declarations via same-package Go overlay, compiled Lean, and an independent quotient/remainder oracle. 384 boundaries and 60,000 sampled inputs at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hCodeCode64_bits"
+    ],
+    "check": "difftest/compress/flate/hcode/check.go",
+    "review": "coverage/packages/compress/flate/hcode.code64.md",
+    "control": "difftest/compress/flate/hcode/review/main.go"
+  },
+  "hcode.zero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HCode.lean",
+    "model_symbol": "GoLean.Compress.Flate.hCodeZero",
+    "claim": "Returns true exactly when the entire 32-bit word is zero.",
+    "limits": "All typed bit patterns are accepted. The setter models a writable nonnil receiver as its before and after words. Huffman construction and nil receiver panics are outside scope.",
+    "configurations": "Pinned private declarations via same-package Go overlay, compiled Lean, and an independent quotient/remainder oracle. 384 boundaries and 60,000 sampled inputs at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hCodeZero_iff"
+    ],
+    "check": "difftest/compress/flate/hcode/check.go",
+    "review": "coverage/packages/compress/flate/hcode.zero.md",
+    "control": "difftest/compress/flate/hcode/review/main.go"
+  },
+  "hcode.set": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HCode.lean",
+    "model_symbol": "GoLean.Compress.Flate.hCodeSet",
+    "claim": "Overwrites the receiver with the packed length and code independently of its previous word.",
+    "limits": "All typed bit patterns are accepted. The setter models a writable nonnil receiver as its before and after words. Huffman construction and nil receiver panics are outside scope.",
+    "configurations": "Pinned private declarations via same-package Go overlay, compiled Lean, and an independent quotient/remainder oracle. 384 boundaries and 60,000 sampled inputs at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hCodeSet_overwrites"
+    ],
+    "check": "difftest/compress/flate/hcode/check.go",
+    "review": "coverage/packages/compress/flate/hcode.set.md",
+    "control": "difftest/compress/flate/hcode/review/main.go"
+  },
+  "reverseBits": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/ReverseBits.lean",
+    "model_symbol": "GoLean.Compress.Flate.reverseBits",
+    "claim": "Returns the low count-modulo-16 bits reversed, using all 16 bits when the residue is zero. Each output position follows reversed indexing after the masked shift.",
+    "limits": "All typed uint16 and byte inputs are modeled. The theorem proves each output bit after the pinned word-width shift. Huffman table construction is outside scope.",
+    "configurations": "Pinned private function via Go overlay, Lean bit-vector model and independent per-bit arithmetic oracle. 9,728 boundary rows spanning all 256 counts and 60,000 cases at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.reverseBits_bit"
+    ],
+    "check": "difftest/compress/flate/reverse-bits/check.go",
+    "review_sources": [
+      "lean/GoLean/Math/Bits/Reversal.lean"
+    ],
+    "review": "coverage/packages/compress/flate/reverseBits.md",
+    "control": "difftest/compress/flate/reverse-bits/review/main.go"
+  },
+  "generateFixedLiteralEncoding": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/FixedHuffman.lean",
+    "model_symbol": "GoLean.Compress.Flate.generateFixedLiteralEncoding",
+    "claim": "Constructs the fixed literal and length encoder with 286 visible code words and 512 capacity, exact packed reversed canonical codes, zero spare words, and zero auxiliary workspace. Each native call allocates a distinct table.",
+    "limits": "Deterministic no-argument entry point. The model represents spare zero words and zero workspace without allocation identities; native replay separately checks two allocations. Proofs cover geometry and code lengths; every packed word is checked.",
+    "configurations": "Pinned private Go overlay and Lean compared exhaustively with an independent canonical-code assignment from full alphabet length counts. Checks both native calls, every visible and spare word, and all workspace fields.",
+    "theorems": [
+      "GoLean.Compress.Flate.generateFixedLiteralEncoding_geometry",
+      "GoLean.Compress.Flate.generateFixedLiteralEncoding_transitions"
+    ],
+    "check": "difftest/compress/flate/fixed-huffman/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HCode.lean",
+      "lean/GoLean/Compress/Flate/ReverseBits.lean"
+    ],
+    "review": "coverage/packages/compress/flate/generateFixedLiteralEncoding.md",
+    "control": "difftest/compress/flate/fixed-huffman/review/main.go"
+  },
+  "generateFixedOffsetEncoding": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/FixedHuffman.lean",
+    "model_symbol": "GoLean.Compress.Flate.generateFixedOffsetEncoding",
+    "claim": "Constructs the fixed distance encoder with 30 visible code words and 32 capacity, exact packed reversed canonical codes, zero spare words, and zero auxiliary workspace. Each native call allocates a distinct table.",
+    "limits": "Deterministic no-argument entry point. The model represents spare zero words and zero workspace without allocation identities; native replay separately checks two allocations. Proofs cover geometry and code lengths; every packed word is checked.",
+    "configurations": "Pinned private Go overlay and Lean compared exhaustively with an independent canonical-code assignment from full alphabet length counts. Checks both native calls, every visible and spare word, and all workspace fields.",
+    "theorems": [
+      "GoLean.Compress.Flate.generateFixedOffsetEncoding_geometry",
+      "GoLean.Compress.Flate.generateFixedOffsetEncoding_lengths"
+    ],
+    "check": "difftest/compress/flate/fixed-huffman/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HCode.lean",
+      "lean/GoLean/Compress/Flate/ReverseBits.lean"
+    ],
+    "review": "coverage/packages/compress/flate/generateFixedOffsetEncoding.md",
+    "control": "difftest/compress/flate/fixed-huffman/review/main.go"
+  },
+  "newHuffmanEncoder": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/EncoderInit.lean",
+    "model_symbol": "GoLean.Compress.Flate.newHuffmanEncoder",
+    "claim": "Allocates a zeroed encoder with the requested code length and capacity computed from the uint32 predecessor bit length. Negative sizes produce a runtime bounds error.",
+    "limits": "Feasible allocations and negative sizes. Zero-size behavior on 64-bit native Go would require a 2^32-word allocation and is untested. Resource exhaustion and allocator identity are outside scope.",
+    "configurations": "Pinned private Go overlay, compiled Lean and independent arithmetic doubling oracle. Initialization checks 4,104 fixed sizes and 60,000 seeded inputs (17, 2718, 65537), including every positive size through 4,096. The single sentinel is checked completely.",
+    "theorems": [
+      "GoLean.Compress.Flate.newHuffmanEncoder_negative",
+      "GoLean.Compress.Flate.newHuffmanEncoder_boundary"
+    ],
+    "check": "difftest/compress/flate/encoder-init/check.go",
+    "control": "difftest/compress/flate/encoder-init/review/main.go",
+    "review": "coverage/packages/compress/flate/newHuffmanEncoder.md"
+  },
+  "maxNode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/EncoderInit.lean",
+    "model_symbol": "GoLean.Compress.Flate.maxNode",
+    "claim": "Returns the fixed maximum literal and frequency sentinel.",
+    "limits": "Deterministic no-argument entry point. Both uint16 fields are checked.",
+    "configurations": "Pinned private Go overlay, compiled Lean and independent arithmetic doubling oracle. Initialization checks 4,104 fixed sizes and 60,000 seeded inputs (17, 2718, 65537), including every positive size through 4,096. The single sentinel is checked completely.",
+    "theorems": [
+      "GoLean.Compress.Flate.maxNode_fields"
+    ],
+    "check": "difftest/compress/flate/encoder-init/check.go",
+    "control": "difftest/compress/flate/encoder-init/review/main.go",
+    "review": "coverage/packages/compress/flate/maxNode.md"
+  },
+  "huffmanEncoder.bitLength": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/EncoderCost.lean",
+    "model_symbol": "GoLean.Compress.Flate.bitLength",
+    "claim": "Skips zero frequencies without reading the table and accumulates the native-width frequency-weighted lengths.",
+    "limits": "Finite frequency and input slices, nil receiver and short table panic classes. Arithmetic outputs are represented as native unsigned bit patterns. Concurrent writes and runtime panic messages outside scope.",
+    "configurations": "14 fixed cases and 60,000 samples per modeled width at seeds 17, 2718, 65537, compared with an arithmetic oracle and pinned private Go overlay at native width. Lean checks 32-bit and 64-bit profiles, including wrap boundaries.",
+    "theorems": [
+      "GoLean.Compress.Flate.bitLength_skipsZero"
+    ],
+    "check": "difftest/compress/flate/encoder-cost/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HCode.lean"
+    ],
+    "control": "difftest/compress/flate/encoder-cost/review/main.go",
+    "review": "coverage/packages/compress/flate/huffmanEncoder.bitLength.md"
+  },
+  "huffmanEncoder.bitLengthRaw": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/EncoderCost.lean",
+    "model_symbol": "GoLean.Compress.Flate.bitLengthRaw",
+    "claim": "Reads each indicated symbol and sums its encoded length with a minimum charge of one bit.",
+    "limits": "Finite frequency and input slices, nil receiver and short table panic classes. Arithmetic outputs are represented as native unsigned bit patterns. Concurrent writes and runtime panic messages outside scope.",
+    "configurations": "14 fixed cases and 60,000 samples per modeled width at seeds 17, 2718, 65537, compared with an arithmetic oracle and pinned private Go overlay at native width. Lean checks 32-bit and 64-bit profiles, including wrap boundaries.",
+    "theorems": [
+      "GoLean.Compress.Flate.bitLengthRaw_minimum"
+    ],
+    "check": "difftest/compress/flate/encoder-cost/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HCode.lean"
+    ],
+    "control": "difftest/compress/flate/encoder-cost/review/main.go",
+    "review": "coverage/packages/compress/flate/huffmanEncoder.bitLengthRaw.md"
+  },
+  "huffmanEncoder.canEncodeLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/EncoderCost.lean",
+    "model_symbol": "GoLean.Compress.Flate.canEncodeLen",
+    "claim": "Skips zero frequencies, returns MaxInt32 at the first nonzero frequency with an unset whole word, and otherwise accumulates weighted lengths.",
+    "limits": "Finite frequency and input slices, nil receiver and short table panic classes. Arithmetic outputs are represented as native unsigned bit patterns. Concurrent writes and runtime panic messages outside scope.",
+    "configurations": "14 fixed cases and 60,000 samples per modeled width at seeds 17, 2718, 65537, compared with an arithmetic oracle and pinned private Go overlay at native width. Lean checks 32-bit and 64-bit profiles, including wrap boundaries.",
+    "theorems": [
+      "GoLean.Compress.Flate.canEncodeLen_fullWord"
+    ],
+    "check": "difftest/compress/flate/encoder-cost/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HCode.lean"
+    ],
+    "control": "difftest/compress/flate/encoder-cost/review/main.go",
+    "review": "coverage/packages/compress/flate/huffmanEncoder.canEncodeLen.md"
+  },
+  "token.typ": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenFields.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokenType",
+    "claim": "Returns the two high type bits in their original positions.",
+    "limits": "All typed uint32 token words. Representation only; token construction and semantic validity are outside scope.",
+    "configurations": "Pinned private Go overlay and arithmetic decomposition oracle. 7,168 boundary words cover every type and length combination, plus 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokenFields_partition"
+    ],
+    "check": "difftest/compress/flate/token-fields/check.go",
+    "review": "coverage/packages/compress/flate/token.typ.md",
+    "control": "difftest/compress/flate/token-fields/review/main.go"
+  },
+  "token.literal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenFields.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokenLiteral",
+    "claim": "Returns the low eight bits regardless of type or other fields.",
+    "limits": "All typed uint32 token words. Representation only; token construction and semantic validity are outside scope.",
+    "configurations": "Pinned private Go overlay and arithmetic decomposition oracle. 7,168 boundary words cover every type and length combination, plus 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokenLiteral_offset"
+    ],
+    "check": "difftest/compress/flate/token-fields/check.go",
+    "review": "coverage/packages/compress/flate/token.literal.md",
+    "control": "difftest/compress/flate/token-fields/review/main.go"
+  },
+  "token.offset": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenFields.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokenOffset",
+    "claim": "Returns all 22 low bits, including the embedded offset code.",
+    "limits": "All typed uint32 token words. Representation only; token construction and semantic validity are outside scope.",
+    "configurations": "Pinned private Go overlay and arithmetic decomposition oracle. 7,168 boundary words cover every type and length combination, plus 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokenFields_partition"
+    ],
+    "check": "difftest/compress/flate/token-fields/check.go",
+    "review": "coverage/packages/compress/flate/token.offset.md",
+    "control": "difftest/compress/flate/token-fields/review/main.go"
+  },
+  "token.length": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenFields.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokenLength",
+    "claim": "Extracts the eight length bits above the offset and below the type.",
+    "limits": "All typed uint32 token words. Representation only; token construction and semantic validity are outside scope.",
+    "configurations": "Pinned private Go overlay and arithmetic decomposition oracle. 7,168 boundary words cover every type and length combination, plus 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokenFields_partition"
+    ],
+    "check": "difftest/compress/flate/token-fields/check.go",
+    "review": "coverage/packages/compress/flate/token.length.md",
+    "control": "difftest/compress/flate/token-fields/review/main.go"
+  },
+  "lengthCode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/MatchCodes.lean",
+    "model_symbol": "GoLean.Compress.Flate.lengthCode",
+    "claim": "Returns the DEFLATE length code index for every byte representing the match length minus three, with code 28 at byte 255.",
+    "limits": "Exhaustive byte input. Match token construction outside scope.",
+    "configurations": "Pinned private Go overlay, Lean and independent interval-width algorithms. Every low 16-bit offset and length byte, plus 60,000 full-width samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.lengthCode_max",
+      "GoLean.Compress.Flate.lengthCode_firstPaired"
+    ],
+    "check": "difftest/compress/flate/match-codes/check.go",
+    "review": "coverage/packages/compress/flate/lengthCode.md",
+    "control": "difftest/compress/flate/match-codes/review/main.go"
+  },
+  "offsetCode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/MatchCodes.lean",
+    "model_symbol": "GoLean.Compress.Flate.offsetCode",
+    "claim": "Returns the distance code for the stored offset, using the pinned shifted and byte-truncated selection on the long branch.",
+    "limits": "All uint32 offsets modeled including values beyond the DEFLATE window. Periodicity on the long branch is proved. Compression output outside scope.",
+    "configurations": "Pinned private Go overlay, Lean and independent interval-width algorithms. Every low 16-bit offset and length byte, plus 60,000 full-width samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.offsetCode_switch",
+      "GoLean.Compress.Flate.offsetCode_periodic"
+    ],
+    "check": "difftest/compress/flate/match-codes/check.go",
+    "review": "coverage/packages/compress/flate/offsetCode.md",
+    "control": "difftest/compress/flate/match-codes/review/main.go"
+  },
+  "noEOF": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/NoEOF.lean",
+    "model_symbol": "GoLean.Compress.Flate.noEOF",
+    "claim": "Replaces the exact io.EOF sentinel with io.ErrUnexpectedEOF and preserves the input identity in every other case.",
+    "limits": "Exhaustive modeled error categories with a quantified identity theorem for arbitrary other errors. Error object internals and decompressor I/O are outside scope.",
+    "configurations": "Pinned private Go overlay and Lean. Eight fixed cases cover nil, both sentinels, other EOF text and wrapped EOF, a typed nil, an incomparable slice-backed error and another pointer error.",
+    "theorems": [
+      "GoLean.Compress.Flate.noEOF_eof",
+      "GoLean.Compress.Flate.noEOF_preserves"
+    ],
+    "check": "difftest/compress/flate/no-eof/check.go",
+    "review": "coverage/packages/compress/flate/noEOF.md",
+    "control": "difftest/compress/flate/no-eof/review/main.go",
+    "review_sources": [
+      "difftest/compress/flate/no-eof/review/testdata/control_test.go"
+    ]
+  },
+  "hash4u": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HashWords.lean",
+    "model_symbol": "GoLean.Compress.Flate.hash4u",
+    "claim": "Returns the upper requested bits of the wrapped 32-bit product with the four-byte prime. Byte shift subtraction and overshift follow Go.",
+    "limits": "All typed word, width and byte-count inputs. Hash-chain and compressor effects are outside scope.",
+    "configurations": "Pinned private Go overlay and Lean against arbitrary-precision modular arithmetic. 66,240 boundaries include all width/count pairs, and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hash4u_full"
+    ],
+    "check": "difftest/compress/flate/hash-words/check.go",
+    "control": "difftest/compress/flate/hash-words/review/main.go",
+    "review": "coverage/packages/compress/flate/hash4u.md"
+  },
+  "hashLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HashWords.lean",
+    "model_symbol": "GoLean.Compress.Flate.hashLen",
+    "claim": "Selects the exact 3-, 5-, 6-, 7-, or 8-byte multiply-and-shift path, defaulting to the four-byte hash. Returns the low 32 result bits.",
+    "limits": "All typed word, width and byte-count inputs. Hash-chain and compressor effects are outside scope.",
+    "configurations": "Pinned private Go overlay and Lean against arbitrary-precision modular arithmetic. 66,240 boundaries include all width/count pairs, and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hashLen_four",
+      "GoLean.Compress.Flate.hashLen_default"
+    ],
+    "check": "difftest/compress/flate/hash-words/check.go",
+    "control": "difftest/compress/flate/hash-words/review/main.go",
+    "review": "coverage/packages/compress/flate/hash-len.md"
+  },
+  "hash4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HashWindow.lean",
+    "model_symbol": "GoLean.Compress.Flate.hash4",
+    "claim": "Reads the first four bytes through slice capacity and returns the 17-bit little-endian hash, or a bounds failure if capacity is short.",
+    "limits": "Legal finite slice geometry, disjoint source and destination, exact full destination backing and bounds failure class. Panic strings and concurrent writes outside scope.",
+    "configurations": "Pinned private Go overlay and Lean against independent per-window little-endian recomputation. 6,006 boundary rows and 60,000 sampled cases at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.hash4_ignoreSuffix"
+    ],
+    "check": "difftest/compress/flate/hash-window/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HashWords.lean"
+    ],
+    "review": "coverage/packages/compress/flate/hash4.md",
+    "control": "difftest/compress/flate/hash-window/review/main.go"
+  },
+  "bulkHash4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/HashWindow.lean",
+    "model_symbol": "GoLean.Compress.Flate.bulkHash4",
+    "claim": "Writes rolling little-endian four-byte hashes for every visible source window. It preserves backing beyond the writes and earlier writes before a short-destination bounds failure.",
+    "limits": "Legal finite slice geometry, disjoint source and destination, exact full destination backing and bounds failure class. Panic strings and concurrent writes outside scope.",
+    "configurations": "Pinned private Go overlay and Lean against independent per-window little-endian recomputation. 6,006 boundary rows and 60,000 sampled cases at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.bulkHash4_three",
+      "GoLean.Compress.Flate.bulkHash4_first"
+    ],
+    "check": "difftest/compress/flate/hash-window/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/HashWords.lean"
+    ],
+    "review": "coverage/packages/compress/flate/bulkHash4.md",
+    "control": "difftest/compress/flate/hash-window/review/main.go"
+  },
+  "loadLE8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/LittleEndian.lean",
+    "model_symbol": "GoLean.Compress.Flate.loadLE8",
+    "claim": "Loads a visible indexed byte or signals a bounds failure.",
+    "limits": "Valid finite slice geometry, all ten index types, and bounds failure class. Store is observed through the full backing array. Panic strings and concurrent memory changes outside scope.",
+    "configurations": "Pinned same-package Go overlay and Lean with independent standard byte-order oracle and index arithmetic. 3,510 boundary rows and 60,000 samples at seeds 17, 2718, 65537. Native int widths as configured by Go.",
+    "theorems": [
+      "GoLean.Compress.Flate.loadLE8_short"
+    ],
+    "check": "difftest/compress/flate/little-endian/check.go",
+    "review_sources": [],
+    "review": "coverage/packages/compress/flate/loadLE8.md",
+    "control": "difftest/compress/flate/little-endian/review/main.go"
+  },
+  "loadLE32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/LittleEndian.lean",
+    "model_symbol": "GoLean.Compress.Flate.loadLE32",
+    "claim": "Loads four little-endian bytes through slice capacity when the typed index and typed endpoint are valid.",
+    "limits": "Valid finite slice geometry, all ten index types, and bounds failure class. Store is observed through the full backing array. Panic strings and concurrent memory changes outside scope.",
+    "configurations": "Pinned same-package Go overlay and Lean with independent standard byte-order oracle and index arithmetic. 3,510 boundary rows and 60,000 samples at seeds 17, 2718, 65537. Native int widths as configured by Go.",
+    "theorems": [
+      "GoLean.Compress.Flate.loadLE32_capacity"
+    ],
+    "check": "difftest/compress/flate/little-endian/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/EndianRead.lean"
+    ],
+    "review": "coverage/packages/compress/flate/loadLE32.md",
+    "control": "difftest/compress/flate/little-endian/review/main.go"
+  },
+  "loadLE64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/LittleEndian.lean",
+    "model_symbol": "GoLean.Compress.Flate.loadLE64",
+    "claim": "Loads eight little-endian bytes through slice capacity and signals bounds failure on wrapped or invalid typed endpoints.",
+    "limits": "Valid finite slice geometry, all ten index types, and bounds failure class. Store is observed through the full backing array. Panic strings and concurrent memory changes outside scope.",
+    "configurations": "Pinned same-package Go overlay and Lean with independent standard byte-order oracle and index arithmetic. 3,510 boundary rows and 60,000 samples at seeds 17, 2718, 65537. Native int widths as configured by Go.",
+    "theorems": [
+      "GoLean.Compress.Flate.loadLE64_wrappedIndex"
+    ],
+    "check": "difftest/compress/flate/little-endian/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/EndianRead.lean"
+    ],
+    "review": "coverage/packages/compress/flate/loadLE64.md",
+    "control": "difftest/compress/flate/little-endian/review/main.go"
+  },
+  "storeLE64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/LittleEndian.lean",
+    "model_symbol": "GoLean.Compress.Flate.storeLE64",
+    "claim": "Writes the first eight visible bytes in little-endian order and preserves the rest of the backing. It performs no writes on a short view.",
+    "limits": "Valid finite slice geometry, all ten index types, and bounds failure class. Store is observed through the full backing array. Panic strings and concurrent memory changes outside scope.",
+    "configurations": "Pinned same-package Go overlay and Lean with independent standard byte-order oracle and index arithmetic. 3,510 boundary rows and 60,000 samples at seeds 17, 2718, 65537. Native int widths as configured by Go.",
+    "theorems": [
+      "GoLean.Compress.Flate.storeLE64_short"
+    ],
+    "check": "difftest/compress/flate/little-endian/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/EndianPut.lean"
+    ],
+    "review": "coverage/packages/compress/flate/storeLE64.md",
+    "control": "difftest/compress/flate/little-endian/review/main.go"
+  },
+  "histogram": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/Histogram.lean",
+    "model_symbol": "GoLean.Compress.Flate.histogram",
+    "claim": "Processes inputs below 8,192 bytes in order and delegates inputs at or above 8,192 bytes to the four-quarter loop. Adds byte frequencies modulo 65,536 across the first 256 uint16 counters and preserves the remaining backing. Capacity under 256 panics before any write, even with empty input.",
+    "limits": "Ordinary disjoint Go byte input and uint16 backing, with any valid histogram slice length and capacity. The model stores the backing from the slice start through capacity and abstracts away initial length because reslicing uses available capacity. The observable panic outcome is modeled without the runtime panic payload. Lean proves the short-capacity branch leaves the complete backing unchanged. Traversal/counting agreement is differential.",
+    "configurations": "Pinned native Go via direct same-package overlay, compiled Lean, and independent frequency-count oracle. 443 fixed rows include all four remainders around 8,192 bytes, bin updates spanning multiple uint16 wraps, capacity 255/256, nil and zero-length inputs, and full-backing tail sentinels. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.histogram_short_capacity"
+    ],
+    "check": "difftest/compress/flate/histogram/check.go",
+    "review": "coverage/packages/compress/flate/histogram.md",
+    "control": "difftest/compress/flate/histogram/review/main.go",
+    "review_sources": [
+      "difftest/compress/flate/histogram/review/testdata/control_test.go"
+    ]
+  },
+  "histogramSplit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/Histogram.lean",
+    "model_symbol": "GoLean.Compress.Flate.histogramSplit",
+    "claim": "Consumes the length remainder first and then interleaves four equal contiguous quarters, incrementing each selected counter even when lanes select the same bin. Adds byte frequencies modulo 65,536 across the first 256 uint16 counters and preserves the remaining backing. Capacity under 256 panics before any write, even with empty input.",
+    "limits": "Ordinary disjoint Go byte input and uint16 backing, with any valid histogram slice length and capacity. The model stores the backing from the slice start through capacity and abstracts away initial length because reslicing uses available capacity. The observable panic outcome is modeled without the runtime panic payload. Lean proves the short-capacity branch leaves the complete backing unchanged. Traversal/counting agreement is differential.",
+    "configurations": "Pinned native Go via direct same-package overlay, compiled Lean, and independent frequency-count oracle. 443 fixed rows include all four remainders around 8,192 bytes, bin updates spanning multiple uint16 wraps, capacity 255/256, nil and zero-length inputs, and full-backing tail sentinels. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.histogramSplit_short_capacity"
+    ],
+    "check": "difftest/compress/flate/histogram/check.go",
+    "review": "coverage/packages/compress/flate/histogramSplit.md",
+    "control": "difftest/compress/flate/histogram/review/main.go",
+    "review_sources": [
+      "difftest/compress/flate/histogram/review/testdata/control_test.go"
+    ]
+  },
+  "matchLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/MatchLength.lean",
+    "model_symbol": "GoLean.Compress.Flate.matchLen",
+    "claim": "Returns the first differing byte or the full left length when all bytes agree. Models the timing of capacity checks on eight-byte loads and length and capacity checks at the tail transition.",
+    "limits": "Legal slice geometry, finite bytes, and no concurrent changes. Summarizes word XOR and trailing-zero division as first difference inside an eight-byte chunk. Bounds failure class only.",
+    "configurations": "Pinned private Go overlay, Lean and independent byte-scan oracle. 6,084 boundary geometries and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.matchLen_empty",
+      "GoLean.Compress.Flate.matchLen_tailCapacity",
+      "GoLean.Compress.Flate.matchLen_blockTailBounds"
+    ],
+    "check": "difftest/compress/flate/match-length/check.go",
+    "control": "difftest/compress/flate/match-length/review/main.go",
+    "review": "coverage/packages/compress/flate/matchLen.md"
+  },
+  "CorruptInputError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/ErrorText.lean",
+    "model_symbol": "GoLean.Compress.Flate.corruptInputError",
+    "claim": "Formats the signed offset in decimal after the corrupt-input prefix.",
+    "limits": "Raw string bytes and signed offsets. The I/O wrappers represent nested callbacks by return or panic outcome, call count, and nil access. Stack and custom callback internals are outside scope.",
+    "configurations": "Pinned public Go methods and Lean against independent fmt-based formatting. 280 boundaries and 60,000 samples at seeds 17, 2718, and 65537. Verifies nil and typed nil callback dispatch and panic identity.",
+    "theorems": [
+      "GoLean.Compress.Flate.corruptInputError_sign"
+    ],
+    "check": "difftest/compress/flate/error-text/check.go",
+    "review": "coverage/packages/compress/flate/CorruptInputError.Error.md",
+    "control": "difftest/compress/flate/error-text/review/main.go"
+  },
+  "InternalError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/ErrorText.lean",
+    "model_symbol": "GoLean.Compress.Flate.internalError",
+    "claim": "Prefixes the input string while preserving every raw byte.",
+    "limits": "Raw string bytes and signed offsets. The I/O wrappers represent nested callbacks by return or panic outcome, call count, and nil access. Stack and custom callback internals are outside scope.",
+    "configurations": "Pinned public Go methods and Lean against independent fmt-based formatting. 280 boundaries and 60,000 samples at seeds 17, 2718, and 65537. Verifies nil and typed nil callback dispatch and panic identity.",
+    "theorems": [
+      "GoLean.Compress.Flate.internalError_raw"
+    ],
+    "check": "difftest/compress/flate/error-text/check.go",
+    "review": "coverage/packages/compress/flate/InternalError.Error.md",
+    "control": "difftest/compress/flate/error-text/review/main.go"
+  },
+  "ReadError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/ErrorText.lean",
+    "model_symbol": "GoLean.Compress.Flate.readError",
+    "claim": "Formats the read offset and body and delegates exactly once to the nested Error method on a live receiver and interface.",
+    "limits": "Raw string bytes and signed offsets. The I/O wrappers represent nested callbacks by return or panic outcome, call count, and nil access. Stack and custom callback internals are outside scope.",
+    "configurations": "Pinned public Go methods and Lean against independent fmt-based formatting. 280 boundaries and 60,000 samples at seeds 17, 2718, and 65537. Verifies nil and typed nil callback dispatch and panic identity.",
+    "theorems": [
+      "GoLean.Compress.Flate.readError_callback"
+    ],
+    "check": "difftest/compress/flate/error-text/check.go",
+    "review": "coverage/packages/compress/flate/ReadError.Error.md",
+    "control": "difftest/compress/flate/error-text/review/main.go"
+  },
+  "WriteError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/ErrorText.lean",
+    "model_symbol": "GoLean.Compress.Flate.writeError",
+    "claim": "Formats the write offset and body and delegates exactly once to the nested Error method on a live receiver and interface.",
+    "limits": "Raw string bytes and signed offsets. The I/O wrappers represent nested callbacks by return or panic outcome, call count, and nil access. Stack and custom callback internals are outside scope.",
+    "configurations": "Pinned public Go methods and Lean against independent fmt-based formatting. 280 boundaries and 60,000 samples at seeds 17, 2718, and 65537. Verifies nil and typed nil callback dispatch and panic identity.",
+    "theorems": [
+      "GoLean.Compress.Flate.writeError_callback"
+    ],
+    "check": "difftest/compress/flate/error-text/check.go",
+    "review": "coverage/packages/compress/flate/WriteError.Error.md",
+    "control": "difftest/compress/flate/error-text/review/main.go"
+  },
+  "emitLiterals": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenState.lean",
+    "model_symbol": "GoLean.Compress.Flate.emitLiterals",
+    "claim": "Writes input bytes as literal token words in order, incrementing the corresponding bins and count modulo 65,536 with backing positions wrapping with the count.",
+    "limits": "Nonnil receiver with fixed-size Go arrays and valid view indexes after reslicing. Array contents are modeled as index functions on their valid ranges. Alias observation is to the same receiver, without concurrent writes. Native full backing is observed on fixed rows and all touched cells plus sentinel indexes on seeded rows. Lean observes changed histogram bins, representative unchanged bins and queried backing. Initial fixture histograms use a uniform seed; emitted slices contain up to 16 disjoint bytes.",
+    "configurations": "Pinned same-package direct Go calls, compiled Lean and independent sparse write and frequency oracles. 280 fixed cases and 60,000 sampled rows at seeds 17, 2718 and 65537 per declaration. Fixed cases cover zero count with retained nonzero histograms, both uint16 wraps, and both alias directions.",
+    "theorems": [
+      "GoLean.Compress.Flate.emitLiterals_empty"
+    ],
+    "check": "difftest/compress/flate/token-state/check.go",
+    "review": "coverage/packages/compress/flate/emitLiterals.md",
+    "control": "difftest/compress/flate/token-state/review/main.go"
+  },
+  "tokens.Reset": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenState.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokensReset",
+    "claim": "Leaves the entire receiver intact at count zero. Otherwise clears the count, filled count and all three histograms, retaining the token backing.",
+    "limits": "Nonnil receiver with fixed-size Go arrays and valid view indexes after reslicing. Array contents are modeled as index functions on their valid ranges. Alias observation is to the same receiver, without concurrent writes. Native full backing is observed on fixed rows and all touched cells plus sentinel indexes on seeded rows. Lean observes changed histogram bins, representative unchanged bins and queried backing. Initial fixture histograms use a uniform seed; emitted slices contain up to 16 disjoint bytes.",
+    "configurations": "Pinned same-package direct Go calls, compiled Lean and independent sparse write and frequency oracles. 280 fixed cases and 60,000 sampled rows at seeds 17, 2718 and 65537 per declaration. Fixed cases cover zero count with retained nonzero histograms, both uint16 wraps, and both alias directions.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokensReset_zero_count"
+    ],
+    "check": "difftest/compress/flate/token-state/check.go",
+    "review": "coverage/packages/compress/flate/tokens.Reset.md",
+    "control": "difftest/compress/flate/token-state/review/main.go"
+  },
+  "tokens.AddLiteral": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenState.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokensAddLiteral",
+    "claim": "Writes the literal word at the old count and increments that literal bin and the count modulo 65,536.",
+    "limits": "Nonnil receiver with fixed-size Go arrays and valid view indexes after reslicing. Array contents are modeled as index functions on their valid ranges. Alias observation is to the same receiver, without concurrent writes. Native full backing is observed on fixed rows and all touched cells plus sentinel indexes on seeded rows. Lean observes changed histogram bins, representative unchanged bins and queried backing. Initial fixture histograms use a uniform seed; emitted slices contain up to 16 disjoint bytes.",
+    "configurations": "Pinned same-package direct Go calls, compiled Lean and independent sparse write and frequency oracles. 280 fixed cases and 60,000 sampled rows at seeds 17, 2718 and 65537 per declaration. Fixed cases cover zero count with retained nonzero histograms, both uint16 wraps, and both alias directions.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokensAddLiteral_written"
+    ],
+    "check": "difftest/compress/flate/token-state/check.go",
+    "review": "coverage/packages/compress/flate/tokens.AddLiteral.md",
+    "control": "difftest/compress/flate/token-state/review/main.go"
+  },
+  "tokens.AddEOB": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenState.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokensAddEOB",
+    "claim": "Writes token 256 at the old count and increments extra histogram bin zero and the count modulo 65,536.",
+    "limits": "Nonnil receiver with fixed-size Go arrays and valid view indexes after reslicing. Array contents are modeled as index functions on their valid ranges. Alias observation is to the same receiver, without concurrent writes. Native full backing is observed on fixed rows and all touched cells plus sentinel indexes on seeded rows. Lean observes changed histogram bins, representative unchanged bins and queried backing. Initial fixture histograms use a uniform seed; emitted slices contain up to 16 disjoint bytes.",
+    "configurations": "Pinned same-package direct Go calls, compiled Lean and independent sparse write and frequency oracles. 280 fixed cases and 60,000 sampled rows at seeds 17, 2718 and 65537 per declaration. Fixed cases cover zero count with retained nonzero histograms, both uint16 wraps, and both alias directions.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokensAddEOB_written"
+    ],
+    "check": "difftest/compress/flate/token-state/check.go",
+    "review": "coverage/packages/compress/flate/tokens.AddEOB.md",
+    "control": "difftest/compress/flate/token-state/review/main.go"
+  },
+  "tokens.Slice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/TokenState.lean",
+    "model_symbol": "GoLean.Compress.Flate.tokensSlice",
+    "claim": "Returns a nonnil prefix view of the token backing with the current count as length and capacity 65,536. The view can expose the last backing entry and shares storage with its receiver.",
+    "limits": "Nonnil receiver with fixed-size Go arrays and valid view indexes after reslicing. Array contents are modeled as index functions on their valid ranges. Alias observation is to the same receiver, without concurrent writes. Native full backing is observed on fixed rows and all touched cells plus sentinel indexes on seeded rows. Lean observes changed histogram bins, representative unchanged bins and queried backing. Initial fixture histograms use a uniform seed; emitted slices contain up to 16 disjoint bytes.",
+    "configurations": "Pinned same-package direct Go calls, compiled Lean and independent sparse write and frequency oracles. 280 fixed cases and 60,000 sampled rows at seeds 17, 2718 and 65537 per declaration. Fixed cases cover zero count with retained nonzero histograms, both uint16 wraps, and both alias directions.",
+    "theorems": [
+      "GoLean.Compress.Flate.tokensSlice_last_cell"
+    ],
+    "check": "difftest/compress/flate/token-state/check.go",
+    "review": "coverage/packages/compress/flate/tokens.Slice.md",
+    "control": "difftest/compress/flate/token-state/review/main.go"
+  },
+  "dictDecoder.histSize": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.histSize",
+    "claim": "Returns the visible buffer length for a full window and the writer position otherwise.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.histSize_full"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.histSize.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.availRead": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.availRead",
+    "claim": "Returns the count between the reader and writer positions.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.availRead_ready"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.availRead.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.availWrite": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.availWrite",
+    "claim": "Returns the remaining visible space after the writer position.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.availWrite_ready"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.availWrite.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.writeSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.writeSlice",
+    "claim": "Returns an aliased view beginning at the writer position and retaining spare capacity.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.writeSlice_origin"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.writeSlice.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.writeMark": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.writeMark",
+    "claim": "Advances the writer position by the requested in-range count.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.writeMark_value"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.writeMark.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.writeByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.writeByte",
+    "claim": "Writes one byte and advances the writer or fails on a full visible view without changing the state.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.writeByte_full"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.writeByte.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.readFlush": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryState.lean",
+    "model_symbol": "GoLean.Compress.Flate.readFlush",
+    "claim": "Returns an aliased unread view and advances the reader, or resets both cursors and sets full at the end of the visible buffer.",
+    "limits": "Nonnil decoder with valid geometry and 0 \u2264 read \u2264 written \u2264 visible length; mark respects available space. WriteByte also checks failure at the end. Concurrent mutation, alias pointer representation and panic text outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent slice-and-position oracle. 991 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native checks alias identity when capacity is nonzero, nilness and full backing.",
+    "theorems": [
+      "GoLean.Compress.Flate.readFlush_full"
+    ],
+    "check": "difftest/compress/flate/dictionary-state/check.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.readFlush.md",
+    "control": "difftest/compress/flate/dictionary-state/review/main.go"
+  },
+  "dictDecoder.init": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryInit.lean",
+    "model_symbol": "GoLean.Compress.Flate.dictionaryInit",
+    "claim": "Resizes or replaces backing, copies the final fitting bytes of the preset, preserves unused reused bytes, and resets read/write positions and full state.",
+    "limits": "Nonnil decoder, feasible nonnegative size, valid prior geometry and disjoint preset backing. Exact old and new backing and nilness. Distinct zero-capacity allocations are not represented. Concurrent mutation and resource failures outside scope.",
+    "configurations": "Pinned private Go overlay observes backing identity and entire buffers, compared to Lean and an independent suffix-copy oracle. 900 fixed and 60,000 sampled inputs at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.dictionaryInit_zero",
+      "GoLean.Compress.Flate.dictionaryInit_readEqualsWrite"
+    ],
+    "check": "difftest/compress/flate/dictionary-init/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/DictionaryState.lean"
+    ],
+    "control": "difftest/compress/flate/dictionary-init/review/main.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.init.md"
+  },
+  "dictDecoder.writeCopy": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryCopy.lean",
+    "model_symbol": "GoLean.Compress.Flate.writeCopy",
+    "claim": "Copies up to the available output length from a positive history distance, wrapping the source through a full ring and allowing new output to feed subsequent bytes.",
+    "limits": "Nonnil decoder, legal cursor geometry, positive distance within available history, and nonnegative feasible count without int overflow. Models bulk Go copies as bytewise LZ77 repetition; counts, read/write and full fields, and all backing bytes observed.",
+    "configurations": "Pinned private Go overlay and Lean with a separate immutable period oracle. 7,644 fixed rows and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.writeCopy_space"
+    ],
+    "check": "difftest/compress/flate/dictionary-copy/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/DictionaryState.lean"
+    ],
+    "control": "difftest/compress/flate/dictionary-copy/review/main.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.writeCopy.md"
+  },
+  "dictDecoder.tryWriteCopy": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Compress/Flate/DictionaryCopy.lean",
+    "model_symbol": "GoLean.Compress.Flate.tryWriteCopy",
+    "claim": "Leaves the entire state unchanged when the source would wrap or the request exceeds visible output. Otherwise copies the whole request and advances the writer.",
+    "limits": "Nonnil decoder, legal cursor geometry, positive distance within available history, and nonnegative feasible count without int overflow. Models bulk Go copies as bytewise LZ77 repetition; counts, read/write and full fields, and all backing bytes observed.",
+    "configurations": "Pinned private Go overlay and Lean with a separate immutable period oracle. 7,644 fixed rows and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Compress.Flate.tryWriteCopy_wrapped",
+      "GoLean.Compress.Flate.tryWriteCopy_short"
+    ],
+    "check": "difftest/compress/flate/dictionary-copy/check.go",
+    "review_sources": [
+      "lean/GoLean/Compress/Flate/DictionaryState.lean"
+    ],
+    "control": "difftest/compress/flate/dictionary-copy/review/main.go",
+    "review": "coverage/packages/compress/flate/dictDecoder.tryWriteCopy.md"
+  }
+}

@@ -1,0 +1,421 @@
+{
+  "Palette.Convert": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/PaletteConvert.lean",
+    "model_symbol": "GoLean.Image.Color.paletteConvert",
+    "claim": "Return nil for empty palettes without invoking the query. Otherwise delegate selection to Palette.Index, propagate its panic or return the interface value at the selected slot after callbacks complete.",
+    "limits": "The model represents interface identity or nil, callback order and outcomes, and the slot value present after selection. It abstracts callback side effects beyond those observations. The selection theorem assumes the returned index denotes a palette slot. The Go comparison uses 14 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls image/color.Palette.Convert with nil and non-nil empty palettes, distinct entry pointer identities and callbacks that can panic or replace their own slot.",
+    "theorems": [
+      "GoLean.Image.Color.paletteConvert_empty",
+      "GoLean.Image.Color.paletteConvert_selected",
+      "GoLean.Image.Color.paletteConvert_panic"
+    ],
+    "check": "difftest/image/color/palette-convert/check.go",
+    "control": "coverage/packages/image/color/controls/PaletteConvert/main.go",
+    "review": "coverage/packages/image/color/Palette.Convert.md"
+  },
+  "Palette.Index": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/PaletteIndex.lean",
+    "model_symbol": "GoLean.Image.Color.paletteIndex",
+    "claim": "Call the query then visit palette entries in order, choosing the earliest minimum of the four per-channel truncated squared differences. Stop immediately at the first score of zero. Return index zero for an empty palette after calling the query.",
+    "limits": "The model preserves 32-bit distance arithmetic and represents callbacks by their observable ordered outcomes, including nil interfaces and panics. Callback effects beyond the trace and outcomes, allocator behavior and races are outside the claim. The general return theorem covers normally returning inputs; separate proofs cover empty palettes, query failures and stopping at a zero-scoring first entry. The Go comparison uses 11 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly invokes image/color.Palette.Index on contract-valid premultiplied channels and on synthetic callbacks using all uint32 values, checking the index or panic and ordered callback trace.",
+    "theorems": [
+      "GoLean.Image.Color.paletteIndex_return",
+      "GoLean.Image.Color.paletteIndex_query",
+      "GoLean.Image.Color.paletteIndex_zero"
+    ],
+    "check": "difftest/image/color/palette-index/check.go",
+    "control": "coverage/packages/image/color/controls/PaletteIndex/main.go",
+    "review": "coverage/packages/image/color/Palette.Index.md"
+  },
+  "nYCbCrAModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NYCbCrAModel.lean",
+    "model_symbol": "GoLean.Image.Color.nYCbCrAModel",
+    "claim": "Preserve NYCbCrA values and add full alpha to YCbCr values. Other colors call RGBA once, unpremultiply RGB when alpha is nonzero using uint32 arithmetic, convert the narrowed RGB bytes to YCbCr, and narrow alpha to its second byte.",
+    "limits": "Models concrete value branches, resulting channels, RGBA call count and whether a panic occurred. The Lean model abstracts the specific panic payload and callback side effects beyond the call count. The Go fixture checks recovery of the original pointer payload and the runtime panic type for a nil interface. Comparison uses 5,122 boundary cases and 60,000 sampled inputs with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private image/color.nYCbCrAModel declaration directly through a same-package test overlay.",
+    "theorems": [
+      "GoLean.Image.Color.nYCbCrAModel_values",
+      "GoLean.Image.Color.nYCbCrAModel_return",
+      "GoLean.Image.Color.nYCbCrAModel_panic"
+    ],
+    "check": "difftest/image/color/nycbcra-model/check.go",
+    "control": "coverage/packages/image/color/controls/NYCbCrAModel/main.go",
+    "review": "coverage/packages/image/color/nYCbCrAModel.md"
+  },
+  "ModelFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/ModelFunc.lean",
+    "model_symbol": "GoLean.Image.Color.modelFunc",
+    "claim": "Returns a non-nil pointer wrapper storing the supplied callback, including nil, without invoking it. Successive wrappers compare unequal even when they store the same callback.",
+    "limits": "The allocation supply represents abstract wrapper identity, with no addresses or allocator behavior. Callback values are opaque in the proof. Native Go observes stored behavior through Convert, covering returning, panicking and nil callbacks on 75 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls image/color.ModelFunc twice, checks dynamic type, nilness, interface comparison and construction-time call count, then compares both wrappers' Convert results, callback arguments and calls.",
+    "theorems": [
+      "GoLean.Image.Color.modelFunc_spec",
+      "GoLean.Image.Color.modelFunc_distinct"
+    ],
+    "check": "difftest/image/color/model-func/check.go",
+    "control": "coverage/packages/image/color/controls/ModelFunc/main.go",
+    "review": "coverage/packages/image/color/ModelFunc.md"
+  },
+  "modelFunc.Convert": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/ModelFuncConvert.lean",
+    "model_symbol": "GoLean.Image.Color.modelFuncConvert",
+    "claim": "Calls the stored callback exactly once with the original color, propagating its return value or panic payload and preserving its state changes. A nil receiver or nil callback panics without invoking a callback.",
+    "limits": "The callback is an abstract state transition returning a color or panic value. Go observes nil and pointer identity with marker colors, call count, argument, state changes and typed panic payload. Nil failures are checked as runtime panics without matching their diagnostic text. The comparison uses 108 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go calls (*modelFunc).Convert directly through a temporary same-package test overlay.",
+    "theorems": [
+      "GoLean.Image.Color.modelFuncConvert_spec",
+      "GoLean.Image.Color.modelFuncConvert_nilReceiver",
+      "GoLean.Image.Color.modelFuncConvert_nilCallback"
+    ],
+    "check": "difftest/image/color/model-func-convert/check.go",
+    "control": "coverage/packages/image/color/controls/ModelFuncConvert/main.go",
+    "review": "coverage/packages/image/color/modelFunc.Convert.md"
+  },
+  "Alpha.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Alpha.lean",
+    "model_symbol": "GoLean.Image.Color.alphaRGBA",
+    "claim": "All four channels equal the unsigned input byte multiplied by 257.",
+    "limits": "Models the sole uint8 field of Alpha. The comparison exhausts all 256 input values.",
+    "configurations": "Native Go calling image/color.Alpha.RGBA directly.",
+    "theorems": ["GoLean.Image.Color.alphaRGBA_spec"],
+    "check": "difftest/image/color/alpha-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/AlphaRGBA/main.go",
+    "review": "coverage/packages/image/color/Alpha.RGBA.md"
+  },
+  "Alpha16.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Alpha16.lean",
+    "model_symbol": "GoLean.Image.Color.alpha16RGBA",
+    "claim": "All four channels equal the original unsigned 16-bit alpha field.",
+    "limits": "Models the sole uint16 field of Alpha16. The comparison exhausts all 65,536 input values.",
+    "configurations": "Native Go calling image/color.Alpha16.RGBA directly.",
+    "theorems": ["GoLean.Image.Color.alpha16RGBA_spec"],
+    "check": "difftest/image/color/alpha16-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/AlphaRGBA/main.go",
+    "review": "coverage/packages/image/color/Alpha16.RGBA.md"
+  },
+  "CMYK.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/CMYK.lean",
+    "model_symbol": "GoLean.Image.Color.cmykRGBA",
+    "claim": "Each RGB channel is the floor of 257 times its complementary ink byte times the complementary black byte divided by 255. Alpha is 65535.",
+    "limits": "The theorem covers all four byte fields. The source-shaped model uses uint32 arithmetic and the proof shows that the subtractions and products do not wrap. The check uses 65,536 tuples exhausting every ink-black pair in each RGB position, plus 60,000 sampled tuples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling image/color.CMYK.RGBA.",
+    "theorems": ["GoLean.Image.Color.cmykRGBA_spec"],
+    "check": "difftest/image/color/cmyk-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/WideRGBA/main.go",
+    "review": "coverage/packages/image/color/CMYK.RGBA.md"
+  },
+  "CMYKToRGB": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/CMYKToRGB.lean",
+    "model_symbol": "GoLean.Image.Color.cmykToRGB",
+    "claim": "Returns each channel in cyan, magenta and yellow order as floor(257 × (255 − ink) × (255 − black) / 65280).",
+    "limits": "Proof covers all four input bytes. The model reuses the equivalent widened CMYK.RGBA channel arithmetic before applying the source right shift and byte narrowing. The check covers every ink/black byte pair in each position using 65,536 tuples plus 60,000 sampled tuples with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calling image/color.CMYKToRGB directly.",
+    "theorems": ["GoLean.Image.Color.cmykToRGB_spec"],
+    "check": "difftest/image/color/cmyk-to-rgb/check.go",
+    "control": "coverage/packages/image/color/controls/InkConversions/main.go",
+    "review": "coverage/packages/image/color/CMYKToRGB.md"
+  },
+  "Gray.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Gray.lean",
+    "model_symbol": "GoLean.Image.Color.grayRGBA",
+    "claim": "Each RGB channel equals the unsigned input byte multiplied by 257, and alpha is 65535.",
+    "limits": "Models the sole uint8 field of Gray. The comparison exhausts all 256 input values.",
+    "configurations": "Native Go calling image/color.Gray.RGBA directly.",
+    "theorems": ["GoLean.Image.Color.grayRGBA_spec"],
+    "check": "difftest/image/color/gray-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAConversions/main.go",
+    "review": "coverage/packages/image/color/Gray.RGBA.md"
+  },
+  "Gray16.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Gray16.lean",
+    "model_symbol": "GoLean.Image.Color.gray16RGBA",
+    "claim": "Returns the unsigned grayscale field unchanged in each of the three uint32 RGB channels and returns alpha 65535.",
+    "limits": "The model takes the sole uint16 field of a Gray16 value. The comparison exhausts all 65,536 values.",
+    "configurations": "Native Go calling image/color.Gray16.RGBA directly.",
+    "theorems": ["GoLean.Image.Color.gray16RGBA_spec"],
+    "check": "difftest/image/color/gray16-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/WideRGBA/main.go",
+    "review": "coverage/packages/image/color/Gray16.RGBA.md"
+  },
+  "NYCbCrA.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NYCbCrA.lean",
+    "model_symbol": "GoLean.Image.Color.nYCbCrARGBA",
+    "claim": "Saturates the converted 16-bit RGB channels and then floors each saturated channel times the input alpha divided by 255. Returns the input alpha replicated to 16 bits.",
+    "limits": "The RGB conversion reuses the identical operations in YCbCr.RGBA. The proof establishes that the final uint32 multiplication does not wrap and cancels the alpha replication factor. The comparison crosses all 256 alpha values with 343 boundary YCbCr triples and checks 60,000 sampled four-byte inputs using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling image/color.NYCbCrA.RGBA directly and comparing all four channels against the independent floor, saturation and alpha-scaling oracle.",
+    "theorems": ["GoLean.Image.Color.nYCbCrARGBA_spec"],
+    "check": "difftest/image/color/nycbcra-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/WideRGBA/main.go",
+    "review": "coverage/packages/image/color/NYCbCrA.RGBA.md"
+  },
+  "NRGBA.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NRGBA.lean",
+    "model_symbol": "GoLean.Image.Color.nrgbaRGBA",
+    "claim": "Returns RGB channels in order, each equal to its byte-alpha product plus the floor of twice that product divided by 255. The alpha channel is the original byte multiplied by 257.",
+    "limits": "Proof covers every byte tuple and interprets multiplication and division as natural arithmetic because all intermediate Go products fit in uint32. The differential exhausts all 65,536 channel-alpha pairs independently in each RGB position and samples 60,000 additional four-byte tuples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling image/color.NRGBA.RGBA.",
+    "theorems": ["GoLean.Image.Color.nrgbaRGBA_spec"],
+    "check": "difftest/image/color/nrgba-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAConversions/main.go",
+    "review": "coverage/packages/image/color/NRGBA.RGBA.md"
+  },
+  "NRGBA64.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NRGBA64.lean",
+    "model_symbol": "GoLean.Image.Color.nrgba64RGBA",
+    "claim": "Returns RGB channels in order, each the floor of its unsigned channel-alpha product divided by 65535. The alpha channel is unchanged.",
+    "limits": "The model follows Go's uint32 multiplication and division and the proof establishes that the products of uint16 inputs do not overflow. Go checks 10,000 boundary tuples and 60,000 uniform samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling image/color.NRGBA64.RGBA.",
+    "theorems": ["GoLean.Image.Color.nrgba64RGBA_spec"],
+    "check": "difftest/image/color/nrgba64-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAConversions/main.go",
+    "review": "coverage/packages/image/color/NRGBA64.RGBA.md"
+  },
+  "RGBA.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/RGBA.lean",
+    "model_symbol": "GoLean.Image.Color.rgbaRGBA",
+    "claim": "Returns the red, green, blue and alpha bytes in their original order, each multiplied by 257.",
+    "limits": "Proof covers every combination of byte fields. Go tests 1,296 boundary tuples and 60,000 sampled tuples using seeds 17, 2718 and 65537. Samples include both premultiplied colors and unrestricted field values.",
+    "configurations": "Native Go directly calling image/color.RGBA.RGBA.",
+    "theorems": ["GoLean.Image.Color.rgbaRGBA_spec"],
+    "check": "difftest/image/color/rgba-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAConversions/main.go",
+    "review": "coverage/packages/image/color/RGBA.RGBA.md"
+  },
+  "RGBA64.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/RGBA64.lean",
+    "model_symbol": "GoLean.Image.Color.rgba64RGBA",
+    "claim": "Returns the unsigned red, green, blue and alpha fields unchanged in their original order as uint32 values.",
+    "limits": "Proof covers every combination of 16-bit fields. Go tests 1,296 boundary tuples and 60,000 sampled tuples with seeds 17, 2718 and 65537, including premultiplied colors and unrestricted field values.",
+    "configurations": "Native Go directly calling image/color.RGBA64.RGBA.",
+    "theorems": ["GoLean.Image.Color.rgba64RGBA_spec"],
+    "check": "difftest/image/color/rgba64-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/RGBA64RGBA/main.go",
+    "review": "coverage/packages/image/color/RGBA64.RGBA.md"
+  },
+  "RGBToCMYK": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/RGBToCMYK.lean",
+    "model_symbol": "GoLean.Image.Color.rgbToCMYK",
+    "claim": "Returns (0, 0, 0, 255) at black. Otherwise black ink equals 255 minus the maximum input channel, and each chromatic ink is the floor of 255 times its deficit divided by that maximum.",
+    "limits": "The theorem covers every byte triple and establishes that the widened channel arithmetic and final narrowing preserve the natural-number result. The check covers 98,688 representative tuples spanning all valid channel–maximum pairs in every RGB position, plus 60,000 sampled triples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling image/color.RGBToCMYK. The independent oracle computes each chromatic ink as 255 minus the ceiling of the scaled input channel divided by the maximum.",
+    "theorems": ["GoLean.Image.Color.rgbToCMYK_spec"],
+    "check": "difftest/image/color/rgb-to-cmyk/check.go",
+    "control": "coverage/packages/image/color/controls/InkConversions/main.go",
+    "review": "coverage/packages/image/color/RGBToCMYK.md"
+  },
+  "YCbCr.RGBA": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/YCbCr.lean",
+    "model_symbol": "GoLean.Image.Color.yCbCrRGBA",
+    "claim": "Returns each RGB channel as replicated luminance plus the floor-rounded chroma adjustment, clamped to 0 through 65535, and returns alpha 65535.",
+    "limits": "Models the source int32 arithmetic as exact integers on byte inputs. The model retains the high-byte saturation test, signed shifts, complement and sixteen-bit mask. Compares 196,951 boundary triples before deduplication, including all chroma pairs at Y values 0, 128 and 255, and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling image/color.YCbCr.RGBA directly. The independent arithmetic oracle uses floor division and explicit clamping.",
+    "theorems": ["GoLean.Image.Color.yCbCrRGBA_spec"],
+    "check": "difftest/image/color/ycbcr-rgba/check.go",
+    "control": "coverage/packages/image/color/controls/WideRGBA/main.go",
+    "review": "coverage/packages/image/color/YCbCr.RGBA.md"
+  },
+  "YCbCrToRGB": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/YCbCrToRGB.lean",
+    "model_symbol": "GoLean.Image.Color.yCbCrToRGB",
+    "claim": "Returns each luminance-plus-chroma result with the source rounding adjustment and saturation to the interval 0 through 255.",
+    "limits": "The model represents signed 32-bit arithmetic with integers and retains the high-byte guard, arithmetic shifts, signed complement and uint8 narrowing. The proof covers every byte triple. The check exercises 343 boundary triples, all 65,536 chroma pairs at luminance 128, and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling image/color.YCbCrToRGB directly and comparing every channel to the independent floor-division and saturation formula.",
+    "theorems": ["GoLean.Image.Color.yCbCrToRGB_spec"],
+    "check": "difftest/image/color/ycbcr-to-rgb/check.go",
+    "control": "coverage/packages/image/color/controls/YCbCrConversions/main.go",
+    "review": "coverage/packages/image/color/YCbCrToRGB.md"
+  },
+    "RGBToYCbCr": {
+      "go_version": "1.27.0",
+      "model": "lean/GoLean/Image/Color/RGBToYCbCr.lean",
+      "model_symbol": "GoLean.Image.Color.rgbToYCbCr",
+      "claim": "Returns luminance and chroma as green-relative fixed-point expressions with half-up rounding and saturation of the chroma channels.",
+      "limits": "Uses signed mathematical integers for source int32 arithmetic. The byte inputs keep the intermediate products and sums within int32. The comparison checks 393,216 boundary tuples before deduplication by sweeping every pair with the third channel fixed to 0 or 255. It also checks 60,000 samples using seeds 17, 2718 and 65537.",
+      "configurations": "Native Go directly calling image/color.RGBToYCbCr. The independent arithmetic oracle computes rounded green-relative channel differences.",
+      "theorems": [
+        "GoLean.Image.Color.rgbToYCbCr_spec"
+      ],
+      "check": "difftest/image/color/rgb-to-ycbcr/check.go",
+      "control": "coverage/packages/image/color/controls/YCbCrConversions/main.go",
+      "review": "coverage/packages/image/color/RGBToYCbCr.md"
+    },
+  "alpha16Model": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Alpha16Model.lean",
+    "model_symbol": "GoLean.Image.Color.alpha16Model",
+    "claim": "Preserves an Alpha16 input. For other non-nil colors, invokes RGBA once and returns the low 16 bits of its alpha word as Alpha16, or propagates a callback panic. A nil Color panics.",
+    "limits": "Models custom RGBA behavior by its alpha word or panic. The callback probe checks the invocation count and identity of the propagated panic value. The comparison crosses every Alpha16 value and every 16-bit callback word, checks additional high bits and panic cases, and samples 60,000 full-width words with seeds 17, 2718 and 65537. The boundary count is 131,089. Runtime panic diagnostics are outside the claim.",
+    "configurations": "Native pinned Go calls image/color.alpha16Model directly through a temporary same-package overlay test.",
+    "theorems": ["GoLean.Image.Color.alpha16Model_alpha16", "GoLean.Image.Color.alpha16Model_return", "GoLean.Image.Color.alpha16Model_panic", "GoLean.Image.Color.alpha16Model_nil"],
+    "check": "difftest/image/color/alpha16-model/check.go",
+    "control": "coverage/packages/image/color/controls/ChannelModels/main.go",
+    "review": "coverage/packages/image/color/alpha16Model.md"
+  },
+  "alphaModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/AlphaModel.lean",
+    "model_symbol": "GoLean.Image.Color.alphaModel",
+    "claim": "Preserves an Alpha input. For other non-nil colors, calls RGBA once and returns the second-lowest byte of its alpha word as Alpha, or propagates a callback panic. A nil Color panics.",
+    "limits": "Abstracts custom RGBA behavior by the alpha word or panic outcome. The callback probe counts invocations and checks that the same panic value propagates. The exact Alpha fast path is translated from source and its result is compared exhaustively. The check covers 1,794 boundary cases and 60,000 sampled alpha words using seeds 17, 2718 and 65537. Runtime panic diagnostics are outside the model.",
+    "configurations": "Native pinned Go calls the unexported image/color.alphaModel directly from a temporary same-package overlay test.",
+    "theorems": ["GoLean.Image.Color.alphaModel_alpha", "GoLean.Image.Color.alphaModel_return", "GoLean.Image.Color.alphaModel_panic", "GoLean.Image.Color.alphaModel_nil"],
+    "check": "difftest/image/color/alpha-model/check.go",
+    "control": "coverage/packages/image/color/controls/ChannelModels/main.go",
+    "review": "coverage/packages/image/color/alphaModel.md"
+  },
+  "gray16Model": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/Gray16Model.lean",
+    "model_symbol": "GoLean.Image.Color.gray16Model",
+    "claim": "Returns an existing Gray16 unchanged. For another color, calls RGBA once and returns the high 16 bits of the uint32 weighted RGB sum with rounding bias 32768, or propagates a callback panic. A nil Color panics.",
+    "limits": "The model abstracts dynamic Color methods by their callback outcome. The theorem covers uint32 wrapping and proves the unwrapped quotient for valid 16-bit RGB channels. The fixture checks callback counts and panic propagation. The comparison covers 66,538 boundaries, including every Gray16 value, and 60,000 samples split between 16-bit and arbitrary 32-bit words with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls image/color.gray16Model directly in a temporary same-package overlay test.",
+    "theorems": ["GoLean.Image.Color.gray16Model_gray", "GoLean.Image.Color.gray16Model_return", "GoLean.Image.Color.gray16Model_bounded", "GoLean.Image.Color.gray16Model_panic", "GoLean.Image.Color.gray16Model_nil"],
+    "check": "difftest/image/color/gray16-model/check.go",
+    "control": "coverage/packages/image/color/controls/ChannelModels/main.go",
+    "review": "coverage/packages/image/color/gray16Model.md"
+  },
+  "grayModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/GrayModel.lean",
+    "model_symbol": "GoLean.Image.Color.grayModel",
+    "claim": "Returns an existing Gray unchanged. For another color, calls RGBA once and returns the high byte of the uint32 weighted RGB sum with rounding bias 32768, or propagates a callback panic. A nil Color panics.",
+    "limits": "The model abstracts dynamic Color methods by their callback outcome. The theorem covers uint32 wrapping and proves the unwrapped quotient for valid 16-bit RGB channels. The fixture checks callback counts and panic propagation. The comparison covers 1,258 boundaries and 60,000 samples split between 16-bit and arbitrary 32-bit words with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls image/color.grayModel directly in a temporary same-package overlay test.",
+    "theorems": ["GoLean.Image.Color.grayModel_gray", "GoLean.Image.Color.grayModel_return", "GoLean.Image.Color.grayModel_bounded", "GoLean.Image.Color.grayModel_panic", "GoLean.Image.Color.grayModel_nil"],
+    "check": "difftest/image/color/gray-model/check.go",
+    "control": "coverage/packages/image/color/controls/ChannelModels/main.go",
+    "review": "coverage/packages/image/color/grayModel.md"
+  },
+  "rgbaModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/RGBAModel.lean",
+    "model_symbol": "GoLean.Image.Color.rgbaModel",
+    "claim": "Preserves a RGBA input. For other non-nil colors, invokes RGBA once and returns bits 8 through 15 of each channel as RGBA, or propagates a callback panic. A nil Color panics.",
+    "limits": "Models custom callback words or panic. The probe checks invocation count and propagated panic identity. The comparison uses 307 boundaries, covering every fast-path value per channel, and 60,000 full-width callback tuples using seeds 17, 2718 and 65537. Runtime panic diagnostics are outside the claim.",
+    "configurations": "Native pinned Go calls image/color.rgbaModel directly through a temporary same-package overlay test.",
+    "theorems": [
+      "GoLean.Image.Color.rgbaModel_same",
+      "GoLean.Image.Color.rgbaModel_return",
+      "GoLean.Image.Color.rgbaModel_panic"
+    ],
+    "check": "difftest/image/color/rgba-model/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAModels/main.go",
+    "review": "coverage/packages/image/color/rgbaModel.md"
+  },
+  "rgba64Model": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/RGBAModel.lean",
+    "model_symbol": "GoLean.Image.Color.rgba64Model",
+    "claim": "Preserves a RGBA64 input. For other non-nil colors, invokes RGBA once and returns the low 16 bits of each channel as RGBA64, or propagates a callback panic. A nil Color panics.",
+    "limits": "Models custom callback words or panic. The probe checks invocation count and propagated panic identity. The comparison uses 65,587 boundaries, covering every fast-path value per channel, and 60,000 full-width callback tuples using seeds 17, 2718 and 65537. Runtime panic diagnostics are outside the claim.",
+    "configurations": "Native pinned Go calls image/color.rgba64Model directly through a temporary same-package overlay test.",
+    "theorems": [
+      "GoLean.Image.Color.rgba64Model_same",
+      "GoLean.Image.Color.rgba64Model_return",
+      "GoLean.Image.Color.rgba64Model_panic"
+    ],
+    "check": "difftest/image/color/rgba-model/check.go",
+    "control": "coverage/packages/image/color/controls/RGBAModels/main.go",
+    "review": "coverage/packages/image/color/rgba64Model.md"
+  },
+  "nrgbaModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NRGBAModel.lean",
+    "model_symbol": "GoLean.Image.Color.nrgbaModel",
+    "claim": "Preserves an input of type NRGBA. Otherwise calls RGBA once and returns transparent black when alpha is zero. For nonzero alpha, takes bits 8 through 15 of alpha and each RGB word, scaling RGB by 65535 with uint32 wrapping before dividing by alpha only when alpha differs from 65535. A callback panic propagates and a nil interface panics.",
+    "limits": "The model abstracts the callback by its words or panic and tracks calls. The Go fixture checks callback panic identity and leaves runtime panic diagnostics out of scope. The comparison uses 358 boundaries, including every fast-path value per channel, and 60,000 samples split evenly between valid premultiplied channels and arbitrary uint32 callback words, with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls image/color.nrgbaModel directly through a temporary same-package overlay test.",
+    "theorems": [
+      "GoLean.Image.Color.nrgbaModel_same",
+      "GoLean.Image.Color.nrgbaModel_return",
+      "GoLean.Image.Color.nrgbaModel_panic"
+    ],
+    "check": "difftest/image/color/nrgba-model/check.go",
+    "control": "coverage/packages/image/color/controls/NRGBAModel/main.go",
+    "review": "coverage/packages/image/color/nrgbaModel.md"
+  },
+  "nrgba64Model": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/NRGBAModel.lean",
+    "model_symbol": "GoLean.Image.Color.nrgba64Model",
+    "claim": "Preserves an input of type NRGBA64. Otherwise calls RGBA once and returns transparent black when alpha is zero. For nonzero alpha, takes the low 16 bits of alpha and each RGB word, scaling RGB by 65535 with uint32 wrapping before dividing by alpha only when alpha differs from 65535. A callback panic propagates and a nil interface panics.",
+    "limits": "The model abstracts the callback by its words or panic and tracks calls. The Go fixture checks callback panic identity and leaves runtime panic diagnostics out of scope. The comparison uses 65,638 boundaries, including every fast-path value per channel, and 60,000 samples split evenly between valid premultiplied channels and arbitrary uint32 callback words, with seeds 17, 2718 and 65537.",
+    "configurations": "Native pinned Go calls image/color.nrgba64Model directly through a temporary same-package overlay test.",
+    "theorems": [
+      "GoLean.Image.Color.nrgba64Model_same",
+      "GoLean.Image.Color.nrgba64Model_return",
+      "GoLean.Image.Color.nrgba64Model_panic"
+    ],
+    "check": "difftest/image/color/nrgba-model/check.go",
+    "control": "coverage/packages/image/color/controls/NRGBAModel/main.go",
+    "review": "coverage/packages/image/color/nrgba64Model.md"
+  },
+  "sqDiff": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/SqDiff.lean",
+    "model_symbol": "GoLean.Image.Color.sqDiff",
+    "claim": "For two channels in 0 through 65535, returns the square of their absolute difference divided by four with integer truncation.",
+    "limits": "The model uses uint32 wrapping for subtraction and multiplication. The theorem covers the channel range assumed by the source. The check uses 100 boundary pairs, both subtraction orders for every possible channel difference against zero, and 60,000 sampled channel pairs across seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go calls image/color.sqDiff directly through a temporary same-package test overlay.",
+    "theorems": ["GoLean.Image.Color.sqDiff_spec"],
+    "check": "difftest/image/color/sq-diff/check.go",
+    "control": "difftest/image/color/sq-diff/control/main.go",
+    "review": "coverage/packages/image/color/sqDiff.md"
+  },
+  "yCbCrModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/YCbCrModel.lean",
+    "model_symbol": "GoLean.Image.Color.yCbCrModel",
+    "claim": "Preserves an existing YCbCr value without calling RGBA. Otherwise calls RGBA once, discards alpha and converts bits 8 through 15 of each RGB word. Callback panic is propagated and a nil Color panics without calling RGBA.",
+    "limits": "The callback is observed through returned words or panic and call count. The Go check tests panic identity for a custom Color and runtime panic for a nil Color. The comparison covers 1,282 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go calls image/color.yCbCrModel directly through a temporary same-package test overlay. The oracle uses division and an independent green-relative RGB-to-YCbCr formula.",
+    "theorems": [
+      "GoLean.Image.Color.yCbCrModel_value",
+      "GoLean.Image.Color.yCbCrModel_return",
+      "GoLean.Image.Color.yCbCrModel_panic",
+      "GoLean.Image.Color.yCbCrModel_nil"
+    ],
+    "check": "difftest/image/color/ycbcr-model/check.go",
+    "control": "coverage/packages/image/color/controls/YCbCrModel/main.go",
+    "review": "coverage/packages/image/color/yCbCrModel.md"
+  },
+  "cmykModel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Image/Color/CMYKModel.lean",
+    "model_symbol": "GoLean.Image.Color.cmykModel",
+    "claim": "Preserves an existing CMYK value without calling RGBA. Otherwise calls RGBA once, ignores alpha and converts bits 8 through 15 of each RGB word with RGBToCMYK. A callback panic propagates and a nil Color panics without calling RGBA.",
+    "limits": "Models the callback outcome and call count. Go checks the identity of the panic payload from a custom Color and a runtime panic for nil Color. The comparison uses 1,282 boundary inputs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go calls image/color.cmykModel directly through a temporary same-package test overlay. The independent oracle uses division for channel extraction and the complementary ink formula.",
+    "theorems": [
+      "GoLean.Image.Color.cmykModel_value",
+      "GoLean.Image.Color.cmykModel_return",
+      "GoLean.Image.Color.cmykModel_panic",
+      "GoLean.Image.Color.cmykModel_nil"
+    ],
+    "check": "difftest/image/color/cmyk-model/check.go",
+    "control": "coverage/packages/image/color/controls/CMYKModel/main.go",
+    "review": "coverage/packages/image/color/cmykModel.md"
+  }
+}

@@ -1,4 +1,1025 @@
 {
+  "AddrPort.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortString",
+    "claim": "Returns invalid AddrPort for an invalid address, otherwise formats the IP followed by a decimal port and surrounds IPv6 with brackets.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPortString_zero"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/addrport-string.md"
+  },
+  "AddrPort.MarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortMarshalText",
+    "claim": "Returns exact AddrPort text bytes, with a nonnil empty native result for an invalid address.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPortMarshalText_zero"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/addrport-marshaltext.md"
+  },
+  "AddrPort.AppendTo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortAppendTo",
+    "claim": "Appends address and decimal port text with IPv6 brackets. Complete append stages can modify the original backing before growth.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPortAppendTo_zero"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/addrport-appendto.md"
+  },
+  "AddrPort.AppendText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortAppendText",
+    "claim": "Delegates to the exact AddrPort append encoding and returns no error.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPortAppendText_same"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/addrport-appendtext.md"
+  },
+  "Prefix.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixString",
+    "claim": "Returns the exact address and length text, or invalid Prefix for an invalid prefix.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixString_invalid"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/prefix-string.md"
+  },
+  "Prefix.MarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixMarshalText",
+    "claim": "Returns empty nonnil native text for the zero prefix and invalid Prefix for an invalid prefix retaining an address.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixMarshalText_invalidIPv4"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/prefix-marshaltext.md"
+  },
+  "Prefix.AppendTo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixAppendTo",
+    "claim": "Appends exact unmasked address and prefix length text, retaining staged writes, and distinguishes zero from invalid-but-initialized values.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixAppendTo_zero"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/prefix-appendto.md"
+  },
+  "Prefix.AppendText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PortPrefixText.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixAppendText",
+    "claim": "Delegates to the exact prefix append encoding and returns no error.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped addresses, arbitrary raw zones and feasible append buffers. Prefixes are constructed through PrefixFrom, with normalized validity and stripped zones. Exact allocator growth capacity is outside scope. Checks 6,296 fixed observations and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go calls and a composition oracle using public Addr formatting, independent decimal port and bit counts, and append-stage boundaries. Checks exact bytes and native prior backing writes, alias and nilness.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixAppendText_same"
+    ],
+    "check": "difftest/net/netip/port-prefix-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrText.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "lean/GoLean/Net/Netip/AddrFields.lean"
+    ],
+    "control": "difftest/net/netip/port-prefix-text/review/main.go",
+    "review": "coverage/packages/net/netip/prefix-appendtext.md"
+  },
+  "Addr.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrString",
+    "claim": "Formats invalid addresses as invalid IP, IPv4 as dotted decimal, mapped IPv6 with a dotted tail, and ordinary IPv6 with compressed hex and raw zone.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 14,336 fixed and 195,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrString_invalid"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.String.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.StringExpanded": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrStringExpanded",
+    "claim": "Formats IPv6 as eight padded four-digit fields with raw zone, including mapped IPv6. Invalid and IPv4 use their ordinary string.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 14,336 fixed and 195,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrStringExpanded_invalid"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.StringExpanded.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.AppendTo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendTo",
+    "claim": "Appends the appropriate address text, leaving invalid inputs unchanged and retaining complete chunk writes before detachment.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 14,336 fixed and 195,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendTo_invalid"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.AppendTo.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.AppendText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendText",
+    "claim": "Appends the exact Addr.AppendTo text and returns no error.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 14,336 fixed and 195,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendText_same"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.AppendText.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.MarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrMarshalText",
+    "claim": "Returns the compact address text and a nonnil empty slice for an invalid address in native Go.",
+    "limits": "Reachable invalid, IPv4, IPv6 and mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 14,336 fixed and 195,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrMarshalText_invalid"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.MarshalText.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.appendTo4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendTo4",
+    "claim": "Appends four unsigned decimal octets separated by dots, tracking exact reuse and old backing writes.",
+    "limits": "Direct private calls on IPv4 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 3,584 fixed and 60,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendTo4_prefix"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.appendTo4.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.appendTo4In6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendTo4In6",
+    "claim": "Appends the mapped IPv6 marker, dotted IPv4 tail and any raw zone; tracks staged writes and reuse.",
+    "limits": "Direct private calls on IPv4-mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 3,584 fixed and 60,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendTo4In6_prefix"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.appendTo4In6.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "Addr.appendTo6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrText.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendTo6",
+    "claim": "Appends lowercase IPv6, compressing the earliest longest zero run of at least two fields, and preserves raw zone and staged writes.",
+    "limits": "Direct private calls on non-mapped IPv6 addresses. Arbitrary raw zones and feasible append buffers. Exact allocator growth capacity is outside scope. Checks 3,584 fixed and 60,000 sampled observations at seeds 17, 2718 and 65537. IPv6 fixtures include all 256 zero-word masks.",
+    "configurations": "Pinned same-package calls and an independent numeric text and zero-run oracle. Checks exact text bytes, resulting buffer reuse and retained old writes for append functions, plus nonnil native marshal result.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendTo6_prefix"
+    ],
+    "check": "difftest/net/netip/addr-text/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "lean/GoLean/Net/Netip/TextDigits.lean",
+      "difftest/net/netip/addr-text/testdata/addr_text_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.appendTo6.md",
+    "control": "difftest/net/netip/addr-text/review/main.go"
+  },
+  "appendDecimal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/TextDigits.lean",
+    "model_symbol": "GoLean.Net.Netip.appendDecimal",
+    "claim": "Appends one to three decimal digits without leading zeros, retaining each individual digit written into old backing before detachment.",
+    "limits": "Native uint8 decimal and uint16 hex inputs. Valid offset buffers with nil and nonnil inputs. Checks every uint16 value across zero through four bytes of spare capacity, using the low input byte for decimal. Also checks three explicit nil fixtures, for 327,683 rows per declaration. The model tracks reuse and prior writes. Runtime reallocation capacity and allocator failure are outside scope.",
+    "configurations": "Pinned direct private Go through a same-package overlay. strconv supplies an independent digit oracle. Native verifies exact output, pointer reuse, remaining backing and unchanged surrounding sentinels.",
+    "theorems": [
+      "GoLean.Net.Netip.appendDecimal_zero"
+    ],
+    "check": "difftest/net/netip/text-digits/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "difftest/net/netip/text-digits/testdata/text_digits_test.go"
+    ],
+    "review": "coverage/packages/net/netip/appendDecimal.md",
+    "control": "difftest/net/netip/text-digits/review/main.go"
+  },
+  "appendHex": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/TextDigits.lean",
+    "model_symbol": "GoLean.Net.Netip.appendHex",
+    "claim": "Appends one to four lowercase hex digits without leading zeros, retaining each individual digit written into old backing before detachment.",
+    "limits": "Native uint8 decimal and uint16 hex inputs. Valid offset buffers with nil and nonnil inputs. Checks every uint16 value across zero through four bytes of spare capacity, using the low input byte for decimal. Also checks three explicit nil fixtures, for 327,683 rows per declaration. The model tracks reuse and prior writes. Runtime reallocation capacity and allocator failure are outside scope.",
+    "configurations": "Pinned direct private Go through a same-package overlay. strconv supplies an independent digit oracle. Native verifies exact output, pointer reuse, remaining backing and unchanged surrounding sentinels.",
+    "theorems": [
+      "GoLean.Net.Netip.appendHex_zero"
+    ],
+    "check": "difftest/net/netip/text-digits/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "difftest/net/netip/text-digits/testdata/text_digits_test.go"
+    ],
+    "review": "coverage/packages/net/netip/appendHex.md",
+    "control": "difftest/net/netip/text-digits/review/main.go"
+  },
+  "appendHexPad": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/TextDigits.lean",
+    "model_symbol": "GoLean.Net.Netip.appendHexPad",
+    "claim": "Appends all four lowercase hexadecimal digits as a single chunk. When a new backing array is needed, the original backing is unchanged.",
+    "limits": "Native uint8 decimal and uint16 hex inputs. Valid offset buffers with nil and nonnil inputs. Checks every uint16 value across zero through four bytes of spare capacity, using the low input byte for decimal. Also checks three explicit nil fixtures, for 327,683 rows per declaration. The model tracks reuse and prior writes. Runtime reallocation capacity and allocator failure are outside scope.",
+    "configurations": "Pinned direct private Go through a same-package overlay. strconv supplies an independent digit oracle. Native verifies exact output, pointer reuse, remaining backing and unchanged surrounding sentinels.",
+    "theorems": [
+      "GoLean.Net.Netip.appendHexPad_width"
+    ],
+    "check": "difftest/net/netip/text-digits/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/BinaryCodec.lean",
+      "difftest/net/netip/text-digits/testdata/text_digits_test.go"
+    ],
+    "review": "coverage/packages/net/netip/appendHexPad.md",
+    "control": "difftest/net/netip/text-digits/review/main.go"
+  },
+  "Addr.marshalBinarySize": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.addrMarshalBinarySize",
+    "claim": "Returns zero for an invalid address, four for IPv4, or sixteen plus raw zone length for IPv6.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.addrMarshalBinarySize_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.marshalBinarySize.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Addr.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.addrAppendBinary",
+    "claim": "Appends the address encoding and preserves staged writes into old backing before detaching.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.addrAppendBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.AppendBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Addr.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.addrMarshalBinary",
+    "claim": "Produces the exact address encoding, using network order and preserving raw IPv6 zone bytes.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.addrMarshalBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.MarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Addr.UnmarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.addrUnmarshalBinary",
+    "claim": "Decodes valid wire lengths and leaves the receiver unchanged on an unexpected slice size.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.addrUnmarshalBinary_empty"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.UnmarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "AddrPort.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.portAppendBinary",
+    "claim": "Appends address data and a little-endian port, preserving staged writes into old backing.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.portAppendBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/AddrPort.AppendBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "AddrPort.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.portMarshalBinary",
+    "claim": "Produces the address encoding followed by the two-byte little-endian port.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.portMarshalBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/AddrPort.MarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "AddrPort.UnmarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.portUnmarshalBinary",
+    "claim": "Decodes an address and little-endian tail port with assignment only after valid address decoding.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.portUnmarshalBinary_empty"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/AddrPort.UnmarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Prefix.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixAppendBinary",
+    "claim": "Appends a zoneless address and one prefix length byte, preserving staged writes into old backing.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixAppendBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.AppendBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Prefix.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixMarshalBinary",
+    "claim": "Produces the zoneless address followed by one prefix length byte, with 255 for invalid length.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixMarshalBinary_zero"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.MarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Prefix.UnmarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/BinaryCodec.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixUnmarshalBinary",
+    "claim": "Decodes a zoneless prefix, preserving an initialized address with invalid bits and keeping the original receiver on structural errors.",
+    "limits": "Reachable invalid, IPv4, IPv6, mapped and zoned states, arbitrary binary payload bytes, nonnil receiver, disjoint source and destination, valid append buffer geometry and representable lengths. The Lean observer tracks staged writes, allocation requirement and nil append output. Native also checks address-zone ownership and exact marshal slice geometry. Runtime growth capacity and allocation failures are outside scope. Checks 2,502 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned same-package calls checked against Lean and independent network-byte-order, wire classification and staged backing oracles. Native verifies exact errors, receiver preservation and input storage independence.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixUnmarshalBinary_empty"
+    ],
+    "check": "difftest/net/netip/binary-codec/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFields.lean",
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "difftest/net/netip/binary-codec/testdata/binary_codec_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.UnmarshalBinary.md",
+    "control": "difftest/net/netip/binary-codec/review/main.go"
+  },
+  "Addr.Prefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPrefix",
+    "claim": "Validates requested bits in source order, masks host bits, and strips IPv6 zones from the resulting prefix.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPrefix_negative"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.Prefix.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "Prefix.Masked": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixMasked",
+    "claim": "Masks a valid prefix and returns the zero prefix on invalid stored bits.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixMasked_zero"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.Masked.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "Prefix.isZero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixIsZero",
+    "claim": "Distinguishes the actual all-zero prefix from invalid prefixes retaining an initialized address.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixIsZero_zero"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.isZero.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "Prefix.Contains": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixContains",
+    "claim": "Checks equal family, valid prefix, absent address zone and equality of leading network bits. Mapped IPv6 remains IPv6.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixContains_invalid"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.Contains.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "Prefix.Overlaps": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixOverlaps",
+    "claim": "Checks whether both valid same-family prefixes agree on their shorter leading prefix, including non-normalized input.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixOverlaps_invalid"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.Overlaps.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "Prefix.Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/PrefixOps.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixCompare",
+    "claim": "Orders first by masked address, then stored bit count, then unmasked address, preserving ordering for invalid prefixes retaining addresses.",
+    "limits": "Reachable prefixes constructed through PrefixFrom and reachable invalid, IPv4, IPv6, and mapped IPv6 addresses. Zones affect only absence checks and stripping; their contents do not affect a prefix. Checks 6,480 geometry and extreme-int boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package native calls and independent per-bit network-order oracle. Checks exact returned prefix and error text, invalid addresses retaining storage, zoned and mapped addresses, overlap symmetry and comparison antisymmetry.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixCompare_zero"
+    ],
+    "check": "difftest/net/netip/prefix-ops/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/PrefixFrom.lean",
+      "lean/GoLean/Net/Netip/AddrCompare.lean",
+      "lean/GoLean/Net/Netip/Uint128.lean",
+      "difftest/net/netip/prefix-ops/testdata/prefix_ops_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Prefix.Compare.md",
+    "control": "difftest/net/netip/prefix-ops/review/main.go"
+  },
+  "AddrFromSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrFromSlice",
+    "claim": "Constructs an unzoned IPv4 or IPv6 address from exactly 4 or 16 bytes. Other lengths return the invalid address and false.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrFromSlice_invalid"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/AddrFromSlice.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.v4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrV4Byte",
+    "claim": "Extracts a byte from the low limb using the wrapped uint8 shift count and returns zero for shifts at least 64.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrV4Byte_wrap"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.v4.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.v6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrV6Byte",
+    "claim": "Reads a network-order byte from the two stored limbs with modulo-16 indexing across the full uint8 domain.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrV6Byte_wrap"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.v6.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.v6u16": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrV6Word",
+    "claim": "Reads a network-order 16-bit word from the two stored limbs with modulo-eight indexing.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrV6Word_wrap"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.v6u16.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.isZero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrIsZero",
+    "claim": "Recognizes the invalid detail class. Valid unspecified addresses have distinct initialized detail.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrIsZero_ipv4"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.isZero.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.hasZone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrHasZone",
+    "claim": "Reports a zone exactly for the reachable IPv6 detail carrying a nonempty zone.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrHasZone_empty"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.hasZone.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "Addr.withoutZone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/AddrFields.lean",
+    "model_symbol": "GoLean.Net.Netip.addrWithoutZone",
+    "claim": "Clears IPv6 zone identity while retaining both limbs and address family. Leaves invalid and IPv4 values unchanged.",
+    "limits": "Reachable invalid, IPv4, and IPv6 addresses, including mapped IPv6, with arbitrary raw zone bytes. Full uint8 index range. Constructor comparison includes nil and offset slices and input mutation after conversion. Checks 2,308 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct in-package calls and independent network-order arithmetic and origin-class oracle. Native comparisons include exact stored limbs, zone payload or removal, and invalid constructor return.",
+    "theorems": [
+      "GoLean.Net.Netip.addrWithoutZone_ipv6"
+    ],
+    "check": "difftest/net/netip/addr-fields/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/AddrFrom4.lean",
+      "lean/GoLean/Net/Netip/AddrFrom16.lean",
+      "lean/GoLean/Net/Netip/AddrBitLen.lean",
+      "difftest/net/netip/addr-fields/testdata/addr_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/Addr.withoutZone.md",
+    "control": "difftest/net/netip/addr-fields/review/main.go"
+  },
+  "mask6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.mask6",
+    "claim": "Constructs the high-prefix mask for counts 0 through 128. Other signed counts panic on a negative shift.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.mask6_boundary"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/mask6.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.isZero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128IsZero",
+    "claim": "Checks whether both limbs are zero.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128IsZero_zero"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.isZero.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.and": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128And",
+    "claim": "Computes bitwise AND across the two limbs.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128And_halves"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.and.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.xor": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128Xor",
+    "claim": "Computes bitwise XOR across the two limbs.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128Xor_halves"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.xor.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.or": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128Or",
+    "claim": "Computes bitwise OR across the two limbs.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128Or_halves"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.or.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.not": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128Not",
+    "claim": "Complements both limbs.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128Not_halves"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.not.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.subOne": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128SubOne",
+    "claim": "Subtracts one modulo 2^128, borrowing into the high limb when required.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128SubOne_borrow"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.subOne.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.addOne": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128AddOne",
+    "claim": "Adds one modulo 2^128, carrying into the high limb when required.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128AddOne_carry"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.addOne.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.halves": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128Halves",
+    "claim": "Returns distinct pointers to the high and low limbs in that order. Nil receiver panics.",
+    "limits": "The native overlay checks both pointer identities and separate read and write through each field. The Lean observer models the resulting reads and writes. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128Halves_reads_and_writes"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.halves.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.bitsSetFrom": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128BitsSetFrom",
+    "claim": "Sets every bit at or below the indexed MSB-first position. Indices greater than 128 panic.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128BitsSetFrom_all"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.bitsSetFrom.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
+  "uint128.bitsClearedFrom": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/Uint128.lean",
+    "model_symbol": "GoLean.Net.Netip.uint128BitsClearedFrom",
+    "claim": "Clears every bit at or below the indexed MSB-first position. Indices greater than 128 panic.",
+    "limits": "Full two-limb words, native signed mask counts and full uint8 bit indices as applicable. Checks 1,796 fixed and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned in-package overlay invokes the exact private declaration. A 128-bit big integer oracle independently checks word arithmetic and bit positions. The harness observes exact limbs and runtime panic categories.",
+    "theorems": [
+      "GoLean.Net.Netip.uint128BitsClearedFrom_all"
+    ],
+    "check": "difftest/net/netip/uint128/check.go",
+    "review_sources": [
+      "difftest/net/netip/uint128/testdata/uint128_test.go"
+    ],
+    "review": "coverage/packages/net/netip/uint128.bitsClearedFrom.md",
+    "control": "difftest/net/netip/uint128/review/main.go"
+  },
   "AddrPort.Compare": {
     "go_version": "1.27.0",
     "model": "lean/GoLean/Net/Netip/AddrPortCompare.lean",
@@ -6,8 +1027,12 @@
     "claim": "Orders address-port pairs by address and breaks ties by unsigned port, returning -1, 0 or 1.",
     "limits": "The proof covers all modeled addresses and ports. Go comparisons use empty and decimal zones in 256 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling AddrPort.Compare on zero-address, IPv4, mapped IPv6, and scoped and unscoped IPv6 pairs.",
-    "theorems": ["GoLean.Net.Netip.addrPortCompare_spec"],
-    "check": "difftest/net/netip/addrport-compare/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrPortCompare_spec"
+    ],
+    "check": "difftest/net/netip/addrport-compare/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrPort/main.go",
+    "review": "coverage/packages/net/netip/AddrPort.Compare.md"
   },
   "Addr.Compare": {
     "go_version": "1.27.0",
@@ -16,8 +1041,12 @@
     "claim": "Returns -1, 0 or 1 according to lexicographic order by bit length, unsigned address words, and zone for tied IPv6 addresses.",
     "limits": "The proof covers modeled words and Lean strings. The Go check uses empty and decimal zones in 64 boundary pairs and 60,000 samples with seeds 17, 2718 and 65537. Arbitrary Go zone byte sequences are outside the comparison.",
     "configurations": "Native Go calling Addr.Compare on zero, IPv4, mapped IPv6 and scoped and unscoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrCompare_spec"],
-    "check": "difftest/net/netip/addr-compare/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrCompare_spec"
+    ],
+    "check": "difftest/net/netip/addr-compare/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrOrder/main.go",
+    "review": "coverage/packages/net/netip/Addr.Compare.md"
   },
   "Addr.Less": {
     "go_version": "1.27.0",
@@ -26,8 +1055,12 @@
     "claim": "Orders addresses lexicographically by bit length, unsigned address words and, for tied IPv6 addresses, zone.",
     "limits": "The model uses Lean strings for zones. Go checks empty and decimal zones in 64 boundary cases and 60,000 samples using seeds 17, 2718 and 65537. Arbitrary Go string byte sequences are outside the comparison.",
     "configurations": "Native Go invoking Addr.Less directly on zero, IPv4, mapped IPv6 and scoped and unscoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrLess_spec"],
-    "check": "difftest/net/netip/addr-less/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrLess_spec"
+    ],
+    "check": "difftest/net/netip/addr-less/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrOrder/main.go",
+    "review": "coverage/packages/net/netip/Addr.Less.md"
   },
   "Addr.Prev": {
     "go_version": "1.27.0",
@@ -39,7 +1072,9 @@
     "theorems": [
       "GoLean.Net.Netip.addrPrev_spec"
     ],
-    "check": "difftest/net/netip/addr-prev/check.go"
+    "check": "difftest/net/netip/addr-prev/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrNeighbor/main.go",
+    "review": "coverage/packages/net/netip/Addr.Prev.md"
   },
   "Addr.Next": {
     "go_version": "1.27.0",
@@ -48,8 +1083,12 @@
     "claim": "Increments the stored address with carry, returns the zero Addr on family-width overflow, and otherwise retains the original address detail.",
     "limits": "The model covers all stored words and observable details. The zero receiver retains invalid detail with incremented bits in the pinned implementation. Go checks 16 boundary cases and 60,000 samples using seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Addr.Next and observing BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.addrNext_spec"],
-    "check": "difftest/net/netip/addr-next/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrNext_spec"
+    ],
+    "check": "difftest/net/netip/addr-next/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrNeighbor/main.go",
+    "review": "coverage/packages/net/netip/Addr.Next.md"
   },
   "Addr.IsGlobalUnicast": {
     "go_version": "1.27.0",
@@ -58,8 +1097,12 @@
     "claim": "After unmapping, excludes invalid and unspecified addresses, the IPv4 limited broadcast, loopback, multicast and link-local unicast. Scoped IPv6 zero and private unicast addresses can qualify.",
     "limits": "The model compares canonical address details by contents. The check uses net.IP.IsGlobalUnicast as the value oracle with an explicit adjustment for scoped IPv6 zero. It exercises 31 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Addr.IsGlobalUnicast on zero, IPv4 and IPv6 receivers, including scoped and mapped IPv6.",
-    "theorems": ["GoLean.Net.Netip.addrIsGlobalUnicast_spec"],
-    "check": "difftest/net/netip/addr-isglobalunicast/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsGlobalUnicast_spec"
+    ],
+    "check": "difftest/net/netip/addr-isglobalunicast/check.go",
+    "control": "coverage/packages/net/netip/controls/AddressClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsGlobalUnicast.md"
   },
   "Addr.IsPrivate": {
     "go_version": "1.27.0",
@@ -71,7 +1114,9 @@
     "theorems": [
       "GoLean.Net.Netip.addrIsPrivate_spec"
     ],
-    "check": "difftest/net/netip/addr-isprivate/check.go"
+    "check": "difftest/net/netip/addr-isprivate/check.go",
+    "control": "coverage/packages/net/netip/controls/AddressClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsPrivate.md"
   },
   "Addr.IsInterfaceLocalMulticast": {
     "go_version": "1.27.0",
@@ -83,7 +1128,9 @@
     "theorems": [
       "GoLean.Net.Netip.addrIsInterfaceLocalMulticast_spec"
     ],
-    "check": "difftest/net/netip/addr-isinterfacelocalmulticast/check.go"
+    "check": "difftest/net/netip/addr-isinterfacelocalmulticast/check.go",
+    "control": "coverage/packages/net/netip/controls/ScopedClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsInterfaceLocalMulticast.md"
   },
   "Addr.IsLinkLocalUnicast": {
     "go_version": "1.27.0",
@@ -95,7 +1142,9 @@
     "theorems": [
       "GoLean.Net.Netip.addrIsLinkLocalUnicast_spec"
     ],
-    "check": "difftest/net/netip/addr-islinklocalunicast/check.go"
+    "check": "difftest/net/netip/addr-islinklocalunicast/check.go",
+    "control": "coverage/packages/net/netip/controls/ScopedClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsLinkLocalUnicast.md"
   },
   "Addr.IsLinkLocalMulticast": {
     "go_version": "1.27.0",
@@ -104,8 +1153,12 @@
     "claim": "Recognizes 224.0.0.0/24 for IPv4 and mapped IPv6 payloads, and IPv6 multicast with scope 2 regardless of flags.",
     "limits": "Proof covers all modeled words, families and zones. Go comparison uses unzoned receivers in 2,049 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Addr.IsLinkLocalMulticast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIsLinkLocalMulticast_spec"],
-    "check": "difftest/net/netip/addr-islinklocalmulticast/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsLinkLocalMulticast_spec"
+    ],
+    "check": "difftest/net/netip/addr-islinklocalmulticast/check.go",
+    "control": "coverage/packages/net/netip/controls/ScopedClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsLinkLocalMulticast.md"
   },
   "Addr.IsMulticast": {
     "go_version": "1.27.0",
@@ -114,8 +1167,12 @@
     "claim": "Recognizes 224.0.0.0/4 for IPv4 and mapped IPv6 payloads, and ff00::/8 for IPv6.",
     "limits": "The proof covers all modeled addresses and ignores zone contents. The Go check uses unzoned receivers and 769 boundary cases, including all first octets for each address form, plus 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Addr.IsMulticast on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIsMulticast_spec"],
-    "check": "difftest/net/netip/addr-ismulticast/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsMulticast_spec"
+    ],
+    "check": "difftest/net/netip/addr-ismulticast/check.go",
+    "control": "coverage/packages/net/netip/controls/ScopedClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsMulticast.md"
   },
   "Addr.IsLoopback": {
     "go_version": "1.27.0",
@@ -124,8 +1181,12 @@
     "claim": "Returns true exactly for IPv4 and mapped IPv6 addresses with IPv4 payload in 127/8, and for IPv6 ::1.",
     "limits": "The proof covers every modeled address and arbitrary zone contents. The Go check uses unzoned receivers in 233 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Addr.IsLoopback on zero, IPv4, mapped IPv6 and ordinary IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIsLoopback_spec"],
-    "check": "difftest/net/netip/addr-isloopback/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsLoopback_spec"
+    ],
+    "check": "difftest/net/netip/addr-isloopback/check.go",
+    "control": "coverage/packages/net/netip/controls/ScopedClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsLoopback.md"
   },
   "Addr.IsUnspecified": {
     "go_version": "1.27.0",
@@ -134,8 +1195,12 @@
     "claim": "Returns true exactly for 0.0.0.0 and unzoned ::.",
     "limits": "Models Go address equality using words, the detail class and zone contents. The proof covers all modeled receivers. The Go comparison uses 133 boundary cases and 60,000 samples across seeds 17, 2718 and 65537, using empty and decimal zones.",
     "configurations": "Native Go calling Addr.IsUnspecified on zero, IPv4, IPv6 and scoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIsUnspecified_spec"],
-    "check": "difftest/net/netip/addr-isunspecified/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsUnspecified_spec"
+    ],
+    "check": "difftest/net/netip/addr-isunspecified/check.go",
+    "control": "coverage/packages/net/netip/controls/AddressClassifications/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsUnspecified.md"
   },
   "Prefix.IsSingleIP": {
     "go_version": "1.27.0",
@@ -144,8 +1209,12 @@
     "claim": "For PrefixFrom results, returns true exactly for initialized IPv4 addresses at /32 and IPv6 addresses at /128.",
     "limits": "Proof covers every modeled address and requested integer length. The comparison exhausts reachable length tags by family using five representative addresses at requested lengths -1 through 129 and both int extrema. A separate Go check covers the zero Prefix.",
     "configurations": "Native Go invoking Prefix.IsSingleIP on the zero value and PrefixFrom results.",
-    "theorems": ["GoLean.Net.Netip.prefixIsSingleIP_spec"],
-    "check": "difftest/net/netip/prefix-issingleip/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.prefixIsSingleIP_spec"
+    ],
+    "check": "difftest/net/netip/prefix-issingleip/check.go",
+    "control": "coverage/packages/net/netip/controls/Prefix/main.go",
+    "review": "coverage/packages/net/netip/Prefix.IsSingleIP.md"
   },
   "PrefixFrom": {
     "go_version": "1.27.0",
@@ -154,8 +1223,12 @@
     "claim": "Preserves family and address bits including host bits, strips IPv6 zones, and reports the requested prefix length if valid or -1 otherwise.",
     "limits": "The model represents observable address details and uses mathematical integers, covering every Go int input. Allocation is outside the claim. Go checks 11 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling PrefixFrom and observing Bits and the stored address through Addr, BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.prefixFrom_spec"],
-    "check": "difftest/net/netip/prefixfrom/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.prefixFrom_spec"
+    ],
+    "check": "difftest/net/netip/prefixfrom/check.go",
+    "control": "coverage/packages/net/netip/controls/Prefix/main.go",
+    "review": "coverage/packages/net/netip/PrefixFrom.md"
   },
   "Prefix.IsValid": {
     "go_version": "1.27.0",
@@ -164,8 +1237,12 @@
     "claim": "Returns true exactly when the stored prefix length decodes to a nonnegative length, including /0.",
     "limits": "The proof covers all byte tags. Go and Lean checks exercise all 130 reachable tags. Go uses five representative addresses at requested lengths -1 through 129 and both int extrema, plus a zero Prefix.",
     "configurations": "Native Go calling Prefix.IsValid on the zero value and PrefixFrom results.",
-    "theorems": ["GoLean.Net.Netip.prefixIsValid_spec"],
-    "check": "difftest/net/netip/prefix-isvalid/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.prefixIsValid_spec"
+    ],
+    "check": "difftest/net/netip/prefix-isvalid/check.go",
+    "control": "coverage/packages/net/netip/controls/Prefix/main.go",
+    "review": "coverage/packages/net/netip/Prefix.IsValid.md"
   },
   "Prefix.Bits": {
     "go_version": "1.27.0",
@@ -174,8 +1251,12 @@
     "claim": "Decodes the stored prefix length tag by subtracting one after widening, yielding -1 for an invalid prefix.",
     "limits": "The proof covers all byte tags. Go and Lean checks exhaust the 130 reachable tags, with Go checking five representative addresses at requested lengths -1 through 129 and both int extrema, plus a zero Prefix.",
     "configurations": "Native Go calling Prefix.Bits on the zero value and PrefixFrom results.",
-    "theorems": ["GoLean.Net.Netip.prefixBits_spec"],
-    "check": "difftest/net/netip/prefix-bits/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.prefixBits_spec"
+    ],
+    "check": "difftest/net/netip/prefix-bits/check.go",
+    "control": "coverage/packages/net/netip/controls/Prefix/main.go",
+    "review": "coverage/packages/net/netip/Prefix.Bits.md"
   },
   "Prefix.Addr": {
     "go_version": "1.27.0",
@@ -184,8 +1265,12 @@
     "claim": "Returns the stored address regardless of prefix length or validity, preserving stored host bits.",
     "limits": "The proof covers all modeled stored addresses and length tags. Fixtures use PrefixFrom, which strips the input zone before Addr reads the stored address. The Go check uses six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling Prefix.Addr on valid and invalid PrefixFrom results and observing BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.prefixAddr_spec"],
-    "check": "difftest/net/netip/prefix-addr/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.prefixAddr_spec"
+    ],
+    "check": "difftest/net/netip/prefix-addr/check.go",
+    "control": "coverage/packages/net/netip/controls/Prefix/main.go",
+    "review": "coverage/packages/net/netip/Prefix.Addr.md"
   },
   "AddrPort.Addr": {
     "go_version": "1.27.0",
@@ -194,8 +1279,12 @@
     "claim": "Returns the stored address, preserving bytes, family and zone for every port.",
     "limits": "The proof covers all modeled addresses and ports. The Go comparison uses six boundary cases and 60,000 samples with seeds 17, 2718 and 65537, and empty or decimal zones.",
     "configurations": "Native Go calling AddrPort.Addr and observing BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.addrPortAddr_spec"],
-    "check": "difftest/net/netip/addrport-addr/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrPortAddr_spec"
+    ],
+    "check": "difftest/net/netip/addrport-addr/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrPort/main.go",
+    "review": "coverage/packages/net/netip/AddrPort.Addr.md"
   },
   "AddrPortFrom": {
     "go_version": "1.27.0",
@@ -204,8 +1293,12 @@
     "claim": "Preserves the supplied address bytes, family, zone and uint16 port.",
     "limits": "The proof covers every modeled address and port. The Go check uses six boundary cases and 60,000 samples across seeds 17, 2718 and 65537, with empty and decimal zone strings. Allocation is outside the claim.",
     "configurations": "Native Go calling AddrPortFrom and observing Addr and Port, with BitLen, As16 and Zone on the returned address.",
-    "theorems": ["GoLean.Net.Netip.addrPortFrom_spec"],
-    "check": "difftest/net/netip/addrportfrom/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrPortFrom_spec"
+    ],
+    "check": "difftest/net/netip/addrportfrom/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrPort/main.go",
+    "review": "coverage/packages/net/netip/AddrPortFrom.md"
   },
   "AddrPort.IsValid": {
     "go_version": "1.27.0",
@@ -214,8 +1307,12 @@
     "claim": "Returns true exactly when the stored address is initialized, for every port including zero.",
     "limits": "The proof covers every modeled address and port. The comparison exhausts all 65,536 ports in each of the three modeled address classes and uses six representative Go addresses.",
     "configurations": "Native Go calling netip.AddrPort.IsValid on receivers built with AddrPortFrom.",
-    "theorems": ["GoLean.Net.Netip.addrPortIsValid_spec"],
-    "check": "difftest/net/netip/addrport-isvalid/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrPortIsValid_spec"
+    ],
+    "check": "difftest/net/netip/addrport-isvalid/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrPort/main.go",
+    "review": "coverage/packages/net/netip/AddrPort.IsValid.md"
   },
   "AddrPort.Port": {
     "go_version": "1.27.0",
@@ -224,8 +1321,12 @@
     "claim": "Returns the stored uint16 port independently of the address, including zero for a zero AddrPort.",
     "limits": "The proof quantifies over all modeled addresses and ports. The comparison exhausts all 65,536 port values for one Lean address and five Go addresses, with a separate Go zero-value check.",
     "configurations": "Native Go invoking netip.AddrPort.Port on the zero value and values built with AddrPortFrom.",
-    "theorems": ["GoLean.Net.Netip.addrPortPort_spec"],
-    "check": "difftest/net/netip/addrport-port/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrPortPort_spec"
+    ],
+    "check": "difftest/net/netip/addrport-port/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrPort/main.go",
+    "review": "coverage/packages/net/netip/AddrPort.Port.md"
   },
   "Addr.AsSlice": {
     "go_version": "1.27.0",
@@ -234,8 +1335,12 @@
     "claim": "Returns nil for the zero address, the four IPv4 bytes for IPv4, and all sixteen IPv6 bytes for IPv6, including mapped and scoped IPv6.",
     "limits": "The proof covers nilness, length and contents for every address class and word pair. Slice capacity, allocation and storage identity are outside the claim. The Go comparison uses 133 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go comparing netip.Addr.AsSlice nilness and byte sequences.",
-    "theorems": ["GoLean.Net.Netip.addrAsSlice_spec"],
-    "check": "difftest/net/netip/addr-asslice/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrAsSlice_spec"
+    ],
+    "check": "difftest/net/netip/addr-asslice/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrBytes/main.go",
+    "review": "coverage/packages/net/netip/Addr.AsSlice.md"
   },
   "Addr.As4": {
     "go_version": "1.27.0",
@@ -244,8 +1349,12 @@
     "claim": "Returns the four IPv4 bytes for IPv4 and IPv4-mapped IPv6 receivers. The zero receiver and other IPv6 receivers panic with distinct messages.",
     "limits": "Models panic payloads and returned bytes. The four-byte truncated store is modeled by the last four bytes of the big-endian low word and proved against base-256 digits. The Go check uses 100 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.As4 and comparing its bytes or recovered string panic payload.",
-    "theorems": ["GoLean.Net.Netip.addrAs4_spec"],
-    "check": "difftest/net/netip/addr-as4/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrAs4_spec"
+    ],
+    "check": "difftest/net/netip/addr-as4/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrBytes/main.go",
+    "review": "coverage/packages/net/netip/Addr.As4.md"
   },
   "Addr.As16": {
     "go_version": "1.27.0",
@@ -254,8 +1363,12 @@
     "claim": "Returns each stored address word as eight big-endian bytes, high word first. The zero receiver gives zero bytes and IPv4 uses its mapped representation.",
     "limits": "The model takes the stored words directly because the source does not read address detail. The proof covers every pair of words and every output position. Go comparison uses 133 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.As16 on zero, IPv4, IPv6 and scoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrAs16_spec"],
-    "check": "difftest/net/netip/addr-as16/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrAs16_spec"
+    ],
+    "check": "difftest/net/netip/addr-as16/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrBytes/main.go",
+    "review": "coverage/packages/net/netip/Addr.As16.md"
   },
   "Addr.Zone": {
     "go_version": "1.27.0",
@@ -264,8 +1377,12 @@
     "claim": "Returns the stored zone for IPv6 and an empty string for IPv4 and zero receivers.",
     "limits": "Models the observable contents of the detail handle. IPv4 uses z4, whose zone is empty. The proof covers arbitrary Lean strings. The Go check uses empty and decimal zones across five boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.Zone on zero, IPv4 and IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrZone_spec"],
-    "check": "difftest/net/netip/addr-zone/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrZone_spec"
+    ],
+    "check": "difftest/net/netip/addr-zone/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrZone/main.go",
+    "review": "coverage/packages/net/netip/Addr.Zone.md"
   },
   "Addr.WithZone": {
     "go_version": "1.27.0",
@@ -274,8 +1391,12 @@
     "claim": "Preserves address bytes and family. Replaces the zone for IPv6, including removing it for an empty request, and leaves IPv4 and the zero address unchanged.",
     "limits": "Models observable family and zone contents. Handle identity and interning costs are outside the claim. The proof covers arbitrary Lean strings. The Go check uses empty and decimal zone strings in six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.WithZone and observing BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.addrWithZone_spec"],
-    "check": "difftest/net/netip/addr-withzone/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrWithZone_spec"
+    ],
+    "check": "difftest/net/netip/addr-withzone/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrZone/main.go",
+    "review": "coverage/packages/net/netip/Addr.WithZone.md"
   },
   "Addr.Unmap": {
     "go_version": "1.27.0",
@@ -284,8 +1405,12 @@
     "claim": "Converts mapped IPv6 receivers to IPv4 with an empty zone and identical As16 bytes. All other receivers retain their family, address bytes and zone.",
     "limits": "Models the address-detail handle by family class and zone contents. Handle identity is abstracted. Go comparison uses 101 boundary cases and 60,000 samples across seeds 17, 2718 and 65537, with empty and decimal zone strings.",
     "configurations": "Native Go calling netip.Addr.Unmap and observing BitLen, As16 and Zone.",
-    "theorems": ["GoLean.Net.Netip.addrUnmap_spec"],
-    "check": "difftest/net/netip/addr-unmap/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrUnmap_spec"
+    ],
+    "check": "difftest/net/netip/addr-unmap/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrZone/main.go",
+    "review": "coverage/packages/net/netip/Addr.Unmap.md"
   },
   "Addr.Is4In6": {
     "go_version": "1.27.0",
@@ -294,8 +1419,12 @@
     "claim": "Returns true exactly for IPv6 receivers whose first 96 bits match ::ffff:0:0/96.",
     "limits": "The model uses the address-detail class and both address words. Zone contents do not affect the predicate. The Go check uses 100 boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.Is4In6 on zero, IPv4 and IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIs4In6_spec"],
-    "check": "difftest/net/netip/addr-is4in6/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIs4In6_spec"
+    ],
+    "check": "difftest/net/netip/addr-is4in6/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrFamily/main.go",
+    "review": "coverage/packages/net/netip/Addr.Is4In6.md"
   },
   "Addr.Is6": {
     "go_version": "1.27.0",
@@ -304,8 +1433,12 @@
     "claim": "Returns true exactly for IPv6 receivers, including scoped and IPv4-mapped IPv6 addresses.",
     "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.Is6 on zero, IPv4, IPv6, and scoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIs6_spec"],
-    "check": "difftest/net/netip/addr-is6/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIs6_spec"
+    ],
+    "check": "difftest/net/netip/addr-is6/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrFamily/main.go",
+    "review": "coverage/packages/net/netip/Addr.Is6.md"
   },
   "Addr.Is4": {
     "go_version": "1.27.0",
@@ -314,8 +1447,12 @@
     "claim": "Returns true exactly for IPv4 receivers. IPv4-mapped IPv6 receivers return false.",
     "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.Is4 on zero, IPv4, IPv6, and scoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIs4_spec"],
-    "check": "difftest/net/netip/addr-is4/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIs4_spec"
+    ],
+    "check": "difftest/net/netip/addr-is4/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrFamily/main.go",
+    "review": "coverage/packages/net/netip/Addr.Is4.md"
   },
   "Addr.IsValid": {
     "go_version": "1.27.0",
@@ -324,8 +1461,12 @@
     "claim": "Returns true exactly when the receiver is initialized, including both unspecified addresses.",
     "limits": "The model groups handles into zero, IPv4 and IPv6 detail classes. The proof covers all classes. The Go comparison uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go calling netip.Addr.IsValid on zero, IPv4, IPv6, and scoped IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrIsValid_spec"],
-    "check": "difftest/net/netip/addr-isvalid/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrIsValid_spec"
+    ],
+    "check": "difftest/net/netip/addr-isvalid/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrDetail/main.go",
+    "review": "coverage/packages/net/netip/Addr.IsValid.md"
   },
   "Addr.BitLen": {
     "go_version": "1.27.0",
@@ -334,8 +1475,12 @@
     "claim": "Returns 0 for the zero Addr, 32 for IPv4 and 128 for IPv6, including scoped and IPv4-mapped IPv6 addresses.",
     "limits": "Models which address-detail handle class the source switch observes. The theorem exhausts those classes. Address bytes and zone contents are irrelevant to the switch. The Go check uses five boundary cases and 60,000 samples across seeds 17, 2718 and 65537.",
     "configurations": "Native Go directly invoking netip.Addr.BitLen on zero, IPv4 and IPv6 receivers.",
-    "theorems": ["GoLean.Net.Netip.addrBitLen_spec"],
-    "check": "difftest/net/netip/addr-bitlen/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrBitLen_spec"
+    ],
+    "check": "difftest/net/netip/addr-bitlen/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrDetail/main.go",
+    "review": "coverage/packages/net/netip/Addr.BitLen.md"
   },
   "AddrFrom4": {
     "go_version": "1.27.0",
@@ -344,8 +1489,12 @@
     "claim": "Returns an unzoned IPv4 address whose As16 bytes have the IPv4-mapped prefix followed by the four input bytes in order.",
     "limits": "The proof covers all 32-bit inputs. The Go comparison samples 60,000 inputs with seeds 17, 2718 and 65537, plus 36 boundary cases. The model represents address detail by family and zone contents. Handle identity and allocation are outside the claim.",
     "configurations": "Native Go calling netip.AddrFrom4 and observing As16, Is6 and Zone.",
-    "theorems": ["GoLean.Net.Netip.addrFrom4_spec"],
-    "check": "difftest/net/netip/addrfrom4/check.go"
+    "theorems": [
+      "GoLean.Net.Netip.addrFrom4_spec"
+    ],
+    "check": "difftest/net/netip/addrfrom4/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrConstructors/main.go",
+    "review": "coverage/packages/net/netip/AddrFrom4.md"
   },
   "AddrFrom16": {
     "go_version": "1.27.0",
@@ -357,7 +1506,9 @@
     "theorems": [
       "GoLean.Net.Netip.addrFrom16_spec"
     ],
-    "check": "difftest/net/netip/addrfrom16/check.go"
+    "check": "difftest/net/netip/addrfrom16/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrConstructors/main.go",
+    "review": "coverage/packages/net/netip/AddrFrom16.md"
   },
   "IPv6Loopback": {
     "go_version": "1.27.0",
@@ -369,7 +1520,9 @@
     "theorems": [
       "GoLean.Net.Netip.ipv6Loopback_spec"
     ],
-    "check": "difftest/net/netip/ipv6loopback/check.go"
+    "check": "difftest/net/netip/ipv6loopback/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrConstructors/main.go",
+    "review": "coverage/packages/net/netip/IPv6Loopback.md"
   },
   "IPv6LinkLocalAllRouters": {
     "go_version": "1.27.0",
@@ -381,7 +1534,9 @@
     "theorems": [
       "GoLean.Net.Netip.ipv6LinkLocalAllRouters_spec"
     ],
-    "check": "difftest/net/netip/ipv6linklocalallrouters/check.go"
+    "check": "difftest/net/netip/ipv6linklocalallrouters/check.go",
+    "control": "coverage/packages/net/netip/controls/IPv6Multicast/main.go",
+    "review": "coverage/packages/net/netip/IPv6LinkLocalAllRouters.md"
   },
   "IPv6Unspecified": {
     "go_version": "1.27.0",
@@ -393,7 +1548,9 @@
     "theorems": [
       "GoLean.Net.Netip.ipv6Unspecified_spec"
     ],
-    "check": "difftest/net/netip/ipv6unspecified/check.go"
+    "check": "difftest/net/netip/ipv6unspecified/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrConstructors/main.go",
+    "review": "coverage/packages/net/netip/IPv6Unspecified.md"
   },
   "IPv6LinkLocalAllNodes": {
     "go_version": "1.27.0",
@@ -405,7 +1562,9 @@
     "theorems": [
       "GoLean.Net.Netip.ipv6LinkLocalAllNodes_spec"
     ],
-    "check": "difftest/net/netip/ipv6linklocalallnodes/check.go"
+    "check": "difftest/net/netip/ipv6linklocalallnodes/check.go",
+    "control": "coverage/packages/net/netip/controls/IPv6Multicast/main.go",
+    "review": "coverage/packages/net/netip/IPv6LinkLocalAllNodes.md"
   },
   "IPv4Unspecified": {
     "go_version": "1.27.0",
@@ -417,6 +1576,285 @@
     "theorems": [
       "GoLean.Net.Netip.ipv4Unspecified_spec"
     ],
-    "check": "difftest/net/netip/ipv4unspecified/check.go"
+    "check": "difftest/net/netip/ipv4unspecified/check.go",
+    "control": "coverage/packages/net/netip/controls/AddrConstructors/main.go",
+    "review": "coverage/packages/net/netip/IPv4Unspecified.md"
+  },
+  "parseIPv4Fields": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseFields.lean",
+    "model_symbol": "GoLean.Net.Netip.parseIPv4Fields",
+    "claim": "Parses the selected byte slice into four IPv4 octets, retaining completed field writes even when later input fails, and returns the structured reason and offending suffix.",
+    "limits": "Valid byte slice indices and an initially populated four-byte destination as used by pinned IPv4 and mixed IPv6 callers. Invalid indices, shorter buffers and rendered diagnostic strings are outside scope.",
+    "configurations": "Pinned native same-package overlay, compiled Lean and an independent segment-based oracle. 1,227 fixed rows include all byte subranges of representative inputs, and 60,000 rows are sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Netip.parseIPv4Fields_partial"
+    ],
+    "check": "difftest/net/netip/parse-fields/check.go",
+    "review_sources": [
+      "difftest/net/netip/parse-fields/testdata/parse_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/parseIPv4Fields.md",
+    "control": "difftest/net/netip/parse-fields/review/main.go"
+  },
+  "parseIPv4": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseFields.lean",
+    "model_symbol": "GoLean.Net.Netip.parseIPv4",
+    "claim": "Returns a zone-free IPv4 address on success. Failure returns an invalid zero address plus the structured IPv4 diagnostic.",
+    "limits": "Arbitrary raw bytes. The model represents IPv4 success by its four octets and compares the native address family, zone and fields of the structured diagnostic.",
+    "configurations": "Pinned native same-package overlay, compiled Lean and an independent segment-based oracle. 1,227 fixed rows include all byte subranges of representative inputs, and 60,000 rows are sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Netip.parseIPv4_allZero"
+    ],
+    "check": "difftest/net/netip/parse-fields/check.go",
+    "review_sources": [
+      "difftest/net/netip/parse-fields/testdata/parse_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/parseIPv4.md",
+    "control": "difftest/net/netip/parse-fields/review/main.go"
+  },
+  "splitAddrPort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseFields.lean",
+    "model_symbol": "GoLean.Net.Netip.splitAddrPort",
+    "claim": "Splits at the final colon, checks nonempty raw host and port in source order, handles outer brackets and reports exact split errors.",
+    "limits": "Arbitrary raw bytes. The declaration splits shape only. Later address and port parsing are outside the claim.",
+    "configurations": "Pinned native same-package overlay, compiled Lean and an independent segment-based oracle. 1,227 fixed rows include all byte subranges of representative inputs, and 60,000 rows are sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Netip.splitAddrPort_emptyHostBrackets"
+    ],
+    "check": "difftest/net/netip/parse-fields/check.go",
+    "review_sources": [
+      "difftest/net/netip/parse-fields/testdata/parse_fields_test.go"
+    ],
+    "review": "coverage/packages/net/netip/splitAddrPort.md",
+    "control": "difftest/net/netip/parse-fields/review/main.go"
+  },
+  "parseIPv6": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseAddress.lean",
+    "model_symbol": "GoLean.Net.Netip.parseIPv6",
+    "claim": "Parses IPv6 groups, expansion of one double colon, optional final IPv4 fields and a nonempty raw zone. Failures preserve the original input, reason and offending suffix.",
+    "limits": "Raw byte strings with native family, bytes, zone and structured parser error results. Zone interning allocation and rendering of diagnostic strings are outside scope.",
+    "configurations": "Pinned native same-package overlay and compiled Lean. 374 fixed prefix cases and 60,000 sampled cases at seeds 17, 2718 and 65537. The sampled corpus has 48,000 addresses independently constructed with known bytes, 36,000 of them IPv6, and 12,000 raw or lexical samples.",
+    "theorems": [
+      "GoLean.Net.Netip.parseIPv6_unspecified"
+    ],
+    "check": "difftest/net/netip/parse-address/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-address/testdata/address_test.go"
+    ],
+    "control": "difftest/net/netip/parse-address/review/main.go",
+    "review": "coverage/packages/net/netip/parseIPv6.md"
+  },
+  "ParseAddr": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseAddress.lean",
+    "model_symbol": "GoLean.Net.Netip.parseAddr",
+    "claim": "Selects IPv4, IPv6 or missing-address diagnostics using the first dot, colon or percent byte and returns the exact family, bytes and zone.",
+    "limits": "Raw byte strings with native family, bytes, zone and structured parser error results. Zone interning allocation and rendering of diagnostic strings are outside scope.",
+    "configurations": "Pinned native same-package overlay and compiled Lean. 374 fixed prefix cases and 60,000 sampled cases at seeds 17, 2718 and 65537. The sampled corpus has 48,000 addresses independently constructed with known bytes, 36,000 of them IPv6, and 12,000 raw or lexical samples.",
+    "theorems": [
+      "GoLean.Net.Netip.parseAddr_zoneFirst"
+    ],
+    "check": "difftest/net/netip/parse-address/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-address/testdata/address_test.go"
+    ],
+    "control": "difftest/net/netip/parse-address/review/main.go",
+    "review": "coverage/packages/net/netip/ParseAddr.md"
+  },
+  "MustParseAddr": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseAddress.lean",
+    "model_symbol": "GoLean.Net.Netip.mustParseAddr",
+    "claim": "Returns the parsed address or panics with the concrete structured parser error.",
+    "limits": "Raw byte strings with native family, bytes, zone and structured parser error results. Zone interning allocation and rendering of diagnostic strings are outside scope.",
+    "configurations": "Pinned native same-package overlay and compiled Lean. 374 fixed prefix cases and 60,000 sampled cases at seeds 17, 2718 and 65537. The sampled corpus has 48,000 addresses independently constructed with known bytes, 36,000 of them IPv6, and 12,000 raw or lexical samples.",
+    "theorems": [
+      "GoLean.Net.Netip.mustParseAddr_empty"
+    ],
+    "check": "difftest/net/netip/parse-address/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-address/testdata/address_test.go"
+    ],
+    "control": "difftest/net/netip/parse-address/review/main.go",
+    "review": "coverage/packages/net/netip/MustParseAddr.md"
+  },
+  "Addr.UnmarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseAddress.lean",
+    "model_symbol": "GoLean.Net.Netip.addrUnmarshalText",
+    "claim": "Clears a live receiver on empty input or parser error. On successful nonempty input, stores the exact parsed family, bytes and zone.",
+    "limits": "Raw byte strings with native family, bytes, zone and structured parser error results. Zone interning allocation and rendering of diagnostic strings are outside scope. Receiver is nonnil.",
+    "configurations": "Pinned native same-package overlay and compiled Lean. 374 fixed prefix cases and 60,000 sampled cases at seeds 17, 2718 and 65537. The sampled corpus has 48,000 addresses independently constructed with known bytes, 36,000 of them IPv6, and 12,000 raw or lexical samples.",
+    "theorems": [
+      "GoLean.Net.Netip.addrUnmarshalText_empty"
+    ],
+    "check": "difftest/net/netip/parse-address/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-address/testdata/address_test.go"
+    ],
+    "control": "difftest/net/netip/parse-address/review/main.go",
+    "review": "coverage/packages/net/netip/Addr.UnmarshalText.md"
+  },
+  "ParseAddrPort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.parseAddrPort",
+    "claim": "Parses endpoint bytes, requiring brackets around IPv6 and accepting decimal ports through 65535.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.parseAddrPort_zero"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/parse-addr-port.md"
+  },
+  "MustParseAddrPort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.mustParseAddrPort",
+    "claim": "Returns the parsed address and port or panics with the parser's error category.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.mustParseAddrPort_empty"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/must-parse-addr-port.md"
+  },
+  "AddrPort.UnmarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.addrPortUnmarshalText",
+    "claim": "Clears on empty input or parser failure and stores the parsed address and port on success.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.addrPortUnmarshalText_empty"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/addr-port-unmarshal-text.md"
+  },
+  "ParsePrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.parsePrefix",
+    "claim": "Parses the last-slash suffix, rejects zones and noncanonical lengths, and preserves host bits.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.parsePrefix_noSlash"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/parse-prefix.md"
+  },
+  "MustParsePrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.mustParsePrefix",
+    "claim": "Returns the parsed prefix or panics with the parser's error category.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.mustParsePrefix_empty"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/must-parse-prefix.md"
+  },
+  "Prefix.UnmarshalText": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/ParseEndpoint.lean",
+    "model_symbol": "GoLean.Net.Netip.prefixUnmarshalText",
+    "claim": "Clears on empty input or parser failure and stores the parsed prefix on success.",
+    "limits": "Raw byte strings and successful address, zone and numeric results. Errors are classified by branch. Diagnostic rendering, exact error values, zone interning and nil receivers are outside scope. Prefix bits use the native signed int width.",
+    "configurations": "574 fixed cases and 60,000 sampled cases at seeds 17, 2718 and 65537. Sampled cases include 48,000 successful endpoint or prefix constructions with independent byte, zone and numeric expectations.",
+    "theorems": [
+      "GoLean.Net.Netip.prefixUnmarshalText_empty"
+    ],
+    "check": "difftest/net/netip/parse-endpoint/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Netip/ParseAddress.lean",
+      "lean/GoLean/Net/Netip/ParseFields.lean",
+      "difftest/net/netip/parse-endpoint/testdata/endpoint_test.go"
+    ],
+    "control": "difftest/net/netip/parse-endpoint/review/main.go",
+    "review": "coverage/packages/net/netip/prefix-unmarshal-text.md"
+  },
+  "parseAddrError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/RenderErrors.lean",
+    "model_symbol": "GoLean.Net.Netip.renderAddrError",
+    "claim": "Renders the Go-quoted input, raw message, and optional Go-quoted failure suffix.",
+    "limits": "Arbitrary byte strings, with pinned Go Unicode printability. Models returned bytes.",
+    "configurations": "Every individual byte, every boundary where Go Unicode printability changes, and 60,000 sampled raw or Unicode strings at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Netip.renderAddrError_empty"
+    ],
+    "check": "difftest/net/netip/render-errors/check.go",
+    "review_sources": [
+      "lean/GoLean/Strconv/PrintRanges.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean",
+      "difftest/net/netip/render-errors/testdata/render_test.go",
+      "difftest/net/netip/render-errors/printtable/main.go"
+    ],
+    "review": "coverage/packages/net/netip/parseAddrError.Error.md",
+    "control": "difftest/net/netip/render-errors/review/main.go"
+  },
+  "parsePrefixError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Netip/RenderErrors.lean",
+    "model_symbol": "GoLean.Net.Netip.renderPrefixError",
+    "claim": "Renders the Go-quoted input and raw message using the prefix diagnostic label.",
+    "limits": "Arbitrary byte strings, with pinned Go Unicode printability. Models returned bytes.",
+    "configurations": "Every individual byte, every boundary where Go Unicode printability changes, and 60,000 sampled raw or Unicode strings at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Netip.renderPrefixError_empty"
+    ],
+    "check": "difftest/net/netip/render-errors/check.go",
+    "review_sources": [
+      "lean/GoLean/Strconv/PrintRanges.lean",
+      "lean/GoLean/Unicode/Utf8/DecodeRuneInString.lean",
+      "difftest/net/netip/render-errors/testdata/render_test.go",
+      "difftest/net/netip/render-errors/printtable/main.go"
+    ],
+    "review": "coverage/packages/net/netip/parsePrefixError.Error.md",
+    "control": "difftest/net/netip/render-errors/review/main.go"
   }
 }

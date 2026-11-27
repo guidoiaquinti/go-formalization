@@ -1,0 +1,4 @@
+{
+  "name": "godiff-addr-isloopback",
+  "root": "GoDiff.Net.Netip.AddrIsLoopback"
+}

@@ -1,0 +1,4 @@
+{
+  "name": "godiff-utf8-decode-rune-in-string-slow",
+  "root": "GoDiff.Unicode.Utf8.DecodeRuneInStringSlow"
+}

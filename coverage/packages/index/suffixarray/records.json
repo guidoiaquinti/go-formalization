@@ -1,0 +1,490 @@
+{
+  "ints.len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.intsLen",
+    "claim": "Returns the sum of both visible internal slice lengths, including the direct case where both slices are populated.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.intsLen_sum"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/ints.len.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "ints.get": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.intsGet",
+    "claim": "Prefers a nonnil int32 slice, sign-extends the selected 32-bit value, and otherwise reads the int64 slice. Invalid indices panic.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.intsGet_negative"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/ints.get.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "ints.set": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.intsSet",
+    "claim": "Mutates the selected backing cell, truncating to the low 32 bits when using int32 storage. Bounds failures preserve both backing views.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.intsSet_truncates"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/ints.set.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "ints.slice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.intsSlice",
+    "claim": "Returns an alias view of the selected storage, preserving nilness and deriving capacity from the low index. The high index can extend into spare capacity.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.intsSlice_spare"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/ints.slice.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "Index.Bytes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.indexBytes",
+    "claim": "Returns the original indexed byte view with identical bytes, nilness and backing geometry.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.indexBytes_original"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/Index.Bytes.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "Index.at": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Accessors.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.indexAt",
+    "claim": "Uses the chosen signed suffix offset, exposing the visible suffix and preserving remaining backing capacity. Invalid index or suffix offset panics.",
+    "limits": "Legal slice backing geometry and feasible lengths, including explicit nil and nonnil empty storage. Observes nil-receiver and bounds panic classes. Concurrency, corruption of slice headers and intentional mutation of the public Bytes result are outside scope.",
+    "configurations": "Pinned native direct Go via a same-package overlay. Independent signed arithmetic and view geometry oracle. Includes pointer aliasing where capacity is positive, both storage widths, alternate backing states, signed extrema and spare capacity. 56,448 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.indexAt_spare"
+    ],
+    "check": "difftest/index/suffixarray/accessors/check.go",
+    "review": "coverage/packages/index/suffixarray/Index.at.md",
+    "control": "difftest/index/suffixarray/accessors/review/main.go"
+  },
+  "Index.lookupAll": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Lookup.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.lookupAll",
+    "claim": "Returns the exact alias range of the matching suffixes in suffix-array order, including the insertion-position view when there are no matches and the entire range for an empty needle.",
+    "limits": "Well-formed complete sorted suffix indices in either representation, zero index, and nil receiver fault or short-circuit. Raw bytes with feasible sizes. Concurrency, corrupted suffix indices and allocator failures are outside scope.",
+    "configurations": "Pinned native private and public Go entry via same-package overlay. Lexicographic suffixes supplied independently and exact cut checked by a linear raw prefix oracle. Checks alias and pointer geometry, result isolation, signed limits, nil and empty. 5,772 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.lookupAll_banana"
+    ],
+    "check": "difftest/index/suffixarray/lookup/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean",
+      "lean/GoLean/Sort/Search.lean",
+      "lean/GoLean/Sort/SearchInterval.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/Index.lookupAll.md",
+    "control": "difftest/index/suffixarray/lookup/review/main.go"
+  },
+  "Index.Lookup": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Lookup.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.indexLookup",
+    "claim": "Returns a fresh slice of the first matching offsets in suffix-array order, clipped to a positive limit and unrestricted for negative limits. Returns nil on no matches, empty needles or zero limits.",
+    "limits": "Well-formed complete sorted suffix indices in either representation, zero index, and nil receiver fault or short-circuit. Raw bytes with feasible sizes. Concurrency, corrupted suffix indices and allocator failures are outside scope.",
+    "configurations": "Pinned native private and public Go entry via same-package overlay. Lexicographic suffixes supplied independently and exact cut checked by a linear raw prefix oracle. Checks alias and pointer geometry, result isolation, signed limits, nil and empty. 5,772 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.indexLookup_empty",
+      "GoLean.Index.Suffixarray.indexLookup_zero",
+      "GoLean.Index.Suffixarray.indexLookup_bananaLimited"
+    ],
+    "check": "difftest/index/suffixarray/lookup/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean",
+      "lean/GoLean/Sort/Search.lean",
+      "lean/GoLean/Sort/SearchInterval.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/Index.Lookup.md",
+    "control": "difftest/index/suffixarray/lookup/review/main.go"
+  },
+  "freq_8_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.freqByte32",
+    "claim": "Returns a nonnegative-head cached table unchanged, or clears and counts into the supplied frequency view or bucket fallback. Preserves completed counts at an index panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.freqByte32_cached"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/freq_8_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMin_8_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMinByte32",
+    "claim": "Writes the exclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMinByte32_first"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMin_8_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMax_8_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMaxByte32",
+    "claim": "Writes the inclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMaxByte32_first"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMax_8_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "freq_8_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.freqByte64",
+    "claim": "Returns a nonnegative-head cached table unchanged, or clears and counts into the supplied frequency view or bucket fallback. Preserves completed counts at an index panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.freqByte64_cached"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/freq_8_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMin_8_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMinByte64",
+    "claim": "Writes the exclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMinByte64_first"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMin_8_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMax_8_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMaxByte64",
+    "claim": "Writes the inclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Byte input recounts and bucket writes use 256 entries through available capacity.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMaxByte64_first"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMax_8_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "freq_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.freq32",
+    "claim": "Returns a nonnegative-head cached table unchanged, or clears and counts into the supplied frequency view or bucket fallback. Preserves completed counts at an index panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.freq32_cached"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/freq_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMin_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMin32",
+    "claim": "Writes the exclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMin32_prefix"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMin_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMax_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMax32",
+    "claim": "Writes the inclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMax32_prefix"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMax_32.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "freq_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.freq64",
+    "claim": "Returns a nonnegative-head cached table unchanged, or clears and counts into the supplied frequency view or bucket fallback. Preserves completed counts at an index panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.freq64_cached"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/freq_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMin_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMin64",
+    "claim": "Writes the exclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMin64_prefix"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMin_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "bucketMax_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/Buckets.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.bucketMax64",
+    "claim": "Writes the inclusive prefix sum in native signed counter words after acquiring frequencies, preserving earlier writes at a bounds panic. Integer input uses visible slice lengths and rejects an invalid symbol when reached.",
+    "limits": "Valid slice geometry and finite feasible arrays. The frequency and bucket slices are disjoint when frequency is nonnil. Nil frequency uses the bucket itself. Includes cached values, short views, invalid integer symbols, signed counter wrap, and the bounds panic class. Arbitrary overlapping nonnil inputs and concurrent writes are outside scope.",
+    "configurations": "Pinned same-package private Go overlay. An independent histogram and unsigned cumulative oracle checks full backing, partial panic writes, selected capacity and frequency output alias. 2,908 boundaries and 60,000 samples per declaration at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.bucketMax64_prefix"
+    ],
+    "check": "difftest/index/suffixarray/buckets/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/bucketMax_64.md",
+    "control": "difftest/index/suffixarray/buckets/review/main.go"
+  },
+  "writeInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/IntegerIO.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.writeInt",
+    "claim": "Encodes a signed native int before offering the complete ten-byte frame, retaining the previous padding, preserving partial writes on bounds faults and forwarding the writer error.",
+    "limits": "Legal buffer geometry with finite I/O. Reader returns bounded chunks and EOF or a fixed error at exhaustion. Writer records the offered alias and returns zero with nil or a fixed error. Also covers nil I/O interfaces and bounds panic classes. Arbitrary callback mutation or panic, concurrent access, and unbounded zero progress are outside scope.",
+    "configurations": "Pinned exact private Go via same-package overlay. Independent framing oracle checks return values, error identity and full scratch, offered lengths/capacities/aliases and I/O trace. 5,944 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.writeInt_keepsPadding"
+    ],
+    "check": "difftest/index/suffixarray/integer-io/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/VarintPut.lean",
+      "lean/GoLean/Encoding/Binary/VarintDecode.lean",
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/writeInt.md",
+    "control": "difftest/index/suffixarray/integer-io/review/main.go"
+  },
+  "readInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/IntegerIO.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.readInt",
+    "claim": "Fills a ten-byte capacity-checked view then decodes the original visible buffer even after a read error, preserving stale bytes as applicable.",
+    "limits": "Legal buffer geometry with finite I/O. Reader returns bounded chunks and EOF or a fixed error at exhaustion. Writer records the offered alias and returns zero with nil or a fixed error. Also covers nil I/O interfaces and bounds panic classes. Arbitrary callback mutation or panic, concurrent access, and unbounded zero progress are outside scope.",
+    "configurations": "Pinned exact private Go via same-package overlay. Independent framing oracle checks return values, error identity and full scratch, offered lengths/capacities/aliases and I/O trace. 5,944 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.readInt_staleAfterError",
+      "GoLean.Index.Suffixarray.readInt_shortView"
+    ],
+    "check": "difftest/index/suffixarray/integer-io/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/VarintPut.lean",
+      "lean/GoLean/Encoding/Binary/VarintDecode.lean",
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/readInt.md",
+    "control": "difftest/index/suffixarray/integer-io/review/main.go"
+  },
+  "writeSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/IntegerIO.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.writeSlice",
+    "claim": "Packs unsigned encodings of either index width until fewer than ten visible bytes remain, then updates the size header and writes the framed bytes with the exact entry count.",
+    "limits": "Legal buffer geometry with finite I/O. Reader returns bounded chunks and EOF or a fixed error at exhaustion. Writer records the offered alias and returns zero with nil or a fixed error. Also covers nil I/O interfaces and bounds panic classes. Arbitrary callback mutation or panic, concurrent access, and unbounded zero progress are outside scope.",
+    "configurations": "Pinned exact private Go via same-package overlay. Independent framing oracle checks return values, error identity and full scratch, offered lengths/capacities/aliases and I/O trace. 5,944 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.writeSlice_wordRoom"
+    ],
+    "check": "difftest/index/suffixarray/integer-io/check.go",
+    "review_sources": [
+      "lean/GoLean/Encoding/Binary/VarintPut.lean",
+      "lean/GoLean/Encoding/Binary/VarintDecode.lean",
+      "lean/GoLean/Index/Suffixarray/Accessors.lean"
+    ],
+    "review": "coverage/packages/index/suffixarray/writeSlice.md",
+    "control": "difftest/index/suffixarray/integer-io/review/main.go"
+  },
+  "map_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/MapLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.mapLms32",
+    "claim": "Scans from the inclusive midpoint down to zero, filters positive signed LMS IDs, decrements each and packs the retained sequence at the high end of the visible slice. The count argument is unused. A zero-length view faults before mutation.",
+    "limits": "Finite feasible slices of signed 32-bit words with valid backing geometry, including empty/nil, spare capacity, and arbitrary ID contents. Scoped to sequential calls and the bounds panic class.",
+    "configurations": "Pinned native exact private declaration via same-package overlay. Independent filter and tail-copy oracle observes all visible and spare cells. 27,308 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.mapLms32_compacts",
+      "GoLean.Index.Suffixarray.mapLms32_empty"
+    ],
+    "check": "difftest/index/suffixarray/map-lms/check.go",
+    "control": "difftest/index/suffixarray/map-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/map_32.md"
+  },
+  "map_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/MapLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.mapLms64",
+    "claim": "Scans from the inclusive midpoint down to zero, filters positive signed LMS IDs, decrements each and packs the retained sequence at the high end of the visible slice. The count argument is unused. A zero-length view faults before mutation.",
+    "limits": "Finite feasible slices of signed 64-bit words with valid backing geometry, including empty/nil, spare capacity, and arbitrary ID contents. Scoped to sequential calls and the bounds panic class.",
+    "configurations": "Pinned native exact private declaration via same-package overlay. Independent filter and tail-copy oracle observes all visible and spare cells. 27,308 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.mapLms64_compacts",
+      "GoLean.Index.Suffixarray.mapLms64_ignoresCount"
+    ],
+    "check": "difftest/index/suffixarray/map-lms/check.go",
+    "control": "difftest/index/suffixarray/map-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/map_64.md"
+  },
+  "expand_8_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/ExpandLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.expandByte32",
+    "claim": "Stable expansion from a compacted sorted LMS suffix prefix into the upper ends of symbol buckets for byte symbols and signed 32-bit suffix and bucket cells. Clears the other suffix-array slots and tracks the exact remaining bucket boundaries.",
+    "limits": "Nonempty lawful compacted LMS prefixes with length-matched suffix storage, nonnegative alphabet cells, disjoint writable views and representable indices. Frequency mode is nil, cold sentinel or exact warm counts. Model and observation include retained spare bucket and frequency words. Malformed internal states and allocator identity are outside scope.",
+    "configurations": "Pinned same-package native calls, compiled Lean and independent bucket grouping oracle. 8,178 fixed rows exhaust ternary texts of lengths three through seven with at least one LMS suffix and all three cache modes, and 60,000 sampled rows at seeds 17, 2718 and 65537. All four native widths and alphabet profiles run on every row.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.expandByte32_places"
+    ],
+    "check": "difftest/index/suffixarray/expand-lms/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Buckets.lean",
+      "difftest/index/suffixarray/expand-lms/testdata/expand_test.go"
+    ],
+    "control": "difftest/index/suffixarray/expand-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/expand_8_32.md"
+  },
+  "expand_8_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/ExpandLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.expandByte64",
+    "claim": "Stable expansion from a compacted sorted LMS suffix prefix into the upper ends of symbol buckets for byte symbols and signed 64-bit suffix and bucket cells. Clears the other suffix-array slots and tracks the exact remaining bucket boundaries.",
+    "limits": "Nonempty lawful compacted LMS prefixes with length-matched suffix storage, nonnegative alphabet cells, disjoint writable views and representable indices. Frequency mode is nil, cold sentinel or exact warm counts. Model and observation include retained spare bucket and frequency words. Malformed internal states and allocator identity are outside scope.",
+    "configurations": "Pinned same-package native calls, compiled Lean and independent bucket grouping oracle. 8,178 fixed rows exhaust ternary texts of lengths three through seven with at least one LMS suffix and all three cache modes, and 60,000 sampled rows at seeds 17, 2718 and 65537. All four native widths and alphabet profiles run on every row.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.expandByte64_places"
+    ],
+    "check": "difftest/index/suffixarray/expand-lms/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Buckets.lean",
+      "difftest/index/suffixarray/expand-lms/testdata/expand_test.go"
+    ],
+    "control": "difftest/index/suffixarray/expand-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/expand_8_64.md"
+  },
+  "expand_32": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/ExpandLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.expand32",
+    "claim": "Stable expansion from a compacted sorted LMS suffix prefix into the upper ends of symbol buckets for signed 32-bit alphabet, suffix and bucket cells. Clears the other suffix-array slots and tracks the exact remaining bucket boundaries.",
+    "limits": "Nonempty lawful compacted LMS prefixes with length-matched suffix storage, nonnegative alphabet cells, disjoint writable views and representable indices. Frequency mode is nil, cold sentinel or exact warm counts. Model and observation include retained spare bucket and frequency words. Malformed internal states and allocator identity are outside scope.",
+    "configurations": "Pinned same-package native calls, compiled Lean and independent bucket grouping oracle. 8,178 fixed rows exhaust ternary texts of lengths three through seven with at least one LMS suffix and all three cache modes, and 60,000 sampled rows at seeds 17, 2718 and 65537. All four native widths and alphabet profiles run on every row.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.expand32_places"
+    ],
+    "check": "difftest/index/suffixarray/expand-lms/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Buckets.lean",
+      "difftest/index/suffixarray/expand-lms/testdata/expand_test.go"
+    ],
+    "control": "difftest/index/suffixarray/expand-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/expand_32.md"
+  },
+  "expand_64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Index/Suffixarray/ExpandLms.lean",
+    "model_symbol": "GoLean.Index.Suffixarray.expand64",
+    "claim": "Stable expansion from a compacted sorted LMS suffix prefix into the upper ends of symbol buckets for signed 64-bit alphabet, suffix and bucket cells. Clears the other suffix-array slots and tracks the exact remaining bucket boundaries.",
+    "limits": "Nonempty lawful compacted LMS prefixes with length-matched suffix storage, nonnegative alphabet cells, disjoint writable views and representable indices. Frequency mode is nil, cold sentinel or exact warm counts. Model and observation include retained spare bucket and frequency words. Malformed internal states and allocator identity are outside scope.",
+    "configurations": "Pinned same-package native calls, compiled Lean and independent bucket grouping oracle. 8,178 fixed rows exhaust ternary texts of lengths three through seven with at least one LMS suffix and all three cache modes, and 60,000 sampled rows at seeds 17, 2718 and 65537. All four native widths and alphabet profiles run on every row.",
+    "theorems": [
+      "GoLean.Index.Suffixarray.expand64_places"
+    ],
+    "check": "difftest/index/suffixarray/expand-lms/check.go",
+    "review_sources": [
+      "lean/GoLean/Index/Suffixarray/Buckets.lean",
+      "difftest/index/suffixarray/expand-lms/testdata/expand_test.go"
+    ],
+    "control": "difftest/index/suffixarray/expand-lms/review/main.go",
+    "review": "coverage/packages/index/suffixarray/expand_64.md"
+  }
+}

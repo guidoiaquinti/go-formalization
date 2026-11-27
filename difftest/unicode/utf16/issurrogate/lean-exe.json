@@ -1,0 +1,4 @@
+{
+  "name": "godiff-utf16-issurrogate",
+  "root": "GoDiff.Unicode.Utf16.IsSurrogate"
+}

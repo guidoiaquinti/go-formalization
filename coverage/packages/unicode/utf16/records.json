@@ -1,0 +1,117 @@
+{
+  "AppendRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/AppendRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.appendRune",
+    "claim": "Preserves the destination prefix and appends one word for a valid BMP rune, the calculated surrogate pair for a supplementary rune, or U+FFFD for invalid input.",
+    "limits": "Models returned contents and length, with uint16 words represented as natural numbers. Capacity, backing array identity, alias writes and allocation are outside the model. The check covers 228 boundary cases and 60,000 samples across seeds 17, 2718 and 65537, with varying destination contents and spare capacity.",
+    "configurations": "Native Go calling unicode/utf16.AppendRune directly on nil, empty and populated destinations.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.appendRune_spec"
+    ],
+    "check": "difftest/unicode/utf16/appendrune/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/AppendRune.md"
+  },
+  "Decode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/Decode.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.decode",
+    "claim": "Returns BMP words outside the surrogate blocks unchanged, consumes a high-low pair as a single supplementary rune, and replaces each unpaired surrogate with U+FFFD.",
+    "limits": "Models the output rune sequence and input consumption, with uint16 words represented by natural numbers. Slice capacity, backing storage, nilness and allocation are outside the claim. The comparison exercises 1,112 boundary sequences and 60,000 sampled sequences with seeds 17, 2718 and 65537, including sequences near the initial buffer capacity.",
+    "configurations": "Native Go calling unicode/utf16.Decode directly on nil, empty and populated slices.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.decode_spec"
+    ],
+    "check": "difftest/unicode/utf16/decode/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/Decode.md"
+  },
+  "DecodeRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/DecodeRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.decodeRune",
+    "claim": "For a high surrogate followed by a low surrogate, returns 65536 plus 1024 times the first payload plus the second payload. Otherwise returns U+FFFD.",
+    "limits": "The proof treats Go runes as signed mathematical integers and uses natural bit operations for the nonnegative payloads. The resulting code point fits in a signed rune. The check crosses 11 signed and surrogate-boundary values and samples 60,000 pairs with seeds 17, 2718 and 65537, including valid pairs and mixed or arbitrary signed inputs.",
+    "configurations": "Native Go calling unicode/utf16.DecodeRune directly.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.decodeRune_spec"
+    ],
+    "check": "difftest/unicode/utf16/decoderune/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/DecodeRune.md"
+  },
+  "Encode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/Encode.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.encode",
+    "claim": "Returns the concatenated UTF-16 encoding of the input runes with capacity equal to the input length plus the number of runes at or above U+10000, including out-of-range positive runes.",
+    "limits": "Models the returned words and capacity through the source size pass and RuneLen dispatch. Allocation failure, size overflow and storage beyond the returned length are excluded. The check covers nil and empty input, 344 boundary sequences in total and 60,000 sampled sequences with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling unicode/utf16.Encode directly and inspecting the returned slice.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.encode_spec"
+    ],
+    "check": "difftest/unicode/utf16/encode/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/Encode.md"
+  },
+  "EncodeRune": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/EncodeRune.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.encodeRune",
+    "claim": "For supplementary Unicode planes 1 through 16, adds the quotient and remainder of the payload divided by 1024 to the high and low surrogate bases respectively. All other inputs return two U+FFFD values.",
+    "limits": "Models a signed Go rune as an integer and the nonnegative supplementary payload as a natural number. The proof covers every signed 32-bit rune. The comparison checks 18 boundary cases and samples 30,000 supplementary and 30,000 full-width runes with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling unicode/utf16.EncodeRune directly. The oracle computes the signed plane index by arithmetic right shift.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.encodeRune_spec"
+    ],
+    "check": "difftest/unicode/utf16/encoderune/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/EncodeRune.md"
+  },
+  "IsSurrogate": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/IsSurrogate.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.isSurrogate",
+    "claim": "Returns true exactly when the signed rune has high-bit prefix 54 or 55 after removing the low ten bits. These are the high and low UTF-16 surrogate blocks.",
+    "limits": "Models the signed rune as a mathematical integer. The proof covers all integers, including every signed 32-bit rune. The comparison exhausts 65,536 BMP values, checks seven additional boundary and signed values, and samples 60,000 signed 32-bit runes using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling unicode/utf16.IsSurrogate with signed 32-bit runes. The Go oracle uses an arithmetic right shift and the Lean theorem uses floor division by 1024.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.isSurrogate_spec"
+    ],
+    "check": "difftest/unicode/utf16/issurrogate/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/IsSurrogate.md"
+  },
+  "RuneLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/RuneLen.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.runeLen",
+    "claim": "Returns -1 for negative values, planes 17 and above, or reserved surrogate blocks 54 and 55. Returns one UTF-16 word for valid plane-zero runes and two for other valid runes.",
+    "limits": "The proof covers every mathematical integer, including all signed 32-bit runes. The comparison exhausts the 65,536 BMP values and checks seven further boundaries, 30,000 supplementary-plane samples and 30,000 full-width signed rune samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling unicode/utf16.RuneLen. The oracle uses signed shifts to compute the plane and block quotients in the Lean theorem.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.runeLen_spec"
+    ],
+    "check": "difftest/unicode/utf16/runelen/check.go",
+    "control": "coverage/packages/unicode/utf16/controls/main.go",
+    "review": "coverage/packages/unicode/utf16/RuneLen.md"
+  },
+  "decode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Unicode/Utf16/DecodeAppend.lean",
+    "model_symbol": "GoLean.Unicode.Utf16.decodeAppend",
+    "claim": "Preserves the destination rune prefix and appends the full decoded sequence, replacing unpaired surrogates and consuming valid pairs together.",
+    "limits": "The model covers returned contents and length for arbitrary modeled input and destination lists. Nilness, backing storage, capacity and allocation are outside the claim. Checks 120 boundary states and 60,000 sampled states with seeds 17, 2718 and 65537, including nil and empty slices, malformed input, and varying destination capacity.",
+    "configurations": "Native pinned Go runs an overlay test inside unicode/utf16 that calls the private decode helper directly. The returned rune sequence is checked against the compiled Lean model and an independent arithmetic oracle.",
+    "theorems": [
+      "GoLean.Unicode.Utf16.decodeAppend_spec"
+    ],
+    "check": "difftest/unicode/utf16/decode-append/check.go",
+    "control": "difftest/unicode/utf16/decode-append/control/main.go",
+    "review_sources": [
+      "difftest/unicode/utf16/decode-append/testdata/decode_append_control_test.go"
+    ],
+    "review": "coverage/packages/unicode/utf16/decode-private.md"
+  }
+}

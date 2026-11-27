@@ -1,0 +1,861 @@
+{
+  "Array.Elem": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns the stored element interface unchanged, including nil interface and typed nil. A nil receiver panics.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.arrayElem",
+    "theorems": [
+      "GoLean.Go.Types.arrayElem_reads"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Array.Elem.md"
+  },
+  "Array.Len": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns the exact signed 64-bit length, including negative inputs. A nil receiver panics.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.arrayLen",
+    "theorems": [
+      "GoLean.Go.Types.arrayLen_reads"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Array.Len.md"
+  },
+  "Array.Underlying": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns a Type interface containing the same Array pointer, including a nonnil interface with a nil Array pointer for a nil receiver.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.arrayUnderlying",
+    "theorems": [
+      "GoLean.Go.Types.arrayUnderlying_self"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Array.Underlying.md"
+  },
+  "Chan.Dir": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns the stored native-width direction without validation. A nil receiver panics.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.chanDir",
+    "theorems": [
+      "GoLean.Go.Types.chanDir_reads"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Chan.Dir.md"
+  },
+  "Chan.Elem": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns the stored element interface unchanged, including nil interface and typed nil. A nil receiver panics.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.chanElem",
+    "theorems": [
+      "GoLean.Go.Types.chanElem_reads"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Chan.Elem.md"
+  },
+  "Chan.Underlying": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Returns a Type interface containing the same Chan pointer, including a nonnil interface with a nil Chan pointer for a nil receiver.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.chanUnderlying",
+    "theorems": [
+      "GoLean.Go.Types.chanUnderlying_self"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/Chan.Underlying.md"
+  },
+  "NewArray": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Creates distinct arrays preserving the exact element interface and signed length.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.newArray",
+    "theorems": [
+      "GoLean.Go.Types.newArray_fields"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/NewArray.md"
+  },
+  "NewChan": {
+    "check": "difftest/go/types/array-chan/check.go",
+    "claim": "Creates distinct channels preserving the exact element interface and native-width direction.",
+    "configurations": "Direct public calls in pinned Go with compiled Lean and independent field, pointer-identity and nil or panic observations. 1,008 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "go_version": "1.27.0",
+    "limits": "Elements are opaque interface identities. Constructor proofs preserve supplied allocation identities and native tests check distinct pointers. The model includes nil, zero-value and constructed receivers and uses the native int width for ChanDir. Type checking and string rendering are outside scope.",
+    "model": "lean/GoLean/Go/Types/ArrayChan.lean",
+    "model_symbol": "GoLean.Go.Types.newChan",
+    "theorems": [
+      "GoLean.Go.Types.newChan_fields"
+    ],
+    "control": "difftest/go/types/array-chan/review/main.go",
+    "review": "coverage/packages/go/types/NewChan.md"
+  },
+  "NewSlice": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.newSlice",
+    "claim": "Creates a fresh slice type retaining the exact element interface.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newSlice_fields"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/new-slice.md"
+  },
+  "Slice.Elem": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.sliceElem",
+    "claim": "Returns the exact stored element interface. A nil receiver panics.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.sliceElem_reads"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/slice-elem.md"
+  },
+  "Slice.Underlying": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.sliceUnderlying",
+    "claim": "Returns the same Slice pointer in a Type interface. A nil receiver yields an interface holding a typed nil Slice pointer.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.sliceUnderlying_self"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/slice-underlying.md"
+  },
+  "NewPointer": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.newPointer",
+    "claim": "Creates a fresh pointer type retaining the exact element interface.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newPointer_fields"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/new-pointer.md"
+  },
+  "Pointer.Elem": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.pointerElem",
+    "claim": "Returns the exact stored element interface. A nil receiver panics.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.pointerElem_reads"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/pointer-elem.md"
+  },
+  "Pointer.Underlying": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.pointerUnderlying",
+    "claim": "Returns the same Pointer pointer in a Type interface. A nil receiver yields an interface holding a typed nil Pointer pointer.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.pointerUnderlying_self"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/pointer-underlying.md"
+  },
+  "NewMap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.newMap",
+    "claim": "Creates a fresh map type retaining the exact key and element interfaces.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newMap_fields"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/new-map.md"
+  },
+  "Map.Key": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.mapKey",
+    "claim": "Returns the exact stored key interface. A nil receiver panics.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.mapKey_reads"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/map-key.md"
+  },
+  "Map.Elem": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.mapElem",
+    "claim": "Returns the exact stored element interface. A nil receiver panics.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.mapElem_reads"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/map-elem.md"
+  },
+  "Map.Underlying": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ContainerTypes.lean",
+    "model_symbol": "GoLean.Go.Types.mapUnderlying",
+    "claim": "Returns the same Map pointer in a Type interface. A nil receiver yields an interface holding a typed nil Map pointer.",
+    "limits": "Type interfaces are opaque identities, including nil interfaces and typed nils. Constructor identities are supplied to Lean and distinct pointers are checked in Go. Nil, zero and constructed receivers are modeled. Type checking and string rendering are outside scope.",
+    "configurations": "Direct pinned Go, compiled Lean, and an independent field and pointer oracle. Exhausts 300 combinations of ten representative key or element values and three receiver modes, plus 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.mapUnderlying_self"
+    ],
+    "check": "difftest/go/types/container-types/check.go",
+    "control": "difftest/go/types/container-types/review/main.go",
+    "review": "coverage/packages/go/types/map-underlying.md"
+  },
+  "Basic.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/BasicFields.lean",
+    "model_symbol": "GoLean.Go.Types.basicKind",
+    "claim": "Returns the exact stored kind. A nil receiver panics.",
+    "limits": "Native signed BasicKind and BasicInfo words, arbitrary raw names, and nil or live Basic receivers. Lean treats the Basic pointer as an opaque identity. Basic.String assumes the pinned initialized unsafe scope and summarizes its type-name lookup. Changes to the unsafe scope and other TypeString cases are outside scope.",
+    "configurations": "Pinned Go same-package test overlay with explicit private field initialization, compiled Lean and independent field, identity and rendering oracle. 576 fixed rows and 60,000 random rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.basicKind_reads"
+    ],
+    "check": "difftest/go/types/basic-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/basic-fields/testdata/basic_test.go"
+    ],
+    "control": "difftest/go/types/basic-fields/review/main.go",
+    "review": "coverage/packages/go/types/Basic.Kind.md"
+  },
+  "Basic.Info": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/BasicFields.lean",
+    "model_symbol": "GoLean.Go.Types.basicInfo",
+    "claim": "Returns the exact stored info. A nil receiver panics.",
+    "limits": "Native signed BasicKind and BasicInfo words, arbitrary raw names, and nil or live Basic receivers. Lean treats the Basic pointer as an opaque identity. Basic.String assumes the pinned initialized unsafe scope and summarizes its type-name lookup. Changes to the unsafe scope and other TypeString cases are outside scope.",
+    "configurations": "Pinned Go same-package test overlay with explicit private field initialization, compiled Lean and independent field, identity and rendering oracle. 576 fixed rows and 60,000 random rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.basicInfo_reads"
+    ],
+    "check": "difftest/go/types/basic-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/basic-fields/testdata/basic_test.go"
+    ],
+    "control": "difftest/go/types/basic-fields/review/main.go",
+    "review": "coverage/packages/go/types/Basic.Info.md"
+  },
+  "Basic.Name": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/BasicFields.lean",
+    "model_symbol": "GoLean.Go.Types.basicName",
+    "claim": "Returns the exact stored name. A nil receiver panics.",
+    "limits": "Native signed BasicKind and BasicInfo words, arbitrary raw names, and nil or live Basic receivers. Lean treats the Basic pointer as an opaque identity. Basic.String assumes the pinned initialized unsafe scope and summarizes its type-name lookup. Changes to the unsafe scope and other TypeString cases are outside scope.",
+    "configurations": "Pinned Go same-package test overlay with explicit private field initialization, compiled Lean and independent field, identity and rendering oracle. 576 fixed rows and 60,000 random rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.basicName_reads"
+    ],
+    "check": "difftest/go/types/basic-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/basic-fields/testdata/basic_test.go"
+    ],
+    "control": "difftest/go/types/basic-fields/review/main.go",
+    "review": "coverage/packages/go/types/Basic.Name.md"
+  },
+  "Basic.Underlying": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/BasicFields.lean",
+    "model_symbol": "GoLean.Go.Types.basicUnderlying",
+    "claim": "Returns the same Basic pointer in the Type interface, including a typed nil pointer for a nil receiver.",
+    "limits": "Native signed BasicKind and BasicInfo words, arbitrary raw names, and nil or live Basic receivers. Lean treats the Basic pointer as an opaque identity. Basic.String assumes the pinned initialized unsafe scope and summarizes its type-name lookup. Changes to the unsafe scope and other TypeString cases are outside scope.",
+    "configurations": "Pinned Go same-package test overlay with explicit private field initialization, compiled Lean and independent field, identity and rendering oracle. 576 fixed rows and 60,000 random rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.basicUnderlying_identity"
+    ],
+    "check": "difftest/go/types/basic-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/basic-fields/testdata/basic_test.go"
+    ],
+    "control": "difftest/go/types/basic-fields/review/main.go",
+    "review": "coverage/packages/go/types/Basic.Underlying.md"
+  },
+  "Basic.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/BasicFields.lean",
+    "model_symbol": "GoLean.Go.Types.basicString",
+    "claim": "Returns the stored raw name, qualifying Pointer as unsafe.Pointer under the initialized unsafe scope. A nil receiver panics.",
+    "limits": "Native signed BasicKind and BasicInfo words, arbitrary raw names, and nil or live Basic receivers. Lean treats the Basic pointer as an opaque identity. Basic.String assumes the pinned initialized unsafe scope and summarizes its type-name lookup. Changes to the unsafe scope and other TypeString cases are outside scope.",
+    "configurations": "Pinned Go same-package test overlay with explicit private field initialization, compiled Lean and independent field, identity and rendering oracle. 576 fixed rows and 60,000 random rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.basicString_pointer",
+      "GoLean.Go.Types.basicString_plain"
+    ],
+    "check": "difftest/go/types/basic-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/basic-fields/testdata/basic_test.go"
+    ],
+    "control": "difftest/go/types/basic-fields/review/main.go",
+    "review": "coverage/packages/go/types/Basic.String.md"
+  },
+  "NewPackage": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.newPackage",
+    "claim": "Stores the raw path and name and returns a fresh incomplete package with unset version and explicit imports and an empty distinct scope under Universe.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newPackage_initial"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/NewPackage.md"
+  },
+  "Package.Scope": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageScope",
+    "claim": "Returns the stored scope pointer on a live package and the Universe scope on a nil receiver.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageScope_identity"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.Scope.md"
+  },
+  "Package.SetName": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageSetName",
+    "claim": "Replaces the raw name and preserves the modeled fields. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageSetName_only_name"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.SetName.md"
+  },
+  "Package.MarkComplete": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageMarkComplete",
+    "claim": "Sets completion true without changing other modeled fields. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageMarkComplete_only_complete"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.MarkComplete.md"
+  },
+  "Package.Path": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packagePath",
+    "claim": "Returns the stored raw path. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packagePath_reads"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.Path.md"
+  },
+  "Package.Name": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageName",
+    "claim": "Returns the stored raw name. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageName_reads"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.Name.md"
+  },
+  "Package.GoVersion": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageGoVersion",
+    "claim": "Returns the stored Go version. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageGoVersion_reads"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.GoVersion.md"
+  },
+  "Package.Complete": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/PackageFields.lean",
+    "model_symbol": "GoLean.Go.Types.packageComplete",
+    "claim": "Returns the stored completion flag. A nil receiver panics.",
+    "limits": "Raw path, name and version strings, initialized Universe, nil and live receivers with present or absent scope. Lean models scope by identity and stores these package fields. Native checks distinct fresh package and scope objects, nil initial imports, scope parent, empty contents, no positions and exact diagnostic comment. Import and scope mutations, type checking and allocation internals are outside scope.",
+    "configurations": "Pinned same-package Go overlay, compiled Lean and an independent field and state oracle. 150 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.packageComplete_reads"
+    ],
+    "check": "difftest/go/types/package-fields/check.go",
+    "review_sources": [
+      "difftest/go/types/package-fields/testdata/package_test.go"
+    ],
+    "control": "difftest/go/types/package-fields/review/main.go",
+    "review": "coverage/packages/go/types/Package.Complete.md"
+  },
+  "newVar": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.newVarRaw",
+    "claim": "Creates a fresh variable storing the supplied byte kind and object metadata with no origin and a cleared embedded bit.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newVarRaw_initial"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/new-var-private.md"
+  },
+  "NewVar": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.newVar",
+    "claim": "Creates a fresh PackageVar storing the supplied position, package, raw name and type.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newVar_initial"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/new-var.md"
+  },
+  "NewParam": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.newParam",
+    "claim": "Creates a fresh ParamVar storing the supplied position, package, raw name and type.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newParam_initial"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/new-param.md"
+  },
+  "NewField": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.newField",
+    "claim": "Creates a fresh FieldVar storing the supplied object metadata and embedded bit.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.newField_initial"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/new-field.md"
+  },
+  "Var.SetKind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varSetKind",
+    "claim": "Replaces the raw variable kind without changing the other fields. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varSetKind_changes_only_kind"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-set-kind.md"
+  },
+  "VarKind.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varKindString",
+    "claim": "Returns the generated variable-kind name or the decimal byte fallback for unnamed values.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varKindString_boundaries"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-kind-string.md"
+  },
+  "Var.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varKind",
+    "claim": "Returns the stored variable kind. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varKind_reads"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-kind.md"
+  },
+  "Var.Anonymous": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varAnonymous",
+    "claim": "Returns the embedded flag. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varAnonymous_reads"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-anonymous.md"
+  },
+  "Var.Embedded": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varEmbedded",
+    "claim": "Returns the embedded flag. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varEmbedded_reads"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-embedded.md"
+  },
+  "Var.IsField": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varIsField",
+    "claim": "Reports exact equality with FieldVar even if the embedded bit differs. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varIsField_reads"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-is-field.md"
+  },
+  "Var.Origin": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/VariableState.lean",
+    "model_symbol": "GoLean.Go.Types.varOrigin",
+    "claim": "Returns the stored origin when present, otherwise the same receiver. A nil receiver panics.",
+    "limits": "Native-width signed position, raw names, full uint8 kind, package and type identity including nil interfaces and representative typed nil, nil or live receivers with optional origin. Parent, object order, scope position and fresh allocations checked in Go for constructors. Lean abstracts object identity and constructor storage. Type checking, instantiation, and allocation internals are outside scope.",
+    "configurations": "Pinned direct Go constructors and methods via same-package overlay, compiled Lean and an independent state oracle. 1,536 fixed rows cover all kind values and 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Types.varOrigin_reads"
+    ],
+    "check": "difftest/go/types/variable-state/check.go",
+    "review_sources": [
+      "difftest/go/types/variable-state/testdata/var_test.go"
+    ],
+    "control": "difftest/go/types/variable-state/review/main.go",
+    "review": "coverage/packages/go/types/var-origin.md"
+  },
+  "NewConst": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.newConst",
+    "claim": "Creates a fresh constant with the exact object metadata, type and value interfaces.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.newConst_stores"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-NewConst.md"
+  },
+  "Const.Val": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.constVal",
+    "claim": "Returns the exact stored constant interface, including nil and typed nil. A nil receiver panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.constVal_reads"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-Const.Val.md"
+  },
+  "NewPkgName": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.newPkgName",
+    "claim": "Creates a fresh import name object with Typ[Invalid] and the supplied imported package pointer, distinct from its owner metadata.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.newPkgName_stores"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-NewPkgName.md"
+  },
+  "PkgName.Imported": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.pkgNameImported",
+    "claim": "Returns the stored imported package pointer, including nil. A nil receiver panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.pkgNameImported_reads"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-PkgName.Imported.md"
+  },
+  "NewTypeName": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.newTypeName",
+    "claim": "Creates a fresh name with the supplied object fields and exact type interface, including absent or typed-nil type.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.newTypeName_stores"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-NewTypeName.md"
+  },
+  "NewLabel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.newLabel",
+    "claim": "Creates a fresh unused label with exact object metadata and Typ[Invalid].",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.newLabel_unused"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-NewLabel.md"
+  },
+  "NewFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.newFunc",
+    "claim": "Creates a fresh function with exact position, package and name, the supplied nonnil signature identity or a nil Type interface, and initially empty function metadata.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.newFunc_nilSignature"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-NewFunc.md"
+  },
+  "Func.Signature": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.funcSignature",
+    "claim": "Returns the existing signature pointer. Missing type returns a new trivial signature, typed-nil signature returns nil, and wrong dynamic type or nil receiver panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.funcSignature_fresh"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-Func.Signature.md"
+  },
+  "Func.Scope": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.funcScope",
+    "claim": "Returns the scope of a live signature, including nil. Nil receiver, missing type, typed-nil signature or wrong dynamic type panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.funcScope_live"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-Func.Scope.md"
+  },
+  "Func.Origin": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.funcOrigin",
+    "claim": "Returns the stored origin pointer when present and the receiver otherwise. A nil receiver panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.funcOrigin_reads"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-Func.Origin.md"
+  },
+  "Func.Pkg": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Types/ObjectConstructors.lean",
+    "model_symbol": "GoLean.Go.Types.funcPkg",
+    "claim": "Returns the exact owning package pointer including nil. A nil receiver panics.",
+    "limits": "Native word positions and raw object names. Lean abstracts package, signature, object, type and value identities with tokens and observes generic success or panic. Native distinguishes nil and typed nil and runs synthetic signature/receiver states where applicable. Fresh allocation identity, constructor zero-valued fields not represented in Lean, and function flags are native observations. Allocator implementation and panic diagnostics are outside scope.",
+    "configurations": "Pinned Go public method calls through a same-package fixture, compiled Lean and independent result-state expectations. 864 deterministic boundary rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Go.Types.funcPkg_reads"
+    ],
+    "check": "difftest/go/types/object-constructors/check.go",
+    "review_sources": [
+      "lean/GoLean/Go/Types/VariableState.lean",
+      "difftest/go/types/object-constructors/testdata/construct_test.go"
+    ],
+    "control": "difftest/go/types/object-constructors/review/main.go",
+    "review": "coverage/packages/go/types/object-constructors-Func.Pkg.md"
+  }
+}

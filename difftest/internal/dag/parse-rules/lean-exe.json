@@ -1,0 +1,4 @@
+{
+  "name": "godiff-dag-parse-rules",
+  "root": "GoDiff.Internal.Dag.ParseRules"
+}

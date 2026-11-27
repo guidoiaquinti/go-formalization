@@ -1,0 +1,4 @@
+{
+  "name": "godiff-internal-dag-graph-transitive-reduction",
+  "root": "GoDiff.Internal.Dag.TransitiveReduction"
+}

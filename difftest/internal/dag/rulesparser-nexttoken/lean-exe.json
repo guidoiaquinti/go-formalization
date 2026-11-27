@@ -1,0 +1,4 @@
+{
+  "name": "godiff-dag-nexttoken",
+  "root": "GoDiff.Internal.Dag.NextToken"
+}

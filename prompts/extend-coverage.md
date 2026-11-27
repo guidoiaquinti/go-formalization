@@ -29,25 +29,35 @@ Give each agent its own worktree from the same baseline commit. Each block below
 ### Agent A
 
 ```text
-Work in the dedicated coverage/utf8-runestart worktree. Follow AGENTS.md,
-CONTRIBUTING.md and prompts/extend-coverage.md with Target = unicode/utf8
-and Function = unicode/utf8.RuneStart. Run the target inventory before editing
-and check for existing evidence. Compare every one of the 256 byte values
-against Go and the claim that a rune can start at any byte outside 0x80–0xBF.
-Run make coverage-update and make verify. Leave passing new evidence at
-AWAITING_REVIEW. Report paths, case count, verification, inventory state and gaps.
+In your dedicated worktree, follow AGENTS.md and CONTRIBUTING.md to extend
+coverage by one Go declaration. Run make inventory to inspect current coverage.
+Keep UNSTARTED rows and sort them alphabetically by package import path, then
+exact inventory symbol, using LC_ALL=C. Start with the first row and walk
+inward past rows with existing evidence or declarations the Go driver cannot
+call directly under the contributor guide. Coordinate before editing if you
+converge on the same package or symbol.
+
+Run make inventory TARGET=<selected-target> before editing. Add the model,
+comparison and proof, then run make coverage-update and
+make verify TARGET=<selected-target>. Leave passing new evidence at
+AWAITING_REVIEW. Report the symbol, claim, domain or
+case count and seeds, verification, current state and gaps. Link the evidence.
 ```
 
 ### Agent B
 
 ```text
-Work in the dedicated coverage/utf16-issurrogate worktree. Follow AGENTS.md,
-CONTRIBUTING.md and prompts/extend-coverage.md with Target = unicode/utf16
-and Function = unicode/utf16.IsSurrogate. Run the target inventory before editing
-and check for existing evidence. Model the full signed rune domain and check
-membership in U+D800 through U+DFFF inclusive. Include both bounds, adjacent
-values, negative runes and int32 extremes, plus at least 50,000 reproducible
-cases across several seeds. Run make coverage-update and make verify. Leave
-passing new evidence at AWAITING_REVIEW. Report paths, counts, seeds,
-verification, inventory state and gaps.
+In your dedicated worktree, follow AGENTS.md and CONTRIBUTING.md to extend
+coverage by one Go declaration. Run make inventory to inspect current coverage.
+Keep UNSTARTED rows and sort them alphabetically by package import path, then
+exact inventory symbol, using LC_ALL=C. Start with the last row and walk
+inward past rows with existing evidence or declarations the Go driver cannot
+call directly under the contributor guide. Coordinate before editing if you
+converge on the same package or symbol.
+
+Run make inventory TARGET=<selected-target> before editing. Add the model,
+comparison and proof, then run make coverage-update and
+make verify TARGET=<selected-target>. Leave passing new evidence at
+AWAITING_REVIEW. Report the symbol, claim, domain or
+case count and seeds, verification, current state and gaps. Link the evidence.
 ```

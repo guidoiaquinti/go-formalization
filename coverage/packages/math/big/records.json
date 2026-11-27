@@ -1,0 +1,467 @@
+{
+  "NewInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.newInt",
+    "claim": "Constructs fresh signed magnitude storage with the exact native word layout.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.newInt_zero"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/NewInt.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.SetInt64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.setInt64",
+    "claim": "Stores the normalized signed magnitude in the receiver, including the minimum signed word.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.setInt64_min"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.SetInt64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.SetUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.setUint64",
+    "claim": "Stores the normalized unsigned magnitude and clears the old sign.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.setUint64_max"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.SetUint64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.Sign": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intSign",
+    "claim": "Returns zero for empty magnitude, and otherwise returns minus one or one according to sign.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intSign_empty"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.Sign.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.Int64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intToInt64",
+    "claim": "Returns the low magnitude word with the sign applied modulo 64 bits.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intToInt64_negative"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.Int64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.Uint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intToUint64",
+    "claim": "Returns the low magnitude word without applying the sign.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intToUint64_negative"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.Uint64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.IsInt64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intIsInt64",
+    "claim": "Tests signed 64-bit representability including the asymmetric minimum signed boundary.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intIsInt64_min"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.IsInt64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.IsUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intIsUint64",
+    "claim": "Tests unsigned 64-bit representability using word count and sign.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intIsUint64_negative"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.IsUint64.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.BitLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntWords.lean",
+    "model_symbol": "GoLean.Math.Big.intBitLen",
+    "claim": "Returns the number of significant magnitude bits across native words, ignoring the sign.",
+    "limits": "Canonical normalized magnitude words and nil receiver panic where applicable. Out-of-range conversion values describe only pinned Go. Allocation capacity and timing are outside scope. Native comparison on the 64-bit author host; Lean exercises both native widths.",
+    "configurations": "Direct pinned Go methods checked against a byte-oriented reference. Includes sign replacement, receiver identity, constructor isolation, nil cases, and signed/unsigned transitions. 1,428 boundaries and 60,000 cases at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Math.Big.intBitLen_min"
+    ],
+    "check": "difftest/math/big/int-words/check.go",
+    "review": "coverage/packages/math/big/Int.BitLen.md",
+    "control": "difftest/math/big/int-words/review/main.go"
+  },
+  "Int.Set": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intSet",
+    "claim": "Copies the exact signed integer into the receiver and returns the receiver.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intSet_preserves"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Set.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Abs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intAbs",
+    "claim": "Sets the receiver to the nonnegative mathematical magnitude and returns it.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intAbs_magnitude"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Abs.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Neg": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intNeg",
+    "claim": "Sets the receiver to the additive inverse, including zero, and returns it.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intNeg_involution"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Neg.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Add": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intAdd",
+    "claim": "Sets the receiver to the exact signed sum and returns it.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intAdd_cancel"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Add.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Sub": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intSub",
+    "claim": "Sets the receiver to the exact first operand minus the second and returns it.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intSub_self"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Sub.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Mul": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intMul",
+    "claim": "Sets the receiver to the exact signed product, including self-squaring, and returns it.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intMul_zero"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Mul.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Cmp": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intCmp",
+    "claim": "Returns -1, 0 or 1 according to signed mathematical integer order.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intCmp_order"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.Cmp.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.CmpAbs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntArithmetic.lean",
+    "model_symbol": "GoLean.Math.Big.intCmpAbs",
+    "claim": "Returns -1, 0 or 1 according to the order of the absolute magnitudes.",
+    "limits": "Nonnil operands and destination with normalized magnitude. Lean models values. Native compares the returned receiver and unchanged distinct operands, with receiver aliasing, operands sharing one object and all pointers sharing one object when applicable. Nil pointers, direct raw-limb mutation, physical backing array identity and allocator behavior are outside scope.",
+    "configurations": "Pinned Go direct method calls, compiled Lean and a separate exact signed decimal digit oracle. 240 fixed pairs with up to 721 decimal digits and 60,000 sampled pairs with up to 65 digits using seeds 17, 2718 and 65537. Native compares each pair separately, with destination equal to the first operand, and for binary operations with destination equal to the second operand.",
+    "theorems": [
+      "GoLean.Math.Big.intCmpAbs_sign"
+    ],
+    "check": "difftest/math/big/int-arithmetic/check.go",
+    "review": "coverage/packages/math/big/Int.CmpAbs.md",
+    "control": "difftest/math/big/int-arithmetic/review/main.go"
+  },
+  "Int.Quo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intQuo",
+    "claim": "Sets and returns the receiver to the quotient truncated toward zero. A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intQuo_truncates"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.Quo.md"
+  },
+  "Int.Rem": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intRem",
+    "claim": "Sets and returns the receiver to the remainder of division truncated toward zero. A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intRem_truncates"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.Rem.md"
+  },
+  "Int.QuoRem": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intQuoRem",
+    "claim": "Sets the two destinations to the truncated quotient and remainder and returns both destination pointers. The pair reconstructs the dividend. A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intQuoRem_reconstruct"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.QuoRem.md"
+  },
+  "Int.Div": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intDiv",
+    "claim": "Sets and returns the receiver to the Euclidean quotient, correcting the truncated pair when the remainder is negative. A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intDiv_negative_dividend"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.Div.md"
+  },
+  "Int.Mod": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intMod",
+    "claim": "Sets and returns the receiver to the Euclidean remainder in [0, |divisor|). A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intMod_negative_dividend",
+      "GoLean.Math.Big.intMod_euclidean_bounds"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.Mod.md"
+  },
+  "Int.DivMod": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntDivision.lean",
+    "model_symbol": "GoLean.Math.Big.intDivMod",
+    "claim": "Sets both destinations to the Euclidean quotient and remainder and returns both destination pointers. The pair reconstructs the dividend. A zero divisor panics.",
+    "limits": "Normalized nonnil signed integers. Lean models exact values and division by zero. Native checks the exact panic text and unchanged state on a zero divisor, distinct primary receiver or primary receiver aliasing either operand. Dual-output calls use a remainder destination distinct from both operands and the quotient. Raw limb aliases, allocation and internal long-division algorithms are outside scope.",
+    "configurations": "Direct pinned Go calls, compiled Lean and an independent bitwise long-division oracle. 210 fixed operand pairs with up to 160 decimal digits and 60,000 sampled pairs using seeds 17, 2718 and 65537, each with applicable primary receiver profiles and representative shared operands.",
+    "theorems": [
+      "GoLean.Math.Big.intDivMod_reconstruct"
+    ],
+    "check": "difftest/math/big/int-division/check.go",
+    "control": "difftest/math/big/int-division/review/main.go",
+    "review": "coverage/packages/math/big/Int.DivMod.md"
+  },
+  "Int.And": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intAnd",
+    "claim": "Returns the bitwise intersection of unbounded two\u2019s-complement integers.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intAnd_idempotent"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.And.md"
+  },
+  "Int.AndNot": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intAndNot",
+    "claim": "Keeps the two\u2019s-complement bits of the first operand that are clear in the second.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intAndNot_self"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.AndNot.md"
+  },
+  "Int.Or": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intOr",
+    "claim": "Returns the bitwise union of unbounded two\u2019s-complement integers.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intOr_idempotent"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Or.md"
+  },
+  "Int.Xor": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intXor",
+    "claim": "Returns the bitwise exclusive-or of unbounded two\u2019s-complement integers.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intXor_self"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Xor.md"
+  },
+  "Int.Not": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intNot",
+    "claim": "Complements the unbounded two\u2019s-complement bits.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intNot_involution"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Not.md"
+  },
+  "Int.Lsh": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intLsh",
+    "claim": "Shifts the signed integer left by the supplied unsigned amount, filling the low bits with zero.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intLsh_zero"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Lsh.md"
+  },
+  "Int.Rsh": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intRsh",
+    "claim": "Shifts the signed integer right arithmetically, retaining sign extension for negative inputs.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intRsh_zero"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Rsh.md"
+  },
+  "Int.Bit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intBit",
+    "claim": "Reads the indexed bit including sign extension, and panics for negative indices.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intBit_negative"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.Bit.md"
+  },
+  "Int.SetBit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intSetBit",
+    "claim": "Sets or clears the indexed bit of the two\u2019s-complement integer and returns the receiver. A negative index takes precedence over an invalid bit value.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope. Panic diagnostics are compared. Receiver backing state after an invalid bit-value panic is outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intSetBit_negative",
+      "GoLean.Math.Big.intSetBit_badValue"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.SetBit.md"
+  },
+  "Int.TrailingZeroBits": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Math/Big/IntBitwise.lean",
+    "model_symbol": "GoLean.Math.Big.intTrailingZeroBits",
+    "claim": "Returns the count of low zero bits in the magnitude. Zero itself returns zero.",
+    "limits": "Normalized nonnil signed magnitudes. Lean abstracts raw limbs and allocations. Native checks returned receiver identity on writes and distinct inputs, including destination aliasing either operand and shared inputs. Resource-exhausting shifts or indices are outside scope.",
+    "configurations": "Pinned Go and compiled Lean against a separate finite two\u2019s-complement byte oracle with explicit sign extension. 3,584 fixed tuples and 60,000 sampled tuples at seeds 17, 2718 and 65537. Cases span signed values through 301 decimal digits, 0\u2013511 shift counts, signed indices from -10 through 529, and both valid and invalid bit values.",
+    "theorems": [
+      "GoLean.Math.Big.intTrailingZeroBits_sign",
+      "GoLean.Math.Big.intTrailingZeroBits_zero"
+    ],
+    "check": "difftest/math/big/int-bitwise/check.go",
+    "control": "difftest/math/big/int-bitwise/review/main.go",
+    "review": "coverage/packages/math/big/Int.TrailingZeroBits.md"
+  }
+}

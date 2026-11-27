@@ -1,0 +1,427 @@
+{
+  "Count": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Count.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.count",
+    "claim": "Counts exact occurrences of a target byte in the supplied slice.",
+    "limits": "Models the returned count as a scalar fold, with a kernel proof against filter cardinality. Native assembly layout, timing and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes Count, CountString, countGeneric and countGenericString through a same-package overlay. An independent frequency-table oracle exercises nil/empty inputs, all target bytes, alignment offsets, and scalar/vector length boundaries with matching backing bytes outside the view.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.count_spec"
+    ],
+    "check": "difftest/internal/bytealg/count/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/count/testdata/bridge_test.go",
+      "difftest/internal/bytealg/count/testdata/count_test.go"
+    ],
+    "control": "difftest/internal/bytealg/count/review/main.go",
+    "review": "coverage/packages/internal/bytealg/count-assembly.md"
+  },
+  "CountString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Count.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.countString",
+    "claim": "Counts exact occurrences of a target byte in the raw string bytes.",
+    "limits": "Models the returned count as a scalar fold, with a kernel proof against filter cardinality. Native assembly layout, timing and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes Count, CountString, countGeneric and countGenericString through a same-package overlay. An independent frequency-table oracle exercises nil/empty inputs, all target bytes, alignment offsets, and scalar/vector length boundaries with matching backing bytes outside the view.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.countString_spec"
+    ],
+    "check": "difftest/internal/bytealg/count/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/count/testdata/bridge_test.go",
+      "difftest/internal/bytealg/count/testdata/count_test.go"
+    ],
+    "control": "difftest/internal/bytealg/count/review/main.go",
+    "review": "coverage/packages/internal/bytealg/count-string-assembly.md"
+  },
+  "countGeneric": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Count.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.countGeneric",
+    "claim": "Counts exact occurrences by scanning the supplied slice with byte equality.",
+    "limits": "Models the returned count as a scalar fold, with a kernel proof against filter cardinality. Native assembly layout, timing and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes Count, CountString, countGeneric and countGenericString through a same-package overlay. An independent frequency-table oracle exercises nil/empty inputs, all target bytes, alignment offsets, and scalar/vector length boundaries with matching backing bytes outside the view.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.countGeneric_spec"
+    ],
+    "check": "difftest/internal/bytealg/count/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/count/testdata/bridge_test.go",
+      "difftest/internal/bytealg/count/testdata/count_test.go"
+    ],
+    "control": "difftest/internal/bytealg/count/review/main.go",
+    "review": "coverage/packages/internal/bytealg/count-generic-private.md"
+  },
+  "countGenericString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Count.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.countGenericString",
+    "claim": "Counts exact occurrences by indexing the raw string bytes and comparing each byte.",
+    "limits": "Models the returned count as a scalar fold, with a kernel proof against filter cardinality. Native assembly layout, timing and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes Count, CountString, countGeneric and countGenericString through a same-package overlay. An independent frequency-table oracle exercises nil/empty inputs, all target bytes, alignment offsets, and scalar/vector length boundaries with matching backing bytes outside the view.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.countGenericString_spec"
+    ],
+    "check": "difftest/internal/bytealg/count/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/count/testdata/bridge_test.go",
+      "difftest/internal/bytealg/count/testdata/count_test.go"
+    ],
+    "control": "difftest/internal/bytealg/count/review/main.go",
+    "review": "coverage/packages/internal/bytealg/count-generic-string-private.md"
+  },
+  "IndexByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/ByteIndex.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.indexByte",
+    "claim": "Returns the index of the first matching byte in the supplied slice, or -1 when absent.",
+    "limits": "Models returned byte index and absence. The Lean theorems characterize position and absence on all byte lists. Assembly layout and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes all four index entry points through internal/bytealg same-package overlay. Independent position buckets check exact indices; covers nil/empty input, all byte values, alignment offsets and vector-length boundaries.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.indexByte_found",
+      "GoLean.Internal.Bytealg.indexByte_missing"
+    ],
+    "check": "difftest/internal/bytealg/byte-index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/byte-index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/byte-index/testdata/byte_index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/byte-index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/index-byte-native.md"
+  },
+  "IndexByteString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/ByteIndex.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.indexByteString",
+    "claim": "Returns the index of the first matching byte in the raw string bytes, or -1 when absent.",
+    "limits": "Models returned byte index and absence. The Lean theorems characterize position and absence on all byte lists. Assembly layout and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes all four index entry points through internal/bytealg same-package overlay. Independent position buckets check exact indices; covers nil/empty input, all byte values, alignment offsets and vector-length boundaries.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.indexByteString_found",
+      "GoLean.Internal.Bytealg.indexByteString_missing"
+    ],
+    "check": "difftest/internal/bytealg/byte-index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/byte-index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/byte-index/testdata/byte_index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/byte-index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/index-byte-string-native.md"
+  },
+  "LastIndexByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/ByteIndex.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.lastIndexByte",
+    "claim": "Returns the index of the last matching byte in the supplied slice, or -1 when absent.",
+    "limits": "Models returned byte index and absence. The Lean theorems characterize position and absence on all byte lists. Assembly layout and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes all four index entry points through internal/bytealg same-package overlay. Independent position buckets check exact indices; covers nil/empty input, all byte values, alignment offsets and vector-length boundaries.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.lastIndexByte_found",
+      "GoLean.Internal.Bytealg.lastIndexByte_missing"
+    ],
+    "check": "difftest/internal/bytealg/byte-index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/byte-index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/byte-index/testdata/byte_index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/byte-index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/last-index-byte-generic.md"
+  },
+  "LastIndexByteString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/ByteIndex.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.lastIndexByteString",
+    "claim": "Returns the index of the last matching byte in the raw string bytes, or -1 when absent.",
+    "limits": "Models returned byte index and absence. The Lean theorems characterize position and absence on all byte lists. Assembly layout and unexecuted architectures are outside scope. Checks 3,587 boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native darwin/arm64 invokes all four index entry points through internal/bytealg same-package overlay. Independent position buckets check exact indices; covers nil/empty input, all byte values, alignment offsets and vector-length boundaries.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.lastIndexByteString_found",
+      "GoLean.Internal.Bytealg.lastIndexByteString_missing"
+    ],
+    "check": "difftest/internal/bytealg/byte-index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/byte-index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/byte-index/testdata/byte_index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/byte-index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/last-index-byte-string-generic.md"
+  },
+  "Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Compare.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.compare",
+    "claim": "Returns -1, 0, or 1 in unsigned lexicographic order of the two slice contents.",
+    "limits": "Models results and ignores timing, internal assembly instructions, transient allocation and unexecuted architectures. Checks 67,940 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned darwin/arm64 invokes all four declarations directly in internal/bytealg through a test overlay. Independent slices.Compare oracle covers nil, empty, aliased and detached content, all one-byte pairs, proper prefixes, and long near-equal views with alignment offsets.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.compare_spec"
+    ],
+    "check": "difftest/internal/bytealg/compare/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/compare/testdata/bridge_test.go",
+      "difftest/internal/bytealg/compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/internal/bytealg/compare/review/main.go",
+    "review": "coverage/packages/internal/bytealg/compare-native.md"
+  },
+  "CompareString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Compare.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.compareString",
+    "claim": "Returns -1, 0, or 1 in unsigned lexicographic order of the raw string bytes.",
+    "limits": "Models results and ignores timing, internal assembly instructions, transient allocation and unexecuted architectures. Checks 67,940 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned darwin/arm64 invokes all four declarations directly in internal/bytealg through a test overlay. Independent slices.Compare oracle covers nil, empty, aliased and detached content, all one-byte pairs, proper prefixes, and long near-equal views with alignment offsets.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.compareString_spec"
+    ],
+    "check": "difftest/internal/bytealg/compare/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/compare/testdata/bridge_test.go",
+      "difftest/internal/bytealg/compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/internal/bytealg/compare/review/main.go",
+    "review": "coverage/packages/internal/bytealg/compare-string-native.md"
+  },
+  "abigen_runtime_cmpstring": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Compare.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.runtimeCmpstring",
+    "claim": "The ABI-linked runtime string comparator returns exact unsigned lexicographic order over raw byte strings.",
+    "limits": "Models results and ignores timing, internal assembly instructions, transient allocation and unexecuted architectures. Checks 67,940 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned darwin/arm64 invokes all four declarations directly in internal/bytealg through a test overlay. Independent slices.Compare oracle covers nil, empty, aliased and detached content, all one-byte pairs, proper prefixes, and long near-equal views with alignment offsets.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.runtimeCmpstring_spec"
+    ],
+    "check": "difftest/internal/bytealg/compare/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/compare/testdata/bridge_test.go",
+      "difftest/internal/bytealg/compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/internal/bytealg/compare/review/main.go",
+    "review": "coverage/packages/internal/bytealg/runtime-cmpstring-native.md"
+  },
+  "Equal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Compare.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.equal",
+    "claim": "Reports equality of lengths and bytes, treating nil and empty slices alike.",
+    "limits": "Models results and ignores timing, internal assembly instructions, transient allocation and unexecuted architectures. Checks 67,940 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned darwin/arm64 invokes all four declarations directly in internal/bytealg through a test overlay. Independent slices.Compare oracle covers nil, empty, aliased and detached content, all one-byte pairs, proper prefixes, and long near-equal views with alignment offsets.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.equal_spec"
+    ],
+    "check": "difftest/internal/bytealg/compare/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/compare/testdata/bridge_test.go",
+      "difftest/internal/bytealg/compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/internal/bytealg/compare/review/main.go",
+    "review": "coverage/packages/internal/bytealg/equal-native.md"
+  },
+  "hashStr": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RabinKarp.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.hashStr",
+    "claim": "Returns the forward polynomial hash and base-to-length power with uint32 wrap.",
+    "limits": "Models both string and slice inputs as raw bytes, including nil or empty content. Checks exact hash, power, index, absent -1 and index-bounds panic class. Excludes timing and exact panic message. Checks 597 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes both generic instantiations through an internal/bytealg test overlay. Independent coefficient summation and plain byte-window scanning check the outcomes, with explicit forward and reverse hash collisions.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.hashStr_empty",
+      "GoLean.Internal.Bytealg.hashStr_collision"
+    ],
+    "check": "difftest/internal/bytealg/rabin-karp/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/rabin-karp/testdata/bridge_test.go",
+      "difftest/internal/bytealg/rabin-karp/testdata/rabin_karp_test.go"
+    ],
+    "control": "difftest/internal/bytealg/rabin-karp/review/main.go",
+    "review": "coverage/packages/internal/bytealg/hash-str.md"
+  },
+  "hashStrRev": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RabinKarp.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.hashStrRev",
+    "claim": "Returns the reversed polynomial hash and the same wrapped base-to-length power.",
+    "limits": "Models both string and slice inputs as raw bytes, including nil or empty content. Checks exact hash, power, index, absent -1 and index-bounds panic class. Excludes timing and exact panic message. Checks 597 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes both generic instantiations through an internal/bytealg test overlay. Independent coefficient summation and plain byte-window scanning check the outcomes, with explicit forward and reverse hash collisions.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.hashStrRev_reverse"
+    ],
+    "check": "difftest/internal/bytealg/rabin-karp/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/rabin-karp/testdata/bridge_test.go",
+      "difftest/internal/bytealg/rabin-karp/testdata/rabin_karp_test.go"
+    ],
+    "control": "difftest/internal/bytealg/rabin-karp/review/main.go",
+    "review": "coverage/packages/internal/bytealg/hash-str-rev.md"
+  },
+  "IndexRabinKarp": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RabinKarp.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.indexRabinKarp",
+    "claim": "Returns the first exact matching byte window using wrapped rolling hashes and confirms candidate bytes after hash matches. A separator longer than input panics.",
+    "limits": "Models both string and slice inputs as raw bytes, including nil or empty content. Checks exact hash, power, index, absent -1 and index-bounds panic class. Excludes timing and exact panic message. Checks 597 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes both generic instantiations through an internal/bytealg test overlay. Independent coefficient summation and plain byte-window scanning check the outcomes, with explicit forward and reverse hash collisions.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.indexRabinKarp_long",
+      "GoLean.Internal.Bytealg.indexRabinKarp_collision"
+    ],
+    "check": "difftest/internal/bytealg/rabin-karp/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/rabin-karp/testdata/bridge_test.go",
+      "difftest/internal/bytealg/rabin-karp/testdata/rabin_karp_test.go"
+    ],
+    "control": "difftest/internal/bytealg/rabin-karp/review/main.go",
+    "review": "coverage/packages/internal/bytealg/index-rabin-karp.md"
+  },
+  "LastIndexRabinKarp": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RabinKarp.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.lastIndexRabinKarp",
+    "claim": "Returns the last exact matching byte window using wrapped rolling hashes in reverse. Hash collisions are resolved by byte equality and a separator longer than input panics.",
+    "limits": "Models both string and slice inputs as raw bytes, including nil or empty content. Checks exact hash, power, index, absent -1 and index-bounds panic class. Excludes timing and exact panic message. Checks 597 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes both generic instantiations through an internal/bytealg test overlay. Independent coefficient summation and plain byte-window scanning check the outcomes, with explicit forward and reverse hash collisions.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.lastIndexRabinKarp_long",
+      "GoLean.Internal.Bytealg.lastIndexRabinKarp_collision"
+    ],
+    "check": "difftest/internal/bytealg/rabin-karp/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/rabin-karp/testdata/bridge_test.go",
+      "difftest/internal/bytealg/rabin-karp/testdata/rabin_karp_test.go"
+    ],
+    "control": "difftest/internal/bytealg/rabin-karp/review/main.go",
+    "review": "coverage/packages/internal/bytealg/last-index-rabin-karp.md"
+  },
+  "Index": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Index.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.index",
+    "claim": "Returns the first exact matching window of byte slices, or -1 when no window matches.",
+    "limits": "The native comparison uses caller-supported inputs with haystack length at least needle length and needle size from 2 through 32 on arm64 or through 31 on amd64. The model proves first-match behavior of the abstract byte scan. Assembly instruction layout, other native profiles and out-of-domain calls are outside scope. Checks 7,936 boundary cases on arm64 or 7,680 on amd64, plus 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned internal/bytealg same-package overlay directly invokes Index and IndexString and verifies fixture sizes against the active MaxLen. Independent byte-window enumeration covers all tested needle widths, alignment offsets, first and last matches, repeated matches and out-of-view matching bytes. Native darwin/arm64 tested locally.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.index_spec"
+    ],
+    "check": "difftest/internal/bytealg/index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/index/testdata/index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/index-native.md"
+  },
+  "IndexString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/Index.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.indexString",
+    "claim": "Returns the first exact matching window of raw string bytes, or -1 when no window matches.",
+    "limits": "The native comparison uses caller-supported inputs with haystack length at least needle length and needle size from 2 through 32 on arm64 or through 31 on amd64. The model proves first-match behavior of the abstract byte scan. Assembly instruction layout, other native profiles and out-of-domain calls are outside scope. Checks 7,936 boundary cases on arm64 or 7,680 on amd64, plus 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned internal/bytealg same-package overlay directly invokes Index and IndexString and verifies fixture sizes against the active MaxLen. Independent byte-window enumeration covers all tested needle widths, alignment offsets, first and last matches, repeated matches and out-of-view matching bytes. Native darwin/arm64 tested locally.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.indexString_spec"
+    ],
+    "check": "difftest/internal/bytealg/index/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/index/testdata/bridge_test.go",
+      "difftest/internal/bytealg/index/testdata/index_test.go"
+    ],
+    "control": "difftest/internal/bytealg/index/review/main.go",
+    "review": "coverage/packages/internal/bytealg/index-string-native.md"
+  },
+  "MakeNoZero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RuntimeMemory.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.makeNoZero",
+    "claim": "Returns nonnil byte slice geometry with requested length and pinned small allocation capacity; invalid lengths panic.",
+    "limits": "Covers all successful lengths through 512 bytes, negative lengths and positive lengths beyond the runtime allocation bound. Allocation failure and initial storage contents are outside scope. Checks 5,125 boundary rows on 64-bit hosts and 5,124 on 32-bit hosts, plus 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go calls MakeNoZero directly through an internal/bytealg overlay. Compares length, rounded capacity, nilness and length panic class. Writes every capacity byte before inspecting stored values.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.makeNoZero_zero",
+      "GoLean.Internal.Bytealg.makeNoZero_negative",
+      "GoLean.Internal.Bytealg.makeNoZero_roundsNine"
+    ],
+    "check": "difftest/internal/bytealg/runtime-memory/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/runtime-memory/testdata/bridge_test.go",
+      "difftest/internal/bytealg/runtime-memory/testdata/runtime_memory_test.go"
+    ],
+    "control": "difftest/internal/bytealg/runtime-memory/review/main.go",
+    "review": "coverage/packages/internal/bytealg/make-no-zero.md"
+  },
+  "abigen_runtime_memequal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/RuntimeMemory.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.runtimeMemequal",
+    "claim": "Returns exact equality of the specified readable byte windows, including true for size zero.",
+    "limits": "Covers valid readable windows for positive size and nil or nonnil pointers for zero size. Pointer faults, timing, instruction layout and unexecuted architectures are outside scope. Checks 5,125 boundary rows on 64-bit hosts and 5,124 on 32-bit hosts, plus 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go directly calls the runtime.memequal ABI alias through an internal/bytealg overlay. Independent slices.Equal compares only the requested prefix, with aliases, varying alignment, distinct outside bytes and mismatches precisely at the boundary.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.runtimeMemequal_spec",
+      "GoLean.Internal.Bytealg.runtimeMemequal_zero"
+    ],
+    "check": "difftest/internal/bytealg/runtime-memory/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/runtime-memory/testdata/bridge_test.go",
+      "difftest/internal/bytealg/runtime-memory/testdata/runtime_memory_test.go"
+    ],
+    "control": "difftest/internal/bytealg/runtime-memory/review/main.go",
+    "review": "coverage/packages/internal/bytealg/abigen-runtime-memequal.md"
+  },
+  "abigen_runtime_memequal_varlen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/MemequalVarlen.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.runtimeMemequalVarlen",
+    "claim": "Uses the byte length carried by valid ABI closure metadata and compares that exact readable window.",
+    "limits": "Assumes valid compiler-generated variable-length equality closures and readable initialized windows. Checks 2,496 boundaries and 60,000 samples at seeds 17, 2718 and 65537 across thirteen widths from 3 through 257. Zero metadata is modeled but not produced by a compiler descriptor in the native test.",
+    "configurations": "Pinned Go calls each generated internal/abi.Type.Equal closure through internal/bytealg test overlay. runtime.FuncForPC verifies runtime.memequal_varlen as the code entry before calls. Independent prefix equality checks aliases, alignments and just-outside differences.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.runtimeMemequalVarlen_spec",
+      "GoLean.Internal.Bytealg.runtimeMemequalVarlen_zero"
+    ],
+    "check": "difftest/internal/bytealg/memequal-varlen/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/memequal-varlen/testdata/memequal_varlen_test.go"
+    ],
+    "control": "difftest/internal/bytealg/memequal-varlen/review/main.go",
+    "review": "coverage/packages/internal/bytealg/memequal-varlen.md"
+  },
+  "Cutover": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/IndexAMD64.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.amd64Cutover",
+    "claim": "Computes the amd64 failure threshold by wrapping signed 64-bit addition and truncating division by eight toward zero.",
+    "limits": "Exhausts 2,112 boundary values and compares 60,000 samples at seeds 17, 2718 and 65537. The original pinned amd64 body runs on the native 64-bit Go host. Direct native amd64 execution is configured but not locally executed.",
+    "configurations": "The overlay extracts the pinned index_amd64.go Cutover body without changing its arithmetic and compares it to a signed-shift oracle with remainder correction. On amd64 it also directly calls the actual Cutover declaration.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.amd64Cutover_initial",
+      "GoLean.Internal.Bytealg.amd64Cutover_truncation",
+      "GoLean.Internal.Bytealg.amd64Cutover_overflow"
+    ],
+    "check": "difftest/internal/bytealg/index-amd64-profile/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/index-amd64-profile/testdata/profile_test.go"
+    ],
+    "control": "difftest/internal/bytealg/index-amd64-profile/review/main.go",
+    "review": "coverage/packages/internal/bytealg/cutover-amd64.md"
+  },
+  "init@index_amd64.go:11": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Internal/Bytealg/IndexAMD64.lean",
+    "model_symbol": "GoLean.Internal.Bytealg.amd64IndexInit",
+    "claim": "Initializes the amd64 MaxLen variable to 63 with AVX2 and 31 otherwise.",
+    "limits": "Exhausts both boolean AVX2 inputs with the pinned initialization body. CPU feature detection itself and a native amd64 run are outside local evidence.",
+    "configurations": "The overlay extracts the pinned index_amd64.go init body, supplies the CPU feature and observes its MaxLen assignment. On amd64 it additionally checks the real package initialization against the detected CPU flag.",
+    "theorems": [
+      "GoLean.Internal.Bytealg.amd64IndexInit_avx2",
+      "GoLean.Internal.Bytealg.amd64IndexInit_base"
+    ],
+    "check": "difftest/internal/bytealg/index-amd64-profile/check.go",
+    "review_sources": [
+      "difftest/internal/bytealg/index-amd64-profile/testdata/profile_test.go"
+    ],
+    "control": "difftest/internal/bytealg/index-amd64-profile/review/main.go",
+    "review": "coverage/packages/internal/bytealg/init-index-amd64.md"
+  }
+}

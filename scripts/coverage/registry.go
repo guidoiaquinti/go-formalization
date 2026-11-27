@@ -14,6 +14,7 @@ import (
 	"regexp"
 	"slices"
 	"strings"
+	"sync"
 )
 
 type member struct {
@@ -174,13 +175,17 @@ func isFile(path string) error {
 	return nil
 }
 
-func fingerprint(key symbol, r record) (string, error) {
-	files := map[string]string{}
-	paths := append([]string{r.Model, r.Check, ".go-version", "go.mod", "lean/lean-toolchain",
-		"lean/lakefile.toml", "lean/lake-manifest.json", "Makefile", ".github/workflows/verify.yml"}, r.Sources...)
-	if r.Control != "" {
-		paths = append(paths, r.Control)
-	}
+type evidenceFingerprint struct {
+	shared func() (string, error)
+}
+
+func newEvidenceFingerprint() evidenceFingerprint {
+	return evidenceFingerprint{shared: sync.OnceValues(sharedFingerprint)}
+}
+
+func sharedFingerprint() (string, error) {
+	paths := []string{".go-version", "go.mod", "lean/lean-toolchain",
+		"lean/lakefile.toml", "lean/lake-manifest.json", "Makefile", ".github/workflows/verify.yml"}
 	// Hash a conservative source closure. Exclude the generated registry,
 	// whose contents are already derived from the record and checked in CI.
 	for _, root := range []string{"lean", "difftest", "scripts"} {
@@ -208,22 +213,54 @@ func fingerprint(key symbol, r record) (string, error) {
 	} else if !os.IsNotExist(err) {
 		return "", err
 	}
+	files, err := evidenceFileHashes(paths)
+	if err != nil {
+		return "", err
+	}
+	return canonicalFingerprint(files)
+}
+
+func evidenceFileHashes(paths []string) (map[string]string, error) {
+	files := map[string]string{}
 	for _, p := range paths {
+		if _, ok := files[p]; ok {
+			continue
+		}
 		if err := isFile(p); err != nil {
-			return "", err
+			return nil, err
 		}
 		data, err := os.ReadFile(p)
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 		files[p] = fmt.Sprintf("%x", sha256.Sum256(data))
+	}
+	return files, nil
+}
+
+func (f evidenceFingerprint) fingerprint(key symbol, r record) (string, error) {
+	shared, err := f.shared()
+	if err != nil {
+		return "", err
+	}
+	paths := append([]string{r.Model, r.Check}, r.Sources...)
+	if r.Control != "" {
+		paths = append(paths, r.Control)
+	}
+	files, err := evidenceFileHashes(paths)
+	if err != nil {
+		return "", err
 	}
 	theorems := append([]string{}, r.Theorems...)
 	slices.Sort(theorems)
 	manifest := map[string]any{"package": key.Package, "symbol": key.Name, "go_version": r.GoVersion,
 		"model": r.Model, "model_symbol": r.ModelSymbol, "check": r.Check, "theorems": theorems,
 		"control": r.Control, "source_fallback": r.SourceFallback, "claim": r.Claim,
-		"limits": r.Limits, "configurations": r.Configurations, "files": files}
+		"limits": r.Limits, "configurations": r.Configurations, "files": files, "shared_files_sha256": shared}
+	return canonicalFingerprint(manifest)
+}
+
+func canonicalFingerprint(manifest any) (string, error) {
 	// Keep the existing canonical JSON format: sorted keys, compact ASCII
 	// escapes (including surrogate pairs), and no HTML escaping.
 	var buf bytes.Buffer
@@ -250,7 +287,7 @@ func fingerprint(key symbol, r record) (string, error) {
 var verdictLine = regexp.MustCompile(`(?m)^\*\*Verdict: (FAITHFUL|HOLLOW)\*\*`)
 var digestLine = regexp.MustCompile("(?m)^Evidence SHA-256: `([0-9a-f]{64})`$")
 
-func reviewState(version string, key symbol, r record) (string, error) {
+func (f evidenceFingerprint) reviewState(version string, key symbol, r record) (string, error) {
 	if r.GoVersion != version {
 		return "", fmt.Errorf("record must be checked for go%s", version)
 	}
@@ -308,7 +345,7 @@ func reviewState(version string, key symbol, r record) (string, error) {
 	if len(digests) > 1 {
 		return "", fmt.Errorf("%s: expected a single evidence digest", r.Review)
 	}
-	sum, err := fingerprint(key, r)
+	sum, err := f.fingerprint(key, r)
 	if err != nil {
 		return "", err
 	}
@@ -324,6 +361,7 @@ func reviewState(version string, key symbol, r record) (string, error) {
 
 func loadRecords(version string, targets []target) (map[symbol]evidence, error) {
 	records := map[symbol]evidence{}
+	fingerprints := newEvidenceFingerprint()
 	const root = "coverage/packages"
 	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
@@ -351,7 +389,7 @@ func loadRecords(version string, targets []target) (map[symbol]evidence, error) 
 			if err != nil {
 				return fmt.Errorf("%s.%s: %w", pkg, f.name, err)
 			}
-			state, err := reviewState(version, key, r)
+			state, err := fingerprints.reviewState(version, key, r)
 			if err != nil {
 				return fmt.Errorf("%s.%s: %w", pkg, f.name, err)
 			}

@@ -1,0 +1,4 @@
+{
+  "name": "godiff-float64s-are-sorted",
+  "root": "GoDiff.Sort.Float64sAreSorted"
+}

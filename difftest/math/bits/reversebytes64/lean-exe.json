@@ -1,0 +1,4 @@
+{
+  "name": "godiff-reversebytes64",
+  "root": "GoDiff.Math.Bits.ReverseBytes64"
+}

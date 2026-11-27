@@ -1,0 +1,689 @@
+{
+  "FileHeader.Mode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderMode",
+    "claim": "Selects Unix or DOS attribute interpretation by creator and adds the directory bit when the name ends in a raw slash.",
+    "limits": "All 16-bit creator versions and 32-bit external attributes. The name is reduced to the predicate that the final byte is slash. Nonnil FileHeader only. The theorem proves the slash directory bit.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderMode_slash"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/file-header-mode.md"
+  },
+  "FileHeader.SetMode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderSetMode",
+    "claim": "Sets Unix creator and replaces external attributes from the input mode, setting DOS directory and readonly compatibility bits.",
+    "limits": "All 16-bit creator versions and 32-bit input modes; nonnil FileHeader. Differential comparison also checks unchanged unrelated fields on populated headers. The theorem checks both creator version bytes.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderSetMode_creator"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/file-header-set-mode.md"
+  },
+  "FileHeader.hasDataDescriptor": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderHasDataDescriptor",
+    "claim": "Reports whether the general-purpose flags have the data descriptor bit set.",
+    "limits": "All 16-bit flags; nonnil FileHeader. The theorem proves equality to the test of bit 3.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderHasDataDescriptor_bit"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/file-header-has-data-descriptor.md"
+  },
+  "detectUTF8": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/DetectUTF8.lean",
+    "model_symbol": "GoLean.Archive.Zip.detectUTF8",
+    "claim": "Reports UTF-8 validity and whether a valid byte string requires ZIP's UTF-8 flag, including controls, backslash, tilde, non-ASCII and literal RuneError. Malformed encoding clears both results even after a rune requires UTF-8.",
+    "limits": "Arbitrary raw byte strings. The theorem covers a backslash followed by a malformed continuation byte with arbitrary suffix. General validity and requirement are tested. Archive writing and the eventual flag decision are outside scope.",
+    "configurations": "Pinned native private Go declaration via same-package test overlay, separate whole-string validity and byte-range oracle, and compiled Lean. All one- and two-byte inputs, explicit longer edges and 60,000 sampled strings using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.detectUTF8_malformed_after_backslash"
+    ],
+    "check": "difftest/archive/zip/detect-utf8/check.go",
+    "control": "difftest/archive/zip/detect-utf8/review/main.go",
+    "review": "coverage/packages/archive/zip/detectUTF8.md"
+  },
+  "fileModeToUnixMode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileModeToUnixMode",
+    "claim": "Maps the exact Go type pattern to Unix type bits, defaulting to regular file for unrecognized combinations; includes permission and special bits.",
+    "limits": "All uint32 FileMode values. The theorem proves permission preservation.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileModeToUnixMode_permissions"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/file-mode-to-unix-mode.md"
+  },
+  "msdosModeToFileMode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.msdosModeToFileMode",
+    "claim": "Derives file or directory mode from DOS attributes and removes all write permissions for readonly entries.",
+    "limits": "All uint32 attributes. The theorem proves all but the directory and readonly bits are irrelevant.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.msdosModeToFileMode_mask"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/msdos-mode-to-file-mode.md"
+  },
+  "unixModeToFileMode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileMode.lean",
+    "model_symbol": "GoLean.Archive.Zip.unixModeToFileMode",
+    "claim": "Decodes recognized Unix types and copies permissions, setuid, setgid and sticky bits.",
+    "limits": "All uint32 Unix attributes. The theorem proves permission preservation.",
+    "configurations": "Pinned native entry points through a same-package test overlay and compiled Lean. Each declaration is checked in 139,264 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.unixModeToFileMode_permissions"
+    ],
+    "check": "difftest/archive/zip/file-mode/check.go",
+    "review_sources": [
+      "difftest/archive/zip/file-mode/testdata/file_mode_test.go"
+    ],
+    "control": "difftest/archive/zip/file-mode/review/main.go",
+    "review": "coverage/packages/archive/zip/unix-mode-to-file-mode.md"
+  },
+  "FileHeader.FileInfo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderFileInfo",
+    "claim": "Returns a headerFileInfo value retaining the exact header pointer, including a typed nil pointer.",
+    "limits": "The model uses abstract pointer identity. Native checks concrete adapter type and exact pointer/interface identity including a nil header.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,521 fixed and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderFileInfo_retains"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/FileHeader.FileInfo.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Name": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoName",
+    "claim": "Returns the last raw slash-separated component, ignoring trailing slashes. Empty input returns a dot and all-slash input returns a slash.",
+    "limits": "Nonnil header fields, with arbitrary byte names and full metadata word widths. The native checker mutates the header after creating the adapter to verify a live view.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,520 fixed and 60,000 seeded nonnil rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoName_edges"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Name.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Size": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoSize",
+    "claim": "Returns the signed reinterpretation of the nonzero uint64 uncompressed size, or the zero-extended legacy uint32 size when the wide field is zero.",
+    "limits": "Nonnil header fields, with arbitrary byte names and full metadata word widths. The native checker mutates the header after creating the adapter to verify a live view.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,520 fixed and 60,000 seeded nonnil rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoSize_legacy"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Size.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Mode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoMode",
+    "claim": "Returns FileHeader.Mode for the referenced header using the creator, external attributes and raw trailing slash.",
+    "limits": "Nonnil header fields, with arbitrary byte names and full metadata word widths. The native checker mutates the header after creating the adapter to verify a live view.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,520 fixed and 60,000 seeded nonnil rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoMode_delegates"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Mode.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Type": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoType",
+    "claim": "Returns only Go file type bits of the referenced FileHeader mode.",
+    "limits": "Nonnil header fields, with arbitrary byte names and full metadata word widths. The native checker mutates the header after creating the adapter to verify a live view.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,520 fixed and 60,000 seeded nonnil rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoType_masks"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Type.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.IsDir": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoIsDir",
+    "claim": "Reports whether the resolved mode of the referenced header has the directory bit.",
+    "limits": "Nonnil header fields, with arbitrary byte names and full metadata word widths. The native checker mutates the header after creating the adapter to verify a live view.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,520 fixed and 60,000 seeded nonnil rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoIsDir_directory"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.IsDir.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Sys": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoSys",
+    "claim": "Returns the exact stored header pointer as an interface, including a typed nil pointer.",
+    "limits": "The model uses abstract pointer identity. Native checks concrete adapter type and exact pointer/interface identity including a nil header.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,521 fixed and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoSys_retains"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Sys.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "headerFileInfo.Info": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderInfo.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerInfoInfo",
+    "claim": "Returns the same adapter value and a nil error.",
+    "limits": "The model uses abstract pointer identity. Native checks concrete adapter type and exact pointer/interface identity including a nil header.",
+    "configurations": "Pinned public adapter and direct native same-package method calls, compiled Lean and an independent byte-component, size and lookup-table mode oracle. 2,521 fixed and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerInfoInfo_retains"
+    ],
+    "check": "difftest/archive/zip/header-info/check.go",
+    "review_sources": [
+      "difftest/archive/zip/header-info/testdata/header_info_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/headerFileInfo.Info.md",
+    "control": "difftest/archive/zip/header-info/review/main.go"
+  },
+  "timeZone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/TimeZone.lean",
+    "model_symbol": "GoLean.Archive.Zip.timeZone",
+    "claim": "Rounds to the nearest quarter hour with ties away from zero, uses zero outside the supported rounded range, and returns an unnamed fixed zone with whole-hour cache reuse.",
+    "limits": "All signed duration words. Model abstracts the fixed zone as offset seconds and cache behavior; native checks constant unnamed non-DST zones across four dates. Allocation internals outside scope.",
+    "configurations": "Pinned private Go overlay, Lean, and independent signed arithmetic oracle. 1,129 fixed boundaries and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.timeZone_roundBeforeLimit",
+      "GoLean.Archive.Zip.timeZone_negativeTie"
+    ],
+    "check": "difftest/archive/zip/time-zone/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/DurationNumeric.lean",
+      "difftest/archive/zip/time-zone/review/testdata/zone_review_test.go"
+    ],
+    "control": "difftest/archive/zip/time-zone/review/main.go",
+    "review": "coverage/packages/archive/zip/timeZone.md"
+  },
+  "msDosTimeToTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/DOSTime.lean",
+    "model_symbol": "GoLean.Archive.Zip.msDosTimeToTime",
+    "claim": "Decodes the full DOS field widths and normalizes out-of-range fields to an integral UTC instant.",
+    "limits": "Nonnil header receivers. Decoding models Gregorian UTC normalization directly. Encoding takes the projected civil fields and models the instant separately from UTC location and monotonic implementation details, which are not modeled.",
+    "configurations": "Pinned private overlay and Lean with standard time normalization and arithmetic field oracle. 3,150 fixed rows and 60,000 samples at seeds 17, 2718, 65537. Fixed offsets and diverse instants tested.",
+    "theorems": [
+      "GoLean.Archive.Zip.msDosTime_epoch"
+    ],
+    "check": "difftest/archive/zip/dos-time/check.go",
+    "control": "difftest/archive/zip/dos-time/review/main.go",
+    "review": "coverage/packages/archive/zip/msDosTimeToTime.md"
+  },
+  "timeToMsDosTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/DOSTime.lean",
+    "model_symbol": "GoLean.Archive.Zip.timeToMsDosTime",
+    "claim": "Packs the local civil fields modulo the two 16-bit words and truncates odd seconds.",
+    "limits": "Nonnil header receivers. Decoding models Gregorian UTC normalization directly. Encoding takes the projected civil fields and models the instant separately from UTC location and monotonic implementation details, which are not modeled.",
+    "configurations": "Pinned private overlay and Lean with standard time normalization and arithmetic field oracle. 3,150 fixed rows and 60,000 samples at seeds 17, 2718, 65537. Fixed offsets and diverse instants tested.",
+    "theorems": [
+      "GoLean.Archive.Zip.timeToMsDosTime_odd"
+    ],
+    "check": "difftest/archive/zip/dos-time/check.go",
+    "control": "difftest/archive/zip/dos-time/review/main.go",
+    "review": "coverage/packages/archive/zip/timeToMsDosTime.md"
+  },
+  "FileHeader.ModTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/DOSTime.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderModTime",
+    "claim": "Decodes the legacy words as an integral UTC instant independently of the Modified field.",
+    "limits": "Nonnil header receivers. Decoding models Gregorian UTC normalization directly. Encoding takes the projected civil fields and models the instant separately from UTC location and monotonic implementation details, which are not modeled.",
+    "configurations": "Pinned private overlay and Lean with standard time normalization and arithmetic field oracle. 3,150 fixed rows and 60,000 samples at seeds 17, 2718, 65537. Fixed offsets and diverse instants tested.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderModTime_epoch"
+    ],
+    "check": "difftest/archive/zip/dos-time/check.go",
+    "control": "difftest/archive/zip/dos-time/review/main.go",
+    "review": "coverage/packages/archive/zip/FileHeader.ModTime.md"
+  },
+  "FileHeader.SetModTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/DOSTime.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileHeaderSetModTime",
+    "claim": "Stores the same instant as UTC and updates both legacy words from UTC civil fields.",
+    "limits": "Nonnil header receivers. Decoding models Gregorian UTC normalization directly. Encoding takes the projected civil fields and models the instant separately from UTC location and monotonic implementation details, which are not modeled.",
+    "configurations": "Pinned private overlay and Lean with standard time normalization and arithmetic field oracle. 3,150 fixed rows and 60,000 samples at seeds 17, 2718, 65537. Fixed offsets and diverse instants tested.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileHeaderSetModTime_keepsInstant"
+    ],
+    "check": "difftest/archive/zip/dos-time/check.go",
+    "control": "difftest/archive/zip/dos-time/review/main.go",
+    "review": "coverage/packages/archive/zip/FileHeader.SetModTime.md"
+  },
+  "headerFileInfo.ModTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/HeaderModTime.lean",
+    "model_symbol": "GoLean.Archive.Zip.headerFileInfoModTime",
+    "claim": "Uses the legacy DOS fields only when the modern timestamp is zero. Otherwise returns the modern instant in UTC and strips any monotonic clock reading.",
+    "limits": "Nonnil header and Go time words. Lean represents the chosen instant in seconds and nanoseconds. Native checks UTC identity and monotonic stripping.",
+    "configurations": "Pinned FileHeader.FileInfo().ModTime method call and Lean against a branch and calendar oracle. 600 fixed rows, 60,000 samples at seeds 17, 2718, and 65537, and one native time.Now observation.",
+    "theorems": [
+      "GoLean.Archive.Zip.headerFileInfoModTime_legacy",
+      "GoLean.Archive.Zip.headerFileInfoModTime_modern"
+    ],
+    "check": "difftest/archive/zip/header-modtime/check.go",
+    "review_sources": [
+      "lean/GoLean/Archive/Zip/DOSTime.lean",
+      "lean/GoLean/Time/TimeCompare.lean"
+    ],
+    "control": "difftest/archive/zip/header-modtime/review/main.go",
+    "review": "coverage/packages/archive/zip/header-file-info-mod-time.md"
+  },
+  "split": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.splitEntryName",
+    "claim": "Removes exactly one final slash and splits at the last remaining slash, using dot for the directory when no delimiter remains. Returns the original trailing-slash flag.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.splitEntryName_doubleSlash"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/split.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileEntryCompare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.fileEntryCompare",
+    "claim": "Orders names by the split directory then element in unsigned byte lexicographic order, ignoring the trailing-slash flag.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.fileEntryCompare_directoryFirst"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileEntryCompare.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Name": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryName",
+    "claim": "Returns the raw element of the directory-entry name, including empty elements.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryName_slash"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Name.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Size": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntrySize",
+    "claim": "Returns zero independent of backing file size or entry flags.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntrySize_zero"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Size.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Mode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryMode",
+    "claim": "Returns directory mode with 0555 permissions independent of entry flags and file metadata.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryMode_permissions"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Mode.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Type": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryType",
+    "claim": "Returns the directory type bit without permission bits.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryType_directory"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Type.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.IsDir": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryIsDir",
+    "claim": "Reports true independent of the internal isDir flag.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryIsDir_true"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.IsDir.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Sys": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntrySys",
+    "claim": "Returns a nil interface.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntrySys_none"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Sys.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.ModTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryModTime",
+    "claim": "Returns the zero time when the entry has no file. Otherwise uses the backing file Modified instant with UTC location.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryModTime_absent"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.ModTime.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.Info": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryInfo",
+    "claim": "Returns the same entry as fs.FileInfo and a nil error.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryInfo_identity"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.Info.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/FileListEntry.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryString",
+    "claim": "Formats the directory marker and a space followed by the raw split element and a slash.",
+    "limits": "Arbitrary byte strings for names and paired names, including malformed UTF-8, NUL, repeated slashes and empty elements. Nonnil fileListEntry receiver, optional backing File, and arbitrary flag combinations. Info identity is abstract in Lean and exact in native Go. ModTime models instant coordinates, while the oracle also checks UTC location. Monotonic internals and ZIP parsing are outside scope.",
+    "configurations": "Pinned native direct same-package Go calls, compiled Lean and independent raw-byte split and metadata oracle. 2,888 fixed and 60,000 sampled cases at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryString_slash"
+    ],
+    "check": "difftest/archive/zip/file-list-entry/check.go",
+    "review_sources": [
+      "lean/GoLean/Strings/Compare.lean",
+      "lean/GoLean/Slices/Compare.lean"
+    ],
+    "review": "coverage/packages/archive/zip/fileListEntry.String.md",
+    "control": "difftest/archive/zip/file-list-entry/review/main.go"
+  },
+  "fileListEntry.stat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/EntryStat.lean",
+    "model_symbol": "GoLean.Archive.Zip.listEntryStat",
+    "claim": "Reports a duplicate error with exact raw name bytes before selecting any view. A directory returns the receiver; a nondirectory returns the backing file header view or fails on a missing file.",
+    "limits": "Nonnil outer receivers with arbitrary entry flags and name bytes, including synthetic missing nested pointers. The model abstracts pointer identity as a tag and runtime nil dereference as a class. Native checks same-pointer live views and fresh duplicate errors. Archive parsing, runtime panic text and allocation internals are outside scope.",
+    "configurations": "Pinned private same-package calls, compiled Lean and separate metadata oracle. 256 fixed cases cross every flag combination with representative raw names and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.listEntryStat_duplicate",
+      "GoLean.Archive.Zip.listEntryStat_missingFile"
+    ],
+    "check": "difftest/archive/zip/entry-stat/check.go",
+    "review_sources": [
+      "difftest/archive/zip/entry-stat/testdata/stat_test.go"
+    ],
+    "control": "difftest/archive/zip/entry-stat/review/main.go",
+    "review": "coverage/packages/archive/zip/fileListEntry.stat.md"
+  },
+  "openDir.Stat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/EntryStat.lean",
+    "model_symbol": "GoLean.Archive.Zip.openDirStat",
+    "claim": "Delegates to the entry stat method, preserving result kind, backing identity, and duplicate errors. A missing entry fails.",
+    "limits": "Nonnil outer receivers with arbitrary entry flags and name bytes, including synthetic missing nested pointers. The model abstracts pointer identity as a tag and runtime nil dereference as a class. Native checks same-pointer live views and fresh duplicate errors. Archive parsing, runtime panic text and allocation internals are outside scope.",
+    "configurations": "Pinned private same-package calls, compiled Lean and separate metadata oracle. 256 fixed cases cross every flag combination with representative raw names and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.openDirStat_missingEntry",
+      "GoLean.Archive.Zip.openDirStat_delegates"
+    ],
+    "check": "difftest/archive/zip/entry-stat/check.go",
+    "review_sources": [
+      "difftest/archive/zip/entry-stat/testdata/stat_test.go"
+    ],
+    "control": "difftest/archive/zip/entry-stat/review/main.go",
+    "review": "coverage/packages/archive/zip/openDir.Stat.md"
+  },
+  "checksumReader.Stat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/EntryStat.lean",
+    "model_symbol": "GoLean.Archive.Zip.checksumReaderStat",
+    "claim": "Returns a live view of the backing file header independent of sticky read state, or fails on a missing file.",
+    "limits": "Nonnil outer receivers with arbitrary entry flags and name bytes, including synthetic missing nested pointers. The model abstracts pointer identity as a tag and runtime nil dereference as a class. Native checks same-pointer live views and fresh duplicate errors. Archive parsing, runtime panic text and allocation internals are outside scope.",
+    "configurations": "Pinned private same-package calls, compiled Lean and separate metadata oracle. 256 fixed cases cross every flag combination with representative raw names and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Archive.Zip.checksumReaderStat_header"
+    ],
+    "check": "difftest/archive/zip/entry-stat/check.go",
+    "review_sources": [
+      "difftest/archive/zip/entry-stat/testdata/stat_test.go"
+    ],
+    "control": "difftest/archive/zip/entry-stat/review/main.go",
+    "review": "coverage/packages/archive/zip/checksumReader.Stat.md"
+  },
+  "Writer.SetOffset": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterConfig.lean",
+    "model_symbol": "GoLean.Archive.Zip.writerSetOffset",
+    "claim": "Sets the signed offset only when the existing writer count is zero. Otherwise panics with the pinned diagnostic and preserves state.",
+    "limits": "Configuration before or after arbitrary counter states, including nil writer and nil count writer. Covers raw comment bytes, offset state, and error or panic class. No archive output, I/O or concurrency.",
+    "configurations": "Pinned same-package Go fixture calling actual methods, Lean and an independent state oracle. 360 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native verifies exact custom diagnostics.",
+    "theorems": [
+      "GoLean.Archive.Zip.writerSetOffset_zero"
+    ],
+    "check": "difftest/archive/zip/writer-config/check.go",
+    "control": "difftest/archive/zip/writer-config/review/main.go",
+    "review_sources": [
+      "difftest/archive/zip/writer-config/review/testdata/config_review_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/Writer.SetOffset.md"
+  },
+  "Writer.SetComment": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterConfig.lean",
+    "model_symbol": "GoLean.Archive.Zip.writerSetComment",
+    "claim": "Copies the byte string into the comment field only if its length fits uint16. Oversize failure precedes nil receiver access and preserves state.",
+    "limits": "Configuration before or after arbitrary counter states, including nil writer and nil count writer. Covers raw comment bytes, offset state, and error or panic class. No archive output, I/O or concurrency.",
+    "configurations": "Pinned same-package Go fixture calling actual methods, Lean and an independent state oracle. 360 fixed cases and 60,000 samples at seeds 17, 2718, 65537; native verifies exact custom diagnostics.",
+    "theorems": [
+      "GoLean.Archive.Zip.writerSetComment_tooLong"
+    ],
+    "check": "difftest/archive/zip/writer-config/check.go",
+    "control": "difftest/archive/zip/writer-config/review/main.go",
+    "review_sources": [
+      "difftest/archive/zip/writer-config/review/testdata/config_review_test.go"
+    ],
+    "review": "coverage/packages/archive/zip/Writer.SetComment.md"
+  },
+  "countWriter.Write": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterIO.lean",
+    "model_symbol": "GoLean.Archive.Zip.countWriterWrite",
+    "claim": "Calls the underlying writer once with the input bytes, returns its count and error, and adds the returned count to the signed counter modulo 2^64.",
+    "limits": "Nonnil initialized count writer and lawful scripted write replies, including short or full writes with errors. Callback payload and error identity are checked natively. No delegated panics, invalid replies or concurrent mutations.",
+    "configurations": "Pinned native same-package Go, compiled Lean and independent arithmetic/state oracle. 672 fixed cases and 60,000 samples at seeds 17, 2718 and 65537. In-memory callback fixtures only.",
+    "theorems": [
+      "GoLean.Archive.Zip.countWriterWrite_return"
+    ],
+    "check": "difftest/archive/zip/writer-io/check.go",
+    "control": "difftest/archive/zip/writer-io/review/main.go",
+    "review": "coverage/packages/archive/zip/countWriter.Write.md"
+  },
+  "nopCloser.Close": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterIO.lean",
+    "model_symbol": "GoLean.Archive.Zip.nopCloserClose",
+    "claim": "Returns nil without calling Write or Close on the wrapped writer.",
+    "limits": "Wrapped ordinary writer or writer/closer. Observes nil return and absence of callbacks, with no archive output or concurrency.",
+    "configurations": "Pinned native same-package Go, compiled Lean and independent arithmetic/state oracle. 672 fixed cases and 60,000 samples at seeds 17, 2718 and 65537. In-memory callback fixtures only.",
+    "theorems": [
+      "GoLean.Archive.Zip.nopCloserClose_noEffect"
+    ],
+    "check": "difftest/archive/zip/writer-io/check.go",
+    "control": "difftest/archive/zip/writer-io/review/main.go",
+    "review": "coverage/packages/archive/zip/nopCloser.Close.md"
+  },
+  "Writer.Flush": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterIO.lean",
+    "model_symbol": "GoLean.Archive.Zip.zipWriterFlush",
+    "claim": "Delegates to the buffer, preserves the archive counter, and exposes underlying errors and sticky repeated-flush behavior.",
+    "limits": "Nonnil writer with initialized bufio.Writer, empty or bounded pending payload, and lawful write replies. Observes callback bytes, remaining buffered length and native error identity. Buffer allocation and the internal remaining-byte representation are abstracted.",
+    "configurations": "Pinned native same-package Go, compiled Lean and independent arithmetic/state oracle. 672 fixed cases and 60,000 samples at seeds 17, 2718 and 65537. In-memory callback fixtures only.",
+    "theorems": [
+      "GoLean.Archive.Zip.zipWriterFlush_sticky"
+    ],
+    "check": "difftest/archive/zip/writer-io/check.go",
+    "control": "difftest/archive/zip/writer-io/review/main.go",
+    "review": "coverage/packages/archive/zip/Writer.Flush.md"
+  },
+  "NewWriter": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Archive/Zip/WriterIO.lean",
+    "model_symbol": "GoLean.Archive.Zip.zipNewWriter",
+    "claim": "Creates a zero-state ZIP writer without invoking the destination, and retains an existing sufficiently sized bufio.Writer or initializes a fresh default buffer.",
+    "limits": "Ordinary non-panicking io.Writer, nil interface, or live buffered writer. Observes archive zero state, buffer capacity and pending length, callback count and native buffered pointer identity. Destination recovery through later archive output and typed-nil buffered writers are outside scope.",
+    "configurations": "Pinned native same-package Go, compiled Lean and independent arithmetic/state oracle. 672 fixed cases and 60,000 samples at seeds 17, 2718 and 65537. In-memory callback fixtures only.",
+    "theorems": [
+      "GoLean.Archive.Zip.zipNewWriter_reuse"
+    ],
+    "check": "difftest/archive/zip/writer-io/check.go",
+    "control": "difftest/archive/zip/writer-io/review/main.go",
+    "review": "coverage/packages/archive/zip/NewWriter.md"
+  }
+}

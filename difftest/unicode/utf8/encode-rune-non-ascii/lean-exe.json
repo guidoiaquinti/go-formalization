@@ -1,0 +1,4 @@
+{
+  "name": "godiff-utf8-encode-rune-non-ascii",
+  "root": "GoDiff.Unicode.Utf8.EncodeRuneNonASCII"
+}

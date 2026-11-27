@@ -32,12 +32,12 @@ func TestReviewedEvidence(t *testing.T) {
 	for _, p := range paths {
 		write(p, p)
 	}
-	sum, err := fingerprint(key, r)
+	sum, err := newEvidenceFingerprint().fingerprint(key, r)
 	if err != nil {
 		t.Fatal(err)
 	}
 	// Golden digest covers canonical encoding of non-ASCII and HTML characters.
-	const wantSum = "6b81d90d30688f30669f20221ce0af0896035c2ddbaf77efb134511a1c305ca7"
+	const wantSum = "3dcc3489bb1a679b9b28d1ca2068efc043ce545e90a76727c5180f2d59c31e1d"
 	if sum != wantSum {
 		t.Fatalf("fingerprint %s, want %s", sum, wantSum)
 	}
@@ -45,7 +45,7 @@ func TestReviewedEvidence(t *testing.T) {
 	write(r.Review, verdict+"\nEvidence SHA-256: `"+sum+"`\n")
 	expect := func(r record, want string) {
 		t.Helper()
-		state, err := reviewState(version, key, r)
+		state, err := newEvidenceFingerprint().reviewState(version, key, r)
 		if err != nil || state != want {
 			t.Fatalf("state %q, error %v; want %s", state, err, want)
 		}

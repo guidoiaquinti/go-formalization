@@ -1,0 +1,774 @@
+{
+  "MakeInt64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.makeInt64",
+    "claim": "Constructs the exact signed word in the compact representation.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.makeInt64_kind"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/make-int64.md"
+  },
+  "makeInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.makeInt",
+    "claim": "Returns a compact representation inside the signed range and the original arbitrary-precision value otherwise.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.makeInt_overflow"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/make-int-private.md"
+  },
+  "MakeUint64": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.makeUint64",
+    "claim": "Constructs an exact unsigned value and promotes words at or above the signed limit.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.makeUint64_max"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/make-uint64.md"
+  },
+  "Int64Val": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.int64Val",
+    "claim": "Returns signed extraction with an exactness flag, zero false for unknown, and a panic for a noninteger.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.int64Val_unknown"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/int64-val.md"
+  },
+  "Uint64Val": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.uint64Val",
+    "claim": "Returns unsigned extraction with an exactness flag, zero false for unknown, and a panic for a noninteger.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.uint64Val_unknown"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/uint64-val.md"
+  },
+  "BitLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.bitLen",
+    "claim": "Returns the length of the integer magnitude in bits, zero for unknown, and panics for an incorrect value kind.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.bitLen_unknown"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/bit-len.md"
+  },
+  "Bytes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.integerBytes",
+    "claim": "Returns the minimal little-endian magnitude bytes, ignoring sign; panics for noninteger and unknown values.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.integerBytes_unknown"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/bytes.md"
+  },
+  "MakeFromBytes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Integer.lean",
+    "model_symbol": "GoLean.Go.Constant.makeFromBytes",
+    "claim": "Constructs the exact unsigned little-endian integer and chooses a compact representation when it fits.",
+    "limits": "Canonical small and big integer forms, concrete boolean wrong-kind input and Unknown. Native compares pinned inexact extraction results even though the public contract leaves them undefined. Bytes model covers returned data, excluding incidental capacity and allocation failures. 3,024 fixed and 60,000 sampled cases, seeds 17, 2718 and 65537.",
+    "configurations": "Pinned direct same-package calls and independent arbitrary-precision bound, magnitude and byte-order oracle. Native observes concrete small/big representation, preserved raw powers and constructor input ownership, and checks exact wrong-kind panic text.",
+    "theorems": [
+      "GoLean.Go.Constant.makeFromBytes_empty"
+    ],
+    "check": "difftest/go/constant/integer/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer/testdata/integer_test.go"
+    ],
+    "control": "difftest/go/constant/integer/review/main.go",
+    "review": "coverage/packages/go/constant/make-from-bytes.md"
+  },
+  "MakeUnknown": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.makeUnknown",
+    "claim": "Returns the concrete unknownVal representation, including the false result of BoolVal.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.makeUnknown_default"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/make-unknown.md"
+  },
+  "MakeBool": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.makeBool",
+    "claim": "Returns the concrete boolVal representation retaining the exact boolean.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.makeBool_roundTrip"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/make-bool.md"
+  },
+  "unknownVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.unknownKind",
+    "claim": "Returns the Unknown kind code zero.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.unknownKind_code"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/unknown-val-kind.md"
+  },
+  "unknownVal.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.unknownString",
+    "claim": "Returns the literal lowercase unknown.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.unknownString_text"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/unknown-val-string.md"
+  },
+  "unknownVal.ExactString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.unknownExactString",
+    "claim": "Returns the same lowercase unknown string as the ordinary rendering.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.unknownExactString_short"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/unknown-val-exact-string.md"
+  },
+  "boolVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.boolKind",
+    "claim": "Returns the Bool kind code one for either boolean.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.boolKind_code"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/bool-val-kind.md"
+  },
+  "boolVal.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.boolString",
+    "claim": "Formats the boolean as lowercase true or false.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.boolString_text"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/bool-val-string.md"
+  },
+  "boolVal.ExactString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.boolExactString",
+    "claim": "Returns the same lowercase true or false as the ordinary rendering.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.boolExactString_short"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/bool-val-exact-string.md"
+  },
+  "BoolVal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.boolVal",
+    "claim": "Returns the underlying boolean or false for Unknown. Panics with the formatted argument followed by the exact not-a-Bool suffix for other values.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.boolVal_wrongType",
+      "GoLean.Go.Constant.makeBool_roundTrip",
+      "GoLean.Go.Constant.makeUnknown_default"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/bool-val.md"
+  },
+  "Kind.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/Scalars.lean",
+    "model_symbol": "GoLean.Go.Constant.kindString",
+    "claim": "Returns the six generated names or Kind followed by the signed decimal value in parentheses for any other native-width code.",
+    "limits": "Both booleans and the unique unknown representation. Wrong-kind BoolVal values use the separately rendered fmt argument. The pinned native cases exercise nil, String and Int wrong-kind operands. Kind codes use native int width.",
+    "configurations": "Pinned Go same-package overlay, compiled Lean and independent value or formatting expectations. 150 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.kindString_known",
+      "GoLean.Go.Constant.kindString_negative"
+    ],
+    "check": "difftest/go/constant/scalars/check.go",
+    "review_sources": [
+      "difftest/go/constant/scalars/testdata/scalars_test.go"
+    ],
+    "control": "difftest/go/constant/scalars/review/main.go",
+    "review": "coverage/packages/go/constant/kind-string.md"
+  },
+  "MakeString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.makeString",
+    "claim": "Returns a flat leaf with exact raw bytes, sharing the empty singleton only for an empty string.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.makeString_leaf"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/make-string.md"
+  },
+  "stringVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.stringTreeKind",
+    "claim": "Returns String kind 2 even on a nil stringVal receiver.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.stringTreeKind_string"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/string-val-kind.md"
+  },
+  "stringVal.len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.stringTreeLen",
+    "claim": "Returns byte length, summing lazy child lengths without flattening. A nil receiver panics.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.stringTreeLen_children"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/string-val-len.md"
+  },
+  "stringVal.string": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.stringTreeString",
+    "claim": "Returns concatenated raw bytes in leaf order and caches the flattened root without flattening nonroot nodes. A nil receiver panics.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.stringTreeString_twoLeaves"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/string-val-string.md"
+  },
+  "StringVal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.stringValue",
+    "claim": "Returns raw string bytes and caches a lazy root, returns empty for Unknown, and otherwise panics with the pinned type suffix. A typed nil string panics.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.stringValue_unknown",
+      "GoLean.Go.Constant.stringValue_wrongType"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/string-val.md"
+  },
+  "StringLen": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/StringValues.lean",
+    "model_symbol": "GoLean.Go.Constant.stringLength",
+    "claim": "Returns string byte length without flattening, zero for Unknown, and otherwise panics with the pinned type suffix. A typed nil string panics.",
+    "limits": "Sequential acyclic leaf or concatenation state with representable string and byte count, including shared subtrees. Lean abstracts locks and constructor identity beyond singleton classification. Wrong-type accessor formatting receives the separately rendered fmt argument. Native checks raw byte values, Unknown, true, nil and typed nil, plus shared, left and right shapes. Concurrency, resource exhaustion and allocator details are outside scope.",
+    "configurations": "Pinned same-package Go overlay exercising native private and public declarations, compiled Lean, and independent flat-byte and state oracle. 500 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.stringLength_unknown",
+      "GoLean.Go.Constant.stringLength_wrongType"
+    ],
+    "check": "difftest/go/constant/string-values/check.go",
+    "review_sources": [
+      "difftest/go/constant/string-values/testdata/string_test.go"
+    ],
+    "control": "difftest/go/constant/string-values/review/main.go",
+    "review": "coverage/packages/go/constant/string-len.md"
+  },
+  "Sign": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.constantSign",
+    "claim": "Returns the numeric sign, combines complex component signs by signed bitwise OR, returns one for Unknown and panics with the pinned suffix for nonnumeric inputs.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.constantSign_unknown",
+      "GoLean.Go.Constant.constantSign_mixed",
+      "GoLean.Go.Constant.constantSign_wrongType"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/Sign.md"
+  },
+  "int64Val.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.int64ValKind",
+    "claim": "Returns the fixed Int kind code 3.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.int64ValKind_code"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/int64Val.Kind.md"
+  },
+  "intVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.intValKind",
+    "claim": "Returns the fixed Int kind code 3.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.intValKind_code"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/intVal.Kind.md"
+  },
+  "ratVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.ratValKind",
+    "claim": "Returns the fixed Float kind code 4.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.ratValKind_code"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/ratVal.Kind.md"
+  },
+  "floatVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.floatValKind",
+    "claim": "Returns the fixed Float kind code 4.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.floatValKind_code"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/floatVal.Kind.md"
+  },
+  "complexVal.Kind": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericSign.lean",
+    "model_symbol": "GoLean.Go.Constant.complexValKind",
+    "claim": "Returns the fixed Complex kind code 5.",
+    "limits": "Initialized numeric representations and finite acyclic complex values. Big integer and rational numerator magnitudes are abstract signed integers and float inputs are represented by their sign class. Wrong-type formatting receives the separate rendered fmt argument. Native fixtures include scaled big integers, rationals, finite floats, nested complex values, nil Value and bool. Nil internal numeric pointers and numeric construction are outside scope.",
+    "configurations": "Pinned same-package native Go, compiled Lean and independent signed-order and component truth-table oracle. 147 fixed rows and 60,000 seeded rows at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.complexValKind_code"
+    ],
+    "check": "difftest/go/constant/numeric-sign/check.go",
+    "control": "difftest/go/constant/numeric-sign/review/main.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-sign/review/testdata/review_test.go"
+    ],
+    "review": "coverage/packages/go/constant/complexVal.Kind.md"
+  },
+  "newInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.newNumericInt",
+    "claim": "Allocates a distinct integer initialized to zero.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.newNumericInt_zero"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/new-int.md"
+  },
+  "newRat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.newNumericRat",
+    "claim": "Allocates a distinct rational initialized to zero over one.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.newNumericRat_zero"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/new-rat.md"
+  },
+  "newFloat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.newNumericFloat",
+    "claim": "Allocates a distinct positive zero float with working precision 512 and default nearest-even rounding.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.newNumericFloat_zero"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/new-float.md"
+  },
+  "i64toi": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.i64toi",
+    "claim": "Converts an int64 to a distinct big integer preserving its signed value.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.i64toi_exact"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/i64-to-i.md"
+  },
+  "i64tor": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.i64tor",
+    "claim": "Converts an int64 to a distinct rational with the same numerator and denominator one.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.i64tor_exact"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/i64-to-r.md"
+  },
+  "i64tof": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.i64tof",
+    "claim": "Converts an int64 to a distinct exact 512-bit precision float.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.i64tof_exact"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/i64-to-f.md"
+  },
+  "itor": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.itor",
+    "claim": "Copies the initialized big integer into a distinct rational numerator with denominator one.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.itor_exact"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/i-to-r.md"
+  },
+  "vtoc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/NumericConversions.lean",
+    "model_symbol": "GoLean.Go.Constant.vtoc",
+    "claim": "Retains the supplied real Value interface and pairs it with int64Val zero.",
+    "limits": "Exact values, precision, and opaque identity. Native checks distinct allocation identities, default rounding and zero sign for floats, and independent storage of the rational numerator after source mutation. Lean abstracts storage, reflected interface identities and float representation as its exact integer value and precision. int64 conversion declarations accept signed 64-bit inputs. itor requires a nonnil initialized big integer. vtoc native profiles include nil, typed nil and scalar values.",
+    "configurations": "Pinned same-package direct Go, compiled Lean and independent numeric value and metadata oracle. 140 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.vtoc_preserves"
+    ],
+    "check": "difftest/go/constant/numeric-conversions/check.go",
+    "review_sources": [
+      "difftest/go/constant/numeric-conversions/testdata/conversion_test.go"
+    ],
+    "control": "difftest/go/constant/numeric-conversions/review/main.go",
+    "review": "coverage/packages/go/constant/v-to-c.md"
+  },
+  "int64Val.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.int64ValString",
+    "claim": "Renders the signed 64-bit value in decimal.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.int64ValString_min"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/int64Val.String.md"
+  },
+  "int64Val.ExactString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.int64ValExactString",
+    "claim": "Returns the same complete signed decimal rendering as String.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.int64ValExactString_delegate"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/int64Val.ExactString.md"
+  },
+  "intVal.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.intValString",
+    "claim": "Renders the arbitrary-precision integer in decimal or returns the pinned nil-pointer string.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.intValString_nil"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/intVal.String.md"
+  },
+  "intVal.ExactString": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.intValExactString",
+    "claim": "Returns the same complete decimal or nil-pointer rendering as String.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.intValExactString_delegate"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/intVal.ExactString.md"
+  },
+  "is32bit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.is32bit",
+    "claim": "Reports whether the signed 64-bit input fits in a signed 32-bit integer.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.is32bit_edges"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/is32bit.md"
+  },
+  "is63bit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.is63bit",
+    "claim": "Reports whether the signed 64-bit input fits in a signed 63-bit integer.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.is63bit_edges"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/is63bit.md"
+  },
+  "smallInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Go/Constant/IntegerRender.lean",
+    "model_symbol": "GoLean.Go.Constant.smallInt",
+    "claim": "Reports whether the initialized integer magnitude has fewer than 4,096 bits.",
+    "limits": "All signed int64 words and canonical arbitrary-precision integers, including nil underlying *big.Int for intVal rendering. smallInt receives initialized nonnil *big.Int. Models observe textual results and predicates, excluding storage layout and allocation.",
+    "configurations": "Pinned direct same-package Go and compiled Lean against an independent base-256 decimal, signed narrowing and leading-byte width oracle. 336 boundary rows and 60,000 rows with seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Go.Constant.smallInt_zero"
+    ],
+    "check": "difftest/go/constant/integer-render/check.go",
+    "review_sources": [
+      "difftest/go/constant/integer-render/testdata/render_test.go"
+    ],
+    "control": "difftest/go/constant/integer-render/review/main.go",
+    "review": "coverage/packages/go/constant/smallInt.md"
+  }
+}

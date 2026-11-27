@@ -1,0 +1,72 @@
+{
+  "Once.Do": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sync/Once.lean",
+    "model_symbol": "GoLean.Sync.onceDo",
+    "claim": "Skips callbacks after completion. A first call runs the callback at most once and remains completed after its panic or nil-call failure.",
+    "limits": "Sequential non-reentrant calls, with int64 return values and exact comparable pointer panic payloads, nil callbacks, and panic(nil) under panicnil=0. Nil Once receivers only for the direct methods. Concurrent scheduling, Goexit, legacy panicnil=1, callback stack traces and allocation or GC details are outside scope.",
+    "configurations": "Pinned Go direct public calls and a test-only same-package bridge for doSlow and state inspection. Independent serial state oracle compares exact panic or return and callback count. Native observations check mutex state and completion during and after callbacks. 2,160 boundaries and 60,000 cases using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Sync.onceDo_completed"
+    ],
+    "check": "difftest/sync/once/check.go",
+    "review": "coverage/packages/sync/Once.Do.md",
+    "control": "difftest/sync/once/review/main.go"
+  },
+  "Once.doSlow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sync/Once.lean",
+    "model_symbol": "GoLean.Sync.onceDoSlow",
+    "claim": "Checks completion while the mutex is held, calls a pending function before publishing completion, and releases the mutex after normal return or panic.",
+    "limits": "Sequential non-reentrant calls, with int64 return values and exact comparable pointer panic payloads, nil callbacks, and panic(nil) under panicnil=0. Nil Once receivers only for the direct methods. Concurrent scheduling, Goexit, legacy panicnil=1, callback stack traces and allocation or GC details are outside scope.",
+    "configurations": "Pinned Go direct public calls and a test-only same-package bridge for doSlow and state inspection. Independent serial state oracle compares exact panic or return and callback count. Native observations check mutex state and completion during and after callbacks. 2,160 boundaries and 60,000 cases using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Sync.onceDoSlow_remembersPanic"
+    ],
+    "check": "difftest/sync/once/check.go",
+    "review": "coverage/packages/sync/Once.doSlow.md",
+    "control": "difftest/sync/once/review/main.go"
+  },
+  "OnceFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sync/Once.lean",
+    "model_symbol": "GoLean.Sync.onceFunc",
+    "claim": "Returns a deferred closure, invokes the function only on the first call, and replays the original panic payload on repeated calls.",
+    "limits": "Sequential non-reentrant calls, with int64 return values and exact comparable pointer panic payloads, nil callbacks, and panic(nil) under panicnil=0. Nil Once receivers only for the direct methods. Concurrent scheduling, Goexit, legacy panicnil=1, callback stack traces and allocation or GC details are outside scope.",
+    "configurations": "Pinned Go direct public calls and a test-only same-package bridge for doSlow and state inspection. Independent serial state oracle compares exact panic or return and callback count. Native observations check mutex state and completion during and after callbacks. 2,160 boundaries and 60,000 cases using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Sync.onceFunc_replaysPanic"
+    ],
+    "check": "difftest/sync/once/check.go",
+    "review": "coverage/packages/sync/OnceFunc.md",
+    "control": "difftest/sync/once/review/main.go"
+  },
+  "OnceValue": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sync/Once.lean",
+    "model_symbol": "GoLean.Sync.onceValue",
+    "claim": "Returns a deferred closure which caches one successful result or the original panic across calls.",
+    "limits": "Sequential non-reentrant calls, with int64 return values and exact comparable pointer panic payloads, nil callbacks, and panic(nil) under panicnil=0. Nil Once receivers only for the direct methods. Concurrent scheduling, Goexit, legacy panicnil=1, callback stack traces and allocation or GC details are outside scope.",
+    "configurations": "Pinned Go direct public calls and a test-only same-package bridge for doSlow and state inspection. Independent serial state oracle compares exact panic or return and callback count. Native observations check mutex state and completion during and after callbacks. 2,160 boundaries and 60,000 cases using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Sync.onceValue_caches"
+    ],
+    "check": "difftest/sync/once/check.go",
+    "review": "coverage/packages/sync/OnceValue.md",
+    "control": "difftest/sync/once/review/main.go"
+  },
+  "OnceValues": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Sync/Once.lean",
+    "model_symbol": "GoLean.Sync.onceValues",
+    "claim": "Returns a deferred closure which caches both successful results together or replays the original panic.",
+    "limits": "Sequential non-reentrant calls, with int64 return values and exact comparable pointer panic payloads, nil callbacks, and panic(nil) under panicnil=0. Nil Once receivers only for the direct methods. Concurrent scheduling, Goexit, legacy panicnil=1, callback stack traces and allocation or GC details are outside scope.",
+    "configurations": "Pinned Go direct public calls and a test-only same-package bridge for doSlow and state inspection. Independent serial state oracle compares exact panic or return and callback count. Native observations check mutex state and completion during and after callbacks. 2,160 boundaries and 60,000 cases using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Sync.onceValues_caches"
+    ],
+    "check": "difftest/sync/once/check.go",
+    "review": "coverage/packages/sync/OnceValues.md",
+    "control": "difftest/sync/once/review/main.go"
+  }
+}

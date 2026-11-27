@@ -1,0 +1,1117 @@
+{
+  "Duration.Nanoseconds": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationNanoseconds",
+    "claim": "Returns the exact signed nanosecond count.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationNanoseconds_identity"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Nanoseconds.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Microseconds": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationMicroseconds",
+    "claim": "Returns the signed quotient in microseconds, truncating toward zero.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationMicroseconds_negativeBoundary"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Microseconds.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Milliseconds": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationMilliseconds",
+    "claim": "Returns the signed quotient in milliseconds, truncating toward zero.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationMilliseconds_negativeBoundary"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Milliseconds.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Seconds": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationSeconds",
+    "claim": "Converts the signed integral seconds and separately rounded remainder to exact result binary64 bits.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationSeconds_split"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Seconds.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Minutes": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationMinutes",
+    "claim": "Converts the signed integral minutes and separately rounded remainder to exact result binary64 bits.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationMinutes_split"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Minutes.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Hours": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationHours",
+    "claim": "Converts the signed integral hours and separately rounded remainder to exact result binary64 bits.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationHours_split"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Hours.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Truncate": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationTruncate",
+    "claim": "Rounds toward zero to a multiple of a positive divisor and preserves input on a nonpositive divisor.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationTruncate_nonpositive"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Truncate.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Round": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationRound",
+    "claim": "Rounds to the nearest multiple, ties away from zero and saturating outside the signed result range. Nonpositive divisors preserve input.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationRound_nonpositive",
+      "GoLean.Time.durationRound_ties",
+      "GoLean.Time.durationRound_saturates"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Round.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Duration.Abs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationNumeric.lean",
+    "model_symbol": "GoLean.Time.durationAbs",
+    "claim": "Returns absolute magnitude with minimum duration saturating to the maximum.",
+    "limits": "Complete signed int64 nanosecond and divisor model domain. Differential evidence has 712 deterministic boundary fixtures and 60,000 seeded cases at 17, 2718 and 65537.",
+    "configurations": "Direct public pinned Go methods. Independent unsigned quotient and saturation oracle for integer operations and a two-stage exact rational oracle for float rounding. Compares exact raw binary64 words with Lean and Go.",
+    "theorems": [
+      "GoLean.Time.durationAbs_min"
+    ],
+    "check": "difftest/time/duration-numeric/check.go",
+    "review": "coverage/packages/time/Duration.Abs.md",
+    "control": "difftest/time/duration-numeric/review/main.go"
+  },
+  "Time.nsec": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockNsec",
+    "claim": "Returns the low 30 bits of the packed wall word as nanoseconds.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockNsec_maxPacked"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.nsec.md"
+  },
+  "Time.sec": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockSec",
+    "claim": "Returns signed ext for an unmarked word, or 1885 internal-epoch seconds plus the packed 33-bit seconds field for a monotonic word.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockSec_withoutMono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.sec.md"
+  },
+  "Time.unixSec": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockUnixSec",
+    "claim": "Returns the signed wall seconds since the Unix epoch with Go int64 wraparound.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockUnixSec_epoch"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.unixSec.md"
+  },
+  "Time.mono": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockMono",
+    "claim": "Returns the signed ext monotonic reading when the flag is set, and zero otherwise.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockMono_withoutMono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.mono.md"
+  },
+  "Time.Nanosecond": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockNanosecond",
+    "claim": "Returns the packed nanoseconds as a native int.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockNanosecond_nsec"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.Nanosecond.md"
+  },
+  "Time.Unix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockUnix",
+    "claim": "Returns signed wall seconds since the Unix epoch with Go int64 wraparound, independent of the location.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockUnix_seconds"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.Unix.md"
+  },
+  "Time.IsZero": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockIsZero",
+    "claim": "Reports whether both storage words are zero, including when the location is nonnil.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockIsZero_words"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.IsZero.md"
+  },
+  "Time.Before": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockBefore",
+    "claim": "Reports strict ascending order, comparing signed monotonic readings when both flags are present and wall seconds then nanoseconds otherwise.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations. The kernel theorem covers the two-monotonic-readings branch, with mixed and wall-only branches checked by differential comparison.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockBefore_mono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.Before.md"
+  },
+  "Time.After": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockAfter",
+    "claim": "Reports strict descending order, comparing signed monotonic readings when both flags are present and wall seconds then nanoseconds otherwise.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations. The kernel theorem covers the two-monotonic-readings branch, with mixed and wall-only branches checked by differential comparison.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockAfter_mono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.After.md"
+  },
+  "Time.Equal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockEqual",
+    "claim": "Reports equal signed monotonic readings when both flags are present, or equal wall seconds and nanoseconds otherwise. Location is immaterial.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations. The kernel theorem covers the two-monotonic-readings branch, with mixed and wall-only branches checked by differential comparison.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockEqual_mono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.Equal.md"
+  },
+  "Time.Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/TimeCompare.lean",
+    "model_symbol": "GoLean.Time.clockCompare",
+    "claim": "Returns -1, 0 or 1 according to the signed monotonic readings when both flags are present, and wall seconds then nanoseconds otherwise.",
+    "limits": "Raw uint64 wall and signed int64 ext words, including synthetic structures with unused bits or nanoseconds outside the public constructors. Private methods receive nonnil Time pointers. Location offsets are represented only by independently chosen native Time locations. The kernel theorem covers the two-monotonic-readings branch, with mixed and wall-only branches checked by differential comparison.",
+    "configurations": "Pinned private bridge and direct public Go calls, compiled Lean, and an independent decoded-coordinate order oracle. 18,769 fixed paired words and 60,000 seeded rows at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockCompare_mono"
+    ],
+    "check": "difftest/time/time-compare/check.go",
+    "review_sources": [
+      "difftest/time/time-compare/testdata/bridge_test.go",
+      "difftest/time/time-compare/testdata/compare_test.go"
+    ],
+    "control": "difftest/time/time-compare/review/main.go",
+    "review": "coverage/packages/time/Time.Compare.md"
+  },
+  "Duration.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationText.lean",
+    "model_symbol": "GoLean.Time.durationString",
+    "claim": "Renders the signed nanosecond value with exact unit selection and trailing-zero trimming.",
+    "limits": "All signed duration words and a fixed 32-byte backing or nil pointer. Intermediate buffer operations are summarized by their final suffix. Allocation and panic diagnostic text outside scope.",
+    "configurations": "Pinned public and pinned same-package Go calls compared to Lean and an independent fmt-based oracle. 254 boundaries and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Time.durationString_zero",
+      "GoLean.Time.durationString_micro"
+    ],
+    "check": "difftest/time/duration-text/check.go",
+    "control": "difftest/time/duration-text/review/main.go",
+    "review": "coverage/packages/time/Duration.String.md"
+  },
+  "Duration.format": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DurationText.lean",
+    "model_symbol": "GoLean.Time.durationFormat",
+    "claim": "Writes the representation into the suffix of the 32-byte array, preserves its prefix, and returns the exact byte offset. A nil array pointer fails.",
+    "limits": "All signed duration words and a fixed 32-byte backing or nil pointer. Intermediate buffer operations are summarized by their final suffix. Allocation and panic diagnostic text outside scope.",
+    "configurations": "Pinned public and pinned same-package Go calls compared to Lean and an independent fmt-based oracle. 254 boundaries and 60,000 samples at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Time.durationFormat_zero"
+    ],
+    "check": "difftest/time/duration-text/check.go",
+    "control": "difftest/time/duration-text/review/main.go",
+    "review": "coverage/packages/time/Duration.format.md"
+  },
+  "fmtInt": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/FormatHelpers.lean",
+    "model_symbol": "GoLean.Time.fmtInt",
+    "claim": "Writes an unsigned decimal suffix in place, using one zero digit for zero, and returns its starting index. Short visible buffers panic after preserving any trailing digits already written.",
+    "limits": "All uint64 values with valid slice geometry, including nil, empty, short, and spare backing. fmtFrac covers the nonpositive native precision branch and positive precision through 32 in differential evidence; larger positive precision is modeled but not tested. Panic class and full backing are observed; panic text and allocation are outside scope.",
+    "configurations": "Pinned private Go through a test-only bridge, compiled Lean, and a separate decimal-string oracle. 2,592 fixed rows and 60,000 sampled rows at seeds 17, 2718, and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Time.fmtInt_empty",
+      "GoLean.Time.fmtInt_partial"
+    ],
+    "check": "difftest/time/format-helpers/check.go",
+    "review": "coverage/packages/time/fmtInt.md",
+    "control": "difftest/time/format-helpers/review/main.go"
+  },
+  "fmtFrac": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/FormatHelpers.lean",
+    "model_symbol": "GoLean.Time.fmtFrac",
+    "claim": "Writes the fractional suffix with trailing zeros elided, returns the start and quotient, and preserves partial writes when a visible-buffer bounds failure interrupts output. Nonpositive precision performs no work.",
+    "limits": "All uint64 values with valid slice geometry, including nil, empty, short, and spare backing. fmtFrac covers the nonpositive native precision branch and positive precision through 32 in differential evidence; larger positive precision is modeled but not tested. Panic class and full backing are observed; panic text and allocation are outside scope.",
+    "configurations": "Pinned private Go through a test-only bridge, compiled Lean, and a separate decimal-string oracle. 2,592 fixed rows and 60,000 sampled rows at seeds 17, 2718, and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Time.fmtFrac_zeroPrecision",
+      "GoLean.Time.fmtFrac_partial"
+    ],
+    "check": "difftest/time/format-helpers/check.go",
+    "review": "coverage/packages/time/fmtFrac.md",
+    "control": "difftest/time/format-helpers/review/main.go"
+  },
+  "Time.stripMono": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockStripMono",
+    "claim": "Leaves unflagged words intact and replaces a monotonic reading with unpacked wall seconds while retaining the low nanosecond bits.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockStripMono_unflagged"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.stripMono.md"
+  },
+  "Time.setLoc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockSetLoc",
+    "claim": "Strips monotonic state and stores the selected location, representing UTC by a nil field.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockSetLoc_utc"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.setLoc.md"
+  },
+  "Time.UTC": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockUTC",
+    "claim": "Returns the input instant with UTC location encoded as nil and monotonic state stripped.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockUTC_canonical"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.UTC.md"
+  },
+  "Time.Local": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockLocal",
+    "claim": "Returns the input instant with the Local location pointer and monotonic state stripped.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockLocal_identity"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.Local.md"
+  },
+  "Time.In": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockIn",
+    "claim": "Rejects a nil location, otherwise strips monotonic state and uses the exact selected location with UTC canonicalization.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockIn_nil"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.In.md"
+  },
+  "Time.Location": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/Location.lean",
+    "model_symbol": "GoLean.Time.clockLocation",
+    "claim": "Returns the stored location pointer or UTC when the internal location is nil.",
+    "limits": "Location identity is an opaque tag. Includes raw clock words and nil or live location pointers with pinned default UTC and Local globals. Private pointer receivers are nonnil. Location lookup and concurrent mutation outside scope.",
+    "configurations": "Pinned native field and method overlay, Lean and independent quotient/remainder bit extraction. 1,000 fixed and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockLocation_nil"
+    ],
+    "check": "difftest/time/location/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/review/testdata/identity_test.go"
+    ],
+    "control": "difftest/time/location/review/main.go",
+    "review": "coverage/packages/time/Time.location-accessor.md"
+  },
+  "Time.setMono": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockMutation.lean",
+    "model_symbol": "GoLean.Time.clockSetMono",
+    "claim": "Sets the signed monotonic reading for already marked words, or packs in-range extended wall seconds and sets the marker by OR. Rejects out-of-range extended seconds without changing any fields.",
+    "limits": "All raw uint64 wall and int64 ext/argument words on a nonnil private receiver, including synthetic unused bits. The model uses opaque location identities and pinned native comparisons check retained nil and two equal-name distinct pointers. No time zone lookup or concurrent mutation.",
+    "configurations": "Pinned native Go through an import-free bridge, compiled Lean, and separate arithmetic oracle with arbitrary-precision signed saturation. 4,860 fixed rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Time.clockSetMono_existing",
+      "GoLean.Time.clockSetMono_rejectEarly"
+    ],
+    "check": "difftest/time/clock-mutation/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/Location.lean",
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/clock-mutation/testdata/bridge_test.go",
+      "difftest/time/clock-mutation/testdata/mutation_test.go"
+    ],
+    "control": "difftest/time/clock-mutation/review/main.go",
+    "review": "coverage/packages/time/Time.setMono.md"
+  },
+  "Time.addSec": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockMutation.lean",
+    "model_symbol": "GoLean.Time.clockAddSec",
+    "claim": "Adds signed seconds to packed or extended time while preserving the location and appropriate raw wall bits. Strips monotonic state if the packed candidate falls outside range. Extended sums saturate at MaxInt64 or -MaxInt64 on overflow, while exactly representable MinInt64 remains valid.",
+    "limits": "All raw uint64 wall and int64 ext/argument words on a nonnil private receiver, including synthetic unused bits. The model uses opaque location identities and pinned native comparisons check retained nil and two equal-name distinct pointers. No time zone lookup or concurrent mutation.",
+    "configurations": "Pinned native Go through an import-free bridge, compiled Lean, and separate arithmetic oracle with arbitrary-precision signed saturation. 4,860 fixed rows and 60,000 samples at seeds 17, 2718 and 65537 per declaration.",
+    "theorems": [
+      "GoLean.Time.clockAddSec_negativeOverflow",
+      "GoLean.Time.clockAddSec_exactMin"
+    ],
+    "check": "difftest/time/clock-mutation/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/Location.lean",
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/clock-mutation/testdata/bridge_test.go",
+      "difftest/time/clock-mutation/testdata/mutation_test.go"
+    ],
+    "control": "difftest/time/clock-mutation/review/main.go",
+    "review": "coverage/packages/time/Time.addSec.md"
+  },
+  "Time.UnixMilli": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.clockUnixMilli",
+    "claim": "Returns Unix milliseconds from the decoded seconds and truncated nanosecond fraction.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockUnixMilli_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/Time.UnixMilli.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "Time.UnixMicro": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.clockUnixMicro",
+    "claim": "Returns Unix microseconds from the decoded seconds and truncated nanosecond fraction.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockUnixMicro_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/Time.UnixMicro.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "Time.UnixNano": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.clockUnixNano",
+    "claim": "Returns Unix nanoseconds from the decoded seconds and nanosecond fraction.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockUnixNano_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/Time.UnixNano.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "unixTime": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.unixTime",
+    "claim": "Builds the exact raw wall and internal second words with the native Local pointer.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.unixTime_localWords"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/unixTime.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "Unix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.unixFromParts",
+    "claim": "Normalizes signed nanoseconds into seconds and a nonnegative remainder using native wrapped seconds.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.unixFromParts_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/Unix.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "UnixMilli": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.unixFromMilli",
+    "claim": "Constructs local time from signed milliseconds, including correct negative remainder normalization.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.unixFromMilli_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/UnixMilli.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "UnixMicro": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/EpochUnits.lean",
+    "model_symbol": "GoLean.Time.unixFromMicro",
+    "claim": "Constructs local time from signed microseconds, including correct negative remainder normalization.",
+    "limits": "Raw time words and signed epoch inputs. Outside publicly representable ranges, outputs describe pinned word behavior only. Local pointer observed natively; Lean abstracts location identity.",
+    "configurations": "Pinned private Go overlay also calls public methods, compared with Lean and independent math/big arithmetic. 2,560 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.unixFromMicro_negative"
+    ],
+    "check": "difftest/time/epoch-units/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/location/testdata/export_test.go"
+    ],
+    "review": "coverage/packages/time/UnixMicro.md",
+    "control": "difftest/time/epoch-units/review/main.go"
+  },
+  "Time.Add": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockArithmetic.lean",
+    "model_symbol": "GoLean.Time.clockAdd",
+    "claim": "Adds the signed duration with Go’s nanosecond correction and packed or extended wall update. Advances a retained monotonic reading and drops it on overflow. Native comparison checks exact wall and ext words and unchanged location pointer.",
+    "limits": "All raw wall and ext words and signed int64 durations, including synthetic nanosecond and reserved fields. Location tags abstract pointer identity.",
+    "configurations": "Pinned public Go methods and direct private bridge, compiled Lean and independent big.Int stage and decoded coordinate oracle. 5,184 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockAdd_borrow"
+    ],
+    "check": "difftest/time/clock-arithmetic/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockMutation.lean",
+      "lean/GoLean/Time/Location.lean",
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go",
+      "difftest/time/clock-arithmetic/testdata/arithmetic_test.go",
+      "difftest/time/clock-arithmetic/review/testdata/trace_test.go"
+    ],
+    "control": "difftest/time/clock-arithmetic/review/main.go",
+    "review": "coverage/packages/time/Time.Add.md"
+  },
+  "Time.Sub": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockArithmetic.lean",
+    "model_symbol": "GoLean.Time.clockSub",
+    "claim": "Uses saturated monotonic-reading difference when both operands are marked. Otherwise validates the wrapped wall-duration candidate by adding it back and falls back to signed duration saturation when it fails.",
+    "limits": "All raw wall and ext words, including synthetic states. The model follows pinned raw arithmetic and validation behavior. Location does not enter the result.",
+    "configurations": "Pinned public Go methods and direct private bridge, compiled Lean and independent big.Int stage and decoded coordinate oracle. 5,184 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.clockSub_monotonic"
+    ],
+    "check": "difftest/time/clock-arithmetic/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockMutation.lean",
+      "lean/GoLean/Time/Location.lean",
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go",
+      "difftest/time/clock-arithmetic/testdata/arithmetic_test.go",
+      "difftest/time/clock-arithmetic/review/testdata/trace_test.go"
+    ],
+    "control": "difftest/time/clock-arithmetic/review/main.go",
+    "review": "coverage/packages/time/Time.Sub.md"
+  },
+  "subMono": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockArithmetic.lean",
+    "model_symbol": "GoLean.Time.subMono",
+    "claim": "Returns the exact difference of two signed monotonic readings when representable and otherwise clamps to the full signed-duration interval.",
+    "limits": "All signed int64 words. Both saturation endpoints are tested and proved on extreme inputs.",
+    "configurations": "Pinned public Go methods and direct private bridge, compiled Lean and independent big.Int stage and decoded coordinate oracle. 5,184 fixed rows and 60,000 sampled rows using seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Time.subMono_saturation"
+    ],
+    "check": "difftest/time/clock-arithmetic/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockMutation.lean",
+      "lean/GoLean/Time/Location.lean",
+      "lean/GoLean/Time/TimeCompare.lean",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go",
+      "difftest/time/clock-arithmetic/testdata/arithmetic_test.go",
+      "difftest/time/clock-arithmetic/review/testdata/trace_test.go"
+    ],
+    "control": "difftest/time/clock-arithmetic/review/main.go",
+    "review": "coverage/packages/time/subMono.md"
+  },
+  "lessThanHalf": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockRound.lean",
+    "model_symbol": "GoLean.Time.lessThanHalf",
+    "claim": "Doubles the first unsigned word modulo 64 bits and compares it to the second unsigned word.",
+    "limits": "Private div only for positive duration; its long division is represented as exact quotient/remainder of the same unsigned input. Raw synthetic words are pinned implementation behavior. Location modeled by identity tag.",
+    "configurations": "Pinned public and private Go via overlay, Lean and independent big-integer division with native Add oracle. 2,916 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.lessThanHalf_equality"
+    ],
+    "check": "difftest/time/clock-round/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockArithmetic.lean",
+      "difftest/time/location/testdata/export_test.go",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go"
+    ],
+    "control": "difftest/time/clock-round/review/main.go",
+    "review": "coverage/packages/time/lessThanHalf.md"
+  },
+  "div": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockRound.lean",
+    "model_symbol": "GoLean.Time.clockDiv",
+    "claim": "Returns quotient parity and the pinned remainder for positive divisors, including negative-time complement and signed extrema.",
+    "limits": "Private div only for positive duration; its long division is represented as exact quotient/remainder of the same unsigned input. Raw synthetic words are pinned implementation behavior. Location modeled by identity tag.",
+    "configurations": "Pinned public and private Go via overlay, Lean and independent big-integer division with native Add oracle. 2,916 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockDiv_negative"
+    ],
+    "check": "difftest/time/clock-round/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockArithmetic.lean",
+      "difftest/time/location/testdata/export_test.go",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go"
+    ],
+    "control": "difftest/time/clock-round/review/main.go",
+    "review": "coverage/packages/time/div.md"
+  },
+  "Time.Truncate": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockRound.lean",
+    "model_symbol": "GoLean.Time.clockTruncate",
+    "claim": "Strips monotonic state and truncates toward the preceding boundary from the zero time when duration is positive.",
+    "limits": "Private div only for positive duration; its long division is represented as exact quotient/remainder of the same unsigned input. Raw synthetic words are pinned implementation behavior. Location modeled by identity tag.",
+    "configurations": "Pinned public and private Go via overlay, Lean and independent big-integer division with native Add oracle. 2,916 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockTruncate_zero"
+    ],
+    "check": "difftest/time/clock-round/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockArithmetic.lean",
+      "difftest/time/location/testdata/export_test.go",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go"
+    ],
+    "control": "difftest/time/clock-round/review/main.go",
+    "review": "coverage/packages/time/Time.Truncate.md"
+  },
+  "Time.Round": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockRound.lean",
+    "model_symbol": "GoLean.Time.clockRound",
+    "claim": "Strips monotonic state and rounds to the nearest boundary from zero time, giving the later boundary on exact ties.",
+    "limits": "Private div only for positive duration; its long division is represented as exact quotient/remainder of the same unsigned input. Raw synthetic words are pinned implementation behavior. Location modeled by identity tag.",
+    "configurations": "Pinned public and private Go via overlay, Lean and independent big-integer division with native Add oracle. 2,916 boundaries and 60,000 samples at seeds 17, 2718, 65537.",
+    "theorems": [
+      "GoLean.Time.clockRound_zero"
+    ],
+    "check": "difftest/time/clock-round/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockArithmetic.lean",
+      "difftest/time/location/testdata/export_test.go",
+      "difftest/time/clock-arithmetic/testdata/bridge_test.go"
+    ],
+    "control": "difftest/time/clock-round/review/main.go",
+    "review": "coverage/packages/time/Time.Round.md"
+  },
+  "absSeconds.days": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteDays",
+    "claim": "Divides an unsigned absolute seconds word into complete days.",
+    "limits": "All uint64 words.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteDays_firstBoundary"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absSeconds.days.md"
+  },
+  "absSeconds.clock": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteClock",
+    "claim": "Splits seconds within the absolute day into hour, minute and second.",
+    "limits": "All uint64 words.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteClock_lastSecond"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absSeconds.clock.md"
+  },
+  "absDays.weekday": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteWeekday",
+    "claim": "Computes a Wednesday-based weekday, including unsigned addition wraparound.",
+    "limits": "All uint64 words.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteWeekday_wrap"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absDays.weekday.md"
+  },
+  "absYday.janFeb": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteJanFeb",
+    "claim": "Distinguishes January and February from March through December at March-based day 306.",
+    "limits": "March-based days 0 through 365.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteJanFeb_boundary"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absYday.janFeb.md"
+  },
+  "absCentury.leap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteLeap",
+    "claim": "Applies the 4-, 100- and 400-year leap rules to the century and within-century year.",
+    "limits": "All uint64 centuries with within-century years 0 through 99.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteLeap_centuries"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absCentury.leap.md"
+  },
+  "absYday.split": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/ClockFields.lean",
+    "model_symbol": "GoLean.Time.absoluteMonthDay",
+    "claim": "Splits a March-based year day into its absolute month and one-based month day.",
+    "limits": "March-based days 0 through 365, including February 29.",
+    "configurations": "5,124 fixed rows and 60,000 sampled rows at seeds 17, 2718 and 65537, compared with pinned Go and an independent arithmetic/calendar oracle.",
+    "theorems": [
+      "GoLean.Time.absoluteMonthDay_monthBoundary"
+    ],
+    "check": "difftest/time/clock-fields/check.go",
+    "review_sources": [
+      "difftest/time/clock-fields/testdata/clock_fields_test.go",
+      "difftest/time/clock-fields/testdata/export_test.go"
+    ],
+    "control": "difftest/time/clock-fields/review/main.go",
+    "review": "coverage/packages/time/absYday.split.md"
+  },
+  "absDays.split": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.splitAbsoluteDays",
+    "claim": "Splits the absolute day into century, within-century year and March-based day.",
+    "limits": "Full uint64 day words, including native unsigned scaling wraparound.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.splitAbsoluteDays_cycle"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absDays.split.md"
+  },
+  "absCentury.year": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.civilYear",
+    "claim": "Converts century and within-century year to a native signed civil year with January/February rollover.",
+    "limits": "Full uint64 centuries, within-century years 0 through 99, and rollover flags 0 and 1.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.civilYear_rollover"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absCentury.year.md"
+  },
+  "absMonth.month": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.civilMonth",
+    "claim": "Converts an absolute March-based month to a civil month.",
+    "limits": "Months 3 through 14 and matching January/February flag.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.civilMonth_feb"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absMonth.month.md"
+  },
+  "absYday.yday": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.civilYearDay",
+    "claim": "Converts the March-based year day to a one-based civil ordinal with leap and rollover flags.",
+    "limits": "March-based days 0 through 365, matching January/February flag, and leap bits 0 and 1.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.civilYearDay_jan"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absYday.yday.md"
+  },
+  "absDays.date": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.dateFromAbsoluteDays",
+    "claim": "Converts the absolute day to civil year, month and day.",
+    "limits": "Full uint64 days, including pinned Go wraparound and native int width.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.dateFromAbsoluteDays_rollover"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absDays.date.md"
+  },
+  "absDays.yearYday": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/CalendarConversion.lean",
+    "model_symbol": "GoLean.Time.yearDayFromAbsoluteDays",
+    "claim": "Converts the absolute day to civil year and one-based year day.",
+    "limits": "Full uint64 days, including pinned Go wraparound and native int width.",
+    "configurations": "6,954 fixed cases and 60,000 seeded cases at 17, 2718 and 65537. Pinned Go private-helper overlay, compiled Lean and an independent 400-year cycle oracle.",
+    "theorems": [
+      "GoLean.Time.yearDayFromAbsoluteDays_rollover"
+    ],
+    "check": "difftest/time/calendar-conversion/check.go",
+    "review_sources": [
+      "lean/GoLean/Time/ClockFields.lean",
+      "difftest/time/calendar-conversion/testdata/export_test.go",
+      "difftest/time/calendar-conversion/testdata/calendar_test.go"
+    ],
+    "control": "difftest/time/calendar-conversion/review/main.go",
+    "review": "coverage/packages/time/absDays.yearYday.md"
+  },
+  "dateToAbsDays": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DateComponents.lean",
+    "model_symbol": "GoLean.Time.dateToAbsoluteDays",
+    "claim": "Converts civil year, month and day to the absolute March-epoch day word.",
+    "limits": "Months 1–12, full int64 year and native day with pinned modular arithmetic.",
+    "configurations": "15,552 fixed cases and 60,000 samples at seeds 17, 2718 and 65537 with pinned Go, compiled Lean, civil month tables, and big integer normalization.",
+    "theorems": [
+      "GoLean.Time.dateToAbsoluteDays_epoch"
+    ],
+    "check": "difftest/time/date-components/check.go",
+    "review_sources": [
+      "difftest/time/date-components/testdata/export_test.go",
+      "difftest/time/date-components/testdata/date_test.go"
+    ],
+    "control": "difftest/time/date-components/review/main.go",
+    "review": "coverage/packages/time/date-to-abs-days.md"
+  },
+  "isLeap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DateComponents.lean",
+    "model_symbol": "GoLean.Time.gregorianLeap",
+    "claim": "Classifies civil years by the Gregorian leap rule.",
+    "limits": "Full signed native year range.",
+    "configurations": "15,552 fixed cases and 60,000 samples at seeds 17, 2718 and 65537 with pinned Go, compiled Lean, civil month tables, and big integer normalization.",
+    "theorems": [
+      "GoLean.Time.gregorianLeap_centuries"
+    ],
+    "check": "difftest/time/date-components/check.go",
+    "review_sources": [
+      "difftest/time/date-components/testdata/export_test.go",
+      "difftest/time/date-components/testdata/date_test.go"
+    ],
+    "control": "difftest/time/date-components/review/main.go",
+    "review": "coverage/packages/time/is-leap.md"
+  },
+  "daysBefore": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DateComponents.lean",
+    "model_symbol": "GoLean.Time.daysBeforeMonth",
+    "claim": "Returns the days before a month in a non-leap year.",
+    "limits": "Months 1–12.",
+    "configurations": "15,552 fixed cases and 60,000 samples at seeds 17, 2718 and 65537 with pinned Go, compiled Lean, civil month tables, and big integer normalization.",
+    "theorems": [
+      "GoLean.Time.daysBeforeMonth_march"
+    ],
+    "check": "difftest/time/date-components/check.go",
+    "review_sources": [
+      "difftest/time/date-components/testdata/export_test.go",
+      "difftest/time/date-components/testdata/date_test.go"
+    ],
+    "control": "difftest/time/date-components/review/main.go",
+    "review": "coverage/packages/time/days-before.md"
+  },
+  "daysIn": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DateComponents.lean",
+    "model_symbol": "GoLean.Time.daysInMonth",
+    "claim": "Returns a civil month's length in the given year.",
+    "limits": "Months 1–12 and full signed native year range.",
+    "configurations": "15,552 fixed cases and 60,000 samples at seeds 17, 2718 and 65537 with pinned Go, compiled Lean, civil month tables, and big integer normalization.",
+    "theorems": [
+      "GoLean.Time.daysInMonth_february"
+    ],
+    "check": "difftest/time/date-components/check.go",
+    "review_sources": [
+      "difftest/time/date-components/testdata/export_test.go",
+      "difftest/time/date-components/testdata/date_test.go"
+    ],
+    "control": "difftest/time/date-components/review/main.go",
+    "review": "coverage/packages/time/days-in.md"
+  },
+  "norm": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Time/DateComponents.lean",
+    "model_symbol": "GoLean.Time.normalizeFields",
+    "claim": "Moves whole units into the signed high field and keeps the low field in the range of the positive base.",
+    "limits": "Full native high and low signed ranges and positive native bases. Overflow of the high field follows the native word.",
+    "configurations": "15,552 fixed cases and 60,000 samples at seeds 17, 2718 and 65537 with pinned Go, compiled Lean, civil month tables, and big integer normalization.",
+    "theorems": [
+      "GoLean.Time.normalizeFields_borrow"
+    ],
+    "check": "difftest/time/date-components/check.go",
+    "review_sources": [
+      "difftest/time/date-components/testdata/export_test.go",
+      "difftest/time/date-components/testdata/date_test.go"
+    ],
+    "control": "difftest/time/date-components/review/main.go",
+    "review": "coverage/packages/time/norm.md"
+  }
+}

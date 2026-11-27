@@ -1,0 +1,205 @@
+{
+  "IsWordChar": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/EmptyWidth.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.isWordChar",
+    "claim": "Recognizes exactly ASCII letters, digits and underscore across signed rune inputs.",
+    "limits": "Exact signed 32-bit rune inputs and unsigned instruction fields, including unknown opcode and argument bytes, nil receivers where applicable, and feasible sequential calls.",
+    "configurations": "Pinned native exact Go declarations through a same-package overlay. Independent ASCII membership, mask and panic oracle. Exhaustive opcode byte and curated rune/panic boundaries, 41,765 boundary rows and 60,000 sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.isWordChar_underscore",
+      "GoLean.Regexp.Syntax.isWordChar_nonASCII"
+    ],
+    "check": "difftest/regexp/syntax/empty-width/check.go",
+    "control": "difftest/regexp/syntax/empty-width/review/main.go",
+    "review": "coverage/packages/regexp/syntax/IsWordChar.md"
+  },
+  "EmptyOpContext": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/EmptyWidth.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.emptyOpContext",
+    "claim": "Returns exact line, text and complementary word-boundary flags. Any negative neighboring rune sets the corresponding text boundary.",
+    "limits": "Exact signed 32-bit rune inputs and unsigned instruction fields, including unknown opcode and argument bytes, nil receivers where applicable, and feasible sequential calls.",
+    "configurations": "Pinned native exact Go declarations through a same-package overlay. Independent ASCII membership, mask and panic oracle. Exhaustive opcode byte and curated rune/panic boundaries, 41,765 boundary rows and 60,000 sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.emptyOpContext_negative",
+      "GoLean.Regexp.Syntax.emptyOpContext_newlineWord"
+    ],
+    "check": "difftest/regexp/syntax/empty-width/check.go",
+    "control": "difftest/regexp/syntax/empty-width/review/main.go",
+    "review": "coverage/packages/regexp/syntax/EmptyOpContext.md"
+  },
+  "Inst.MatchEmptyWidth": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/EmptyWidth.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.instMatchEmptyWidth",
+    "claim": "Interprets only the low argument byte independently of the opcode. Recognizes only -1 as a text sentinel and distinguishes nil-receiver panic and unknown-argument panic.",
+    "limits": "Exact signed 32-bit rune inputs and unsigned instruction fields, including unknown opcode and argument bytes, nil receivers where applicable, and feasible sequential calls.",
+    "configurations": "Pinned native exact Go declarations through a same-package overlay. Independent ASCII membership, mask and panic oracle. Exhaustive opcode byte and curated rune/panic boundaries, 41,765 boundary rows and 60,000 sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.instMatchEmptyWidth_exactSentinel",
+      "GoLean.Regexp.Syntax.instMatchEmptyWidth_mixture"
+    ],
+    "check": "difftest/regexp/syntax/empty-width/check.go",
+    "control": "difftest/regexp/syntax/empty-width/review/main.go",
+    "review": "coverage/packages/regexp/syntax/Inst.MatchEmptyWidth.md"
+  },
+  "Inst.op": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/EmptyWidth.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.instOp",
+    "claim": "Normalizes three specialized rune opcodes to InstRune and preserves every other byte. A nil receiver panics.",
+    "limits": "Exact signed 32-bit rune inputs and unsigned instruction fields, including unknown opcode and argument bytes, nil receivers where applicable, and feasible sequential calls.",
+    "configurations": "Pinned native exact Go declarations through a same-package overlay. Independent ASCII membership, mask and panic oracle. Exhaustive opcode byte and curated rune/panic boundaries, 41,765 boundary rows and 60,000 sampled at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.instOp_runes",
+      "GoLean.Regexp.Syntax.instOp_unknown"
+    ],
+    "check": "difftest/regexp/syntax/empty-width/check.go",
+    "control": "difftest/regexp/syntax/empty-width/review/main.go",
+    "review": "coverage/packages/regexp/syntax/Inst.op.md"
+  },
+  "InstOp.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/OpcodeStrings.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.instOpString",
+    "claim": "Returns the name of each of the eleven instruction opcodes and the empty string for any other opcode.",
+    "limits": "Exhaustive uint8 domain for both opcode types. Uses the pinned opcode name table and abstracts the generated concatenated string and offsets as individual names.",
+    "configurations": "Direct pinned Go methods and compiled Lean against an independent enum-name and decimal fallback oracle. All 256 inputs per declaration.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.instOpString_outside",
+      "GoLean.Regexp.Syntax.instOpString_last"
+    ],
+    "check": "difftest/regexp/syntax/opcode-strings/check.go",
+    "control": "difftest/regexp/syntax/opcode-strings/review/main.go",
+    "review": "coverage/packages/regexp/syntax/InstOp.String.md"
+  },
+  "Op.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/OpcodeStrings.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.opString",
+    "claim": "Returns the nineteen public operation names, opPseudo at 128, and Op(n) with an unsigned decimal byte for all other values.",
+    "limits": "Exhaustive uint8 domain for both opcode types. Uses the pinned opcode name table and abstracts the generated concatenated string and offsets as individual names.",
+    "configurations": "Direct pinned Go methods and compiled Lean against an independent enum-name and decimal fallback oracle. All 256 inputs per declaration.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.opString_pseudo",
+      "GoLean.Regexp.Syntax.opString_last",
+      "GoLean.Regexp.Syntax.opString_outside"
+    ],
+    "check": "difftest/regexp/syntax/opcode-strings/check.go",
+    "control": "difftest/regexp/syntax/opcode-strings/review/main.go",
+    "review": "coverage/packages/regexp/syntax/op-string.md"
+  },
+  "ranges.Len": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.rangesLen",
+    "claim": "Returns the number of complete endpoint pairs.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.rangesLen_empty"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/ranges.Len.md"
+  },
+  "ranges.Less": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.rangesLess",
+    "claim": "Orders by lower endpoint ascending, breaking ties with higher endpoint descending.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.rangesLess_highFirst"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/ranges.Less.md"
+  },
+  "ranges.Swap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.rangesSwap",
+    "claim": "Swaps both endpoints of two selected pairs and preserves other backing cells.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.rangesSwap_first"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/ranges.Swap.md"
+  },
+  "appendRange": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.appendRange",
+    "claim": "Merges into the last or penultimate overlapping or adjacent pair, preferring the last, or appends a new pair.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.appendRange_checksSecond"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/appendRange.md"
+  },
+  "appendClass": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.appendClass",
+    "claim": "Adds the clean class pairs using appendRange in left-to-right order.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.appendClass_empty"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/appendClass.md"
+  },
+  "appendNegatedClass": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.appendNegatedClass",
+    "claim": "Adds the complement of a clean source class through inclusive Unicode MaxRune in range order.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.appendNegatedClass_full"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/appendNegatedClass.md"
+  },
+  "negateClass": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.negateClass",
+    "claim": "Overwrites the class prefix with its complement, appending the terminal gap when necessary.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.negateClass_empty"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/negateClass.md"
+  },
+  "inCharClass": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Regexp/Syntax/RangeClass.lean",
+    "model_symbol": "GoLean.Regexp.Syntax.inCharClass",
+    "claim": "Reports whether the rune belongs to any clean range, including both endpoints.",
+    "limits": "Valid Unicode numeric endpoints (including surrogate code points), even pair-aligned destination lengths/capacities and valid pair indexes for Less and Swap. Clean sources are sorted, separated, and disjoint from destination. Native compares visible results, original backing and reuse of nonempty backing for writes. Allocation sizes and nil versus nonnil zero-capacity identity are abstracted. No regexp compilation or matching.",
+    "configurations": "Pinned private Go via same-package test overlay, compiled Lean and separate endpoint arithmetic/state oracle. 5,040 fixed rows and 60,000 samples at seeds 17, 2718 and 65537. Less and Swap execute on 55,695 nonempty rows with valid indices.",
+    "theorems": [
+      "GoLean.Regexp.Syntax.inCharClass_inclusive"
+    ],
+    "check": "difftest/regexp/syntax/range-class/check.go",
+    "control": "difftest/regexp/syntax/range-class/review/main.go",
+    "review": "coverage/packages/regexp/syntax/inCharClass.md"
+  }
+}

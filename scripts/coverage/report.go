@@ -123,6 +123,17 @@ func leanRegistry(records map[symbol]evidence) string {
 	for _, m := range sortedKeys(modules) {
 		fmt.Fprintf(&s, "import %s\n", m)
 	}
-	fmt.Fprintf(&s, "\ndef GoLean.registeredTheorems : List (Lean.Name × Lean.Name) :=\n  [%s]\n", strings.Join(sortedKeys(theorems), ",\n   "))
+	// Compile bounded chunks separately so Lean's recursion depth does not grow
+	// with every new theorem added to a single compiled definition.
+	const chunkSize = 128
+	var chunks []string
+	for chunk := range slices.Chunk(sortedKeys(theorems), chunkSize) {
+		name := fmt.Sprintf("registeredTheoremsChunk%d", len(chunks))
+		fmt.Fprintf(&s, "\nprivate def %s : List (Lean.Name × Lean.Name) :=\n  [%s]\n",
+			name, strings.Join(chunk, ",\n   "))
+		chunks = append(chunks, name)
+	}
+	fmt.Fprintf(&s, "\ndef GoLean.registeredTheorems : List (Lean.Name × Lean.Name) :=\n  List.flatten [%s]\n",
+		strings.Join(chunks, ",\n    "))
 	return s.String()
 }

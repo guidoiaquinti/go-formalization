@@ -1,0 +1,11 @@
+name = "go-formalization"
+
+[leanOptions]
+warningAsError = true
+
+[[lean_lib]]
+name = "GoLean"
+
+[[lean_lib]]
+name = "GoDiffSupport"
+roots = ["GoDiff.Math.Bits.Unary", "GoDiff.Math.Bits.Tuple"]

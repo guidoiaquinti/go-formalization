@@ -1,0 +1,116 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"math"
+	"math/rand"
+	"runtime"
+	"runtime/debug"
+	"strconv"
+
+	"github.com/guidoiaquinti/go-formalization/difftest/internal/bessel"
+	"github.com/guidoiaquinti/go-formalization/difftest/internal/binary64"
+	"github.com/guidoiaquinti/go-formalization/difftest/internal/check"
+)
+
+var centers = []float64{
+	0x1p-54, 0x1p-27, 1, 2, 2.197141326031017, 2.8571, 5 * math.Pi / 4,
+	4.5454, 5.429681040794135, 8, 20, 0x1p29, 0x1p129,
+	math.MaxFloat64 / 2, math.MaxFloat64,
+}
+
+var poleWitnesses = []struct{ word, want uint64 }{
+	{0x00028be60db9390f, 0xfff0000000000000},
+	{0x00028be60db93910, 0xfff0000000000000},
+	{0x00028be60db93911, 0xffeffffffffffff8},
+	{0x00028be60db93912, 0xffefffffffffffec},
+}
+
+func main() {
+	profile := nativeProfile()
+	edges := binary64.Boundaries()
+	for _, fixture := range poleWitnesses {
+		if got := binary64.Load(math.Y1(binary64.Store(fixture.word))); got != fixture.want {
+			log.Fatalf("Y1 pinned pole witness %#016x: got %#016x want %#016x", fixture.word, got, fixture.want)
+		}
+		edges = append(edges, fixture.word)
+	}
+	for _, center := range centers {
+		for _, x := range []float64{math.Nextafter(center, 0), center, math.Nextafter(center, math.Inf(1))} {
+			edges = append(edges, binary64.Load(x), binary64.Load(-x))
+		}
+	}
+	var maximum float64
+	check.CompareSamples("godiff-math-y1", edges, sample, func(word uint64) string {
+		return fmt.Sprintf("%d %d", profile, word)
+	}, func(word uint64) string {
+		return observe(math.Y1(binary64.Store(word)))
+	}, func(word uint64) string {
+		x := binary64.Store(word)
+		switch {
+		case math.IsNaN(x), x < 0:
+			return "NaN"
+		case x == 0:
+			return observe(math.Inf(-1))
+		case math.IsInf(x, 1):
+			return "0"
+		}
+		got, want := math.Y1(x), bessel.YOne(x)
+		if got == want {
+			return observe(got)
+		}
+		scaled := (math.Abs(got-want) / max(1, math.Abs(want))) * math.Sqrt(max(1, x))
+		if math.IsNaN(scaled) || scaled > 0x1p-45 {
+			log.Fatalf("Y1(%#016x) = %.17g, reference = %.17g, normalized error = %.5g", word, got, want, scaled)
+		}
+		maximum = max(maximum, scaled)
+		return observe(got)
+	})
+	fmt.Printf("Y1 independent reference: maximum normalized absolute error %.17g.\n", maximum)
+}
+
+func observe(x float64) string {
+	if math.IsNaN(x) {
+		return "NaN"
+	}
+	return strconv.FormatUint(binary64.Load(x), 10)
+}
+
+func sample(rng *rand.Rand, i int) uint64 {
+	switch i % 6 {
+	case 0:
+		return rng.Uint64()
+	case 1:
+		return binary64.Load(4*rng.Float64() - 2)
+	case 2:
+		word := binary64.Load(centers[rng.Intn(len(centers))])
+		return (word + uint64(rng.Intn(129)-64)) | (rng.Uint64() & (1 << 63))
+	case 3:
+		return binary64.Load(40*rng.Float64() - 20)
+	case 4:
+		return binary64.Load(2048*rng.Float64() - 1024)
+	default:
+		return 1 + uint64(rng.Int63n((1<<52)-1))
+	}
+}
+func nativeProfile() int {
+	switch runtime.GOARCH {
+	case "arm64":
+		return 2
+	case "amd64":
+		info, ok := debug.ReadBuildInfo()
+		if !ok {
+			log.Fatal("cannot determine Y1 build profile")
+		}
+		for _, setting := range info.Settings {
+			if setting.Key == "GOAMD64" && (setting.Value == "v3" || setting.Value == "v4") {
+				return 1
+			}
+		}
+		return 0
+	default:
+		log.Fatalf("unmodeled Y1 architecture %s", runtime.GOARCH)
+		return 0
+	}
+}

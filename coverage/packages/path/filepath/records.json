@@ -1,0 +1,694 @@
+{
+  "Abs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Abs.lean",
+    "model_symbol": "GoLean.Path.Filepath.absPath",
+    "claim": "The public Abs delegates to the platform absolute-path routine, preserving cleaned or joined output bytes and the supplied operating-system error.",
+    "limits": "522 native boundaries, 60,000 native cases (17, 2718, 65537), and 10 fixed profile observations. Windows FullPath is represented by its argument and returned outcome. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned public filepath.Abs compares with the model. Input outcomes are independently supplied by the live working directory or Windows FullPath. Fixed alternate profiles check raw dispatch, cleaning and error propagation.",
+    "theorems": [
+      "GoLean.Path.Filepath.absPath_unix",
+      "GoLean.Path.Filepath.absPath_plan9",
+      "GoLean.Path.Filepath.absPath_windowsEmpty",
+      "GoLean.Path.Filepath.absPath_windowsError"
+    ],
+    "check": "difftest/path/filepath/abs/check.go",
+    "control": "difftest/path/filepath/abs/review/main.go",
+    "review": "coverage/packages/path/filepath/Abs.md"
+  },
+  "Base": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Base.lean",
+    "model_symbol": "GoLean.Path.Filepath.baseName",
+    "claim": "For a nonempty path, removes trailing separators, discards the volume of the resulting path, and returns the final raw component or native separator if no component remains. Empty input returns a dot.",
+    "limits": "Models raw string output without filesystem access, normalization, or backing identity. Tests 528 boundaries and 60,000 seeded paths using 17, 2718 and 65537. Native Windows was not run locally; 16 fixed Windows profile cases test drive and UNC behavior.",
+    "configurations": "Pinned Go directly calls filepath.Base on the host. The separate slash-only path.Base supplies a non-Windows oracle. Explicit raw fixtures check the Windows profile.",
+    "theorems": [
+      "GoLean.Path.Filepath.baseName_empty",
+      "GoLean.Path.Filepath.baseName_roots",
+      "GoLean.Path.Filepath.baseName_windowsDrive",
+      "GoLean.Path.Filepath.baseName_uncParent"
+    ],
+    "check": "difftest/path/filepath/base/check.go",
+    "control": "difftest/path/filepath/base/review/main.go",
+    "review": "coverage/packages/path/filepath/Base.md"
+  },
+  "Clean": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Clean.lean",
+    "model_symbol": "GoLean.Path.Filepath.cleanPath",
+    "claim": "Performs lexical cleanup on raw path bytes, keeping Windows volume prefixes, removing empty and dot components, reducing parent components without escaping the root, and preserving leading relative parents. When Windows cleanup materializes a volume-less path, applies the colon and root-device guards.",
+    "limits": "Models output bytes, including the allocated backing bytes retained after rewinds and inspected by the Windows guards. Allocation, backing identity and filesystem resolution are outside scope. Native Windows was untested locally. Checks 536 boundaries, 60,000 seeded inputs (17, 2718 and 65537) and 24 explicit Windows cases.",
+    "configurations": "Pinned Go directly calls filepath.Clean on the host. A separate path.Clean oracle checks the non-Windows lexical result. Explicit raw golden cases check the Windows volume and post-clean guards.",
+    "theorems": [
+      "GoLean.Path.Filepath.cleanPath_empty",
+      "GoLean.Path.Filepath.cleanPath_rootParent",
+      "GoLean.Path.Filepath.cleanPath_windowsColon",
+      "GoLean.Path.Filepath.cleanPath_windowsDevice",
+      "GoLean.Path.Filepath.cleanPath_windowsStaleColon",
+      "GoLean.Path.Filepath.cleanPath_windowsStaleDevice"
+    ],
+    "check": "difftest/path/filepath/clean/check.go",
+    "control": "difftest/path/filepath/clean/review/main.go",
+    "review": "coverage/packages/path/filepath/Clean.md"
+  },
+  "Dir": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Dir.lean",
+    "model_symbol": "GoLean.Path.Filepath.dirName",
+    "claim": "Drops the last raw path component, cleans the prefix after its volume, then restores the normalized volume. When a volume longer than two bytes has a cleaned directory equal to a dot, returns that volume alone.",
+    "limits": "Models raw output bytes, including the volume and lexical cleanup guards. No filesystem access or allocation effects are modeled. Tests 529 boundaries, 60,000 seeded inputs (17, 2718 and 65537) and 17 explicit Windows cases. Native Windows remains untested locally.",
+    "configurations": "Pinned Go calls public filepath.Dir on the host. A separate slash-only path.Dir supplies the non-Windows oracle. Fixed Windows outcomes exercise drive roots, relative drives, UNC and device volumes.",
+    "theorems": [
+      "GoLean.Path.Filepath.dirName_unix",
+      "GoLean.Path.Filepath.dirName_empty",
+      "GoLean.Path.Filepath.dirName_windowsDrive",
+      "GoLean.Path.Filepath.dirName_uncRoot"
+    ],
+    "check": "difftest/path/filepath/dir/check.go",
+    "control": "difftest/path/filepath/dir/review/main.go",
+    "review": "coverage/packages/path/filepath/Dir.md"
+  },
+  "EvalSymlinks": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/EvalSymlinks.lean",
+    "model_symbol": "GoLean.Path.Filepath.evalSymlinks",
+    "claim": "The public EvalSymlinks exposes the platform wrapper outcome. The native Unix comparison includes relative, chained, absolute, missing and cyclical links.",
+    "limits": "270 native boundaries and 60,000 seeded paths (17, 2718 and 65537), three literal link outcomes and nine fixed alternate profile cases. The model takes delegate outcomes as inputs. Native Windows and Plan 9 were not executed locally.",
+    "configurations": "Pinned public filepath.EvalSymlinks compared to the native Unix walker and wrapper model; fixed rows model Windows normalization and Plan 9 stat handling.",
+    "theorems": [
+      "GoLean.Path.Filepath.evalSymlinks_unix",
+      "GoLean.Path.Filepath.evalSymlinks_windowsWalkError",
+      "GoLean.Path.Filepath.evalSymlinks_plan9Empty"
+    ],
+    "check": "difftest/path/filepath/eval-symlinks/check.go",
+    "control": "difftest/path/filepath/eval-symlinks/review/main.go",
+    "review": "coverage/packages/path/filepath/EvalSymlinks.md"
+  },
+  "Ext": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Ext.lean",
+    "model_symbol": "GoLean.Path.Filepath.ext",
+    "claim": "Returns the raw suffix starting at the final dot after the last recognized directory separator, or the empty string when the final component has no dot. Slash is always recognized; backslash is a separator only in the Windows profile.",
+    "limits": "Models raw bytes without path normalization, including trailing separators, leading dots, NUL and malformed UTF-8. Windows is simulated locally. Checks 524 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls filepath.Ext for the host. A separate oracle finds the last dot and last separator with byte-index operations and compares both separator profiles.",
+    "theorems": [
+      "GoLean.Path.Filepath.ext_empty",
+      "GoLean.Path.Filepath.ext_trailingSlash",
+      "GoLean.Path.Filepath.ext_trailingDot",
+      "GoLean.Path.Filepath.ext_trailingWindowsSeparator"
+    ],
+    "check": "difftest/path/filepath/ext/check.go",
+    "control": "difftest/path/filepath/ext/review/main.go",
+    "review": "coverage/packages/path/filepath/Ext.md"
+  },
+  "FromSlash": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/FromSlash.lean",
+    "model_symbol": "GoLean.Path.Filepath.fromSlash",
+    "claim": "Replaces every forward slash byte with the platform path separator, preserving length, repeated separators, and all other bytes. When the separator is forward slash, returns the same string value.",
+    "limits": "Models raw byte content and abstracts allocation and string backing identity. Native Windows is untested locally. Checks 520 boundary paths and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls filepath.FromSlash for the host separator. A separate Go string replacement oracle checks both slash and backslash separator profiles.",
+    "theorems": [
+      "GoLean.Path.Filepath.fromSlash_nativeSlash",
+      "GoLean.Path.Filepath.fromSlash_cons",
+      "GoLean.Path.Filepath.fromSlash_length"
+    ],
+    "check": "difftest/path/filepath/from-slash/check.go",
+    "control": "difftest/path/filepath/from-slash/review/main.go",
+    "review": "coverage/packages/path/filepath/FromSlash.md"
+  },
+  "Glob": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/GlobWithLimit.lean",
+    "model_symbol": "GoLean.Path.Filepath.globWithLimit",
+    "claim": "Runs the modeled recursive path matcher from depth zero. Preserves literal path bytes on Lstat success and returns the native nil or ordered sequence and bad-pattern error class.",
+    "limits": "276 native boundaries and 60,000 seeded observations (17, 2718 and 65537) against a fixed three-level filesystem. The model takes filesystem observations as supplied data. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned public filepath.Glob on a temporary directory, covering two wildcard directory levels, literal, missing and invalid patterns.",
+    "theorems": [
+      "GoLean.Path.Filepath.globWithLimit_existingLiteral"
+    ],
+    "check": "difftest/path/filepath/glob/check.go",
+    "control": "difftest/path/filepath/glob/review/main.go",
+    "review": "coverage/packages/path/filepath/Glob.md"
+  },
+  "HasPrefix": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/HasPrefix.lean",
+    "model_symbol": "GoLean.Path.Filepath.hasPathPrefix",
+    "claim": "Reports raw byte prefix membership in Unix and Plan 9 profiles. Windows first tests the raw prefix and then tests the prefix after pinned simple Unicode lowercase conversion of both complete byte strings.",
+    "limits": "528 raw boundary pairs and 60,000 seeded observations per checked profile (17, 2718, 65537). Native Windows and Plan 9 are unexecuted locally.",
+    "configurations": "Native public filepath.HasPrefix and an independent byte-prefix oracle. Portable Windows checks use the pinned Windows source expression with native strings.ToLower.",
+    "theorems": [
+      "GoLean.Path.Filepath.hasPathPrefix_empty",
+      "GoLean.Path.Filepath.hasPathPrefix_windowsRawLead",
+      "GoLean.Path.Filepath.hasPathPrefix_windowsLowercaseFallback",
+      "GoLean.Path.Filepath.hasPathPrefix_ignoresBoundary"
+    ],
+    "check": "difftest/path/filepath/has-prefix/check.go",
+    "control": "difftest/path/filepath/has-prefix/review/main.go",
+    "review": "coverage/packages/path/filepath/HasPrefix.md"
+  },
+  "IsAbs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/IsAbs.lean",
+    "model_symbol": "GoLean.Path.Filepath.isAbs",
+    "claim": "Reports absoluteness under the Unix, Windows and Plan 9 rules. Unix requires a leading slash, Plan 9 also accepts a leading number sign, and Windows requires a valid volume followed by a separator or a volume introduced by two separators.",
+    "limits": "Models raw string content without resolving paths or querying the filesystem. Windows and Plan 9 profiles are simulated locally. Tests 532 boundaries and 60,000 seeded samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls public filepath.IsAbs on the host. An independent oracle classifies normalized Windows components and checks explicit Unix and Plan 9 prefixes.",
+    "theorems": [
+      "GoLean.Path.Filepath.isAbs_unix",
+      "GoLean.Path.Filepath.isAbs_plan9Device",
+      "GoLean.Path.Filepath.isAbs_windowsRootWithoutVolume",
+      "GoLean.Path.Filepath.isAbs_windowsDriveExample"
+    ],
+    "check": "difftest/path/filepath/is-abs/check.go",
+    "control": "difftest/path/filepath/is-abs/review/main.go",
+    "review": "coverage/packages/path/filepath/IsAbs.md"
+  },
+  "IsLocal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/IsLocal.lean",
+    "model_symbol": "GoLean.Path.Filepath.isLocalPath",
+    "claim": "Decides pinned lexical locality for raw bytes under Unix, Plan 9 and Windows rules. For Windows extended reserved names it accepts the effective OS device-name predicate as an input.",
+    "limits": "533 raw boundary cases and 60,000 seeded native observations (17, 2718, 65537), plus 63 explicit Windows and Plan 9 profile observations. The native Windows and Plan 9 profiles were not run locally. The model does not implement Windows device-name system calls.",
+    "configurations": "Pinned exported filepath.IsLocal on the native platform; fixed Windows observations use both results of the device-name predicate.",
+    "theorems": [
+      "GoLean.Path.Filepath.isLocalPath_plan9Device",
+      "GoLean.Path.Filepath.isLocalPath_windowsDevice",
+      "GoLean.Path.Filepath.isLocalPath_windowsDeviceExtension"
+    ],
+    "check": "difftest/path/filepath/is-local/check.go",
+    "control": "difftest/path/filepath/is-local/review/main.go",
+    "review": "coverage/packages/path/filepath/IsLocal.md"
+  },
+  "Join": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Join.lean",
+    "model_symbol": "GoLean.Path.Filepath.joinPath",
+    "claim": "Combines raw path elements and lexically cleans the result, returning the empty string when all elements are empty. The Windows profile preserves drive-relative concatenation, avoids creating new UNC prefixes from adjacent separators, and guards against unintended root device prefixes.",
+    "limits": "Models raw output bytes, excluding filesystem operations and allocation. Tests 528 boundaries, 60,000 seeded inputs (17, 2718 and 65537) and 16 explicit Windows cases. Native Windows remains untested locally.",
+    "configurations": "Pinned Go calls public filepath.Join on the host. The separate path.Join supplies the non-Windows oracle. Fixed Windows outcomes exercise drives, UNC boundaries, root devices and empty elements.",
+    "theorems": [
+      "GoLean.Path.Filepath.joinPath_empty",
+      "GoLean.Path.Filepath.joinPath_emptyElements",
+      "GoLean.Path.Filepath.joinPath_windowsDrive",
+      "GoLean.Path.Filepath.joinPath_windowsDeviceGuard"
+    ],
+    "check": "difftest/path/filepath/join/check.go",
+    "control": "difftest/path/filepath/join/review/main.go",
+    "review": "coverage/packages/path/filepath/Join.md"
+  },
+  "Localize": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Localize.lean",
+    "model_symbol": "GoLean.Path.Filepath.localizePath",
+    "claim": "Validates raw io/fs path bytes and maps an accepted path to its local form. Models the common invalid path error, Windows reserved device names using the effective OS predicate, and the leading Plan 9 device marker.",
+    "limits": "533 native boundaries, 60,000 seeded native cases (17, 2718 and 65537) and 21 fixed profile cases. Native Windows and Plan 9 execution remain untested locally. Models result and error text, excluding error identity and allocations.",
+    "configurations": "Pinned native public filepath.Localize; alternate profiles model both Windows device-name predicate responses and lexical Plan 9 rules.",
+    "theorems": [
+      "GoLean.Path.Filepath.localizePath_dot",
+      "GoLean.Path.Filepath.localizePath_nonCanonical",
+      "GoLean.Path.Filepath.localizePath_windowsSlash",
+      "GoLean.Path.Filepath.localizePath_plan9Device"
+    ],
+    "check": "difftest/path/filepath/localize/check.go",
+    "control": "difftest/path/filepath/localize/review/main.go",
+    "review": "coverage/packages/path/filepath/Localize.md"
+  },
+  "Match": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Match.lean",
+    "model_symbol": "GoLean.Path.Filepath.matchPath",
+    "claim": "Matches the entire raw name and returns the exact bad-pattern status. Preserves greedy intermediate chunk selection, terminal name exhaustion, platform-specific escaping and separator boundaries, and errors only when execution reaches the malformed chunk.",
+    "limits": "Models returned booleans and ErrBadPattern identity. Direct native Windows is untested locally. Tests 532 boundaries and 60,000 seeded cases using seeds 17, 2718 and 65537, plus 20 fixed cases in each modeled platform profile.",
+    "configurations": "Pinned Go directly calls filepath.Match. Randomized cases exercise the host profile, and fixed golden outputs check both Windows and non-Windows profiles.",
+    "theorems": [
+      "GoLean.Path.Filepath.matchPath_empty",
+      "GoLean.Path.Filepath.matchPath_trailingStar",
+      "GoLean.Path.Filepath.matchPath_terminalConsumption",
+      "GoLean.Path.Filepath.matchPath_errorOrder"
+    ],
+    "check": "difftest/path/filepath/match/check.go",
+    "control": "difftest/path/filepath/match/review/main.go",
+    "review": "coverage/packages/path/filepath/Match.md"
+  },
+  "Rel": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Rel.lean",
+    "model_symbol": "GoLean.Path.Filepath.relativePath",
+    "claim": "Computes the lexical relative path, exact raw error message, or stationary cursor outcome, using pinned path cleaning, original volumes, platform word equality and the remaining base and target components.",
+    "limits": "Compares 529 native boundaries, 60,000 seeded inputs (17, 2718 and 65537), and 17 fixed Windows-profile cases, including one stationary UNC cursor. Filesystem operations, allocation and native Windows execution are outside the local evidence.",
+    "configurations": "Pinned native filepath.Rel and the matching Lean profile. Fixed Windows fixtures cover drives, UNC volumes, root parity, malformed bytes and Unicode simple folds.",
+    "theorems": [
+      "GoLean.Path.Filepath.relativePath_sameUnix",
+      "GoLean.Path.Filepath.relativePath_windowsCase",
+      "GoLean.Path.Filepath.relativePath_upThenDown",
+      "GoLean.Path.Filepath.relativePath_windowsUNCStalls"
+    ],
+    "check": "difftest/path/filepath/rel/check.go",
+    "control": "difftest/path/filepath/rel/review/main.go",
+    "review": "coverage/packages/path/filepath/Rel.md"
+  },
+  "Split": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Split.lean",
+    "model_symbol": "GoLean.Path.Filepath.splitPath",
+    "claim": "Returns the exact input prefix through the last recognized separator after the volume, or the volume itself if there is no separator beyond it. Returns the raw remainder and proves concatenation reconstructs the input.",
+    "limits": "Models output bytes without normalization or backing identity. Tests 528 boundaries and 60,000 seeded paths using 17, 2718 and 65537. Native Windows is untested locally; 16 fixed Windows profile cases test drive, UNC and device splits.",
+    "configurations": "Pinned Go directly calls filepath.Split on the host. The non-Windows oracle obtains the final slash index independently. Fixed Windows cases give explicit raw prefix and remainder.",
+    "theorems": [
+      "GoLean.Path.Filepath.splitPath_join",
+      "GoLean.Path.Filepath.splitPath_empty",
+      "GoLean.Path.Filepath.splitPath_drive",
+      "GoLean.Path.Filepath.splitPath_uncRoot"
+    ],
+    "check": "difftest/path/filepath/split/check.go",
+    "control": "difftest/path/filepath/split/review/main.go",
+    "review": "coverage/packages/path/filepath/Split.md"
+  },
+  "SplitList": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/SplitList.lean",
+    "model_symbol": "GoLean.Path.Filepath.splitList",
+    "claim": "Returns a nonnil empty slice for empty input. Otherwise splits on colons for Unix and NUL for Plan 9. For Windows it splits on semicolons outside double quotes and removes all quotes from each field, even with an unmatched quote. Nonempty inputs retain empty fields and all other raw bytes.",
+    "limits": "Models list content and checks nilness of the native result. String and slice backing allocation are outside scope. Native Windows and Plan 9 were untested locally. Tests 524 boundary inputs and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly calls filepath.SplitList for the host. The oracle uses raw split for Unix and Plan 9 and preceding quote parity for Windows.",
+    "theorems": [
+      "GoLean.Path.Filepath.splitList_empty",
+      "GoLean.Path.Filepath.splitList_unixSeparator",
+      "GoLean.Path.Filepath.splitList_windowsSeparator",
+      "GoLean.Path.Filepath.splitList_plan9Separator",
+      "GoLean.Path.Filepath.splitList_windowsQuoted",
+      "GoLean.Path.Filepath.splitList_windowsUnclosed"
+    ],
+    "check": "difftest/path/filepath/split-list/check.go",
+    "control": "difftest/path/filepath/split-list/review/main.go",
+    "review": "coverage/packages/path/filepath/SplitList.md"
+  },
+  "ToSlash": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/ToSlash.lean",
+    "model_symbol": "GoLean.Path.Filepath.toSlash",
+    "claim": "Replaces each occurrence of the platform path separator with a forward slash, retaining all other bytes, length, and repeated separators. The slash-separator result is the original string value.",
+    "limits": "Characterizes string bytes, including malformed UTF-8 and embedded NUL, and omits allocation and backing identity. The backslash-separator profile is simulated locally. Checks 520 boundary paths and 60,000 seeded samples (17, 2718 and 65537).",
+    "configurations": "Pinned Go calls public filepath.ToSlash for the host separator. Both separator profiles are compared against a Go oracle using a separate string replacement implementation.",
+    "theorems": [
+      "GoLean.Path.Filepath.toSlash_nativeSlash",
+      "GoLean.Path.Filepath.toSlash_cons",
+      "GoLean.Path.Filepath.toSlash_length"
+    ],
+    "check": "difftest/path/filepath/to-slash/check.go",
+    "control": "difftest/path/filepath/to-slash/review/main.go",
+    "review": "coverage/packages/path/filepath/ToSlash.md"
+  },
+  "VolumeName": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/VolumeName.lean",
+    "model_symbol": "GoLean.Path.Filepath.volumeName",
+    "claim": "Returns an empty volume on non-Windows systems. The Windows profile returns the leading drive, device or UNC volume, treats slash and backslash as separators, normalizes slash to backslash, and rejects a parent component in a multi-component volume.",
+    "limits": "Models raw string content and leaves allocation outside scope. Native Windows was untested locally. Tests 534 boundaries and 60,000 seeded paths using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls public filepath.VolumeName on the host. The Windows oracle independently normalizes separators and selects complete components for drive, device and UNC paths.",
+    "theorems": [
+      "GoLean.Path.Filepath.volumeName_unix",
+      "GoLean.Path.Filepath.volumeName_drive",
+      "GoLean.Path.Filepath.volumeName_unc",
+      "GoLean.Path.Filepath.volumeName_uncParent"
+    ],
+    "check": "difftest/path/filepath/volume-name/check.go",
+    "control": "difftest/path/filepath/volume-name/review/main.go",
+    "review": "coverage/packages/path/filepath/VolumeName.md"
+  },
+  "Walk": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/WalkPublic.lean",
+    "model_symbol": "GoLean.Path.Filepath.walkPublic",
+    "claim": "Reports a root lookup failure with nil info, otherwise delegates to the ordered traversal. Normalizes final SkipDir and SkipAll and preserves ordinary callback errors.",
+    "limits": "Exhausts 4,096 callback tables on one native tree and replays 60,000 seeded tables (17, 2718 and 65537). Four missing-root native cases and 12 fixed Lean outcomes. Filesystem results and a sufficient depth bound are supplied to the model. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned public filepath.Walk versus the model, using sorted temporary directory entries, exact callback return identity and missing-root observations. Directory read failures and failed child stats are injected in the Lean fixtures.",
+    "theorems": [
+      "GoLean.Path.Filepath.walkPublic_missingSkipDir",
+      "GoLean.Path.Filepath.walkPublic_missingError"
+    ],
+    "check": "difftest/path/filepath/walk/check.go",
+    "control": "difftest/path/filepath/walk/review/main.go",
+    "review": "coverage/packages/path/filepath/Walk.md"
+  },
+  "WalkDir": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/WalkDirPublic.lean",
+    "model_symbol": "GoLean.Path.Filepath.walkDirPublic",
+    "claim": "Reports a root lookup failure to the callback with a nil entry, otherwise delegates ordered traversal to the modeled private helper. Normalizes top-level SkipDir and SkipAll into success and preserves other callback errors.",
+    "limits": "Exhausts 4,096 callback maps on one ordered tree and replays 60,000 seeded maps (17, 2718 and 65537). Four native missing-root cases and eight fixed Lean error rows cover the top-level wrapper. Takes filesystem observations and a valid depth bound as inputs. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned public filepath.WalkDir with native temporary fixtures; separately supplied partial read errors in Lean.",
+    "theorems": [
+      "GoLean.Path.Filepath.walkDirPublic_missingSkipAll",
+      "GoLean.Path.Filepath.walkDirPublic_missingOther"
+    ],
+    "check": "difftest/path/filepath/walk-dir/check.go",
+    "control": "difftest/path/filepath/walk-dir/review/main.go",
+    "review": "coverage/packages/path/filepath/WalkDir-public.md"
+  },
+  "abs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Abs.lean",
+    "model_symbol": "GoLean.Path.Filepath.absPath",
+    "claim": "Delegates to the modeled Unix helper on Unix and Plan 9. Windows calls FullPath on the original raw path, substituting dot for empty input, and cleans a successful result or preserves the exact supplied error.",
+    "limits": "522 native boundaries, 60,000 native cases (17, 2718, 65537), and 10 fixed profile observations. Windows FullPath is represented by its argument and returned outcome. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned Go private overlay under the host working directory. Windows fixed cases independently supply the syscall argument and returned outcome; native Windows driver can call syscall.FullPath directly.",
+    "theorems": [
+      "GoLean.Path.Filepath.absPath_unix",
+      "GoLean.Path.Filepath.absPath_plan9",
+      "GoLean.Path.Filepath.absPath_windowsEmpty",
+      "GoLean.Path.Filepath.absPath_windowsError"
+    ],
+    "check": "difftest/path/filepath/abs-private/check.go",
+    "control": "difftest/path/filepath/abs-private/review/main.go",
+    "review": "coverage/packages/path/filepath/abs-private.md"
+  },
+  "cleanGlobPath": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/CleanGlobPath.lean",
+    "model_symbol": "GoLean.Path.Filepath.cleanGlobPath",
+    "claim": "Returns a dot for empty input and keeps a single native separator. Otherwise discards exactly the final raw byte, including when a direct call supplies a final byte other than a separator.",
+    "limits": "Models output bytes only. Tests 520 boundary cases and 60,000 samples from seeds 17, 2718 and 65537. Native comparison uses the host separator; the separate Windows glob-cleaning routine is outside this declaration's scope.",
+    "configurations": "Pinned Go directly calls the private helper through a same-package overlay. Go expected outputs trim an exact one-byte suffix outside the two special cases.",
+    "theorems": [
+      "GoLean.Path.Filepath.cleanGlobPath_empty",
+      "GoLean.Path.Filepath.cleanGlobPath_root",
+      "GoLean.Path.Filepath.cleanGlobPath_single",
+      "GoLean.Path.Filepath.cleanGlobPath_many"
+    ],
+    "check": "difftest/path/filepath/clean-glob-path/check.go",
+    "review_sources": [
+      "difftest/path/filepath/clean-glob-path/testdata/bridge_test.go",
+      "difftest/path/filepath/clean-glob-path/testdata/clean_glob_path_test.go",
+      "difftest/path/filepath/clean-glob-path/review/testdata/review_test.go"
+    ],
+    "control": "difftest/path/filepath/clean-glob-path/review/main.go",
+    "review": "coverage/packages/path/filepath/cleanGlobPath.md"
+  },
+  "cleanGlobPathWindows": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/CleanGlobPathWindows.lean",
+    "model_symbol": "GoLean.Path.Filepath.cleanGlobPathWindows",
+    "claim": "Returns the cleaned raw path and exact retained prefix length. Special-cases empty, lone roots and two-byte volumes; otherwise removes the final byte and clamps the reported volume length. Uses the platform separator and volume rules.",
+    "limits": "Models the helper's result for raw bytes. Windows is simulated locally. Tests 528 boundary cases and 60,000 seeded paths with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls the private helper directly through a same-package bridge. The Go oracle generates Windows path prefixes with known volume lengths and compares both platform profiles.",
+    "theorems": [
+      "GoLean.Path.Filepath.cleanGlobPathWindows_empty",
+      "GoLean.Path.Filepath.cleanGlobPathWindows_root",
+      "GoLean.Path.Filepath.cleanGlobPathWindows_drive",
+      "GoLean.Path.Filepath.cleanGlobPathWindows_uncClamp"
+    ],
+    "check": "difftest/path/filepath/clean-glob-path-windows/check.go",
+    "review_sources": [
+      "difftest/path/filepath/clean-glob-path-windows/testdata/bridge_test.go",
+      "difftest/path/filepath/clean-glob-path-windows/testdata/clean_glob_windows_test.go"
+    ],
+    "control": "difftest/path/filepath/clean-glob-path-windows/review/main.go",
+    "review": "coverage/packages/path/filepath/cleanGlobPathWindows.md"
+  },
+  "evalSymlinks": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/EvalSymlinks.lean",
+    "model_symbol": "GoLean.Path.Filepath.evalSymlinks",
+    "claim": "Delegates directly to the symlink walker on Unix, normalizes only successful walks on Windows, and checks and cleans paths on Plan 9 with the native not-a-directory error substitution.",
+    "limits": "268 native boundaries and 60,000 seeded paths (17, 2718 and 65537) on a temporary symlink tree, plus nine fixed model outcomes for platform-specific wrapper branches. Delegated walker, normalization and Lstat are provided outcomes. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned private evalSymlinks compared to its native walkSymlinks delegate. Lean wrapper outputs are compared with native public observations on Unix; alternate rules tested with injected outcomes.",
+    "theorems": [
+      "GoLean.Path.Filepath.evalSymlinks_unix",
+      "GoLean.Path.Filepath.evalSymlinks_windowsWalkError",
+      "GoLean.Path.Filepath.evalSymlinks_plan9Empty"
+    ],
+    "check": "difftest/path/filepath/eval-symlinks-private/check.go",
+    "control": "difftest/path/filepath/eval-symlinks-private/review/main.go",
+    "review": "coverage/packages/path/filepath/eval-symlinks-private.md"
+  },
+  "getEsc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/GetEsc.lean",
+    "model_symbol": "GoLean.Path.Filepath.getEsc",
+    "claim": "Returns the decoded character-class endpoint, exact remaining raw bytes and bad-pattern status. It rejects an empty chunk or a leading unescaped hyphen or right bracket, treats a leading backslash as an escape except on Windows, and retains the decoded rune and remainder on UTF-8 and empty-remainder errors.",
+    "limits": "Models the returned tuple and ErrBadPattern status. Native Windows is untested locally. Checks 780 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls the private helper through a same-package test bridge. The independent oracle uses Go string range start offsets to identify the first UTF-8 unit and checks both escape profiles.",
+    "theorems": [
+      "GoLean.Path.Filepath.getEsc_empty",
+      "GoLean.Path.Filepath.getEsc_hyphen",
+      "GoLean.Path.Filepath.getEsc_escapes",
+      "GoLean.Path.Filepath.getEsc_errorRemainder"
+    ],
+    "check": "difftest/path/filepath/get-esc/check.go",
+    "review_sources": [
+      "difftest/path/filepath/get-esc/testdata/bridge_test.go",
+      "difftest/path/filepath/get-esc/testdata/get_esc_test.go",
+      "difftest/path/filepath/get-esc/review/testdata/review_test.go"
+    ],
+    "control": "difftest/path/filepath/get-esc/review/main.go",
+    "review": "coverage/packages/path/filepath/getEsc.md"
+  },
+  "glob": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Glob.lean",
+    "model_symbol": "GoLean.Path.Filepath.globDirectory",
+    "claim": "Preserves the initial result on stat, directory-type and open failures. Uses available names even after a read error, sorts by raw bytes, appends matching joined paths and returns partial results on the first pattern error.",
+    "limits": "264 model boundaries and 60,000 simulated observations (17, 2718 and 65537), plus seven pinned native temporary filesystem cases. Filesystem and backing allocation are outside the model. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned private filepath.glob overlay on native filesystem fixtures; seeded model inputs compare to sorting and public filepath.Match and Join on the host.",
+    "theorems": [
+      "GoLean.Path.Filepath.globDirectory_statFailed",
+      "GoLean.Path.Filepath.globDirectory_openFailed",
+      "GoLean.Path.Filepath.globDirectory_emptyDirectory",
+      "GoLean.Path.Filepath.globDirectory_badPattern"
+    ],
+    "check": "difftest/path/filepath/glob-private/check.go",
+    "control": "difftest/path/filepath/glob-private/review/main.go",
+    "review": "coverage/packages/path/filepath/glob-private.md"
+  },
+  "globWithLimit": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/GlobWithLimit.lean",
+    "model_symbol": "GoLean.Path.Filepath.globWithLimit",
+    "claim": "Checks initial depth and pattern, preserves literal path bytes on Lstat success, and recursively expands directory patterns before accumulating matching names.",
+    "limits": "271 native boundaries and 60,000 seeded observations (17, 2718 and 65537) against a fixed sandbox filesystem. Models filesystem queries as supplied results, uses path length to bound recursive descent, and excludes native Windows and Plan 9 execution locally.",
+    "configurations": "Pinned private filepath.globWithLimit overlay and public filepath.Glob oracle for the regular entry depth. Fixed additional depths exercise the ordinary depth cutoff.",
+    "theorems": [
+      "GoLean.Path.Filepath.globWithLimit_depthLimit",
+      "GoLean.Path.Filepath.globWithLimit_existingLiteral"
+    ],
+    "check": "difftest/path/filepath/glob-with-limit/check.go",
+    "control": "difftest/path/filepath/glob-with-limit/review/main.go",
+    "review": "coverage/packages/path/filepath/glob-with-limit.md",
+    "review_sources": [
+      "difftest/path/filepath/glob-with-limit/testdata/bridge_test.go",
+      "difftest/path/filepath/glob-with-limit/testdata/glob_limit_test.go"
+    ]
+  },
+  "hasMeta": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/HasMeta.lean",
+    "model_symbol": "GoLean.Path.Filepath.hasMeta",
+    "claim": "Reports whether the path contains a star, question mark, left bracket, or on non-Windows systems a backslash. Malformed UTF-8 cannot mask these ASCII bytes. It does not parse or validate glob patterns.",
+    "limits": "Models the boolean result on raw path bytes. Native Windows untested locally. Tests 520 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls private hasMeta through a same-package test bridge. An independent fixed byte table checks both the Windows and non-Windows profile results.",
+    "theorems": [
+      "GoLean.Path.Filepath.hasMeta_empty",
+      "GoLean.Path.Filepath.hasMeta_cons",
+      "GoLean.Path.Filepath.hasMeta_backslash",
+      "GoLean.Path.Filepath.hasMeta_append"
+    ],
+    "check": "difftest/path/filepath/has-meta/check.go",
+    "review_sources": [
+      "difftest/path/filepath/has-meta/testdata/bridge_test.go",
+      "difftest/path/filepath/has-meta/testdata/has_meta_test.go"
+    ],
+    "control": "difftest/path/filepath/has-meta/review/main.go",
+    "review": "coverage/packages/path/filepath/hasMeta.md"
+  },
+  "join": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Join.lean",
+    "model_symbol": "GoLean.Path.Filepath.joinPath",
+    "claim": "Combines raw path elements using the private platform join declaration and pinned cleanup rules. Handles all-empty slices, Windows drive-relative paths, and ambiguous UNC or device separators.",
+    "limits": "Models raw output bytes, excluding filesystem operations and allocation. Tests 528 boundaries, 60,000 seeded inputs (17, 2718 and 65537) and 16 explicit Windows cases. Native Windows remains untested locally.",
+    "configurations": "Pinned same-package overlay calls private filepath.join. Unix and Plan 9 expectations use path.Join. Fixed Windows rows cover drives, UNC boundaries, root devices and empty elements.",
+    "theorems": [
+      "GoLean.Path.Filepath.joinPath_empty",
+      "GoLean.Path.Filepath.joinPath_emptyElements",
+      "GoLean.Path.Filepath.joinPath_windowsDrive",
+      "GoLean.Path.Filepath.joinPath_windowsDeviceGuard"
+    ],
+    "check": "difftest/path/filepath/join-private/check.go",
+    "control": "difftest/path/filepath/join-private/review/main.go",
+    "review": "coverage/packages/path/filepath/join-private.md"
+  },
+  "matchChunk": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/MatchChunk.lean",
+    "model_symbol": "GoLean.Path.Filepath.matchChunk",
+    "claim": "Matches a raw chunk at the start of the input, returning its exact rest on success. Models byte literals, platform-specific escapes and question marks, UTF-8 class ranges and negation. Malformed syntax returns ErrBadPattern even after an earlier mismatch.",
+    "limits": "Models private helper return values and error identity, with native Windows untested locally. Checks 524 boundaries and 60,000 seeded cases using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls private matchChunk through a same-package test bridge. The Go oracle checks both platform profiles using direct byte and rune operations, and keeps parsing after mismatch.",
+    "theorems": [
+      "GoLean.Path.Filepath.matchChunk_empty",
+      "GoLean.Path.Filepath.matchChunk_invalidAfterMismatch",
+      "GoLean.Path.Filepath.matchChunk_questionSeparator",
+      "GoLean.Path.Filepath.matchChunk_classRange"
+    ],
+    "check": "difftest/path/filepath/match-chunk/check.go",
+    "review_sources": [
+      "difftest/path/filepath/match-chunk/testdata/bridge_test.go",
+      "difftest/path/filepath/match-chunk/testdata/match_chunk_test.go"
+    ],
+    "control": "difftest/path/filepath/match-chunk/review/main.go",
+    "review": "coverage/packages/path/filepath/matchChunk.md"
+  },
+  "readDirNames": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/ReadDirNames.lean",
+    "model_symbol": "GoLean.Path.Filepath.readDirNames",
+    "claim": "Opens the path and on success reads all names and closes the handle. Returns nil names on open or read failure, suppresses close failure, and sorts successful names by raw byte order.",
+    "limits": "260 model boundaries and 60,000 simulated filesystem outcomes with seeds 17, 2718 and 65537. Four native fixtures cover empty and populated directories, missing path and read failure on a regular file. The model takes filesystem outcomes as inputs.",
+    "configurations": "Pinned native private overlay plus independent Go sorting for generated outcomes; injected error and close outcomes are exercised in the Lean model.",
+    "theorems": [
+      "GoLean.Path.Filepath.readDirNames_openError",
+      "GoLean.Path.Filepath.readDirNames_readError",
+      "GoLean.Path.Filepath.readDirNames_ignoresCloseError",
+      "GoLean.Path.Filepath.readDirNames_preservesNames"
+    ],
+    "check": "difftest/path/filepath/read-dir-names/check.go",
+    "control": "difftest/path/filepath/read-dir-names/review/main.go",
+    "review": "coverage/packages/path/filepath/readDirNames.md"
+  },
+  "sameWord": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/SameWord.lean",
+    "model_symbol": "GoLean.Path.Filepath.sameWord",
+    "claim": "Uses byte equality on Unix and Plan 9. Windows uses Go Unicode simple folding, preserving decoding behavior for each malformed byte and making no path separator or normalization changes.",
+    "limits": "Models boolean output from raw strings. Windows folding is simulated locally. Tests 528 boundaries and 60,000 seeded inputs (17, 2718 and 65537).",
+    "configurations": "Pinned Go directly calls private sameWord through a same-package test bridge. A portable oracle compares byte equality and Go strings.EqualFold separately.",
+    "theorems": [
+      "GoLean.Path.Filepath.sameWord_unix",
+      "GoLean.Path.Filepath.sameWord_windows",
+      "GoLean.Path.Filepath.sameWord_asciiExample",
+      "GoLean.Path.Filepath.sameWord_malformedExample"
+    ],
+    "check": "difftest/path/filepath/same-word/check.go",
+    "review_sources": [
+      "difftest/path/filepath/same-word/testdata/bridge_test.go",
+      "difftest/path/filepath/same-word/testdata/same_word_test.go"
+    ],
+    "control": "difftest/path/filepath/same-word/review/main.go",
+    "review": "coverage/packages/path/filepath/sameWord.md"
+  },
+  "scanChunk": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/ScanChunk.lean",
+    "model_symbol": "GoLean.Path.Filepath.scanChunk",
+    "claim": "Consumes leading stars, then returns the chunk and suffix at the first star outside a bracket range. On non-Windows systems a backslash skips the next byte for scanning; neither bytes nor malformed constructs are normalized or validated.",
+    "limits": "Models raw strings and returned tuples, excluding storage and allocation. Native Windows was not executed locally. Tests 524 boundary cases and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go calls the private helper through a same-package bridge. The independent Go oracle first marks escaped byte positions then uses the last active bracket to identify the next separating star.",
+    "theorems": [
+      "GoLean.Path.Filepath.scanChunk_empty",
+      "GoLean.Path.Filepath.scanChunk_stars",
+      "GoLean.Path.Filepath.scanChunk_escape",
+      "GoLean.Path.Filepath.scanChunk_class"
+    ],
+    "check": "difftest/path/filepath/scan-chunk/check.go",
+    "review_sources": [
+      "difftest/path/filepath/scan-chunk/testdata/bridge_test.go",
+      "difftest/path/filepath/scan-chunk/testdata/scan_chunk_test.go"
+    ],
+    "control": "difftest/path/filepath/scan-chunk/review/main.go",
+    "review": "coverage/packages/path/filepath/scanChunk.md"
+  },
+  "splitList": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/SplitList.lean",
+    "model_symbol": "GoLean.Path.Filepath.splitList",
+    "claim": "The private platform splitList returns a nonnil empty slice for empty input. Unix and Plan 9 split raw bytes on colon and NUL respectively. Windows splits at unquoted semicolons and removes every double quote.",
+    "limits": "Models list content and checks nilness of the native result. String and slice backing allocation are outside scope. Native Windows and Plan 9 were untested locally. Tests 524 boundary inputs and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native same-package overlay calls the private declaration. All three Lean profiles compare to separate raw-byte splitting and Windows preceding-quote parity.",
+    "theorems": [
+      "GoLean.Path.Filepath.splitList_empty",
+      "GoLean.Path.Filepath.splitList_unixSeparator",
+      "GoLean.Path.Filepath.splitList_windowsSeparator",
+      "GoLean.Path.Filepath.splitList_plan9Separator",
+      "GoLean.Path.Filepath.splitList_windowsQuoted",
+      "GoLean.Path.Filepath.splitList_windowsUnclosed"
+    ],
+    "check": "difftest/path/filepath/split-list-private/check.go",
+    "control": "difftest/path/filepath/split-list-private/review/main.go",
+    "review": "coverage/packages/path/filepath/splitList-private.md"
+  },
+  "unixAbs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/UnixAbs.lean",
+    "model_symbol": "GoLean.Path.Filepath.unixAbsPath",
+    "claim": "For an absolute path returns the cleaned bytes without consulting the supplied working-directory outcome. For a relative path returns the joined bytes or propagates the exact supplied Getwd error.",
+    "limits": "524 native boundaries and 60,000 seeded paths (17, 2718, 65537), plus 12 fixed model observations across Unix, Windows and Plan 9. Native working-directory resolution behavior is supplied, and native Windows and Plan 9 execution remain unverified locally.",
+    "configurations": "Pinned same-package bridge calls private unixAbs with the live working directory. The harness supplies explicit working-directory success and failure outcomes for fixed Lean rows.",
+    "theorems": [
+      "GoLean.Path.Filepath.unixAbsPath_absolute",
+      "GoLean.Path.Filepath.unixAbsPath_relativeError",
+      "GoLean.Path.Filepath.unixAbsPath_relativeJoin"
+    ],
+    "check": "difftest/path/filepath/unix-abs/check.go",
+    "control": "difftest/path/filepath/unix-abs/review/main.go",
+    "review": "coverage/packages/path/filepath/unix-abs.md",
+    "review_sources": [
+      "difftest/path/filepath/unix-abs/review/testdata/deep_cwd_test.go"
+    ]
+  },
+  "walk": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/Walk.lean",
+    "model_symbol": "GoLean.Path.Filepath.walkTree",
+    "claim": "Traverses sorted names with directory listing before callback. Reports failed child stats with nil info, prunes directory SkipDir, propagates file SkipDir and preserves other callback errors.",
+    "limits": "Exhausts 4,096 callback maps on an ordered fixture tree and replays 60,000 seeded maps (17, 2718, 65537). Eight fixed Lean rows cover failed reads and child stats. Assumes a sufficient depth bound and supplied filesystem observations. Native Windows and Plan 9 remain unexecuted locally.",
+    "configurations": "Pinned private filepath.walk through a native overlay, comparing ordered callback events and error identities. Model-only error rows inject directory or stat failure.",
+    "theorems": [
+      "GoLean.Path.Filepath.walkTree_file",
+      "GoLean.Path.Filepath.walkTree_readFailure"
+    ],
+    "check": "difftest/path/filepath/walk-private/check.go",
+    "control": "difftest/path/filepath/walk-private/review/main.go",
+    "review": "coverage/packages/path/filepath/walk-private.md",
+    "review_sources": [
+      "difftest/path/filepath/walk-private/review/testdata/live_walk_test.go"
+    ]
+  },
+  "walkDir": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/WalkDir.lean",
+    "model_symbol": "GoLean.Path.Filepath.walkDirTree",
+    "claim": "Visits an ordered directory tree and propagates callback errors. Directory SkipDir prunes that subtree, file SkipDir stops that directory’s remaining siblings, and a read error causes a second directory callback before traversal of any supplied partial children.",
+    "limits": "Exhausts 4,096 callback tables on one six-entry temporary tree and replays 60,000 seeded tables (17, 2718 and 65537). Four model cases inject an error with partial children. The model takes supplied ordered filesystem observations and a depth bound at least the actual tree depth. Native Windows and Plan 9 were unexecuted locally.",
+    "configurations": "Pinned native private walkDir bridge compares callback order, path, directory flag and exact control error identity. Separate model fixtures exercise directory read errors.",
+    "theorems": [
+      "GoLean.Path.Filepath.walkDirTree_entry"
+    ],
+    "check": "difftest/path/filepath/walk-dir-private/check.go",
+    "control": "difftest/path/filepath/walk-dir-private/review/main.go",
+    "review": "coverage/packages/path/filepath/walkDir.md",
+    "review_sources": [
+      "difftest/path/filepath/walk-dir-private/review/testdata/review_test.go"
+    ]
+  },
+  "walkSymlinks": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Path/Filepath/WalkSymlinks.lean",
+    "model_symbol": "GoLean.Path.Filepath.walkSymlinks",
+    "claim": "Resolves links component by component using supplied lookup and readlink outcomes, preserves lookup errors, reports a nondirectory component, and stops attempting to read links after 255 substitutions.",
+    "limits": "271 native boundaries and 60,000 seeded paths (17, 2718, 65537), plus eight fixed model rows. Tests a temporary Unix tree and supplied modeled filesystem observations. The model has an explicit step bound, set to 1,024 by this driver. Native Windows execution remains open.",
+    "configurations": "Pinned private walkSymlinks overlay compares raw result paths and observed error classes. Windows uses fixed modeled observations.",
+    "theorems": [
+      "GoLean.Path.Filepath.walkSymlinks_unixEmpty"
+    ],
+    "check": "difftest/path/filepath/walk-symlinks/check.go",
+    "review_sources": [
+      "difftest/path/filepath/walk-symlinks/review/testdata/boundary_test.go"
+    ],
+    "control": "difftest/path/filepath/walk-symlinks/review/main.go",
+    "review": "coverage/packages/path/filepath/walkSymlinks.md"
+  }
+}

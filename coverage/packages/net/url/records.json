@@ -1,0 +1,963 @@
+{
+  "validOptionalPort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.validOptionalPort",
+    "claim": "Accepts empty input, or a colon followed by zero or more ASCII digits. Does not numerically interpret the digit sequence.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.validOptionalPort_colon",
+      "GoLean.Net.Url.validOptionalPort_plus"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/validOptionalPort.md"
+  },
+  "splitHostPort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.splitHostPort",
+    "claim": "Splits at the last colon only when its suffix is a valid optional port, then removes one enclosing bracket pair from the resulting host.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.splitHostPort_brackets",
+      "GoLean.Net.Url.splitHostPort_badPort"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/splitHostPort.md"
+  },
+  "URL.Hostname": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.urlHostname",
+    "claim": "Returns the host component from the pinned host-port split, including stripping enclosing brackets. A nil receiver panics.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.urlHostname_nil",
+      "GoLean.Net.Url.urlHostname_unported"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/URL.Hostname.md"
+  },
+  "URL.Port": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.urlPort",
+    "claim": "Returns the digit sequence after the accepted last colon, or an empty string when no valid port is present. A nil receiver panics.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.urlPort_nil",
+      "GoLean.Net.Url.urlPort_bad"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/URL.Port.md"
+  },
+  "URL.IsAbs": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.urlIsAbs",
+    "claim": "Returns whether the stored scheme is nonempty, irrespective of its spelling. A nil receiver panics.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.urlIsAbs_nil",
+      "GoLean.Net.Url.urlIsAbs_nonempty"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/URL.IsAbs.md"
+  },
+  "getScheme": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.getScheme",
+    "claim": "Returns the original scheme spelling and suffix for an initial ASCII scheme followed by colon. A leading colon returns a missing-scheme error. Other inputs retain the original path.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.getScheme_missing",
+      "GoLean.Net.Url.getScheme_preservesCase"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/getScheme.md"
+  },
+  "stringContainsCTLByte": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Lexical.lean",
+    "model_symbol": "GoLean.Net.Url.stringContainsCTLByte",
+    "claim": "Detects raw control bytes below ASCII space or equal to DEL. Does not decode escapes or UTF-8.",
+    "limits": "Raw strings with feasible lengths. The shared comparison checks 66,608 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Storage identity, allocation failure and concurrent access are outside scope.",
+    "configurations": "Pinned Go directly invokes the declaration, with a same-package overlay for private entries. Independent byte search, ASCII regular expressions and literal control-byte set check all singleton and two-byte inputs, malformed UTF-8, multiple delimiters, bracket cases, long digit sequences, and nil-receiver panic where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.stringContainsCTLByte_del",
+      "GoLean.Net.Url.stringContainsCTLByte_high"
+    ],
+    "check": "difftest/net/url/lexical/check.go",
+    "review_sources": [
+      "difftest/net/url/lexical/testdata/bridge_test.go",
+      "difftest/net/url/lexical/testdata/lexical_test.go"
+    ],
+    "control": "difftest/net/url/lexical/review/main.go",
+    "review": "coverage/packages/net/url/stringContainsCTLByte.md"
+  },
+  "User": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.user",
+    "claim": "Constructs nonnil user information with the provided raw username and the password unset.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.user_noPassword"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/User.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "UserPassword": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.userPassword",
+    "claim": "Constructs nonnil user information with the raw username and password, setting the password flag even when the password is empty.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.userPassword_empty"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/UserPassword.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "Userinfo.Username": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.userinfoUsername",
+    "claim": "Returns the stored username, or the empty string for a nil receiver.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.userinfoUsername_nil"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/Userinfo.Username.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "Userinfo.Password": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.userinfoPassword",
+    "claim": "Returns the stored raw password and its presence flag, or empty and false for a nil receiver.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.userinfoPassword_nil",
+      "GoLean.Net.Url.userinfoPassword_preservesStored"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/Userinfo.Password.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "Userinfo.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.userinfoString",
+    "claim": "Escapes raw username and password in the pinned user-password mode, adding the colon exactly when the password is set. A nil receiver returns empty.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.userinfoString_nil",
+      "GoLean.Net.Url.userinfoString_presentEmpty"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/Userinfo.String.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "validUserinfo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Userinfo.lean",
+    "model_symbol": "GoLean.Net.Url.validUserinfo",
+    "claim": "Checks precisely the pinned ASCII userinfo allowlist, including at sign and percent. It performs no percent-triplet validation.",
+    "limits": "Raw strings and feasible output allocations. Includes nil, constructor-reachable, and synthetic password flag states. Storage identity, resource failures and concurrency are outside scope. Checks 66,043 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url through a same-package overlay for private validation and constructor field observations. Independent formatting and ASCII lexical oracles check all two-byte validator inputs, zero-length fields, enabled or suppressed passwords, raw NUL, and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.validUserinfo_delimiters",
+      "GoLean.Net.Url.validUserinfo_slash"
+    ],
+    "check": "difftest/net/url/userinfo/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Values.lean",
+      "difftest/net/url/userinfo/testdata/bridge_test.go",
+      "difftest/net/url/userinfo/testdata/userinfo_test.go"
+    ],
+    "review": "coverage/packages/net/url/validUserinfo.md",
+    "control": "difftest/net/url/userinfo/review/main.go"
+  },
+  "urlParamsWithinMax": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Query.lean",
+    "model_symbol": "GoLean.Net.Url.urlParamsWithinMax",
+    "claim": "Uses an inclusive default limit of 10,000, a strict nonzero signed override, and zero for no custom limit. An invalid override falls back to default. The non-default metric increments only when the override changes the result.",
+    "limits": "The model takes the effective GODEBUG value and native signed width as inputs. Sequential invocations and feasible map and string allocations. External backing alias changes, process setting races and resource failures are outside scope. Checks 2,463 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go invokes the exact declarations, with a same-package overlay for private entries. Compares an independent split and encoding/hex parser, signed strconv.Atoi setting reference, isolated metric delta, exact map data and typed error or panic. Includes default and changed profile limits, raw semicolon precedence, partial results, nil receivers, and actual query strings around 10,000 parameters.",
+    "theorems": [
+      "GoLean.Net.Url.urlParamsWithinMax_default",
+      "GoLean.Net.Url.urlParamsWithinMax_exclusive"
+    ],
+    "check": "difftest/net/url/query/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Values.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/query/testdata/bridge_test.go",
+      "difftest/net/url/query/testdata/query_test.go"
+    ],
+    "review": "coverage/packages/net/url/url-params-within-max.md",
+    "control": "difftest/net/url/query/review/main.go"
+  },
+  "parseQuery": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Query.lean",
+    "model_symbol": "GoLean.Net.Url.parseQueryInto",
+    "claim": "Checks the query parameter limit before mutating the provided map. Within the limit, appends valid decoded values in order, retains the first malformed escape unless replaced by a semicolon error, and rejects a valid assignment on a nil map.",
+    "limits": "The model takes the effective GODEBUG value and native signed width as inputs. Sequential invocations and feasible map and string allocations. External backing alias changes, process setting races and resource failures are outside scope. Checks 2,463 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go invokes the exact declarations, with a same-package overlay for private entries. Compares an independent split and encoding/hex parser, signed strconv.Atoi setting reference, isolated metric delta, exact map data and typed error or panic. Includes default and changed profile limits, raw semicolon precedence, partial results, nil receivers, and actual query strings around 10,000 parameters.",
+    "theorems": [
+      "GoLean.Net.Url.parseQueryInto_limitBeforeWrite",
+      "GoLean.Net.Url.parseQueryInto_semicolonOverrides"
+    ],
+    "check": "difftest/net/url/query/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Values.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/query/testdata/bridge_test.go",
+      "difftest/net/url/query/testdata/query_test.go"
+    ],
+    "review": "coverage/packages/net/url/parse-query-private.md",
+    "control": "difftest/net/url/query/review/main.go"
+  },
+  "ParseQuery": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Query.lean",
+    "model_symbol": "GoLean.Net.Url.parseQuery",
+    "claim": "Creates a nonnil Values map, using the pinned parser to accumulate valid pairs and return the decoding, semicolon, or parameter-limit error. Preserves repeated-key value order.",
+    "limits": "The model takes the effective GODEBUG value and native signed width as inputs. Sequential invocations and feasible map and string allocations. External backing alias changes, process setting races and resource failures are outside scope. Checks 2,463 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go invokes the exact declarations, with a same-package overlay for private entries. Compares an independent split and encoding/hex parser, signed strconv.Atoi setting reference, isolated metric delta, exact map data and typed error or panic. Includes default and changed profile limits, raw semicolon precedence, partial results, nil receivers, and actual query strings around 10,000 parameters.",
+    "theorems": [
+      "GoLean.Net.Url.parseQuery_empty",
+      "GoLean.Net.Url.parseQuery_order"
+    ],
+    "check": "difftest/net/url/query/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Values.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/query/testdata/bridge_test.go",
+      "difftest/net/url/query/testdata/query_test.go"
+    ],
+    "review": "coverage/packages/net/url/parse-query-public.md",
+    "control": "difftest/net/url/query/review/main.go"
+  },
+  "URL.Query": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Query.lean",
+    "model_symbol": "GoLean.Net.Url.urlQuery",
+    "claim": "Reads RawQuery and returns the nonnil Values from the pinned parser with only valid pairs, discarding the error. A nil URL receiver panics.",
+    "limits": "The model takes the effective GODEBUG value and native signed width as inputs. Sequential invocations and feasible map and string allocations. External backing alias changes, process setting races and resource failures are outside scope. Checks 2,463 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned native Go invokes the exact declarations, with a same-package overlay for private entries. Compares an independent split and encoding/hex parser, signed strconv.Atoi setting reference, isolated metric delta, exact map data and typed error or panic. Includes default and changed profile limits, raw semicolon precedence, partial results, nil receivers, and actual query strings around 10,000 parameters.",
+    "theorems": [
+      "GoLean.Net.Url.urlQuery_nil",
+      "GoLean.Net.Url.urlQuery_partial"
+    ],
+    "check": "difftest/net/url/query/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Values.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/query/testdata/bridge_test.go",
+      "difftest/net/url/query/testdata/query_test.go"
+    ],
+    "review": "coverage/packages/net/url/url-query.md",
+    "control": "difftest/net/url/query/review/main.go"
+  },
+  "Values.Get": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesGet",
+    "claim": "Returns the first string for the exact raw key, or an empty string when absent or empty, including a nil map.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Get. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesGet_nil"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-get.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Has": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesHas",
+    "claim": "Tests membership of the exact raw key, including entries whose stored value list is nil or empty.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Has. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesHas_nil",
+      "GoLean.Net.Url.valuesHas_nilEntry"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-has.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Set": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesSet",
+    "claim": "Replaces all values for the exact key with a singleton. Assignment to a nil map panics.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Set. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesSet_nil",
+      "GoLean.Net.Url.valuesSet_overwrite"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-set.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Add": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesAdd",
+    "claim": "Appends one value in order to the list for the exact key. Assignment to a nil map panics.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Add. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesAdd_nil",
+      "GoLean.Net.Url.valuesAdd_order"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-add.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Del": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesDel",
+    "claim": "Deletes the exact key and all associated values without altering other entries. A nil map remains nil.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Del. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesDel_nil",
+      "GoLean.Net.Url.valuesDel_single"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-del.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Clone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesClone",
+    "claim": "Preserves map and list nilness and all key-value data. Native mutation of cloned entries and value slots leaves the source unchanged.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Clone. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesClone_sameData"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-clone.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "Values.Encode": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Values.lean",
+    "model_symbol": "GoLean.Net.Url.valuesEncode",
+    "claim": "Sorts keys by their raw bytes before query escaping, preserves value order within each key, skips empty lists, and emits ampersand-separated key=value pairs.",
+    "limits": "Sequential operations on finite maps of unique raw byte keys and feasible allocations. Models visible entries, order within value lists and nilness. Capacity, shared external backing aliases and concurrent access are outside scope. Shared comparison checks 1,350 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.Values.Encode. An independent entry-list and byte escaping oracle checks nil and empty maps and lists, case-sensitive keys, malformed raw bytes, membership, updated data and mutation isolation where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.valuesEncode_nil",
+      "GoLean.Net.Url.valuesEncode_keyOrder"
+    ],
+    "check": "difftest/net/url/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean"
+    ],
+    "review": "coverage/packages/net/url/values-encode.md",
+    "control": "difftest/net/url/values/review/main.go"
+  },
+  "validEncoded": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/PathFragment.lean",
+    "model_symbol": "GoLean.Net.Url.validEncoded",
+    "claim": "Checks all raw bytes against the mode allowlist plus punctuation and percent exceptions. A percent byte is accepted without checking that a hexadecimal pair follows it.",
+    "limits": "Raw byte strings, including malformed UTF-8, and feasible output allocations. The shared comparison checks 66,336 boundaries and 60,000 samples with seeds 17, 2718 and 65537. String storage, allocation failure and concurrency are outside scope.",
+    "configurations": "Pinned Go directly invokes the net/url declaration, using a same-package test overlay for private entries. An independent byte allowlist and encoding/hex scanner check the exact bytes, unchanged unrelated fields, typed EscapeError payloads and nil-receiver fault class where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.validEncoded_percent",
+      "GoLean.Net.Url.validEncoded_space"
+    ],
+    "check": "difftest/net/url/path-fragment/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/path-fragment/testdata/bridge_test.go",
+      "difftest/net/url/path-fragment/testdata/path_fragment_test.go"
+    ],
+    "review": "coverage/packages/net/url/valid-encoded.md",
+    "control": "difftest/net/url/path-fragment/review/main.go"
+  },
+  "URL.EscapedPath": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/PathFragment.lean",
+    "model_symbol": "GoLean.Net.Url.escapedPath",
+    "claim": "Returns the supplied nonempty RawPath if the spelling is allowed and decodes to Path. Otherwise uses canonical path escaping, with a literal asterisk exception. Nil receiver panics.",
+    "limits": "Raw byte strings, including malformed UTF-8, and feasible output allocations. The shared comparison checks 66,336 boundaries and 60,000 samples with seeds 17, 2718 and 65537. String storage, allocation failure and concurrency are outside scope.",
+    "configurations": "Pinned Go directly invokes the net/url declaration, using a same-package test overlay for private entries. An independent byte allowlist and encoding/hex scanner check the exact bytes, unchanged unrelated fields, typed EscapeError payloads and nil-receiver fault class where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.escapedPath_rawStar",
+      "GoLean.Net.Url.escapedPath_defaultStar"
+    ],
+    "check": "difftest/net/url/path-fragment/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/path-fragment/testdata/bridge_test.go",
+      "difftest/net/url/path-fragment/testdata/path_fragment_test.go"
+    ],
+    "review": "coverage/packages/net/url/escaped-path.md",
+    "control": "difftest/net/url/path-fragment/review/main.go"
+  },
+  "URL.EscapedFragment": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/PathFragment.lean",
+    "model_symbol": "GoLean.Net.Url.escapedFragment",
+    "claim": "Returns the supplied nonempty RawFragment if the spelling is allowed and decodes to Fragment. Otherwise uses canonical fragment escaping. Nil receiver panics.",
+    "limits": "Raw byte strings, including malformed UTF-8, and feasible output allocations. The shared comparison checks 66,336 boundaries and 60,000 samples with seeds 17, 2718 and 65537. String storage, allocation failure and concurrency are outside scope.",
+    "configurations": "Pinned Go directly invokes the net/url declaration, using a same-package test overlay for private entries. An independent byte allowlist and encoding/hex scanner check the exact bytes, unchanged unrelated fields, typed EscapeError payloads and nil-receiver fault class where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.escapedFragment_mismatch"
+    ],
+    "check": "difftest/net/url/path-fragment/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/path-fragment/testdata/bridge_test.go",
+      "difftest/net/url/path-fragment/testdata/path_fragment_test.go"
+    ],
+    "review": "coverage/packages/net/url/escaped-fragment.md",
+    "control": "difftest/net/url/path-fragment/review/main.go"
+  },
+  "URL.setPath": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/PathFragment.lean",
+    "model_symbol": "GoLean.Net.Url.setPath",
+    "claim": "Decodes the proposed path before updating Path. It clears RawPath for canonical spelling and otherwise records the provided raw spelling. An invalid escape leaves the fields unchanged and returns the typed error before nil receiver access.",
+    "limits": "Raw byte strings, including malformed UTF-8, and feasible output allocations. The shared comparison checks 66,336 boundaries and 60,000 samples with seeds 17, 2718 and 65537. String storage, allocation failure and concurrency are outside scope.",
+    "configurations": "Pinned Go directly invokes the net/url declaration, using a same-package test overlay for private entries. An independent byte allowlist and encoding/hex scanner check the exact bytes, unchanged unrelated fields, typed EscapeError payloads and nil-receiver fault class where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.setPath_errorPreserves",
+      "GoLean.Net.Url.setPath_nonCanonical"
+    ],
+    "check": "difftest/net/url/path-fragment/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/path-fragment/testdata/bridge_test.go",
+      "difftest/net/url/path-fragment/testdata/path_fragment_test.go"
+    ],
+    "review": "coverage/packages/net/url/set-path.md",
+    "control": "difftest/net/url/path-fragment/review/main.go"
+  },
+  "URL.setFragment": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/PathFragment.lean",
+    "model_symbol": "GoLean.Net.Url.setFragment",
+    "claim": "Decodes the proposed fragment before updating Fragment. It clears RawFragment for canonical spelling and otherwise stores the supplied raw hint. Invalid escapes preserve prior state and return the typed error before any nil receiver access.",
+    "limits": "Raw byte strings, including malformed UTF-8, and feasible output allocations. The shared comparison checks 66,336 boundaries and 60,000 samples with seeds 17, 2718 and 65537. String storage, allocation failure and concurrency are outside scope.",
+    "configurations": "Pinned Go directly invokes the net/url declaration, using a same-package test overlay for private entries. An independent byte allowlist and encoding/hex scanner check the exact bytes, unchanged unrelated fields, typed EscapeError payloads and nil-receiver fault class where applicable.",
+    "theorems": [
+      "GoLean.Net.Url.setFragment_default",
+      "GoLean.Net.Url.setFragment_nilInvalid"
+    ],
+    "check": "difftest/net/url/path-fragment/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean",
+      "difftest/net/url/path-fragment/testdata/bridge_test.go",
+      "difftest/net/url/path-fragment/testdata/path_fragment_test.go"
+    ],
+    "review": "coverage/packages/net/url/set-fragment.md",
+    "control": "difftest/net/url/path-fragment/review/main.go"
+  },
+  "unescape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Unescape.lean",
+    "model_symbol": "GoLean.Net.Url.unescape",
+    "claim": "Validates percent triples and host or zone restrictions left to right, returns the first typed error with exact raw payload, and otherwise decodes escaped bytes and query plus signs.",
+    "limits": "Raw strings and all uint8 modes, with feasible lengths. Typed payloads are modeled before Error formatting. Builder allocation and string storage identity are outside scope. Checks 71,168 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned private net/url.unescape via same-package test overlay. An independent single-pass byte enumerator uses encoding/hex and host allowlists. Checks no partial output, raw error payload, malformed and valid hex pairs, exact host and zone handling, and compound modes.",
+    "theorems": [
+      "GoLean.Net.Url.unescape_host_percent",
+      "GoLean.Net.Url.unescape_zone_space",
+      "GoLean.Net.Url.unescape_host_errorPrefix"
+    ],
+    "check": "difftest/net/url/unescape/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "difftest/net/url/unescape/testdata/bridge_test.go",
+      "difftest/net/url/unescape/testdata/unescape_test.go"
+    ],
+    "review": "coverage/packages/net/url/unescape.md",
+    "control": "difftest/net/url/unescape/review/main.go"
+  },
+  "QueryUnescape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Unescape.lean",
+    "model_symbol": "GoLean.Net.Url.queryUnescape",
+    "claim": "Decodes percent triples and turns raw plus into space. On malformed percent input it returns no output and an EscapeError containing the first invalid sequence clipped to at most three raw bytes.",
+    "limits": "Raw strings and feasible lengths. Error payloads are modeled before formatting. The shared comparison checks 71,168 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned net/url.QueryUnescape called directly with an independent encoding/hex oracle. Exhaustive two-byte payloads behind percent, with valid lowercase and uppercase triples, truncated inputs and arbitrary raw input including invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.queryUnescape_plus",
+      "GoLean.Net.Url.queryUnescape_firstInvalid"
+    ],
+    "check": "difftest/net/url/unescape/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "difftest/net/url/unescape/testdata/unescape_test.go"
+    ],
+    "review": "coverage/packages/net/url/query-unescape.md",
+    "control": "difftest/net/url/unescape/review/main.go"
+  },
+  "PathUnescape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Unescape.lean",
+    "model_symbol": "GoLean.Net.Url.pathUnescape",
+    "claim": "Decodes percent triples while retaining raw plus. On malformed percent input it returns no output and an EscapeError with the exact first malformed escape fragment.",
+    "limits": "Raw strings and feasible lengths. Error payloads are modeled before formatting. The shared comparison checks 71,168 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned net/url.PathUnescape called directly with an independent encoding/hex oracle. Exhaustive two-byte payloads behind percent, valid and truncated triples, differing payload bytes, raw plus and invalid UTF-8.",
+    "theorems": [
+      "GoLean.Net.Url.pathUnescape_plus",
+      "GoLean.Net.Url.pathUnescape_truncated"
+    ],
+    "check": "difftest/net/url/unescape/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/Escape.lean",
+      "difftest/net/url/unescape/testdata/unescape_test.go"
+    ],
+    "review": "coverage/packages/net/url/path-unescape.md",
+    "control": "difftest/net/url/unescape/review/main.go"
+  },
+  "shouldEscape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.shouldEscape",
+    "claim": "Returns whether the pinned encoding-table byte has no intersecting bit with the supplied uint8 mode, including combined modes and the hexadecimal classification bit.",
+    "limits": "Exhausts all 65,536 input-byte and mode pairs, with 100 additional multi-byte boundaries and 60,000 sampled inputs at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes private net/url.shouldEscape via a same-package overlay. An independent allowed-byte-set oracle reconstructs all eight table bits.",
+    "theorems": [
+      "GoLean.Net.Url.shouldEscape_zero",
+      "GoLean.Net.Url.shouldEscape_combined"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/should-escape.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "ishex": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.isHex",
+    "claim": "Recognizes exactly the ASCII hexadecimal digit bytes by consulting the generated table flag.",
+    "limits": "Exhaustive over all 256 byte values, repeated in a shared 65,636 boundary and 60,000 sample replay. Seeds are 17, 2718 and 65537.",
+    "configurations": "Private pinned net/url.ishex via same-package overlay, compared against strconv hexadecimal single-byte parsing.",
+    "theorems": [
+      "GoLean.Net.Url.isHex_examples"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/ishex.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "unhex": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.unhex",
+    "claim": "Converts a valid ASCII hexadecimal digit to its nibble using the pinned byte arithmetic.",
+    "limits": "Exhaustive valid digits. The direct helper also exercises all remaining bytes and compares pinned arithmetic without extending the helper's documented input contract. Shared 65,636 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Private pinned net/url.unhex via same-package overlay, compared against strconv for valid digits and an arithmetic oracle for other bytes.",
+    "theorems": [
+      "GoLean.Net.Url.unhex_examples"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/unhex.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "escape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.escape",
+    "claim": "Emits uppercase percent triples for bytes with no matching mode bit, with plus substituted only for a space in the exact query mode.",
+    "limits": "Raw strings, all uint8 modes and feasible output lengths. The model preserves the counted no-change, space-only and hex-encoding branches. Buffer storage identity and resource exhaustion are outside scope. Checks 65,636 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Private pinned net/url.escape via same-package overlay and independent formatting oracle. Covers all singleton byte and mode pairs, malformed UTF-8 and output lengths at the 64-byte stack buffer threshold.",
+    "theorems": [
+      "GoLean.Net.Url.escape_empty",
+      "GoLean.Net.Url.escape_high"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/escape.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "QueryEscape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.queryEscape",
+    "claim": "Encodes raw query bytes using plus for space and uppercase percent triples for other escaped bytes.",
+    "limits": "Raw strings and feasible output lengths. No buffer-storage or allocation claims. The shared replay checks 65,636 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.QueryEscape. Checks all byte values, returned raw bytes, space-only and mixed escaping, malformed UTF-8 and the stack buffer threshold.",
+    "theorems": [
+      "GoLean.Net.Url.queryEscape_plus"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/query-escape.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "PathEscape": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Escape.lean",
+    "model_symbol": "GoLean.Net.Url.pathEscape",
+    "claim": "Encodes raw path-segment bytes using percent triples for space, slash and the other escaped bytes, with literal plus preserved.",
+    "limits": "Raw strings and feasible output lengths. No buffer-storage or allocation claims. The shared replay checks 65,636 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go directly invokes net/url.PathEscape, including all byte values, malformed UTF-8, raw punctuation, and the stack buffer threshold.",
+    "theorems": [
+      "GoLean.Net.Url.pathEscape_plus"
+    ],
+    "check": "difftest/net/url/escape/check.go",
+    "review_sources": [
+      "difftest/net/url/escape/testdata/bridge_test.go",
+      "difftest/net/url/escape/testdata/escape_test.go"
+    ],
+    "review": "coverage/packages/net/url/path-escape.md",
+    "control": "difftest/net/url/escape/review/main.go"
+  },
+  "URL.Clone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Clone.lean",
+    "model_symbol": "GoLean.Net.Url.urlClone",
+    "claim": "Returns nil for a nil receiver. Otherwise copies all URL fields and copies present Userinfo into a distinct object, preserving every field byte and flag.",
+    "limits": "Fresh object identities abstract allocation, with fresh identities a hypothesis of the separation theorem. Userinfo is reachable through nil, User, or UserPassword. Allocation failures and racing writes are outside scope.",
+    "configurations": "Pinned direct URL.Clone against field-by-field and pointer comparisons in Go and Lean. 49 boundaries and 60,000 seeded observations using seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlClone_nil",
+      "GoLean.Net.Url.urlClone_values",
+      "GoLean.Net.Url.urlClone_fresh"
+    ],
+    "check": "difftest/net/url/clone/check.go",
+    "review": "coverage/packages/net/url/URL.Clone.md",
+    "control": "difftest/net/url/clone/review/main.go"
+  },
+  "Error.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.urlErrorError",
+    "claim": "Concatenates raw operation bytes, a space, the Go-quoted URL and the formatted nested error with its separator. A nil receiver panics.",
+    "limits": "Nested fmt formatting is an input to the Lean model. Native checks raw nested error strings, nil interfaces, typed nils and a formatting callback panic.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlErrorError_empty"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/Error.Error.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "Error.Unwrap": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.urlErrorUnwrap",
+    "claim": "Returns the exact stored error interface on a live receiver and panics on a nil receiver.",
+    "limits": "Lean represents nested interface identity by a token. Native checks equality for nil, typed nil and distinct concrete error types.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlErrorUnwrap_identity"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/Error.Unwrap.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "Error.Timeout": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.urlErrorTimeout",
+    "claim": "Calls the nested Timeout method when that capability is present, returning its Boolean or propagating the panic. A live wrapper without that capability returns false. A nil wrapper panics.",
+    "limits": "Nested callback outcomes are supplied. Native checks capability selection and callback counts, and a typed-nil callback propagating an exact panic token.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlErrorTimeout_missing"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/Error.Timeout.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "Error.Temporary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.urlErrorTemporary",
+    "claim": "Calls the nested Temporary method when that capability is present, returning its Boolean or propagating the panic. A live wrapper without that capability returns false. A nil wrapper panics.",
+    "limits": "Nested callback outcomes are supplied. Native checks capability selection and callback counts, and a typed-nil callback propagating an exact panic token.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlErrorTemporary_missing"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/Error.Temporary.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "EscapeError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.escapeErrorError",
+    "claim": "Returns the exact invalid URL escape message with Go-quoted raw input bytes.",
+    "limits": "Go Unicode print table and UTF-8 decoding are pinned. The theorem checks empty input, with differential comparison for arbitrary bytes.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.escapeErrorError_empty"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/EscapeError.Error.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "InvalidHostError.Error": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/ErrorMethods.lean",
+    "model_symbol": "GoLean.Net.Url.invalidHostErrorError",
+    "claim": "Returns the exact invalid character message with Go-quoted raw input bytes and host-name suffix.",
+    "limits": "Go Unicode print table and UTF-8 decoding are pinned. The theorem checks empty input, with differential comparison for arbitrary bytes.",
+    "configurations": "Direct native pinned Go, compiled Lean and an independent capability and formatting oracle using pinned strconv.Quote. 3,325 fixed rows include every single byte and the edges of Unicode print intervals. 60,000 sampled rows use seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.invalidHostErrorError_empty"
+    ],
+    "check": "difftest/net/url/error-methods/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/ErrorQuotePrint.lean",
+      "difftest/net/url/error-methods/gen/main.go"
+    ],
+    "review": "coverage/packages/net/url/InvalidHostError.Error.md",
+    "control": "difftest/net/url/error-methods/review/main.go"
+  },
+  "URL.String": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Serialize.lean",
+    "model_symbol": "GoLean.Net.Url.urlString",
+    "claim": "Serializes a populated URL using opaque or hierarchical form, escaped userinfo, host, path and fragment, and raw query. A nil direct receiver fails.",
+    "limits": "Ordinary directly populated URL values and nil receivers, selected valid RawPath and RawFragment spellings, and valid append slice geometry. No URL parsing, request dispatch, or security-policy decisions. Native compares slice reuse with positive capacity and empty MarshalBinary nilness; allocation capacity, panic text and empty zero-capacity identity are abstracted.",
+    "configurations": "Pinned native public Go methods and compiled Lean with a separate component-based serialization and backing oracle. 603 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlString_colon"
+    ],
+    "check": "difftest/net/url/serialize/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/PathFragment.lean",
+      "lean/GoLean/Net/Url/Userinfo.lean",
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean"
+    ],
+    "control": "difftest/net/url/serialize/review/main.go",
+    "review": "coverage/packages/net/url/URL.String.md"
+  },
+  "URL.Redacted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Serialize.lean",
+    "model_symbol": "GoLean.Net.Url.urlRedacted",
+    "claim": "Serializes the URL after replacing a set userinfo password with xxxxx, retaining the original receiver. A nil receiver returns an empty string.",
+    "limits": "Ordinary directly populated URL values and nil receivers, selected valid RawPath and RawFragment spellings, and valid append slice geometry. No URL parsing, request dispatch, or security-policy decisions. Native compares slice reuse with positive capacity and empty MarshalBinary nilness; allocation capacity, panic text and empty zero-capacity identity are abstracted.",
+    "configurations": "Pinned native public Go methods and compiled Lean with a separate component-based serialization and backing oracle. 603 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlRedacted_nil"
+    ],
+    "check": "difftest/net/url/serialize/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/PathFragment.lean",
+      "lean/GoLean/Net/Url/Userinfo.lean",
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean"
+    ],
+    "control": "difftest/net/url/serialize/review/main.go",
+    "review": "coverage/packages/net/url/URL.Redacted.md"
+  },
+  "URL.RequestURI": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Serialize.lean",
+    "model_symbol": "GoLean.Net.Url.urlRequestURI",
+    "claim": "Serializes the request target with path fallback, opaque handling and optional raw query, excluding fragment. A nil receiver fails.",
+    "limits": "Ordinary directly populated URL values and nil receivers, selected valid RawPath and RawFragment spellings, and valid append slice geometry. No URL parsing, request dispatch, or security-policy decisions. Native compares slice reuse with positive capacity and empty MarshalBinary nilness; allocation capacity, panic text and empty zero-capacity identity are abstracted.",
+    "configurations": "Pinned native public Go methods and compiled Lean with a separate component-based serialization and backing oracle. 603 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlRequestURI_empty"
+    ],
+    "check": "difftest/net/url/serialize/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/PathFragment.lean",
+      "lean/GoLean/Net/Url/Userinfo.lean",
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean"
+    ],
+    "control": "difftest/net/url/serialize/review/main.go",
+    "review": "coverage/packages/net/url/URL.RequestURI.md"
+  },
+  "URL.AppendBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Serialize.lean",
+    "model_symbol": "GoLean.Net.Url.urlAppendBinary",
+    "claim": "Appends the URL string to the caller prefix, preserving the original backing when growth is needed. A nil receiver fails before changing the backing.",
+    "limits": "Ordinary directly populated URL values and nil receivers, selected valid RawPath and RawFragment spellings, and valid append slice geometry. No URL parsing, request dispatch, or security-policy decisions. Native compares slice reuse with positive capacity and empty MarshalBinary nilness; allocation capacity, panic text and empty zero-capacity identity are abstracted.",
+    "configurations": "Pinned native public Go methods and compiled Lean with a separate component-based serialization and backing oracle. 603 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlAppendBinary_nil"
+    ],
+    "check": "difftest/net/url/serialize/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/PathFragment.lean",
+      "lean/GoLean/Net/Url/Userinfo.lean",
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean"
+    ],
+    "control": "difftest/net/url/serialize/review/main.go",
+    "review": "coverage/packages/net/url/URL.AppendBinary.md"
+  },
+  "URL.MarshalBinary": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Net/Url/Serialize.lean",
+    "model_symbol": "GoLean.Net.Url.urlMarshalBinary",
+    "claim": "Returns the serialized URL bytes by appending to nil and returns nil error on success. A nil receiver fails.",
+    "limits": "Ordinary directly populated URL values and nil receivers, selected valid RawPath and RawFragment spellings, and valid append slice geometry. No URL parsing, request dispatch, or security-policy decisions. Native compares slice reuse with positive capacity and empty MarshalBinary nilness; allocation capacity, panic text and empty zero-capacity identity are abstracted.",
+    "configurations": "Pinned native public Go methods and compiled Lean with a separate component-based serialization and backing oracle. 603 fixed rows and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Net.Url.urlMarshalBinary_empty"
+    ],
+    "check": "difftest/net/url/serialize/check.go",
+    "review_sources": [
+      "lean/GoLean/Net/Url/PathFragment.lean",
+      "lean/GoLean/Net/Url/Userinfo.lean",
+      "lean/GoLean/Net/Url/Escape.lean",
+      "lean/GoLean/Net/Url/Unescape.lean"
+    ],
+    "control": "difftest/net/url/serialize/review/main.go",
+    "review": "coverage/packages/net/url/URL.MarshalBinary.md"
+  }
+}

@@ -1,0 +1,1343 @@
+{
+  "order2Ordered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Order2.lean",
+    "model_symbol": "GoLean.Slices.order2Ordered",
+    "claim": "Compares data[b] with data[a], exchanges only the returned indices on a strict inversion, and increments the native-width counter. A missing counter panics only when an inversion requires it.",
+    "limits": "Polymorphic ordering model with legal indices and native-width counter. Direct cases instantiate int64 and float64, including NaNs and signed zeros. Data remains unchanged. Invalid indices, concurrent mutation and other native type instantiations are outside scope. Checks 20,736 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 same-package overlay calls private order2Ordered on darwin/arm64. Independent signed and floating comparisons check returned indices, intact input bits, nil counter panic and machine-word wrap.",
+    "theorems": [
+      "GoLean.Slices.order2Ordered_equal",
+      "GoLean.Slices.order2Ordered_inverted"
+    ],
+    "check": "difftest/slices/order2/check.go",
+    "review_sources": [
+      "difftest/slices/order2/testdata/bridge_test.go",
+      "difftest/slices/order2/testdata/order2_test.go"
+    ],
+    "review": "coverage/packages/slices/order2Ordered.md",
+    "control": "difftest/slices/order2/review/main.go"
+  },
+  "order2CmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Order2.lean",
+    "model_symbol": "GoLean.Slices.order2CmpFunc",
+    "claim": "Calls the comparator exactly once on data[b] then data[a]. A negative result exchanges only the returned indices and increments the native-width counter. Nil callbacks and typed callback panics leave the counter unchanged.",
+    "limits": "Polymorphic model with legal indices, a prescribed comparator result or typed panic, and native-width counter. Direct uint64 cases include nil callbacks, nil counter after a negative result, and counter overflow. Invalid indices, comparator side effects on inputs or counter, and concurrency are outside scope. Checks 20,736 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 same-package overlay calls private order2CmpFunc on darwin/arm64. Prescribed comparator logs exact argument order and rejects extra calls. Checks returned indices, unchanged raw input, nil access, typed panic and native-word counter.",
+    "theorems": [
+      "GoLean.Slices.order2CmpFunc_panic",
+      "GoLean.Slices.order2CmpFunc_nil"
+    ],
+    "check": "difftest/slices/order2/check.go",
+    "review_sources": [
+      "difftest/slices/order2/testdata/bridge_test.go",
+      "difftest/slices/order2/testdata/order2_test.go"
+    ],
+    "review": "coverage/packages/slices/order2CmpFunc.md",
+    "control": "difftest/slices/order2/review/main.go"
+  },
+  "rotateOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/RotateRange.lean",
+    "model_symbol": "GoLean.Slices.rotateOrdered",
+    "claim": "Rotates two adjacent blocks in place using the pinned block-swap loop, preserving order within each block and every backing cell outside the range.",
+    "limits": "The polymorphic model covers 0 <= a < middle < b <= length and the case a = middle = b. Exactly one empty block and invalid signed ranges are outside scope. Native int slice observations include nilness and spare backing. Checks 1,124 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 directly invokes private slices.rotateOrdered through a same-package overlay on darwin/arm64. An independent two-block copy oracle checks the original backing after mutation. The comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.rotateOrdered_empty",
+      "GoLean.Slices.rotateOrdered_unequal"
+    ],
+    "check": "difftest/slices/rotate-range/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SwapRange.lean",
+      "difftest/slices/rotate-range/testdata/bridge_test.go",
+      "difftest/slices/rotate-range/testdata/rotate_range_test.go"
+    ],
+    "review": "coverage/packages/slices/rotateOrdered.md",
+    "control": "difftest/slices/rotate-range/review/main.go"
+  },
+  "rotateCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/RotateRange.lean",
+    "model_symbol": "GoLean.Slices.rotateCmpFunc",
+    "claim": "Rotates two adjacent blocks in place using the pinned block-swap loop, preserving order within each block and every backing cell outside the range. The comparator is never called.",
+    "limits": "The polymorphic model covers 0 <= a < middle < b <= length and the case a = middle = b. Exactly one empty block and invalid signed ranges are outside scope. Native int slice observations include nilness and spare backing. Checks 1,124 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 directly invokes private slices.rotateCmpFunc through a same-package overlay on darwin/arm64. An independent two-block copy oracle checks the original backing after mutation. The comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.rotateCmpFunc_spec",
+      "GoLean.Slices.rotateCmpFunc_ignoresComparator"
+    ],
+    "check": "difftest/slices/rotate-range/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SwapRange.lean",
+      "difftest/slices/rotate-range/testdata/bridge_test.go",
+      "difftest/slices/rotate-range/testdata/rotate_range_test.go"
+    ],
+    "review": "coverage/packages/slices/rotateCmpFunc.md",
+    "control": "difftest/slices/rotate-range/review/main.go"
+  },
+  "swapRangeOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/SwapRange.lean",
+    "model_symbol": "GoLean.Slices.swapRangeOrdered",
+    "claim": "Swaps successive pairs in increasing offset order, including overlap. A nonpositive count is a no-op, and a bounds panic preserves completed swaps and all untouched backing.",
+    "limits": "Polymorphic model with legal slice geometry and signed native offsets and count. The comparison checks index-bounds panic class, not exact formatted index text. The first invalid access stops before later index arithmetic can wrap. Covers 4,855 boundary rows and 60,000 samples with seeds 17, 2718 and 65537. Concurrency is outside scope.",
+    "configurations": "Pinned Go 1.27.0 directly invokes private slices.swapRangeOrdered through a same-package overlay on darwin/arm64. An independent position permutation checks each completed pair and full backing, including spare cells and nilness. The comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.swapRangeOrdered_nonpositive",
+      "GoLean.Slices.swapRangeOrdered_overlap",
+      "GoLean.Slices.swapRangeOrdered_partialPanic"
+    ],
+    "check": "difftest/slices/swap-range/check.go",
+    "review_sources": [
+      "difftest/slices/swap-range/testdata/bridge_test.go",
+      "difftest/slices/swap-range/testdata/swap_range_test.go"
+    ],
+    "control": "difftest/slices/swap-range/review/main.go",
+    "review": "coverage/packages/slices/swapRangeOrdered.md"
+  },
+  "swapRangeCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/SwapRange.lean",
+    "model_symbol": "GoLean.Slices.swapRangeCmpFunc",
+    "claim": "Swaps successive pairs in increasing offset order, including overlap. A nonpositive count is a no-op, and a bounds panic preserves completed swaps and all untouched backing. The comparator is never called.",
+    "limits": "Polymorphic model with legal slice geometry and signed native offsets and count. The comparison checks index-bounds panic class, not exact formatted index text. The first invalid access stops before later index arithmetic can wrap. Covers 4,855 boundary rows and 60,000 samples with seeds 17, 2718 and 65537. Concurrency is outside scope.",
+    "configurations": "Pinned Go 1.27.0 directly invokes private slices.swapRangeCmpFunc through a same-package overlay on darwin/arm64. An independent position permutation checks each completed pair and full backing, including spare cells and nilness. The comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.swapRangeCmpFunc_spec",
+      "GoLean.Slices.swapRangeCmpFunc_ignoresComparator"
+    ],
+    "check": "difftest/slices/swap-range/check.go",
+    "review_sources": [
+      "difftest/slices/swap-range/testdata/bridge_test.go",
+      "difftest/slices/swap-range/testdata/swap_range_test.go"
+    ],
+    "control": "difftest/slices/swap-range/review/main.go",
+    "review": "coverage/packages/slices/swapRangeCmpFunc.md"
+  },
+  "reverseRangeOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/ReverseRange.lean",
+    "model_symbol": "GoLean.Slices.reverseRangeOrdered",
+    "claim": "Reverses the half-open range in place and preserves every other backing cell and slice nilness.",
+    "limits": "The Lean model is polymorphic and the pinned native comparison uses int slices with legal bounds 0 <= a <= b <= len, including nil and nonnil empty slices and populated spare backing cells. Invalid native offsets, integer overflow and reentrant or concurrent access are outside scope. Checks 574 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 same-package overlay directly calls slices.reverseRangeOrdered on darwin/arm64. Independent index reflection checks the complete backing; the comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.reverseRangeOrdered_spec",
+      "GoLean.Slices.reverseRangeOrdered_empty"
+    ],
+    "check": "difftest/slices/reverse-range/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Reverse.lean",
+      "difftest/slices/reverse-range/testdata/bridge_test.go",
+      "difftest/slices/reverse-range/testdata/reverse_range_test.go"
+    ],
+    "control": "difftest/slices/reverse-range/review/main.go",
+    "review": "coverage/packages/slices/reverseRangeOrdered.md"
+  },
+  "reverseRangeCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/ReverseRange.lean",
+    "model_symbol": "GoLean.Slices.reverseRangeCmpFunc",
+    "claim": "Reverses the half-open range in place and preserves every other backing cell and slice nilness. Never calls its comparator.",
+    "limits": "The Lean model is polymorphic and the pinned native comparison uses int slices with legal bounds 0 <= a <= b <= len, including nil and nonnil empty slices and populated spare backing cells. Invalid native offsets, integer overflow and reentrant or concurrent access are outside scope. Checks 574 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 same-package overlay directly calls slices.reverseRangeCmpFunc on darwin/arm64. Independent index reflection checks the complete backing; the comparator variant receives nil or a panic-on-call comparator.",
+    "theorems": [
+      "GoLean.Slices.reverseRangeCmpFunc_spec",
+      "GoLean.Slices.reverseRangeCmpFunc_ignoresComparator"
+    ],
+    "check": "difftest/slices/reverse-range/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Reverse.lean",
+      "difftest/slices/reverse-range/testdata/bridge_test.go",
+      "difftest/slices/reverse-range/testdata/reverse_range_test.go"
+    ],
+    "control": "difftest/slices/reverse-range/review/main.go",
+    "review": "coverage/packages/slices/reverseRangeCmpFunc.md"
+  },
+  "AppendSeq": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/AppendCollect.lean",
+    "model_symbol": "GoLean.Slices.sliceAppendSeq",
+    "claim": "Appends each yielded value in order, acknowledges it, retains nilness if there are no values, and mutates exactly the old spare prefix reached before replacement backing. Nil sequence or producer panic yields no returned slice, while prior writes and producer payload remain observable.",
+    "limits": "Polymorphic model; native named int slices with bounded backing and finite prescribed producer values. The producer may return or panic after a yielded prefix. New allocator-rounded capacity, dynamic producer access to destination elements, repeated or concurrent calls to the saved yield, and allocation failure are outside scope. Checks 12 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 directly invokes slices.AppendSeq and observes result nilness, order, acknowledgments, exact original backing, available reuse, and typed panic. Independent bounded copy oracle and literal branch fixtures.",
+    "theorems": [
+      "GoLean.Slices.sliceAppendSeq_empty",
+      "GoLean.Slices.sliceAppendSeq_nilSequence",
+      "GoLean.Slices.sliceAppendSeq_producerPanic"
+    ],
+    "check": "difftest/slices/append-collect/check.go",
+    "control": "difftest/slices/append-collect/review/main.go",
+    "review": "coverage/packages/slices/AppendSeq.md"
+  },
+  "Collect": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/AppendCollect.lean",
+    "model_symbol": "GoLean.Slices.sliceCollect",
+    "claim": "Starts with a nil slice, acknowledges every yielded value in order, returns nil for no values, and propagates a producer panic without returning a slice.",
+    "limits": "Polymorphic model; native bounded int producer values with normal return, nil producer or typed panic after a yielded prefix. Exact allocation size, dynamic reentrant producer behavior and allocation failure are outside scope. Checks 12 boundaries and 60,000 samples from seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 directly invokes slices.Collect and observes exact values, nilness, acknowledgments and typed panic. Independent bounded copy oracle and literal branch fixtures.",
+    "theorems": [
+      "GoLean.Slices.sliceCollect_empty",
+      "GoLean.Slices.sliceCollect_values",
+      "GoLean.Slices.sliceCollect_producerPanic"
+    ],
+    "check": "difftest/slices/append-collect/check.go",
+    "control": "difftest/slices/append-collect/review/main.go",
+    "review": "coverage/packages/slices/Collect.md"
+  },
+  "Values": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Values.lean",
+    "model_symbol": "GoLean.Slices.sliceValues",
+    "claim": "Yields values in ascending index order from the captured backing array, observing earlier callback edits. False stops immediately, callback panic preserves edits and payload, and the next invocation starts again at the first index.",
+    "limits": "The Lean callback-state model is polymorphic and proves full traversal, nil callback and first-stop results. Pinned comparison uses a named int slice, bounded in-range backing edits and sequential reuse after a return or recover. Reentrant and concurrent mutation is outside scope. Checks 11 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Pinned Go 1.27.0 invokes public slices.Values directly on darwin/arm64. Compares yielded values, live next-cell edits, false return, nil and typed callback panics, and a full replay on the same captured closure.",
+    "theorems": [
+      "GoLean.Slices.sliceValues_nil",
+      "GoLean.Slices.sliceValues_full",
+      "GoLean.Slices.sliceValues_firstStop"
+    ],
+    "check": "difftest/slices/values/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/All.lean"
+    ],
+    "control": "difftest/slices/values/review/main.go",
+    "review": "coverage/packages/slices/Values.md"
+  },
+  "Backward": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Backward.lean",
+    "model_symbol": "GoLean.Slices.sliceBackward",
+    "claim": "Returns an iterator that reads the captured slice in descending index order and yields each index-value pair until exhaustion, a false result or a callback panic. Each read observes earlier callback writes to that cell.",
+    "limits": "The model uses a fixed captured length, state-dependent reads and callback state effects. Theorems prove full descending traversal for continuing callbacks that leave state unchanged, nil callback behavior, and first-callback stop or panic with updated state. The Go check exercises live backing reads and varying stop or panic positions. Runtime panic text and concurrent mutation are outside scope. The comparison uses 11 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls slices.Backward on named int slices and invokes the returned sequence, comparing yielded indices and values, final backing cells and callback or nil-function panic.",
+    "theorems": [
+      "GoLean.Slices.sliceBackward_full",
+      "GoLean.Slices.sliceBackward_nil",
+      "GoLean.Slices.sliceBackward_firstStop"
+    ],
+    "check": "difftest/slices/backward/check.go",
+    "control": "coverage/packages/slices/controls/Backward/main.go",
+    "review": "coverage/packages/slices/Backward.md"
+  },
+  "All": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/All.lean",
+    "model_symbol": "GoLean.Slices.sliceAll",
+    "claim": "Returns an iterator that yields successive captured-slice index and value pairs until exhaustion, a false callback result or a panic. Each value is read when visited, so a callback can change later elements.",
+    "limits": "Models a fixed captured length with state-dependent reads and callback state effects. Theorems prove full traversal for continuing callbacks that leave state unchanged, nil callback behavior and first-callback stop or panic with updated state. The Go comparison exercises fixed-length backing-cell writes and stop or panic at varying indices. Concurrent mutation and runtime panic text are outside scope. There are 11 boundaries and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls slices.All on named int slices and invokes the returned sequence directly, comparing yielded indices and values, final backing cells and callback or nil-function panic.",
+    "theorems": [
+      "GoLean.Slices.sliceAll_full",
+      "GoLean.Slices.sliceAll_nil",
+      "GoLean.Slices.sliceAll_firstStop"
+    ],
+    "check": "difftest/slices/all/check.go",
+    "control": "coverage/packages/slices/controls/All/main.go",
+    "review": "coverage/packages/slices/All.md"
+  },
+  "startIdx": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/StartIdx.lean",
+    "model_symbol": "GoLean.Slices.sliceStartIdx",
+    "claim": "Returns the first haystack index whose element address equals the first needle element address. An empty needle causes a bounds panic and a missing address causes the string panic needle not found.",
+    "limits": "The proof treats pointers as equality identities. For aligned positive-size elements in a common backing array it proves the exact element offset. The comparison also covers safely constructed inputs outside the aliasing prerequisite, but does not model unsafe pointer fabrication or zero-sized pointer identity. It uses 4,050 exhaustive eight-slot range pairs with shared or separate backing, plus 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private slices.startIdx through a test-only shim on equal-valued uint64 arrays, distinguishing indices, runtime bounds panic, and the exact missing-needle panic string.",
+    "theorems": [
+      "GoLean.Slices.sliceStartIdx_found",
+      "GoLean.Slices.sliceStartIdx_missing",
+      "GoLean.Slices.sliceStartIdx_empty",
+      "GoLean.Slices.sliceStartIdx_aligned"
+    ],
+    "check": "difftest/slices/start-idx/check.go",
+    "control": "difftest/slices/start-idx/control/main.go",
+    "review": "coverage/packages/slices/startIdx.md"
+  },
+  "Replace": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Replace.lean",
+    "model_symbol": "GoLean.Slices.sliceReplace",
+    "claim": "Replaces a valid slice interval with the original variadic values, preserving surrounding elements and clearing obsolete cells when shrinking. Reuses storage when capacity suffices, while allocation preserves the original storage. Invalid indices panic before writing.",
+    "limits": "Nonzero-size elements, representable slice lengths and successful allocations. The source is disjoint or is an aligned alias entirely inside the original capacity. The model retains each overlap-specific copy order and rotation, representing startIdx by the distance between aligned offsets when both target ranges overlap. Theorems cover bounds, Insert delegation, allocation and clearing on whole-slice shrink. Copy-path agreement is tested on 18 boundaries and 60,000 samples with seeds 17, 2718 and 65537. Exact allocator rounding and panic diagnostics are outside scope.",
+    "configurations": "Native Go directly calls slices.Replace on named int slices. Explicit cases reach the expanding shift, each rotation path and the both-overlap copy path. The check compares view contents, old and reused backing cells, storage identity, nilness and runtime bounds panic.",
+    "theorems": [
+      "GoLean.Slices.sliceReplace_bounds",
+      "GoLean.Slices.sliceReplace_insert",
+      "GoLean.Slices.sliceReplace_allocate",
+      "GoLean.Slices.sliceReplace_clear"
+    ],
+    "check": "difftest/slices/replace/check.go",
+    "control": "coverage/packages/slices/controls/Replace/main.go",
+    "review": "coverage/packages/slices/Replace.md"
+  },
+  "overlaps": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Overlaps.lean",
+    "model_symbol": "GoLean.Slices.sliceOverlaps",
+    "claim": "Reports overlap exactly when a byte address belongs to both slices' visible element storage. Empty and zero-size element slices never overlap.",
+    "limits": "The model uses byte addresses of contiguous valid slice ranges and assumes last-byte pointer arithmetic is representable as uintptr. It proves equivalence of inclusive source endpoints and a shared byte in the half-open ranges. The comparison uses 16,200 exhaustive combinations of ranges in an eight-slot region across four element sizes and shared or separate storage, and 60,000 samples in 64-slot regions with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go invokes private slices.overlaps through a test-only shim on shared and separate backing arrays with struct{}, byte, [3]byte and uint64 elements.",
+    "theorems": [
+      "GoLean.Slices.sliceOverlaps_spec"
+    ],
+    "check": "difftest/slices/overlaps/check.go",
+    "control": "difftest/slices/overlaps/control/main.go",
+    "review": "coverage/packages/slices/overlaps.md"
+  },
+  "rotateRight": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/RotateRight.lean",
+    "model_symbol": "GoLean.Slices.sliceRotateRight",
+    "claim": "Rotates the visible slice right by an in-range count, preserving spare capacity cells. For other counts, subtracts from length at native signed word width and delegates to rotateLeft, including its partial writes when the adjusted count lies past length but within capacity.",
+    "limits": "The proof assumes a valid slice view and models native-width signed subtraction with a parameterized bit vector. Runtime panic diagnostics are outside the model. The differential uses the native int width, 18 boundary cases including MinInt and MaxInt, and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private slices.rotateRight through a test-only shim on named int slices, comparing visible and hidden cells, outside-view guards and the recovered runtime panic category.",
+    "theorems": [
+      "GoLean.Slices.sliceRotateRight_spec",
+      "GoLean.Slices.sliceRotateRight_firstPanic",
+      "GoLean.Slices.sliceRotateRight_secondPanic"
+    ],
+    "check": "difftest/slices/rotate-right/check.go",
+    "control": "difftest/slices/rotate-right/control/main.go",
+    "review": "coverage/packages/slices/rotateRight.md"
+  },
+  "rotateLeft": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/RotateLeft.lean",
+    "model_symbol": "GoLean.Slices.sliceRotateLeft",
+    "claim": "Rotates the visible slice left by the requested count and preserves spare capacity cells for a count within the length. Negative or over-capacity counts panic before any writes. A count between length and capacity reverses that many backing cells before panicking.",
+    "limits": "Models the visible length and the capacity cells of a valid slice. The proof is polymorphic in the element type and covers the exact three reverse operations and both panic positions. Runtime panic diagnostics are outside the model. Go checks 19 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls the private slices.rotateLeft via a test-only shim on named int slice views, comparing visible and hidden cells after success or recovered runtime bounds panic, with guards outside the view capacity.",
+    "theorems": [
+      "GoLean.Slices.sliceRotateLeft_spec",
+      "GoLean.Slices.sliceRotateLeft_firstPanic",
+      "GoLean.Slices.sliceRotateLeft_secondPanic"
+    ],
+    "check": "difftest/slices/rotate-left/check.go",
+    "control": "difftest/slices/rotate-left/control/main.go",
+    "review": "coverage/packages/slices/rotateLeft.md"
+  },
+  "Insert": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Insert.lean",
+    "model_symbol": "GoLean.Slices.sliceInsert",
+    "claim": "Checks the index before inserting. Returns the original prefix, variadic values from before writes, and original suffix in order. Reuses storage when capacity suffices and preserves the untouched capacity suffix; allocation leaves the original backing unchanged.",
+    "limits": "The model describes nonzero-size elements, representable lengths and successful allocations. Variadic input is disjoint storage or an alias entirely within the original capacity, including cells past the original length. Allocator-rounded capacity and aliases starting outside that region are outside scope. The proof covers invalid index, empty insert, allocation and the overlapping in-place rotation; the direct comparison checks all modeled branches with 14 boundaries and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calls slices.Insert directly on named int slices, including nil input, outside-view guards and aliased variadic slices, and checks backing identity, nilness, bounds panic and capacity cells.",
+    "theorems": [
+      "GoLean.Slices.sliceInsert_bounds",
+      "GoLean.Slices.sliceInsert_empty",
+      "GoLean.Slices.sliceInsert_allocate",
+      "GoLean.Slices.sliceInsert_overlap"
+    ],
+    "check": "difftest/slices/insert/check.go",
+    "control": "coverage/packages/slices/controls/Insert/main.go",
+    "review": "coverage/packages/slices/Insert.md"
+  },
+  "Grow": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Grow.lean",
+    "model_symbol": "GoLean.Slices.sliceGrow",
+    "claim": "Panics with the source string for a negative growth count. Reuses the original slice if it has enough spare capacity. Otherwise preserves length, copies all old capacity cells into new storage and reserves at least the requested space with zeroed new cells through that bound.",
+    "limits": "The allocation path assumes nonzero-size elements, representable lengths and a successful allocation. Exact allocator-rounded capacity, additional cells beyond the requested bound and oversize panics are outside the model. A nil input stays nil without growth and becomes non-nil when reserving positive capacity, as observed in the pinned implementation. The comparison checks 16 boundary cases and 60,000 samples using seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls slices.Grow on named int slices, testing nilness, requested length and capacity behavior, base pointer identity, old storage preservation, copied hidden capacity cells, appended zeros and the negative-count panic payload.",
+    "theorems": [
+      "GoLean.Slices.sliceGrow_negative",
+      "GoLean.Slices.sliceGrow_reuse",
+      "GoLean.Slices.sliceGrow_allocate"
+    ],
+    "check": "difftest/slices/grow/check.go",
+    "control": "coverage/packages/slices/controls/Grow/main.go",
+    "review": "coverage/packages/slices/Grow.md"
+  },
+  "CompactFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/CompactFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceCompactFunc",
+    "claim": "Visit adjacent original pairs in order, passing the current element before its predecessor. Retain the first element and later elements whose comparator result is false, clear the vacated suffix on success, and preserve completed writes without clearing on callback panic.",
+    "limits": "The model takes ordered comparator outcomes as functions of the call index and original values. Comparators that mutate the backing slice are outside scope. The proof covers the complete pure comparator path, nil callbacks and a partial-write panic pattern; the Go check exercises call-index-dependent comparators and additional panic positions on 12 boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calls slices.CompactFunc with named int slices and equality, asymmetric, call-index-dependent, nil or panicking comparators. The comparison checks callback argument order, original backing after success or panic, panic payload identity, nilness, capacity and backing identity.",
+    "theorems": [
+      "GoLean.Slices.sliceCompactFunc_pure",
+      "GoLean.Slices.sliceCompactFunc_matchesCompact",
+      "GoLean.Slices.sliceCompactFunc_nil",
+      "GoLean.Slices.sliceCompactFunc_partialWrite"
+    ],
+    "check": "difftest/slices/compact-func/check.go",
+    "control": "coverage/packages/slices/controls/CompactFunc/main.go",
+    "review": "coverage/packages/slices/CompactFunc.md"
+  },
+  "BinarySearchFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/BinarySearchFunc.lean",
+    "model_symbol": "GoLean.Slices.binarySearchFunc",
+    "claim": "For a pure element-to-target comparator with a negative prefix and nonnegative suffix, returns the first nonnegative index or the slice length. The found flag is true exactly when the index is in bounds and the comparator returns zero there.",
+    "limits": "Models a pure comparator and return values. Comparator effects, panics, nil callbacks and inputs outside the comparison partition are outside the claim. The direct Go check covers nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.BinarySearchFunc with int elements and a struct target in ascending and descending order, using results -7, 0 and 13.",
+    "theorems": [
+      "GoLean.Slices.binarySearchFunc_spec"
+    ],
+    "check": "difftest/slices/binary-search-func/check.go",
+    "control": "coverage/packages/slices/controls/OrderSearch/main.go",
+    "review": "coverage/packages/slices/BinarySearchFunc.md"
+  },
+  "BinarySearch": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/BinarySearch.lean",
+    "model_symbol": "GoLean.Slices.binarySearch",
+    "claim": "Returns the lower bound and reports a match only at an in-range equal element, with NaN keys matching NaN elements for float64.",
+    "limits": "The proof assumes a partitioned less-than predicate and abstracts typed comparisons. Go checks int and float64 directly against linear scans, with 18 boundary cases and 120,000 samples across both types using seeds 17, 2718 and 65537. Other element types and cross-runtime primitive equivalence are outside the proof.",
+    "configurations": "Native Go calling slices.BinarySearch on ascending integer and binary64 slices.",
+    "theorems": [
+      "GoLean.Slices.binarySearch_spec"
+    ],
+    "check": "difftest/slices/binary-search/check.go",
+    "control": "coverage/packages/slices/controls/OrderSearch/main.go",
+    "review": "coverage/packages/slices/BinarySearch.md"
+  },
+  "CompareFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/CompareFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceCompareFunc",
+    "claim": "Returns the exact first nonzero comparator result, propagates a comparator panic, or compares slice lengths if all aligned pairs tie.",
+    "limits": "Models fixed elements and a panic category. Go checks call order, call count and panic payload identity on int and string slices. Nil comparators and mutation of slice elements are outside the comparison. Go checks twelve boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.CompareFunc with int and string slices and a recording comparator.",
+    "theorems": [
+      "GoLean.Slices.sliceCompareFunc_spec"
+    ],
+    "check": "difftest/slices/compare-func/check.go",
+    "control": "coverage/packages/slices/controls/CompareEqual/main.go",
+    "review": "coverage/packages/slices/CompareFunc.md"
+  },
+  "Compact": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Compact.lean",
+    "model_symbol": "GoLean.Slices.sliceCompact",
+    "claim": "Keeps the first element and each element that differs from its original predecessor. The original-length backing region contains the retained prefix followed by zeros.",
+    "limits": "Lean models values and the original backing region. Slice identity, nilness, capacity, and cells outside the view are checked directly in Go. The comparison uses named int slices and covers nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537. Other Go type instantiations and equality panics are outside the evidence.",
+    "configurations": "Native Go calling slices.Compact with named int slices, including nil and nonnil empty slices, offset views, and spare capacity.",
+    "theorems": [
+      "GoLean.Slices.sliceCompact_spec",
+      "GoLean.Slices.sliceCompact_empty"
+    ],
+    "check": "difftest/slices/compact/check.go",
+    "control": "coverage/packages/slices/controls/SequenceChanges/main.go",
+    "review": "coverage/packages/slices/Compact.md"
+  },
+  "Compare": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Compare.lean",
+    "model_symbol": "GoLean.Slices.sliceCompare",
+    "claim": "For int slices, returns -1, 0 or 1 for lexicographic less-than, equality or greater-than, with a shorter strict prefix ordered first.",
+    "limits": "The scan is parametric in element comparison. The proof and Go check instantiate it for int. Floating-point ordering and other element types are outside this evidence. Go uses eight boundary pairs and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Compare instantiated with int and comparing with a suffix-to-prefix oracle.",
+    "theorems": [
+      "GoLean.Slices.sliceCompare_int_spec"
+    ],
+    "check": "difftest/slices/compare/check.go",
+    "control": "coverage/packages/slices/controls/CompareEqual/main.go",
+    "review": "coverage/packages/slices/Compare.md"
+  },
+  "Repeat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Repeat.lean",
+    "model_symbol": "GoLean.Slices.sliceRepeat",
+    "claim": "Returns the requested repetitions with length equal to the product, or panics for a negative count or a product exceeding MaxInt.",
+    "limits": "The model summarizes two-word multiplication as an exact product and the doubling copies as repeated concatenation. The Go check observes contents, nilness, capacity and panic payloads for int slices. Allocator failures are outside the claim. Ten boundary cases and 60,000 samples use seeds 17, 2718 and 65537.",
+    "configurations": "Native Go directly calling slices.Repeat on int slices, including native int extrema.",
+    "theorems": [
+      "GoLean.Slices.sliceRepeat_spec",
+      "GoLean.Slices.sliceRepeat_error"
+    ],
+    "check": "difftest/slices/repeat/check.go",
+    "control": "coverage/packages/slices/controls/SequenceChanges/main.go",
+    "review": "coverage/packages/slices/Repeat.md"
+  },
+  "Concat": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Concat.lean",
+    "model_symbol": "GoLean.Slices.sliceConcat",
+    "claim": "Appends parts in order, returns nil for an empty result, and panics when the total length exceeds MaxInt.",
+    "limits": "Models visible elements and a length bound. Capacity rounding and allocator failures are outside the claim. Go checks seven boundary cases and 60,000 samples with seeds 17, 2718 and 65537, plus native overflow using zero-sized elements. Lean separately checks overflow at a reduced bound. Go also probes storage independence at each nonempty part.",
+    "configurations": "Native Go calling slices.Concat on a named int slice type and on zero-sized elements for overflow.",
+    "theorems": [
+      "GoLean.Slices.sliceConcat_spec"
+    ],
+    "check": "difftest/slices/concat/check.go",
+    "control": "coverage/packages/slices/controls/SequenceChanges/main.go",
+    "review": "coverage/packages/slices/Concat.md"
+  },
+  "Reverse": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Reverse.lean",
+    "model_symbol": "GoLean.Slices.sliceReverse",
+    "claim": "Reverses the element sequence in place.",
+    "limits": "The proof relates endpoint swaps on the modeled view to list reversal. Go separately checks nilness, length, capacity and writes outside the view. Six boundary cases and 60,000 samples use seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Reverse with a named slice of int, including offset subslices.",
+    "theorems": [
+      "GoLean.Slices.sliceReverse_spec"
+    ],
+    "check": "difftest/slices/reverse/check.go",
+    "control": "coverage/packages/slices/controls/SequenceChanges/main.go",
+    "review": "coverage/packages/slices/Reverse.md"
+  },
+  "Clone": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Clone.lean",
+    "model_symbol": "GoLean.Slices.sliceClone",
+    "claim": "Preserves the original element sequence and nilness.",
+    "limits": "Models shallow copying by visible contents. Capacity and allocation are outside the proof. The Go check also writes to the first element of each nonempty clone and checks that the original is unaffected. Five boundary cases and 60,000 samples use seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Clone on a named slice of int, including offset subslices.",
+    "theorems": [
+      "GoLean.Slices.sliceClone_spec"
+    ],
+    "check": "difftest/slices/clone/check.go",
+    "control": "coverage/packages/slices/controls/Clone/main.go",
+    "review": "coverage/packages/slices/Clone.md"
+  },
+  "Clip": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Clip.lean",
+    "model_symbol": "GoLean.Slices.sliceClip",
+    "claim": "Preserves visible elements and nilness and sets capacity to length.",
+    "limits": "The model abstracts backing storage. Go separately checks backing address preservation for nonempty slices. Five boundary cases and 60,000 samples use seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Clip with a named slice of int, including subslices with nonzero offsets.",
+    "theorems": [
+      "GoLean.Slices.sliceClip_spec"
+    ],
+    "check": "difftest/slices/clip/check.go",
+    "control": "coverage/packages/slices/controls/Clip/main.go",
+    "review": "coverage/packages/slices/Clip.md"
+  },
+  "Delete": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Delete.lean",
+    "model_symbol": "GoLean.Slices.sliceDelete",
+    "claim": "Valid signed bounds remove the indicated range and zero the vacated cells in the original backing region. Invalid bounds cause a bounds panic before any mutation.",
+    "limits": "Lean models values, the original backing region and the panic category. The Go check also observes nilness, capacity, backing identity and cells outside offset views. Exact panic text and other Go element instantiations are outside the evidence. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Delete with named int slices and valid and invalid signed bounds, including bounds within capacity but past length.",
+    "theorems": [
+      "GoLean.Slices.sliceDelete_valid",
+      "GoLean.Slices.sliceDelete_invalid"
+    ],
+    "check": "difftest/slices/delete/check.go",
+    "control": "coverage/packages/slices/controls/Delete/main.go",
+    "review": "coverage/packages/slices/Delete.md"
+  },
+  "DeleteFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/DeleteFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceDeleteFunc",
+    "claim": "Visits original elements in order. On success retains the elements rejected by the deletion predicate and clears the tail. On predicate panic it stops, preserves completed prefix writes, and leaves the unwritten suffix intact.",
+    "limits": "The Lean model assumes predicate outcomes depend on fixed element values and represents panic as a category. The Go check observes callback order, partial writes, panic payload, nilness, capacity, backing identity and cells outside offset views. Nil callbacks and predicates mutating the backing array are outside the evidence. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.DeleteFunc on named int slices with an even-value predicate that optionally panics on 13.",
+    "theorems": [
+      "GoLean.Slices.sliceDeleteFunc_pure",
+      "GoLean.Slices.sliceDeleteFunc_panic"
+    ],
+    "check": "difftest/slices/delete-func/check.go",
+    "control": "coverage/packages/slices/controls/DeleteFunc/main.go",
+    "review": "coverage/packages/slices/DeleteFunc.md"
+  },
+  "EqualFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/EqualFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceEqualFunc",
+    "claim": "Unequal lengths return false without comparator calls. Equal-length inputs are compared in order until the first false result or panic.",
+    "limits": "Models fixed elements and scripted comparator outcomes. Go checks argument order, call count and panic payload identity on int and string slices. Nil comparators and mutation of slice elements are outside the comparison. Go checks nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.EqualFunc with int and string slices and a recording comparator.",
+    "theorems": [
+      "GoLean.Slices.sliceEqualFunc_spec",
+      "GoLean.Slices.sliceEqualFunc_length_mismatch"
+    ],
+    "check": "difftest/slices/equal-func/check.go",
+    "control": "coverage/packages/slices/controls/CompareEqual/main.go",
+    "review": "coverage/packages/slices/EqualFunc.md"
+  },
+  "Equal": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Equal.lean",
+    "model_symbol": "GoLean.Slices.sliceEqual",
+    "claim": "For lawful element equality, returns true exactly when the slices have identical element sequences. Nil and empty slices compare equal.",
+    "limits": "The direct comparison uses int slices. NaN equality and panicking interface comparisons are outside this evidence. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Equal instantiated with int and checking sequence equality against a reflection-based oracle.",
+    "theorems": [
+      "GoLean.Slices.sliceEqual_spec"
+    ],
+    "check": "difftest/slices/equal/check.go",
+    "control": "coverage/packages/slices/controls/CompareEqual/main.go",
+    "review": "coverage/packages/slices/Equal.md"
+  },
+  "ContainsFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/ContainsFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceContainsFunc",
+    "claim": "Reports whether an element satisfies the predicate and stops calling it at the first true result or panic.",
+    "limits": "The model uses fixed elements and a panic category. Go checks panic payload identity and callback order. Nil predicates and mutation of slice elements are outside the comparison. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.ContainsFunc on int slices with scripted callback outcomes.",
+    "theorems": [
+      "GoLean.Slices.sliceContainsFunc_pure",
+      "GoLean.Slices.sliceContainsFunc_calls"
+    ],
+    "check": "difftest/slices/contains-func/check.go",
+    "control": "coverage/packages/slices/controls/Search/main.go",
+    "review": "coverage/packages/slices/ContainsFunc.md"
+  },
+  "IndexFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/IndexFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceIndexFunc",
+    "claim": "Visits elements in order, returns the first true index or -1, and stops calling the predicate after a true result or panic.",
+    "limits": "The model uses fixed elements and a panic category. Go checks panic payload identity and callback order. Nil predicates and mutation of slice elements are outside the comparison. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.IndexFunc on int slices with scripted callback outcomes.",
+    "theorems": [
+      "GoLean.Slices.sliceIndexFunc_pure",
+      "GoLean.Slices.sliceIndexFunc_calls"
+    ],
+    "check": "difftest/slices/index-func/check.go",
+    "control": "coverage/packages/slices/controls/Search/main.go",
+    "review": "coverage/packages/slices/IndexFunc.md"
+  },
+  "Contains": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Contains.lean",
+    "model_symbol": "GoLean.Slices.sliceContains",
+    "claim": "Returns true exactly when at least one slice element compares equal to the key.",
+    "limits": "The proof abstracts typed equality as a total Boolean operation. Go checks int slices in eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537. Interface comparisons that panic are outside the model.",
+    "configurations": "Native Go directly calling slices.Contains instantiated with int.",
+    "theorems": [
+      "GoLean.Slices.sliceContains_spec"
+    ],
+    "check": "difftest/slices/contains/check.go",
+    "control": "coverage/packages/slices/controls/Search/main.go",
+    "review": "coverage/packages/slices/Contains.md"
+  },
+  "Index": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Index.lean",
+    "model_symbol": "GoLean.Slices.sliceIndex",
+    "claim": "Returns the first matching index or -1 exactly when no element matches.",
+    "limits": "The proof abstracts typed equality as a total Boolean operation. Go checks int slices in eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537. Interface comparisons that panic are outside the model.",
+    "configurations": "Native Go directly calling slices.Index instantiated with int.",
+    "theorems": [
+      "GoLean.Slices.sliceIndex_found",
+      "GoLean.Slices.sliceIndex_missing"
+    ],
+    "check": "difftest/slices/index/check.go",
+    "control": "coverage/packages/slices/controls/Search/main.go",
+    "review": "coverage/packages/slices/Index.md"
+  },
+  "MaxFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/MaxFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceMaxFunc",
+    "claim": "For a pure comparator whose positive results agree with a strict integer-key order, returns the first element with a maximum key. Empty input panics with the pinned message.",
+    "limits": "The theorem assumes an integer-key ordering and a pure comparator. Comparator effects, nil callbacks, and comparator panics are outside this evidence. The direct Go comparison covers nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.MaxFunc on records with int keys and observable original indexes, comparing only by key.",
+    "theorems": [
+      "GoLean.Slices.sliceMaxFunc_spec"
+    ],
+    "check": "difftest/slices/max-func/check.go",
+    "control": "coverage/packages/slices/controls/Extrema/main.go",
+    "review": "coverage/packages/slices/MaxFunc.md"
+  },
+  "Max": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Max.lean",
+    "model_symbol": "GoLean.Slices.sliceMax",
+    "claim": "For int slices, returns a member no smaller than any other element, or panics with the empty-list message for empty input.",
+    "limits": "The fold is parametric in the typed max operation. The theorem and direct Go check specialize to int. Floating-point NaN and signed-zero rules are outside this evidence. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Max instantiated with int.",
+    "theorems": [
+      "GoLean.Slices.sliceMax_int_spec"
+    ],
+    "check": "difftest/slices/max/check.go",
+    "control": "coverage/packages/slices/controls/Extrema/main.go",
+    "review": "coverage/packages/slices/Max.md"
+  },
+  "MinFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/MinFunc.lean",
+    "model_symbol": "GoLean.Slices.sliceMinFunc",
+    "claim": "For a pure comparator whose negative results agree with a strict integer-key order, returns the first element with a minimum key. Empty input panics with the pinned message.",
+    "limits": "The theorem assumes an integer-key ordering and a pure comparator. Comparator effects, nil callbacks, and comparator panics are outside this evidence. The direct Go comparison covers nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.MinFunc on records with int keys and observable original indexes, comparing only by key.",
+    "theorems": [
+      "GoLean.Slices.sliceMinFunc_spec"
+    ],
+    "check": "difftest/slices/min-func/check.go",
+    "control": "coverage/packages/slices/controls/Extrema/main.go",
+    "review": "coverage/packages/slices/MinFunc.md"
+  },
+  "Min": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Min.lean",
+    "model_symbol": "GoLean.Slices.sliceMin",
+    "claim": "For int slices, returns a member no greater than any other element, or panics with the empty-list message for empty input.",
+    "limits": "The fold is parametric in the typed min operation. The theorem and direct Go check specialize to int. Floating-point NaN and signed-zero rules are outside this evidence. Go checks eight boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.Min instantiated with int.",
+    "theorems": [
+      "GoLean.Slices.sliceMin_int_spec"
+    ],
+    "check": "difftest/slices/min/check.go",
+    "control": "coverage/packages/slices/controls/Extrema/main.go",
+    "review": "coverage/packages/slices/Min.md"
+  },
+  "IsSortedFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/IsSortedFunc.lean",
+    "model_symbol": "GoLean.Slices.isSortedFunc",
+    "claim": "Returns true exactly when every descending adjacent comparison returns a nonnegative result. Stops at the first negative result or comparator panic.",
+    "limits": "Models fixed elements and comparator outcomes, including panic as a category. The Go trace also checks the panic payload and earlier callback effects. Comparators that mutate slice elements and nil comparators are outside the comparison. Go checks six boundary cases and 60,000 samples with seeds 17, 2718 and 65537.",
+    "configurations": "Native Go calling slices.IsSortedFunc on int slices with scripted comparator outcomes.",
+    "theorems": [
+      "GoLean.Slices.isSortedFunc_spec"
+    ],
+    "check": "difftest/slices/is-sorted-func/check.go",
+    "control": "coverage/packages/slices/controls/OrderSearch/main.go",
+    "review": "coverage/packages/slices/IsSortedFunc.md"
+  },
+  "IsSorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/IsSorted.lean",
+    "model_symbol": "GoLean.Slices.isSorted",
+    "claim": "Returns true exactly when the slice has no adjacent inversions under the element ordering.",
+    "limits": "The proof abstracts the typed cmp.Less specialization as a pure comparison. The Go comparison covers int slices on nine boundary cases and 60,000 samples with seeds 17, 2718 and 65537. Other Go type instantiations are outside this comparison.",
+    "configurations": "Native Go directly invoking slices.IsSorted instantiated with int.",
+    "theorems": [
+      "GoLean.Slices.isSorted_spec"
+    ],
+    "check": "difftest/slices/is-sorted/check.go",
+    "control": "coverage/packages/slices/controls/OrderSearch/main.go",
+    "review": "coverage/packages/slices/IsSorted.md"
+  },
+  "xorshift.Next": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/SortPrimitives.lean",
+    "model_symbol": "GoLean.Slices.xorshiftNext",
+    "claim": "The returned uint64 matches the exact updated receiver after the three ordered xorshift stages. Zero remains zero, and a nil receiver panics.",
+    "limits": "Single calls with arbitrary sampled 64-bit words. Nil pointer observation covers the panic class. Concurrent calls are excluded.",
+    "configurations": "Native pinned Go slices same-package test overlay, with zero, one-hot basis words, extrema and random words.",
+    "theorems": [
+      "GoLean.Slices.xorshiftNext_zero",
+      "GoLean.Slices.xorshiftNext_result_eq_state"
+    ],
+    "check": "difftest/slices/sort-primitives/check.go",
+    "review": "coverage/packages/slices/xorshift.Next.md",
+    "control": "difftest/slices/sort-primitives/review/main.go"
+  },
+  "nextPowerOfTwo": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/SortPrimitives.lean",
+    "model_symbol": "GoLean.Slices.nextPowerOfTwo",
+    "claim": "Returns the uint word obtained by shifting one by the number of significant bits in the native unsigned reinterpretation of the signed input. At word-width shifts the result wraps to zero.",
+    "limits": "Native 32- or 64-bit int profile. The author executed the 64-bit profile. Tested at powers and adjacent lengths plus random signed words.",
+    "configurations": "Native pinned Go slices same-package test overlay, using strconv.IntSize.",
+    "theorems": [
+      "GoLean.Slices.nextPowerOfTwo_boundaries"
+    ],
+    "check": "difftest/slices/sort-primitives/check.go",
+    "review": "coverage/packages/slices/nextPowerOfTwo.md",
+    "control": "difftest/slices/sort-primitives/review/main.go"
+  },
+  "isNaN": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/SortPrimitives.lean",
+    "model_symbol": "GoLean.Slices.sortIsNaN",
+    "claim": "Reports NaN exactly for binary32 and binary64 words with an all-ones exponent and nonzero fraction, and false for nonfloat ordered values.",
+    "limits": "The model uses an IEEE classification predicate. The differential samples named float32, float64, int64, and string types. Floating inputs include both signs, infinities, and signaling and quiet NaN payloads.",
+    "configurations": "Native pinned Go slices same-package test overlay; named types and arbitrary bit patterns with NaN-biased rows.",
+    "theorems": [
+      "GoLean.Slices.sortIsNaN_nonfloat",
+      "GoLean.Slices.sortIsNaN_binary_boundaries"
+    ],
+    "check": "difftest/slices/sort-primitives/check.go",
+    "review": "coverage/packages/slices/isNaN.md",
+    "control": "difftest/slices/sort-primitives/review/main.go"
+  },
+  "breakPatternsOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/BreakPatterns.lean",
+    "model_symbol": "GoLean.Slices.breakPatternsOrdered",
+    "claim": "A range shorter than eight leaves the slice unchanged. On wider ranges, the xorshift state seeded by the range length selects up to three sequential swaps. Index failures preserve all completed swaps and prevent later writes.",
+    "limits": "Sequential int slices with valid backing geometry, including nil and empty slices, spare capacity, reversed ranges, and invalid ranges where native signed intermediate arithmetic does not overflow. Models 32- and 64-bit int widths; author replay was 64-bit. Concurrency and signed overflow are outside scope.",
+    "configurations": "Native pinned private Go slices same-package overlay. Exhaustive bounded offset geometries, power-of-two transitions, selected signed extremes, and 60,000 sampled rows at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.breakPatternsOrdered_short",
+      "GoLean.Slices.breakPatternsOrdered_partialPanic"
+    ],
+    "check": "difftest/slices/break-patterns/check.go",
+    "review": "coverage/packages/slices/breakPatternsOrdered.md",
+    "control": "difftest/slices/break-patterns/review/main.go"
+  },
+  "breakPatternsCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/BreakPatterns.lean",
+    "model_symbol": "GoLean.Slices.breakPatternsCmpFunc",
+    "claim": "Applies the same sequential swaps and panic behavior as the ordered entry point without calling the comparator, including when it is nil or panics if invoked.",
+    "limits": "Sequential int slices with valid backing geometry, including nil and empty slices, spare capacity, reversed ranges, and invalid ranges where native signed intermediate arithmetic does not overflow. Models 32- and 64-bit int widths; author replay was 64-bit. Concurrency and signed overflow are outside scope.",
+    "configurations": "Native pinned private Go slices same-package overlay. Exhaustive bounded offset geometries, power-of-two transitions, selected signed extremes, and 60,000 sampled rows at seeds 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.breakPatternsCmpFunc_ignoresComparator"
+    ],
+    "check": "difftest/slices/break-patterns/check.go",
+    "review": "coverage/packages/slices/breakPatternsCmpFunc.md",
+    "control": "difftest/slices/break-patterns/review/main.go"
+  },
+  "medianOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Median.lean",
+    "model_symbol": "GoLean.Slices.medianOrdered",
+    "claim": "Returns the median index of three valid elements using three ordered comparisons, preserving tie order and incrementing the optional counter only for index exchanges. The backing slice is unchanged.",
+    "limits": "Valid indices and neighborhoods on int64 slices. Comparator scripts may depend on arguments and invocation number or panic at one of the three calls. Arbitrary mutation, concurrency, and invalid bounds are outside scope. Models native 32- and 64-bit signed counters. The author executed the native 64-bit profile.",
+    "configurations": "Four exact private Go entries invoked via a pinned same-package overlay. Covers aliased indices, ties, nil counters and comparators, signed counter wrap, and bounded callback panics. 17,497 boundary rows and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.medianOrdered_allTies"
+    ],
+    "check": "difftest/slices/median/check.go",
+    "review": "coverage/packages/slices/medianOrdered.md",
+    "control": "difftest/slices/median/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Order2.lean",
+      "difftest/slices/median/testdata/bridge_test.go",
+      "difftest/slices/median/testdata/median_test.go"
+    ]
+  },
+  "medianCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Median.lean",
+    "model_symbol": "GoLean.Slices.medianCmpFunc",
+    "claim": "Returns the index selected by three sequential comparator calls and retains the exact prior counter updates and call trace if a later callback panics. The backing slice is unchanged.",
+    "limits": "Valid indices and neighborhoods on int64 slices. Comparator scripts may depend on arguments and invocation number or panic at one of the three calls. Arbitrary mutation, concurrency, and invalid bounds are outside scope. Models native 32- and 64-bit signed counters. The author executed the native 64-bit profile.",
+    "configurations": "Four exact private Go entries invoked via a pinned same-package overlay. Covers aliased indices, ties, nil counters and comparators, signed counter wrap, and bounded callback panics. 17,497 boundary rows and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.medianCmpFunc_failsFirst",
+      "GoLean.Slices.medianCmpFunc_retainsPriorCount"
+    ],
+    "check": "difftest/slices/median/check.go",
+    "review": "coverage/packages/slices/medianCmpFunc.md",
+    "control": "difftest/slices/median/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Order2.lean",
+      "difftest/slices/median/testdata/bridge_test.go",
+      "difftest/slices/median/testdata/median_test.go"
+    ]
+  },
+  "medianAdjacentOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Median.lean",
+    "model_symbol": "GoLean.Slices.medianAdjacentOrdered",
+    "claim": "Uses the same ordered three-element selection on the valid neighborhood immediately around the supplied index. Equal neighbors select the center without incrementing the counter.",
+    "limits": "Valid indices and neighborhoods on int64 slices. Comparator scripts may depend on arguments and invocation number or panic at one of the three calls. Arbitrary mutation, concurrency, and invalid bounds are outside scope. Models native 32- and 64-bit signed counters. The author executed the native 64-bit profile.",
+    "configurations": "Four exact private Go entries invoked via a pinned same-package overlay. Covers aliased indices, ties, nil counters and comparators, signed counter wrap, and bounded callback panics. 17,497 boundary rows and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.medianAdjacentOrdered_center"
+    ],
+    "check": "difftest/slices/median/check.go",
+    "review": "coverage/packages/slices/medianAdjacentOrdered.md",
+    "control": "difftest/slices/median/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Order2.lean",
+      "difftest/slices/median/testdata/bridge_test.go",
+      "difftest/slices/median/testdata/median_test.go"
+    ]
+  },
+  "medianAdjacentCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Median.lean",
+    "model_symbol": "GoLean.Slices.medianAdjacentCmpFunc",
+    "claim": "Selects from the three adjacent indices using the comparator. The first call observes the center value followed by the preceding value, and an exception ends evaluation immediately.",
+    "limits": "Valid indices and neighborhoods on int64 slices. Comparator scripts may depend on arguments and invocation number or panic at one of the three calls. Arbitrary mutation, concurrency, and invalid bounds are outside scope. Models native 32- and 64-bit signed counters. The author executed the native 64-bit profile.",
+    "configurations": "Four exact private Go entries invoked via a pinned same-package overlay. Covers aliased indices, ties, nil counters and comparators, signed counter wrap, and bounded callback panics. 17,497 boundary rows and 60,000 samples at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.medianAdjacentCmpFunc_first"
+    ],
+    "check": "difftest/slices/median/check.go",
+    "review": "coverage/packages/slices/medianAdjacentCmpFunc.md",
+    "control": "difftest/slices/median/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Order2.lean",
+      "difftest/slices/median/testdata/bridge_test.go",
+      "difftest/slices/median/testdata/median_test.go"
+    ]
+  },
+  "choosePivotOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/ChoosePivot.lean",
+    "model_symbol": "GoLean.Slices.choosePivotOrdered",
+    "claim": "Returns the pinned quarter-based index and increasing hint below length eight, a median-of-three from length eight, and a Tukey ninther from length fifty. A zero swap count reports increasing and a count of twelve reports decreasing. The backing slice stays unchanged.",
+    "limits": "Valid ranges on int64 slices. Observes the pivot and hint or panic class and callback payload, exact comparator trace, and unchanged data. Comparator functions may inspect operands and invocation number. Arbitrary callback mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Pinned native private Go calls via same-package test overlay. Includes exact thresholds at 8 and 50, ties, ascending and descending inputs, nil comparator, and comparator panic at each reachable invocation. Covers 22,464 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.choosePivotOrdered_short",
+      "GoLean.Slices.choosePivotOrdered_decreasing"
+    ],
+    "check": "difftest/slices/choose-pivot/check.go",
+    "review": "coverage/packages/slices/choosePivotOrdered.md",
+    "control": "difftest/slices/choose-pivot/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Median.lean",
+      "lean/GoLean/Slices/Order2.lean"
+    ]
+  },
+  "choosePivotCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/ChoosePivot.lean",
+    "model_symbol": "GoLean.Slices.choosePivotCmpFunc",
+    "claim": "Selects the pivot and hint with the exact pinned comparator argument order across the component medians. A nil comparator is unused on short ranges. A callback panic stops immediately with the observed prefix of calls. The backing slice stays unchanged.",
+    "limits": "Valid ranges on int64 slices. Observes the pivot and hint or panic class and callback payload, exact comparator trace, and unchanged data. Comparator functions may inspect operands and invocation number. Arbitrary callback mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Pinned native private Go calls via same-package test overlay. Includes exact thresholds at 8 and 50, ties, ascending and descending inputs, nil comparator, and comparator panic at each reachable invocation. Covers 22,464 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.choosePivotCmpFunc_short",
+      "GoLean.Slices.choosePivotCmpFunc_nintherTrace"
+    ],
+    "check": "difftest/slices/choose-pivot/check.go",
+    "review": "coverage/packages/slices/choosePivotCmpFunc.md",
+    "control": "difftest/slices/choose-pivot/review/main.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Median.lean",
+      "lean/GoLean/Slices/Order2.lean"
+    ]
+  },
+  "insertionSortOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.insertionSortOrdered",
+    "claim": "Sorts the valid subrange by ascending adjacent swaps and preserves all surrounding cells. A singleton remains untouched.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.insertionSortOrdered_single"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/insertionSortOrdered.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "insertionSortCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.insertionSortCmpFunc",
+    "claim": "Applies the pinned sequence of adjacent comparisons and swaps. Callback panic retains mutations from the earlier calls.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.insertionSortCmpFunc_partial"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/insertionSortCmpFunc.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "siftDownOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.siftDownOrdered",
+    "claim": "Chooses the larger available child and exchanges it with an inverted root, descending until no exchange is required. Leaf roots leave the input unchanged.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.siftDownOrdered_leaf"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/siftDownOrdered.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "siftDownCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.siftDownCmpFunc",
+    "claim": "Compares the two available children before comparing their selected child with the root. Callback failures preserve prior exchanges and the precise argument prefix.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.siftDownCmpFunc_childFirst"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/siftDownCmpFunc.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "heapSortOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.heapSortOrdered",
+    "claim": "Builds and drains the heap in pinned order and returns the sorted valid subrange while preserving cells outside it.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.heapSortOrdered_two"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/heapSortOrdered.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "heapSortCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/LocalSorts.lean",
+    "model_symbol": "GoLean.Slices.heapSortCmpFunc",
+    "claim": "Builds and drains the heap using the comparator, preserving the exact argument trace and writes before a panic. An empty range does not invoke the comparator.",
+    "limits": "Valid int64 subranges and representable heap indices, with nonnegative sift roots up to the heap length. Scripted comparators may depend on arguments and call count, return inconsistent replies, or panic. Arbitrary callback mutation, invalid bounds, concurrent access, and other generic instantiations are outside scope.",
+    "configurations": "Pinned Go exact private entry tested through a same-package overlay. A separate selection-sort oracle checks ordered sorted values; procedural oracles check heap descent and exact comparator arguments and partial state. Each symbol has 4,321 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.heapSortCmpFunc_empty"
+    ],
+    "check": "difftest/slices/local-sorts/check.go",
+    "review": "coverage/packages/slices/heapSortCmpFunc.md",
+    "control": "difftest/slices/local-sorts/review/main.go"
+  },
+  "partitionOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Partition.lean",
+    "model_symbol": "GoLean.Slices.partitionOrdered",
+    "claim": "Moves the pivot and exchanges crossed scan stops within the valid interval. Returns the final pivot index and whether the inner scan made any cross-swaps.",
+    "limits": "Valid nonempty int64 ranges and pivot indices within them. Scripted comparisons may inspect operands and invocation count, return inconsistent replies, be nil, or panic. Arbitrary mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Native pinned Go direct private entry points via same-package overlay. Tests exact result and full backing, including outside the interval, compared with an independent half-open scan oracle. Each declaration has 6,482 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.partitionOrdered_single"
+    ],
+    "check": "difftest/slices/partition/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partitionOrdered.md",
+    "control": "difftest/slices/partition/review/main.go"
+  },
+  "partitionCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Partition.lean",
+    "model_symbol": "GoLean.Slices.partitionCmpFunc",
+    "claim": "Observes the same pivot index, already-partitioned flag, and backing rearrangement as the source, with exact pivot-relative comparator order and partial writes on panic.",
+    "limits": "Valid nonempty int64 ranges and pivot indices within them. Scripted comparisons may inspect operands and invocation count, return inconsistent replies, be nil, or panic. Arbitrary mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Native pinned Go direct private entry points via same-package overlay. Tests exact result and full backing, including outside the interval, compared with an independent half-open scan oracle. Each declaration has 6,482 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.partitionCmpFunc_initialSwap"
+    ],
+    "check": "difftest/slices/partition/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partitionCmpFunc.md",
+    "control": "difftest/slices/partition/review/main.go"
+  },
+  "partitionEqualOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Partition.lean",
+    "model_symbol": "GoLean.Slices.partitionEqualOrdered",
+    "claim": "Leaves the selected pivot at the front and returns the first index after the lower-or-equal group. With the caller invariant that the pivot is minimum, this group contains only equal elements.",
+    "limits": "Valid nonempty int64 ranges and pivot indices within them. Scripted comparisons may inspect operands and invocation count, return inconsistent replies, be nil, or panic. Arbitrary mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Native pinned Go direct private entry points via same-package overlay. Tests exact result and full backing, including outside the interval, compared with an independent half-open scan oracle. Each declaration has 6,482 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.partitionEqualOrdered_allEqual"
+    ],
+    "check": "difftest/slices/partition/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partitionEqualOrdered.md",
+    "control": "difftest/slices/partition/review/main.go"
+  },
+  "partitionEqualCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Partition.lean",
+    "model_symbol": "GoLean.Slices.partitionEqualCmpFunc",
+    "claim": "Scans with the pivot as the first comparator operand and returns the first index after the accepted group, preserving exact trace and earlier writes on panic.",
+    "limits": "Valid nonempty int64 ranges and pivot indices within them. Scripted comparisons may inspect operands and invocation count, return inconsistent replies, be nil, or panic. Arbitrary mutation, invalid bounds, and concurrency are outside scope.",
+    "configurations": "Native pinned Go direct private entry points via same-package overlay. Tests exact result and full backing, including outside the interval, compared with an independent half-open scan oracle. Each declaration has 6,482 boundaries and 60,000 seeded cases at 17, 2718, and 65537.",
+    "theorems": [
+      "GoLean.Slices.partitionEqualCmpFunc_pivotFirst"
+    ],
+    "check": "difftest/slices/partition/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partitionEqualCmpFunc.md",
+    "control": "difftest/slices/partition/review/main.go"
+  },
+  "partialInsertionSortOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PartialInsertion.lean",
+    "model_symbol": "GoLean.Slices.partialInsertionSortOrdered",
+    "claim": "Returns the pinned early-sorted flag and full backing after at most five localized repairs. Ranges shorter than fifty never repair an inversion. A left shift on a wider range can modify the prefix below the range start.",
+    "limits": "Valid ranges on int64 slices, including empty and singleton. Fixed callback scripts may depend on operands and call count or panic. Observes the helper flag without assuming that a caller-provided prefix satisfies pdqsort invariants. Arbitrary callback mutation, invalid bounds and concurrency are outside scope.",
+    "configurations": "Pinned native private Go calls via a same-package overlay. Exact full backing and callback comparisons include ranges around fifty, five-step repair limits, signed data, order and panic, including crossing the starting offset. 25,742 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.partialInsertionSortOrdered_empty",
+      "GoLean.Slices.partialInsertionSortOrdered_movesPrefix"
+    ],
+    "check": "difftest/slices/partial-insertion/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partialInsertionSortOrdered.md",
+    "control": "difftest/slices/partial-insertion/review/main.go"
+  },
+  "partialInsertionSortCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PartialInsertion.lean",
+    "model_symbol": "GoLean.Slices.partialInsertionSortCmpFunc",
+    "claim": "Preserves exact comparator arguments, early-sorted flag, and whole backing state including exchanges completed before a callback panic.",
+    "limits": "Valid ranges on int64 slices, including empty and singleton. Fixed callback scripts may depend on operands and call count or panic. Observes the helper flag without assuming that a caller-provided prefix satisfies pdqsort invariants. Arbitrary callback mutation, invalid bounds and concurrency are outside scope.",
+    "configurations": "Pinned native private Go calls via a same-package overlay. Exact full backing and callback comparisons include ranges around fifty, five-step repair limits, signed data, order and panic, including crossing the starting offset. 25,742 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.partialInsertionSortCmpFunc_panic"
+    ],
+    "check": "difftest/slices/partial-insertion/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/partialInsertionSortCmpFunc.md",
+    "control": "difftest/slices/partial-insertion/review/main.go"
+  },
+  "pdqsortOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Pdqsort.lean",
+    "model_symbol": "GoLean.Slices.pdqsortOrdered",
+    "claim": "Sorts the valid int64 interval as pinned Go, following insertion and heap fallbacks, break-pattern swaps and signed limit updates, pivot hints, partial repair, ordinary/equal partition, and smaller-side recursion.",
+    "limits": "Valid int64 ranges with representable index arithmetic. For independent sorted-subrange checks, the prefix satisfies the predecessor invariant. The trace model permits fixed scripted comparator replies and panics, but does not model arbitrary comparator mutation, concurrency, invalid bounds or other generic instantiations. Native 64-bit replay.",
+    "configurations": "Pinned native exact private entry via same-package overlay. Checks full backing and callback trace against Lean plus independent suffix, multiset, and sorted-subrange observations. 38,016 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.pdqsortOrdered_short"
+    ],
+    "check": "difftest/slices/pdqsort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/BreakPatterns.lean",
+      "lean/GoLean/Slices/ChoosePivot.lean",
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/Partition.lean",
+      "lean/GoLean/Slices/PartialInsertion.lean",
+      "lean/GoLean/Slices/ReverseRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/pdqsortOrdered.md",
+    "control": "difftest/slices/pdqsort/review/main.go"
+  },
+  "pdqsortCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Pdqsort.lean",
+    "model_symbol": "GoLean.Slices.pdqsortCmpFunc",
+    "claim": "Preserves the exact comparator argument trace and backing state for scripted comparisons, including immediate termination and prior writes on callback panic and nil comparator faults.",
+    "limits": "Valid int64 ranges with representable index arithmetic. For independent sorted-subrange checks, the prefix satisfies the predecessor invariant. The trace model permits fixed scripted comparator replies and panics, but does not model arbitrary comparator mutation, concurrency, invalid bounds or other generic instantiations. Native 64-bit replay.",
+    "configurations": "Pinned native exact private entry via same-package overlay. Checks full backing and callback trace against Lean plus independent suffix, multiset, and sorted-subrange observations. 38,016 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.pdqsortCmpFunc_fallback"
+    ],
+    "check": "difftest/slices/pdqsort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/BreakPatterns.lean",
+      "lean/GoLean/Slices/ChoosePivot.lean",
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/Partition.lean",
+      "lean/GoLean/Slices/PartialInsertion.lean",
+      "lean/GoLean/Slices/ReverseRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/pdqsortCmpFunc.md",
+    "control": "difftest/slices/pdqsort/review/main.go"
+  },
+  "Sort": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicSort.lean",
+    "model_symbol": "GoLean.Slices.sliceSort",
+    "claim": "Sorts in place with the pinned native bit-length limit and preserves the input bit-pattern multiset. Binary64 NaNs precede numerical values, and signed zeros are equivalent in the ordering.",
+    "limits": "int64 and binary64 data with feasible lengths. Finite producers complete or panic after their given values. Comparator scripts may return inconsistent replies or panic. Arbitrary mutation, reentrancy, concurrency, exact returned capacity, and allocator failure are outside scope. Author replay is on native 64-bit Go.",
+    "configurations": "Public pinned Go entry, direct comparisons with full bit patterns, comparator trace, and before/after producer observations. Independent permutation and sortedness checks supplement 6,563 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSort_empty",
+      "GoLean.Slices.sliceSort_three"
+    ],
+    "check": "difftest/slices/public-sort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/Pdqsort.lean"
+    ],
+    "review": "coverage/packages/slices/Sort.md",
+    "control": "difftest/slices/public-sort/review/main.go"
+  },
+  "SortFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicSort.lean",
+    "model_symbol": "GoLean.Slices.sliceSortFunc",
+    "claim": "Runs the pinned pattern-defeating sort on the caller slice. Observes exact comparator order, nil comparator behavior, and prior writes on panic.",
+    "limits": "int64 and binary64 data with feasible lengths. Finite producers complete or panic after their given values. Comparator scripts may return inconsistent replies or panic. Arbitrary mutation, reentrancy, concurrency, exact returned capacity, and allocator failure are outside scope. Author replay is on native 64-bit Go.",
+    "configurations": "Public pinned Go entry, direct comparisons with full bit patterns, comparator trace, and before/after producer observations. Independent permutation and sortedness checks supplement 6,563 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSortFunc_nilOnPair",
+      "GoLean.Slices.sliceSortFunc_partial"
+    ],
+    "check": "difftest/slices/public-sort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/Pdqsort.lean"
+    ],
+    "review": "coverage/packages/slices/SortFunc.md",
+    "control": "difftest/slices/public-sort/review/main.go"
+  },
+  "Sorted": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicSort.lean",
+    "model_symbol": "GoLean.Slices.sliceSorted",
+    "claim": "Collects all produced values before sorting, returns nil for an empty producer, and propagates producer panic without a result.",
+    "limits": "int64 and binary64 data with feasible lengths. Finite producers complete or panic after their given values. Comparator scripts may return inconsistent replies or panic. Arbitrary mutation, reentrancy, concurrency, exact returned capacity, and allocator failure are outside scope. Author replay is on native 64-bit Go.",
+    "configurations": "Public pinned Go entry, direct comparisons with full bit patterns, comparator trace, and before/after producer observations. Independent permutation and sortedness checks supplement 6,563 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSorted_empty",
+      "GoLean.Slices.sliceSorted_three"
+    ],
+    "check": "difftest/slices/public-sort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/Pdqsort.lean"
+    ],
+    "review": "coverage/packages/slices/Sorted.md",
+    "control": "difftest/slices/public-sort/review/main.go"
+  },
+  "SortedFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicSort.lean",
+    "model_symbol": "GoLean.Slices.sliceSortedFunc",
+    "claim": "Collects values before any comparator invocation, preserves exact comparator trace on a completed collection and observes producer and comparator panics. Empty production returns nil.",
+    "limits": "int64 and binary64 data with feasible lengths. Finite producers complete or panic after their given values. Comparator scripts may return inconsistent replies or panic. Arbitrary mutation, reentrancy, concurrency, exact returned capacity, and allocator failure are outside scope. Author replay is on native 64-bit Go.",
+    "configurations": "Public pinned Go entry, direct comparisons with full bit patterns, comparator trace, and before/after producer observations. Independent permutation and sortedness checks supplement 6,563 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSortedFunc_producerFailure"
+    ],
+    "check": "difftest/slices/public-sort/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/Pdqsort.lean"
+    ],
+    "review": "coverage/packages/slices/SortedFunc.md",
+    "control": "difftest/slices/public-sort/review/main.go"
+  },
+  "symMergeOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Stable.lean",
+    "model_symbol": "GoLean.Slices.symMergeOrdered",
+    "claim": "Merges two nonempty sorted runs using the pinned singleton binary searches and recursive rotations, preserving the surrounding data.",
+    "limits": "Valid nonempty merge runs or legal sort prefix of int64 data. Recorded stable order uses int64 occurrence tags and compares the signed upper bits. Scripted comparisons can fault or be inconsistent. Arbitrary mutation, invalid bounds, concurrent access and native index overflow are outside scope.",
+    "configurations": "Pinned exact private Go calls via same-package overlay. Full backing and call trace match Lean. A separate stable minimum selection checks sorted values and tag order. Includes singleton and larger runs, sentinel prefix/suffix, merge width transitions, nil and panicking comparators. 11,666 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.symMergeOrdered_single"
+    ],
+    "check": "difftest/slices/stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/RotateRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/symMergeOrdered.md",
+    "control": "difftest/slices/stable/review/main.go"
+  },
+  "symMergeCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Stable.lean",
+    "model_symbol": "GoLean.Slices.symMergeCmpFunc",
+    "claim": "Preserves stable comparator-equal order under a consistent comparison, exact comparator calls and earlier swaps on panic. The right singleton follows preceding equal members of the left run.",
+    "limits": "Valid nonempty merge runs or legal sort prefix of int64 data. Recorded stable order uses int64 occurrence tags and compares the signed upper bits. Scripted comparisons can fault or be inconsistent. Arbitrary mutation, invalid bounds, concurrent access and native index overflow are outside scope.",
+    "configurations": "Pinned exact private Go calls via same-package overlay. Full backing and call trace match Lean. A separate stable minimum selection checks sorted values and tag order. Includes singleton and larger runs, sentinel prefix/suffix, merge width transitions, nil and panicking comparators. 11,666 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.symMergeCmpFunc_rightLastTie"
+    ],
+    "check": "difftest/slices/stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/RotateRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/symMergeCmpFunc.md",
+    "control": "difftest/slices/stable/review/main.go"
+  },
+  "stableOrdered": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Stable.lean",
+    "model_symbol": "GoLean.Slices.stableOrdered",
+    "claim": "Sorts a prefix through twenty-element insertion-sort blocks and recursively doubled merge passes, leaving the suffix untouched.",
+    "limits": "Valid nonempty merge runs or legal sort prefix of int64 data. Recorded stable order uses int64 occurrence tags and compares the signed upper bits. Scripted comparisons can fault or be inconsistent. Arbitrary mutation, invalid bounds, concurrent access and native index overflow are outside scope.",
+    "configurations": "Pinned exact private Go calls via same-package overlay. Full backing and call trace match Lean. A separate stable minimum selection checks sorted values and tag order. Includes singleton and larger runs, sentinel prefix/suffix, merge width transitions, nil and panicking comparators. 2,162 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.stableOrdered_prefix"
+    ],
+    "check": "difftest/slices/stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/RotateRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/stableOrdered.md",
+    "control": "difftest/slices/stable/review/main.go"
+  },
+  "stableCmpFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Stable.lean",
+    "model_symbol": "GoLean.Slices.stableCmpFunc",
+    "claim": "Sorts a prefix stably, with exact callback order and snapshot after a callback fault across block sorts and recursive merges.",
+    "limits": "Valid nonempty merge runs or legal sort prefix of int64 data. Recorded stable order uses int64 occurrence tags and compares the signed upper bits. Scripted comparisons can fault or be inconsistent. Arbitrary mutation, invalid bounds, concurrent access and native index overflow are outside scope.",
+    "configurations": "Pinned exact private Go calls via same-package overlay. Full backing and call trace match Lean. A separate stable minimum selection checks sorted values and tag order. Includes singleton and larger runs, sentinel prefix/suffix, merge width transitions, nil and panicking comparators. 2,162 boundaries and 60,000 samples at seeds 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.stableCmpFunc_partial"
+    ],
+    "check": "difftest/slices/stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/LocalSorts.lean",
+      "lean/GoLean/Slices/RotateRange.lean",
+      "lean/GoLean/Slices/SortStateOps.lean"
+    ],
+    "review": "coverage/packages/slices/stableCmpFunc.md",
+    "control": "difftest/slices/stable/review/main.go"
+  },
+  "SortStableFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicStable.lean",
+    "model_symbol": "GoLean.Slices.sliceSortStableFunc",
+    "claim": "Sorts the caller slice stably under a consistent comparator. Captures exact comparator calls and any writes completed before panic.",
+    "limits": "Finite tagged int64 values, with stability checked on the signed upper bits. Scripts can return fixed replies, be nil, or panic. Exact allocated capacity, allocation failure, arbitrary callback mutation, concurrent or reentrant use, and other element types are outside scope.",
+    "configurations": "Pinned public Go calls with exact backing, tagged order, callback trace, and producer acknowledgement. Includes nil and empty slices, block transitions, and faults from the producer before sorting. 3,287 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSortStableFunc_ties"
+    ],
+    "check": "difftest/slices/public-stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Stable.lean",
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/PublicSort.lean"
+    ],
+    "review": "coverage/packages/slices/SortStableFunc.md",
+    "control": "difftest/slices/final-trio/review/main.go"
+  },
+  "SortedStableFunc": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/PublicStable.lean",
+    "model_symbol": "GoLean.Slices.sliceSortedStableFunc",
+    "claim": "Collects producer values before the first comparison, returns nil for an empty producer, and preserves stable order with a consistent comparator.",
+    "limits": "Finite tagged int64 values, with stability checked on the signed upper bits. Scripts can return fixed replies, be nil, or panic. Exact allocated capacity, allocation failure, arbitrary callback mutation, concurrent or reentrant use, and other element types are outside scope.",
+    "configurations": "Pinned public Go calls with exact backing, tagged order, callback trace, and producer acknowledgement. Includes nil and empty slices, block transitions, and faults from the producer before sorting. 3,287 boundaries and 60,000 samples at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceSortedStableFunc_empty",
+      "GoLean.Slices.sliceSortedStableFunc_producerFailure"
+    ],
+    "check": "difftest/slices/public-stable/check.go",
+    "review_sources": [
+      "lean/GoLean/Slices/Stable.lean",
+      "lean/GoLean/Slices/AppendCollect.lean",
+      "lean/GoLean/Slices/PublicSort.lean"
+    ],
+    "review": "coverage/packages/slices/SortedStableFunc.md",
+    "control": "difftest/slices/final-trio/review/main.go"
+  },
+  "Chunk": {
+    "go_version": "1.27.0",
+    "model": "lean/GoLean/Slices/Chunk.lean",
+    "model_symbol": "GoLean.Slices.sliceChunk",
+    "claim": "Rejects nonpositive sizes at construction. Yields clipped sub-slice aliases in order, stops at a false callback, and restarts from the first element on the next invocation. A write through the chunk is visible in the backing and on replay.",
+    "limits": "Feasible int64 slice lengths and sequential callbacks. The modeled callback optionally overwrites the first cell and stops at a finite budget. Arbitrary mutation, callback panics, reentrant use, concurrency, and signed index overflow are outside scope.",
+    "configurations": "Pinned public Go plus independent prefix scan. Direct pointer and write probes verify backing alias and append isolation. Includes nil and empty, spare capacity, minimum and maximum native signed chunk sizes, first and second invocation budgets, and short final chunks. 5,402 boundaries and 60,000 seeded cases at 17, 2718 and 65537.",
+    "theorems": [
+      "GoLean.Slices.sliceChunk_badSize",
+      "GoLean.Slices.sliceChunk_shortLast",
+      "GoLean.Slices.sliceChunk_stoppedWrite"
+    ],
+    "check": "difftest/slices/chunk/check.go",
+    "review": "coverage/packages/slices/Chunk.md",
+    "control": "difftest/slices/final-trio/review/main.go"
+  }
+}
